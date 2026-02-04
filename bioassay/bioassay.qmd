@@ -16,14 +16,14 @@ bibliography: ../casestudies.bib
 This notebook includes the code for Bayesian Workflow book Section
 3.5 *A simple example of probabilistic programming*.
 
-# Introduction
+## Introduction
 
 We demonstrate the role of statistical programming environments and
 probabilistic programming by going through the steps of data
 analysis and computation in the context of a simple example.
 
 We work through an example by @Racine-Grieve-Fluhler-etal:1986,
-also included in Section 2.8 of *Bayesian Data Analysis [@BDA3], of
+also included in Section 2.8 of Bayesian Data Analysis [@BDA3], of
 a logistic regression fit to a bioassay experiment.
 
 ```{python}
@@ -54,7 +54,7 @@ SEED = 7412
 ```
 
 
-# Bioassay data
+## Bioassay data
 
 Read the data from csv
 
@@ -63,7 +63,7 @@ df_bioassay = pd.read_csv("data/bioassay.csv")
 df_bioassay
 ```
 
-Data plotted with base Matplotlib
+Plot the data
 
 ```{python}
 #| label: fig-bioassay-data-plot
@@ -84,10 +84,9 @@ bioassay_data = {
     "N": df_bioassay["batch_size"].to_list(),
     "y": df_bioassay["deaths"].to_list(),
 }
-bioassay_data
 ```
 
-# Stan models and inference
+## Stan models and inference
 
 Stan model 0 (without priors). Compile the Stan model code using pedantic mode
 
@@ -96,8 +95,7 @@ mod0 = CmdStanModel(
     stan_file=str("bioassay0.stan"),
     stanc_options={"warn-pedantic": True},
 )
-print_stan(mod0.code())
-mod0
+print_stan(mod0)
 ```
 
 Stan model 1 (with priors). Compile the updated Stan model code using pedantic mode
@@ -107,7 +105,7 @@ mod1 = CmdStanModel(
     stan_file=str("bioassay1.stan"),
     stanc_options={"warn-pedantic": True},
 )
-print_stan(mod1.code())
+print_stan(mod1)
 mod1
 ```
 
@@ -119,7 +117,7 @@ Sample with default settings (expect no progress output)
 fit1 = mod1.sample(data=bioassay_data, seed=SEED, show_progress=False)
 ```
 
-# Posterior summary
+## Posterior summary
 
 Posterior summary and MCMC diagnostics
 
@@ -128,14 +126,12 @@ dt_bioassay1 = az.from_cmdstanpy(fit1)
 az.summary(dt_bioassay1)
 ```
 
-
-PLot 20 logistic curves given 20 posterior
-_draws_, and one logistic given the posterior mean
+Plot 20 logistic curves given 20 posterior _draws_, and one logistic given the posterior mean
 
 ```{python}
 # | label: fig-bioassay-posterior-plot
 posterior = az.extract(dt_bioassay1, group="posterior")
-posterior_20 = az.extract(dt_bioassay1, group="posterior", num_samples=20, random_seed=SEED, show_progress=False)
+posterior_20 = az.extract(dt_bioassay1, group="posterior", num_samples=20, random_seed=SEED)
 
 
 _, ax = plt.subplots(figsize=(8, 3))
@@ -163,7 +159,7 @@ ax.plot(
 )
 ```
 
-# Derived quantities
+## Derived quantities
 
 Compute posterior draws for LD50 in log(g/ml) and in mg/ml
 
@@ -206,7 +202,7 @@ pc = az.plot_dist(
 az.add_lines(pc, [500, 2000]);
 ```
 
-# Bambi model and inference
+## Bambi model and inference
 
 The same model with `Bambi`
 
@@ -226,7 +222,7 @@ idata_bambi = model.fit(random_seed=123)
 Summary of the inference
 
 ```{python}
-az.summary(idata_bambi, var_names="~p")
+az.summary(idata_bambi)
 ```
 
 With `bambi` we can the built-in plotting functions in the interpret submodule.
@@ -245,7 +241,7 @@ ax[0].set(xlabel="Dose log(g/ml)", ylabel="Pr(death)")
 ```
 
 
-# LD50 posterior
+## LD50 posterior
 
 Compute posterior draws for lethal dose 50 (LD50) in log(g/ml) and in mg/ml
 
@@ -288,11 +284,11 @@ pc = az.plot_dist(
 az.add_lines(pc, [500, 2000]);
 ```
 
-# References {.unnumbered}
+## References {.unnumbered}
 
 <div id="refs"></div>
 
-# Licenses {.unnumbered}
+## Licenses {.unnumbered}
 
 * Code © 2025, Andrew Gelman and Aki Vehtari, licensed under BSD-3.
 * Text © 2025, Andrew Gelman and Aki Vehtari, licensed under CC-BY-NC 4.0.
