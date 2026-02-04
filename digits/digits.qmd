@@ -17,7 +17,7 @@ This notebook includes the code for Bayesian Workflow book Sections
 11.4 *How many parallel chains and how many iterations* and 11.6
 *How many digits to report based on posterior uncertainty*.
 
-# Introduction
+##  Introduction
 
 When running any iterative algorithm we need to decide when to stop
 or how many iterations and how many sequences to run. In the
@@ -72,7 +72,7 @@ perform for a new posterior, and we don't know what is the scale of
 that posterior beforehand, we need to start with some initial guess
 of number of iterations to run.
 
-# Summary
+##  Summary
 
 Summary of workflow for how many digits to report
 
@@ -101,14 +101,14 @@ Summary of workflow for how many digits to report
    derived from the (non-extreme) cumulative probabilities that
    always have finite mean and variance.
 
-# Example
+##  Example
 
 As an example, we analyse the trend in summer months average
 temperature 1952--2013 at Kilpisjärvi in northwestern Finnish
 Lapland. Summer months are June, July, and August, and we analyse
 the average temperature over these months in each year.
 
-## Setup
+###  Setup
 
 **Load packages**
 
@@ -121,7 +121,7 @@ import sys
 sys.path.insert(0, '..')
 
 import arviz.preview as az
-from cmdstanpy import CmdStanModel
+from cmdstanpy import CmdStanModel, disable_logging
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -129,17 +129,18 @@ import xarray as xr
 
 from utils import print_stan
 
-warnings.filterwarnings("ignore", category=FutureWarning)
+#warnings.filterwarnings("ignore", category=FutureWarning)
+disable_logging()
 
 az.style.use("arviz-variat")
 az.rcParams["stats.ci_prob"] = 0.90
 plt.rcParams["figure.dpi"] = 100
 
-SEED = 48927  # set random seed for reproducibility
+SEED = 48927  #  set random seed for reproducibility
 np.random.seed(SEED)
 ```
 
-## Kilpisjärvi data and model
+###  Kilpisjärvi data and model
 
 Load Kilpisjärvi summer month average temperatures 1952-2013:
 
@@ -159,7 +160,7 @@ Plot the data
 ```{python}
 #| label: fig-kilpisjarvi-data-plot
 
-fig, ax = plt.subplots(figsize=(8, 4))
+_, ax = plt.subplots(figsize=(8, 4))
 ax.scatter(data_lin["x"], data_lin["y"], color="black")
 ax.set(xlabel="Year", ylabel="Summer temperature\n at Kilpisjärvi (°C)");
 ```
@@ -195,7 +196,7 @@ data_lin_priors = {
 }
 ```
 
-## Run inference for some number of iterations
+###  Run inference for some number of iterations
 
 We run MCMC with Stan's current default settings. All convergence
 diagnostics pass and all effective sample size are big enough that
@@ -207,7 +208,7 @@ fit_lin = mod_lin.sample(data=data_lin_priors, seed=SEED, show_progress=False)
 dt_fit_lin = az.from_cmdstanpy(fit_lin)
 ```
 
-## Run convergence diagnostics
+###  Run convergence diagnostics
 
 There were no convergence issues reported by sampling. We can also
 explicitly call CmdStan inference diagnostics:
@@ -231,11 +232,6 @@ x_centered = xr.DataArray(data_lin["x"] - data_lin["x"].mean(), dims=["obs"])
 mu = posterior["alpha_c"] + posterior["beta"] * x_centered
 ```
 
-```{python}
-
-```
-
-
 Plot the linear fit with 90% posterior interval
 
 ```{python}
@@ -244,7 +240,7 @@ Plot the linear fit with 90% posterior interval
 mu_mean = mu.mean(dim="sample")
 hdi = az.hdi(mu, dim="sample")
 
-fig, ax = plt.subplots(figsize=(8, 4))
+_, ax = plt.subplots(figsize=(8, 4))
 
 ax.fill_between(data_lin["x"], hdi.sel({"ci_bound":"lower"}), hdi.sel({"ci_bound":"upper"}), alpha=0.3, color="gray")
 ax.plot(data_lin["x"], mu_mean, "C0-")
@@ -256,7 +252,7 @@ At this point it is sufficient that diagnostics are OK (cmdstan_diagnose says "n
 
 We could also do posterior predictive checking and residual plots, but now we focus on checking how many MCMC iterations are needed and how many digits to report in posterior summary results.
 
-## How many digits to report based on posterior uncertainty
+###  How many digits to report based on posterior uncertainty
 
 We want to report posterior summaries for the slope, that is the increase in average summer temperature, and for the probability that the slope is positive. We first consider what is the reasonable reporting accuracy if the posterior inference would be exact (ie ignoring first the Monte Carlo variability).
 
@@ -274,7 +270,7 @@ az.summary(dt_fit_lin, var_names=["beta_100"], kind="stats")
 ```
 The number of digits shown in Python varies depending on the print method and options for the specific object.
 
-The number of digits shown in Python can be controled in different ways, for instance in jupyter notebooks (and quarto) we can use the magic `%precision` for instance `%precision %.2g`, means to print using two significant digits. Note that this only affects the display and we can override it for specific print calls. Other libraries like numpy and pandas have their own display options. In ArviZ the number of digits shown in the posterior summary can be modified using the `round_to` argument. This controls the number of decimal places (defaults to 2). Other functions in ArviZ use "2g" as default, which means two significant digits.
+The number of digits shown in Python can be controlled in different ways, for instance in jupyter notebooks (and quarto) we can use the magic `%precision`. `%precision %.2g` means to print using two significant digits. Note that this only affects the display and we can override it for specific print calls. Other libraries like numpy and pandas have their own display options. In ArviZ the number of digits shown in the posterior summary can be modified using the `round_to` argument, the default value is `round_to="auto"`, which applies some custom rounding rules that varies for different quantities, information from the MCSE is used when the MCSE is reported. Other functions in ArviZ use "2g" as default, which means two significant digits.
 
 The more digits are shown, the more of them are likely to be unnecessary clutter distracting the reader from the important message. 
 
@@ -283,7 +279,7 @@ For practical reporting accuracy, and considering the width of the 90% interval,
 The number of significant digits needed for reporting can be often determined also with rough posterior approximations that indicate the order of magnitude of the posterior mean and scale, and then more iterations may be needed to get more accurate estimate for
 those digits.
 
-## How many digits to report based on Monte Carlo standard error
+###  How many digits to report based on Monte Carlo standard error
 
 Now that we have an estimate for the posterior uncertainty of the slope parameter, we can check whether we have enough many iterations for the desired reporting accuracy. Markov chain Monte Carlo method used by Stan to make the posterior estimates is stochastic. If we repeat the computation with different random number generator seed, we get slightly different estimates.
 
@@ -313,7 +309,7 @@ xr.concat(
         az.mcse(beta_100, method="quantile", prob=0.95),
     ],
     dim="mcse",
-).assign_coords(mcse=["mean", "q05", "q95"]).to_dataframe().T.round(3)
+).assign_coords(mcse=["mcse_mean", "mcse_q05", "mcse_q95"]).to_dataframe().T.round(3)
 ```
 
 We show also the ESS values for mean and quantiles, to illustrate
@@ -386,7 +382,7 @@ is more than 1, 2, 3 or 4 degrees, and corresponding MCSEs and ESSs.
 ```{python}
 indicators_dt = xr.Dataset({f'beta_{t}p': beta_100 > t for t in [1, 2, 3, 4]})
 
-xr.concat(
+result = xr.concat(
     [
         az.mean(indicators_dt),
         az.mcse(indicators_dt),
@@ -394,6 +390,8 @@ xr.concat(
     ],
     dim="stat",
 ).assign_coords(stat=["mean", "mcse", "ess"]).to_dataframe().T.round(3)
+result['ess'] = result['ess'].astype(int)
+result
 ```
 
 Taking into account MCSEs given the current posterior sample, we
@@ -404,14 +402,14 @@ require more iterations (16-300 times more iterations depending on
 the quantity), but the added iterations would not change the
 conclusion radically.
 
-# MCSE computation details
+##  MCSE computation details
 
 The details of how MCSE is estimated for posterior expectations and
 quantiles are provided by @Vehtari-Gelman-Simpson-etal:2021, and
 implementations are available, for example in the `posterior` R
 package used in the original R version and in `ArviZ` Python package.
 
-# Rough estimates for how many iterations to run initially
+##  Rough estimates for how many iterations to run initially
 
 Before running any MCMC, we may obtain some rough estimates of how
 many iterations we would need for certain relative accuracy for
@@ -481,11 +479,11 @@ higher ESS would be needed for two significant digit accuracy.
 
 <br />
 
-# References {.unnumbered}
+##  References {.unnumbered}
 
 <div id="refs"></div>
 
-# Licenses {.unnumbered}
+##  Licenses {.unnumbered}
 
 * Code © 2020--2025, Aki Vehtari, licensed under BSD-3.
 * Text © 2020--2025, Aki Vehtari, licensed under CC-BY-NC 4.0.
