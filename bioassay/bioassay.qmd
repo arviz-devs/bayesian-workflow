@@ -225,7 +225,7 @@ Summary of the inference
 az.summary(idata_bambi)
 ```
 
-With `bambi` we can the built-in plotting functions in the interpret submodule.
+With `bambi` we can use the built-in plotting functions in the interpret submodule.
 
 ```{python}
 _, ax = bmb.interpret.plot_predictions(model, idata_bambi, "dose", use_hdi=False, fig_kwargs=dict(figsize=(10, 4)))
