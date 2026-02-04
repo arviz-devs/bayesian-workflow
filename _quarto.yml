@@ -16,8 +16,8 @@ book:
       - index.qmd
       # - text: "Sec 3.5: Bioassay"
       #   href: bioassay/bioassay.qmd
-      - text: "Ch 4: Modeling performance on a multiple choice exam"
-        href: multiple_choice/multiple_choice.qmd
+      # - text: "Ch 4: Modeling performance on a multiple choice exam"
+      #   href: multiple_choice/multiple_choice.qmd
       # - text: "Sec 11.4 and 11.6: How many iterations to run and how many digits to report"
       #   href: digits/digits.qmd
       # - text: "Sec 12.3: Illustration of problematic posteriors"
