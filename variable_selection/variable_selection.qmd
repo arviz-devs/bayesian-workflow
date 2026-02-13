@@ -1,0 +1,741 @@
+---
+title: "Student grades and variable selection"
+author: "Aki Vehtari"
+date: 2023-12-14
+date-modified: today
+date-format: iso
+format:
+  html:
+    number-sections: true
+    code-copy: true
+    code-download: true
+    code-tools: true
+bibliography: ../casestudies.bib
+---
+
+This notebook includes the code for Bayesian Workflow book Chapter
+27 *Models for regression coefficients and variable selection: Student
+grades*.
+
+## Introduction
+
+We work with an example of predicting mathematics and Portuguese
+exam grades for a sample of high school students in Portugal
+[@Cortez-Silva:2008]. The same data was used in Chapter 12 of
+Regression and Other Stories book [@Gelman-Hill-Vehtari:2020] to
+illustrate different models for regression coefficients .
+
+We predict the students' final-year median exam grade in
+mathematics (n=407) and Portuguese (n=657) given a large number of
+potentially relevant predictors: student's school, student's sex,
+student's age, student's home address type, family size, parents'
+cohabitation status, mother's education, father's education,
+home-to-school travel time, weekly study time, number of past class
+failures, extra educational support, extra paid classes within the
+course subject, extra-curricular activities, whether the student
+attended nursery school, whether the student wants to take higher
+education, internet access at home, whether the student has a
+romantic relationship, quality of family relationships, free time
+after school, going out with friends, weekday alcohol consumption,
+weekend alcohol consumption, current health status, and number of
+school absences.
+
+## Variable selection
+
+If we would care only about the predictive performance, we would
+not need to do variable selection, but we would use all the
+variables and a sensible joint prior. Here we are interested in
+finding the smallest set of variables that provide similar
+predictive performance as using all the variables (and sensible
+prior). This helps to improve explainability and to design further
+studies that could include also interventions. We are not
+considering causal structure, and the selected variables are
+unlikely to have direct causal effect, but the selected variables
+that have high predictive relevance are such that their role in
+causal graph should be eventually considered.
+
+We first build models with all predictors, and then use LOO-based
+model comparison to identify the most relevant predictors.
+
+```{python}
+#| label: setup
+#| include: true
+
+import warnings
+import sys
+sys.path.insert(0, '..')
+
+import arviz.preview as az
+import bambi as bmb
+import kulprit as kpt
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import pymc as pm
+
+warnings.filterwarnings("ignore", category=FutureWarning)
+
+az.style.use("arviz-variat")
+az.rcParams["stats.ci_prob"] = 0.95
+plt.rcParams["figure.dpi"] = 100
+
+SEED = 7412
+```
+
+## Data
+
+Get the data from Regression and Other Stories repository
+
+```{python}
+student = pd.read_csv('https://raw.githubusercontent.com/avehtari/ROS-Examples/master/Student/data/student-merged-all.csv')
+
+# List the predictors to be used
+predictors = ["school","sex","age","address","famsize","Pstatus", "Medu","Fedu",
+                "traveltime","studytime","failures","schoolsup", "famsup","paid",
+                "activities", "nursery", "higher", "internet", "romantic","famrel",
+                "freetime","goout","Dalc","Walc","health", "absences"]
+p = len(predictors)
+```
+
+The data includes 3 grades for both mathematics and Portuguese. To
+reduce the variability in the outcome we use median grades based on
+those three exams for each topic. We select only students with
+non-zero grades.
+
+```{python}
+
+grades = ["G1mat", "G2mat", "G3mat", "G1por", "G2por", "G3por"]
+
+# Replace 0 with NaN for grade columns
+grade_cols = student.filter(regex=r'G[1-3]...').columns
+student[grade_cols] = student[grade_cols].replace(0, np.nan)
+
+# Calculate median for mat and por grades
+mat_cols = student.filter(regex=r'G.mat').columns
+por_cols = student.filter(regex=r'G.por').columns
+
+student['Gmat'] = student[mat_cols].median(axis=1)
+student['Gpor'] = student[por_cols].median(axis=1)
+
+# Create subset for Gmat with finite values
+student_Gmat = student[np.isfinite(student['Gmat'])][['Gmat'] + predictors].copy()
+student_Gmat = student_Gmat[np.isfinite(student_Gmat.mean(axis=1))]
+
+# Create subset for Gpor with finite values
+student_Gpor = student[np.isfinite(student['Gpor'])][['Gpor'] + predictors].copy()
+student_Gpor = student_Gpor[np.isfinite(student_Gpor.mean(axis=1))]
+
+
+nmat = len(student_Gmat)
+npor = len(student_Gpor)
+
+
+print(f"Math students: {nmat}")
+print(student_Gmat.head(10))
+print(f"\nPortuguese students: {npor}")
+print(student_Gpor.head(10))
+```
+
+The following plot shows the distributions of median math and Portuguese exam scores for each student.
+
+```{python}
+#| label: fig-data-histograms
+
+_, axes = plt.subplots(1, 2, figsize=(10, 3))
+
+ax1 = axes[0]
+ax1.hist(student_Gmat['Gmat'], bins=np.sort(student_Gmat['Gmat'].unique()))
+ax1.set(xlabel="Median math exam score", yticks=[])
+ax1.spines[['top', 'right']].set_visible(False)
+
+ax2 = axes[1]
+ax2.hist(student_Gpor['Gpor'], bins=np.sort(student_Gpor['Gpor'].unique()))
+ax2.set(xlabel="Median Portuguese exam score", yticks=[])
+ax2.spines[['top', 'right']].set_visible(False)
+```
+
+We standardize all to have standard deviation 1, to make the
+comparison of relevances easier and also to make the definition of
+priors easier.
+
+```{python}
+# Standardize predictors for math
+studentstd_Gmat = student_Gmat.copy()
+studentstd_Gmat[predictors] = (student_Gmat[predictors] - student_Gmat[predictors].mean()) / student_Gmat[predictors].std()
+
+# Standardize predictors for Portuguese
+studentstd_Gpor = student_Gpor.copy()
+studentstd_Gpor[predictors] = (student_Gpor[predictors] - student_Gpor[predictors].mean()) / student_Gpor[predictors].std()
+studentstd_Gpor
+```
+
+## Default priors on coefficients
+
+Before variable selection, we want to build a good model with all covariates. We first illustrate that very wide priors may be bad when we have many predictors. By default Bambi uses very weakly informative priors on regression coefficients.
+
+
+```{python}
+#| label: fitm_u
+
+
+fitm_u = bmb.Model("Gmat ~ " + " + ".join(predictors), studentstd_Gmat)
+fitm_u_idata = fitm_u.fit(random_seed=SEED, idata_kwargs={"log_likelihood": True})
+fitm_u.predict(fitm_u_idata, kind="pps", inplace=True)
+```
+
+If we compare bayesian-$R^2$ and LOO-$R^2$, we see that the bayesian-$R^2$ is much higher, which means that the posterior estimate for the residual variance is strongly underestimated and the model has overfitted the data.
+
+```{python}
+az.bayesian_r2(fitm_u_idata, pred_mean="mu", scale="sigma")
+```
+
+```{python}
+az.loo_r2(fitm_u_idata, var_name="Gmat")
+```
+    
+We plot the marginal posteriors for coefficients. For many
+coefficients the posterior is quite wide.
+
+```{python}
+#| label: fig-fitmu-mcmc_areas
+
+
+pc = az.plot_ridge(
+    fitm_u_idata,
+    var_names=predictors,
+    combined=True,
+    )
+pc.coords = {"column": "ridge"}
+az.add_lines(pc, 0)
+```
+
+### Piranha theorem
+
+The common proper prior choice for coefficients is independent wide
+normal prior. Piranha theorem states that it is not possible that
+all predictors would be independent and have large coefficients at
+the same time [@Tosh+etal:2024:piranha]. Thus when we have many
+predictors we should include prior information that not all
+coefficients can be large. One option is simply to divide the
+normal prior variance with the number of predictors which keeps the
+total variance constant (assuming the predictors are
+normalized). Other option is to use more elaborate joint priors on
+coefficients.
+
+## Implied priors on $R^2$ and R2D2 prior
+
+In regression analysis cases we might assume that data is noisy and
+it is unlikely that we would get almost perfect fit. We can measure
+the proportion of variance explained by the model with $R^2$. To
+understand what is the implied prior on $R^2$ given different
+priors on coefficients, we can simply sample from the prior and
+compute Bayesian $R^2$ using the prior draws. The Bayesian-$R^2$
+depends only on the model parameters, and thus can be used without
+computing residuals that depend on data.
+
+If we have some prior information about $R^2$ we can use R2D2 prior
+[@Zhang+etal:2022:R2D2] to first define a prior directly on $R^2$,
+and then the prior is propagated to coefficients so that despite
+the number of predictors the prior on $R^2$ stays constant. As
+$R^2$ depends also on the residual scale, R2D2 prior is a joint
+prior on coefficients and residual sigma.
+
+Although we can fit models with uniform prior on coefficients and
+get proper posterior, we can't sample from improper unbounded
+uniform prior. Thus, in the following we consider only models with
+proper priors. For all the following models we use normal+(0, 3)
+prior (where normal+ indicates normal distribution constrained to
+be positive) for residual scale sigma, which is very weak prior as
+the standard deviation of the whole data is 3.3. We use four
+different priors for coefficients:
+
+1. Independent normal(0, 2.5) prior which is a proper prior used as default by
+   `rstanarm` and considered to be weakly informative for a single
+   coefficient.
+2. Independent scaled normal prior. If we assume that many
+   predictors may each have small relevance, we can scale the
+   independent priors so that the sum of the prior variance stays
+   reasonable. In this case we have 26 predictors and could have a
+   prior guess that proportion of the explained variance is near
+   $0.3$. Then a simple approach would be to assign independent
+   priors to regression coefficients with mean $0$ and standard
+   deviation $\sqrt{0.3/26}\operatorname{sd}(y)$.
+3. Regularized horseshoe prior [@Piironen+Vehtari:2017:rhs] which
+   is a joint prior for the coefficients depending also on the
+   residual scale, and it can be used to define sparsity assuming
+   prior with the expected number of relevant coefficients. Here we
+   guess that maybe 6 coefficients are relevant and set the global
+   scale according to that. The result is not sensitive to the
+   exact value for the prior guess of the number of relevant
+   coefficients as it states just the mean for the prior. Regularized
+   horseshoe has good prior predictive behavior when more variables
+   are added.
+4. R2D2 prior, which has the benefit that it first defines the
+   prior directly on $R^2$, and then the prior is propagated to the
+   coefficients. The R2D2 prior is predictively consistent, so that
+   the prior on $R^2$ stays constant as the number of predictors
+   increases. We assign the R2D2 prior with mean 1/3 and precision
+   3, which corresponds to the $\Beta(1,2)$ distribution on $R^2$
+   implying that higher $R^2$ values are less likely. We set the
+   concentration parameter to 1/2, which implies we assume some of
+   the coefficients can be big and some small. R2D2 prior implementation
+   assumes the predictors have been standardized to have
+   unit variance.
+
+
+```{python}
+#| label: fitm_n1
+
+formula = 'Gmat ~ ' + ' + '.join(predictors)
+
+# Sample from posterior with normal(0, 2.5) prior
+mod_n1 = bmb.Model(formula, data=studentstd_Gmat,
+                    priors={'common': bmb.Prior('Normal', mu=0, sigma=2.5)})
+
+mod_n1_res = mod_n1.fit(draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True})
+mod_n1.predict(mod_n1_res, kind="response", random_seed=42)
+mod_n1p_res = mod_n1.prior_predictive(draws=4000, random_seed=42)
+
+# Sample from truncated prior
+# For sigma with student_t(3, 0, 3) truncated at lower bound of 5
+def TruncatedStudentT(name, nu, mu, sigma, lower, *args, dims=None, **kwargs):
+    _dist = pm.StudentT.dist(nu=nu, mu=mu, sigma=sigma)
+    # it fails with upper=None, so we set it to a very high value
+    return pm.Truncated(name, _dist, lower=lower, upper=1E8, *args, dims=dims, **kwargs)
+
+mod_n1pt = bmb.Model(formula, data=studentstd_Gmat,
+                       priors={
+                           'common': bmb.Prior('Normal', mu=0, sigma=2.5),
+                           'sigma': bmb.Prior('TruncatedStudentT', 
+                                             nu=3, mu=0, sigma=3,
+                                             lower=5,
+                                             dist=TruncatedStudentT)
+                       })
+mod_n1pt.build()
+mod_n1pt_res = mod_n1pt.prior_predictive(draws=4000, random_seed=42)
+```
+
+```{python}
+#| label: fitm_n2
+
+
+# normal(0, sqrt(0.3/26)*sd(y))
+scale_b = np.sqrt(0.3/26) * studentstd_Gmat['Gmat'].std()
+# Sample from posterior with normal(0, 2.5) prior
+mod_n2 = bmb.Model(formula, data=studentstd_Gmat,
+                    priors={'common': bmb.Prior('Normal', mu=0, sigma=scale_b)})
+
+mod_n2_res = mod_n2.fit(draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True})
+mod_n2.predict(mod_n2_res, kind="response", random_seed=42)
+mod_n2p_res = mod_n2.prior_predictive(draws=4000, random_seed=42)
+```
+
+```{python}
+#| label: fitm_hs
+
+# Horseshoe
+predictor_cols = [col for col in studentstd_Gmat.columns if col != 'Gmat']
+formula = 'Gmat ~ ' + ' + '.join(predictor_cols)
+
+p = len(predictor_cols)
+p0 = 6
+scale_slab = np.std(studentstd_Gmat['Gmat']) / np.sqrt(p0) * np.sqrt(0.3)
+scale_global = p0 / (p - p0) / np.sqrt(len(studentstd_Gmat))
+
+def horseshoe_regularized(
+    name,
+    scale_global,
+    scale_slab,
+    nu_global=4,      # nu_global in Stan
+    nu_local=1,      # nu_local in Stan
+    slab_df=4,    # slab_df in Stan
+    shape=None,
+    dims=None,
+):
+    if dims is None and shape is not None:
+        dims = f"{name}_dim"
+
+    tau = pm.HalfStudentT(f"{name}_tau", nu=nu_global, sigma=scale_global)
+    lam = pm.HalfStudentT(f"{name}_lam", nu=nu_local, sigma=1.0, dims=dims)
+
+    caux = pm.InverseGamma(
+        f"{name}_caux",
+        alpha=slab_df / 2,
+        beta=slab_df / 2,
+    )
+
+    c2 = pm.Deterministic(f"{name}_c2", scale_slab**2 * caux)
+
+    z = pm.Normal(f"{name}_z", 0.0, 1.0, dims=dims)
+
+    lam_tilde = pm.Deterministic(
+        f"{name}_lam_tilde",
+        pm.math.sqrt((c2 * lam**2) / (c2 + tau**2 * lam**2)),
+        dims=dims,
+    )
+
+    beta = pm.Deterministic(name, z * tau * lam_tilde, dims=dims)
+
+    return beta
+
+
+mod_hs = bmb.Model(
+    formula, 
+    data=studentstd_Gmat,
+    priors={
+        "common": bmb.Prior(
+            "horseshoe_regularized",
+            scale_global=scale_global,
+            scale_slab=scale_slab,
+            dist=horseshoe_regularized
+        ),
+    }
+)
+mod_hs_res = mod_hs.fit(draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True})
+mod_hs.predict(mod_hs_res, kind="response", random_seed=42)
+mod_hsp_res = mod_hs.prior_predictive(draws=4000, random_seed=42)
+```
+
+```{python}
+#| label: fitm
+
+
+# R2D2 - using a scaled approach
+# Since Bambi doesn't have R2D2, we will use a placeholder
+mod_r2d2 = bmb.Model(
+    formula, 
+    data=studentstd_Gmat,
+    priors={
+        'common': bmb.Prior('Normal', mu=0, sigma=0.5)  # Narrow normal as placeholder
+    }
+)
+mod_r2d2_res = mod_r2d2.fit(draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True})
+mod_r2d2.predict(mod_r2d2_res, kind="response", random_seed=42)
+mod_r2d2p_res = mod_r2d2.prior_predictive(draws=4000, random_seed=42)
+```
+
+``
+
+```{python}
+models = {
+    "wide normal": mod_n1p_res,
+    "scaled normal": mod_n2p_res,
+    "RHS": mod_hsp_res,
+    "R2D2": mod_r2d2p_res,
+}
+
+
+bayesian_r2_priors = az.from_dict({"ff": {
+    name: az.bayesian_r2(idata,
+                         group="prior",
+                         pred_mean="mu",
+                         scale="sigma",
+                         summary=False)
+    for name, idata in models.items()
+    }}, sample_dims=["draw"])
+
+pc = az.plot_dist(
+    bayesian_r2_priors,
+    group="ff",
+    cols=None,
+    aes={"color": ["__variable__"]},
+    visuals={
+            "title":False,
+            "point_estimate": False,
+            "point_estimate_text":False,
+            "credible_interval": False,
+    },
+
+    )
+pc.add_legend("__variable__", title="priors")
+```
+
+
+```{python}
+
+# use the truncated studet t prior for the wide normal (just a trick to get more prior predictive samples for the wide normal in the interesting region)
+models = {
+    "wide normal": mod_n1pt_res,
+    "scaled normal": mod_n2p_res,
+    "RHS": mod_hsp_res,
+    "R2D2": mod_r2d2p_res,
+}
+
+bayesian_r2_priors = az.from_dict({"ff": {
+    name: az.bayesian_r2(idata,
+                         group="prior",
+                         pred_mean="mu",
+                         scale="sigma",
+                         summary=False)
+    for name, idata in models.items()
+    }}, sample_dims=["draw"])
+
+
+pc = az.plot_dist(
+    bayesian_r2_priors,
+    group="ff",
+    cols=None,
+    aes={"color": ["__variable__"]},
+    visuals={"title":False,
+            "point_estimate": False,
+            "point_estimate_text":False,
+            "credible_interval": False,
+    },
+    stats={"dist":{"bw_fct": 2}}
+
+    )
+pc.add_legend("__variable__", title="priors")
+pc.add_title("Bayesian R2")
+pc.get_viz("plot", "priors").set_xlim(0.04,.42)
+pc.get_viz("plot", "priors").set_ylim(0, 2.5)
+```
+
+```{python}
+models = {
+    "wide normal": mod_n1_res,
+    "scaled normal": mod_n2_res,
+    "RHS": mod_hs_res,
+    "R2D2": mod_r2d2_res,
+}
+
+bayesian_r2_posteriors = az.from_dict({"ff": {
+    name: az.bayesian_r2(idata,
+                         pred_mean="mu",
+                         scale="sigma",
+                         summary=False)
+    for name, idata in models.items()
+    }}, sample_dims=["draw"])
+
+
+pc = az.plot_dist(
+    bayesian_r2_posteriors,
+    group="ff",
+    cols=None,
+    aes={"color": ["__variable__"]},
+    visuals={"title":False,
+            "point_estimate": False,
+            "point_estimate_text":False,
+            "credible_interval": False,
+    },
+    )
+pc.add_legend("__variable__", title="posteriors")
+pc.add_title("Bayesian R2")
+```
+
+
+```{python}
+models = {
+    "wide normal": mod_n1_res,
+    "scaled normal": mod_n2_res,
+    "RHS": mod_hs_res,
+    "R2D2": mod_r2d2_res,
+}
+
+loo_r2_posteriors = az.from_dict({"ff": {
+    name: az.loo_r2(idata,
+                    var_name="Gmat",
+                    summary=False)
+    for name, idata in models.items()
+    }}, sample_dims=["draw"])
+
+
+pc = az.plot_dist(
+    loo_r2_posteriors,
+    group="ff",
+    cols=None,
+    aes={"color": ["__variable__"]},
+    visuals={"title":False,
+            "point_estimate": False,
+            "point_estimate_text":False,
+            "credible_interval": False,
+    },
+
+    )
+pc.add_legend("__variable__", title="posteriors")
+pc.add_title("LOO-R2")
+```
+
+
+## Marginal posteriors of coefficients
+
+We plot the marginal posteriors for coefficients for the model with
+R2D2 prior. For many coefficients the posterior has been shrunk
+close to 0. Some marginal posteriors are wide.
+
+```{python}
+#| label: fig-fitm-mcmc_areas
+pc = az.plot_ridge(
+    mod_r2d2_res,
+    var_names=predictors,
+    combined=True,
+    )
+
+pc.coords = {"column": "ridge"}
+az.add_lines(pc, 0)
+```
+
+We check the bivariate marginal for Fedu and Medu coefficients, and
+see that while the univariate marginals overlap with 0, jointly
+there is not much posterior mass near 0. This is due to Fedu and
+Medu being collinear. Collinearity of predictors, make it difficult
+to infer the predictor relevance from the marginal posteriors.
+
+```{python}
+#| label: fig-fitm-mcmc_scatter-Fedu-Medu
+
+az.plot_pair(mod_r2d2_res, var_names=["Fedu", "Medu"])
+```
+
+## Model checking
+
+We're using a normal observation model, although we know that the
+exam scores are in a bounded range. The posterior predictive checking
+shows that we sometimes predict exam scores higher than 20, but the
+discrepancy is minor.
+
+```{python}
+#| label: fig-fitm-ppc-hist
+
+az.plot_ppc_dist(mod_r2d2_res)
+```
+
+LOO cross-validation shows that otherwise the normal model is quite well
+calibrated.
+
+```{python}
+#| label: fig-fitm-ppc-loo
+
+az.plot_loo_pit(mod_r2d2_res)
+```
+
+We could use truncated normal as more accurate model, but for
+example beta-binomial model cannot be used for median exam scores
+as some of the median scores are not integers. A fancier model
+could model the three exams hierarchically, but as the normal model
+is not that bad, we now continue with it.
+
+## Projection predictive variable selection
+
+We use projection predictive variable selection implemented in `kulprit` to find the minimal set of predictors that can provide similar predictive performance as all predictor jointly. By default `kulprit` starts from the intercept only model and uses forward search to find in which order to add predictors to minimize the divergence from the full model predictive distribution.
+
+### Math exam score
+
+We start with doing fast PSIS-LOO-CV only for the full data search path.
+
+```{python}
+ppi = kpt.ProjectionPredictive(mod_r2d2, mod_r2d2_res)
+ppi.project(early_stop=10)
+```
+
+The following plot shows the relevance order of the predictors and estimated predictive performance given those variables. As the search can overfit and we didn’t cross-validate the search, the performance estimates can go above the reference model performance. However, this plot helps as to see that 10 or fewer predictors would be sufficient.
+
+
+```{python}
+cmp_df = ppi.compare(min_model_size=1)
+kpt.plot_compare(cmp_df);
+```
+
+`kulprit` can also provide suggestion for the sufficient model size.
+
+```{python}
+ppi.select()
+```
+
+Check the projected posterior for the selected model. The marginals of the projected posterior are all clearly away from 0.
+
+```{python}
+pc = kpt.plot_forest(ppi,
+                   submodels=[4],
+                  );
+pc.coords = {"column": "forest"}
+az.add_lines(pc, 0)
+```
+
+### Portuguese exam scores
+
+We repeat the same, but predicting grade for Portuguese instead of mathematics
+
+Fit a model with R2D2 prior with mean 1/3 and precision 3.
+
+```{python}
+formula = 'Gpor ~ ' + ' + '.join(predictors)
+mod_r2d2_por = bmb.Model(
+    formula, 
+    data=student_Gpor,
+    dropna=True,
+    priors={
+        'common': bmb.Prior('Normal', mu=0, sigma=0.5)  # Narrow normal as placeholder
+    }
+)
+mod_r2d2_por_res = mod_r2d2_por.fit(draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True})
+mod_r2d2_por.predict(mod_r2d2_por_res, kind="response", random_seed=42)
+```
+
+Compare bayesian-$R^2$ and LOO-$R^2$. We see that Portuguese grade is easier to predict given the predictors (but there is still a lot of unexplained variance).
+
+```{python}
+az.bayesian_r2(mod_r2d2_por_res, pred_mean="mu", scale="sigma")
+```
+
+```{python}
+az.loo_r2(mod_r2d2_por_res, var_name="Gpor")
+```
+Plot marginal posteriors of coefficients
+
+```{python}
+pc = az.plot_ridge(
+    mod_r2d2_por_res,
+    var_names=predictors,
+    combined=True,
+    )
+
+pc.coords = {"column": "ridge"}
+az.add_lines(pc, 0)
+```
+
+We use projection predictive variable selection.
+
+```{python}
+ppi_por = kpt.ProjectionPredictive(mod_r2d2_por, mod_r2d2_por_res)
+ppi_por.project(early_stop=10)
+```
+
+
+The following plot shows the relevance order of the predictors and estimated predictive performance given those variables. As there is some overfitting in the search and we didn’t cross-validate the search, the performance estimates scan go above the reference model performance. However, this plot helps as to see that 10 or fewer predictors would be sufficient.
+
+```{python}
+cmp_df_por = ppi_por.compare(min_model_size=1)
+kpt.plot_compare(cmp_df_por);
+```
+
+`kulprit` can also provide suggestion for the sufficient model size.
+
+```{python}
+ppi_por.select()
+```
+
+Check the projected posterior for the selected model.
+
+```{python}
+pc_por = kpt.plot_forest(ppi_por,
+                   submodels=[8],
+                  );
+pc_por.coords = {"column": "forest"}
+az.add_lines(pc_por, 0)
+```
+
+
+### Using the selected model
+
+For further predictions we can use the projected draws. Due to how different packages work, sometimes it can be easier to rerun MCMC conditionally on the selected variables. This gives a slightly different result, but when the reference model has been good the difference tends to be small, and the main benefit form using `kulprit` is still that the selection process itself has not caused overfitting and selection of spurious covariates.
+
+
+
+## References {.unnumbered}
+
+<div id="refs"></div>
+
+## Licenses {.unnumbered}
+
+* Code © 2023--2026, Aki Vehtari, licensed under BSD-3.
+* Text © 2023--2026, Aki Vehtari, licensed under CC-BY-NC 4.0.
