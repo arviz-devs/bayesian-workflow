@@ -87,14 +87,15 @@ SEED = 7412
 Get the data from Regression and Other Stories repository
 
 ```{python}
-student = pd.read_csv('https://raw.githubusercontent.com/avehtari/ROS-Examples/master/Student/data/student-merged-all.csv')
+student = pd.read_csv("https://raw.githubusercontent.com/avehtari/ROS-Examples/master/Student/data/student-merged-all.csv")
 
 # List the predictors to be used
-predictors = ["school","sex","age","address","famsize","Pstatus", "Medu","Fedu",
-                "traveltime","studytime","failures","schoolsup", "famsup","paid",
-                "activities", "nursery", "higher", "internet", "romantic","famrel",
-                "freetime","goout","Dalc","Walc","health", "absences"]
-p = len(predictors)
+predictors = [
+    "school", "sex", "age", "address", "famsize", "Pstatus", "Medu", "Fedu",
+    "traveltime", "studytime", "failures", "schoolsup", "famsup", "paid",
+    "activities", "nursery", "higher", "internet", "romantic", "famrel",
+    "freetime", "goout", "Dalc", "Walc", "health", "absences"
+]
 ```
 
 The data includes 3 grades for both mathematics and Portuguese. To
