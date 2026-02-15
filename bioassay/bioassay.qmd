@@ -40,10 +40,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import xarray as xr
-from cmdstanpy import CmdStanModel
 from scipy.special import expit
 
-from utils import print_stan
 
 warnings.filterwarnings("ignore", category=FutureWarning)
 
@@ -52,6 +50,23 @@ az.rcParams["stats.ci_prob"] = 0.95
 plt.rcParams["figure.dpi"] = 100
 SEED = 7412
 ```
+
+
+::: {.panel-tabset group="ppl"}
+## CmdStanPy
+
+```{python}
+from cmdstanpy import CmdStanModel, disable_logging
+disable_logging()
+from utils import print_stan
+```
+
+## Numpyro
+```{.python}
+## coming soon
+```
+:::
+
 
 
 ## Bioassay data
@@ -75,6 +90,8 @@ ax.spines[["top", "right"]].set_visible(False)
 ```
 
 
+::: {.panel-tabset group="ppl"}
+## CmdStanPy
 Data as list for CmdStanPy
 
 ```{python}
@@ -85,11 +102,22 @@ bioassay_data = {
     "y": df_bioassay["deaths"].to_list(),
 }
 ```
+## Numpyro
+```{.python}
+## coming soon
+```
+:::
+
 
 ## Stan models and inference
 
-Stan model 0 (without priors). Compile the Stan model code using pedantic mode
+Model 0 (without priors).
 
+::: {.panel-tabset group="ppl"}
+
+Compile the Stan model code using pedantic mode
+
+## CmdStanPy
 ```{python}
 mod0 = CmdStanModel(
     stan_file=str("bioassay0.stan"),
@@ -98,8 +126,20 @@ mod0 = CmdStanModel(
 print_stan(mod0)
 ```
 
-Stan model 1 (with priors). Compile the updated Stan model code using pedantic mode
+## Numpyro
+```{.python}
+## coming soon
+```
 
+:::
+
+Model 1 (with priors). 
+
+::: {.panel-tabset group="ppl"}
+
+Compile the updated Stan model code using pedantic mode
+
+## CmdStanPy
 ```{python}
 mod1 = CmdStanModel(
     stan_file=str("bioassay1.stan"),
@@ -109,20 +149,36 @@ print_stan(mod1)
 mod1
 ```
 
-Sample with default settings (expect no progress output)
+## Numpyro
+```{.python}
+## coming soon
+```
+:::
+
+Sample with default settings
+
+::: {.panel-tabset group="ppl"}
+## CmdStanPy
 
 ```{python}
 #| label: fit1
 #| results: hide
 fit1 = mod1.sample(data=bioassay_data, seed=SEED, show_progress=False)
+dt_bioassay1 = az.from_cmdstanpy(fit1)
 ```
+
+## Numpyro
+```{.python}
+## coming soon
+```
+:::
+
 
 ## Posterior summary
 
 Posterior summary and MCMC diagnostics
 
 ```{python}
-dt_bioassay1 = az.from_cmdstanpy(fit1)
 az.summary(dt_bioassay1)
 ```
 
