@@ -146,12 +146,12 @@ The following plot shows the distributions of median math and Portuguese exam sc
 _, axes = plt.subplots(1, 2, figsize=(10, 3))
 
 ax1 = axes[0]
-ax1.hist(student_Gmat["Gmat"], bins=np.sort(student_Gmat["Gmat"].unique()))
+ax1.hist(student_Gmat["Gmat"], bins="auto")
 ax1.set(xlabel="Median math exam score", yticks=[])
 ax1.spines[["top", "right"]].set_visible(False)
 
 ax2 = axes[1]
-ax2.hist(student_Gpor["Gpor"], bins=np.sort(student_Gpor["Gpor"].unique()))
+ax2.hist(student_Gpor["Gpor"], bins="auto")
 ax2.set(xlabel="Median Portuguese exam score", yticks=[])
 ax2.spines[["top", "right"]].set_visible(False)
 ```
@@ -173,13 +173,13 @@ studentstd_Gpor
 
 ## Default priors on coefficients
 
-Before variable selection, we want to build a good model with all covariates. We first illustrate that very wide priors may be bad when we have many predictors. By default Bambi uses very weakly informative priors on regression coefficients. We also ask Bambi to compute the log-likelihood as we will need it to compute LOO-$R^2$ later. We also compute posterior predictive samples for the fitted model, as we will need them to compute Bayesian-$R^2$ later.
+Before variable selection, we want to build a good model with all covariates. We first illustrate that very wide priors may be bad when we have many predictors. By default Bambi uses very weakly informative priors on regression coefficients. We also ask Bambi to compute the log-likelihood as we will need it to compute LOO-$R^2$ later. We also use `predict` to compute the posterior distribution of `mu`, we need this to compute Bayesian-$R^2$ later.
 ```{python}
 #| label: fitm_u
 
 fitm_u = bmb.Model("Gmat ~ " + " + ".join(predictors), studentstd_Gmat)
 fitm_u_idata = fitm_u.fit(random_seed=SEED, idata_kwargs={"log_likelihood": True})
-fitm_u.predict(fitm_u_idata, kind="pps", inplace=True)
+fitm_u.predict(fitm_u_idata, inplace=True)
 ```
 
 If we compare bayesian-$R^2$ and LOO-$R^2$, we see that the bayesian-$R^2$ is much higher, which means that the posterior estimate for the residual variance is strongly underestimated and the model has overfitted the data.
