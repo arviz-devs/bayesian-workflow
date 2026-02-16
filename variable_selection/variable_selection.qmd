@@ -63,7 +63,8 @@ model comparison to identify the most relevant predictors.
 
 import warnings
 import sys
-sys.path.insert(0, '..')
+
+sys.path.insert(0, "..")
 
 import arviz.preview as az
 import bambi as bmb
@@ -108,22 +109,22 @@ non-zero grades.
 grades = ["G1mat", "G2mat", "G3mat", "G1por", "G2por", "G3por"]
 
 # Replace 0 with NaN for grade columns
-grade_cols = student.filter(regex=r'G[1-3]...').columns
+grade_cols = student.filter(regex=r"G[1-3]...").columns
 student[grade_cols] = student[grade_cols].replace(0, np.nan)
 
 # Calculate median for mat and por grades
-mat_cols = student.filter(regex=r'G.mat').columns
-por_cols = student.filter(regex=r'G.por').columns
+mat_cols = student.filter(regex=r"G.mat").columns
+por_cols = student.filter(regex=r"G.por").columns
 
-student['Gmat'] = student[mat_cols].median(axis=1)
-student['Gpor'] = student[por_cols].median(axis=1)
+student["Gmat"] = student[mat_cols].median(axis=1)
+student["Gpor"] = student[por_cols].median(axis=1)
 
 # Create subset for Gmat with finite values
-student_Gmat = student[np.isfinite(student['Gmat'])][['Gmat'] + predictors].copy()
+student_Gmat = student[np.isfinite(student["Gmat"])][["Gmat"] + predictors].copy()
 student_Gmat = student_Gmat[np.isfinite(student_Gmat.mean(axis=1))]
 
 # Create subset for Gpor with finite values
-student_Gpor = student[np.isfinite(student['Gpor'])][['Gpor'] + predictors].copy()
+student_Gpor = student[np.isfinite(student["Gpor"])][["Gpor"] + predictors].copy()
 student_Gpor = student_Gpor[np.isfinite(student_Gpor.mean(axis=1))]
 
 
@@ -145,14 +146,14 @@ The following plot shows the distributions of median math and Portuguese exam sc
 _, axes = plt.subplots(1, 2, figsize=(10, 3))
 
 ax1 = axes[0]
-ax1.hist(student_Gmat['Gmat'], bins=np.sort(student_Gmat['Gmat'].unique()))
+ax1.hist(student_Gmat["Gmat"], bins=np.sort(student_Gmat["Gmat"].unique()))
 ax1.set(xlabel="Median math exam score", yticks=[])
-ax1.spines[['top', 'right']].set_visible(False)
+ax1.spines[["top", "right"]].set_visible(False)
 
 ax2 = axes[1]
-ax2.hist(student_Gpor['Gpor'], bins=np.sort(student_Gpor['Gpor'].unique()))
+ax2.hist(student_Gpor["Gpor"], bins=np.sort(student_Gpor["Gpor"].unique()))
 ax2.set(xlabel="Median Portuguese exam score", yticks=[])
-ax2.spines[['top', 'right']].set_visible(False)
+ax2.spines[["top", "right"]].set_visible(False)
 ```
 
 We standardize all to have standard deviation 1, to make the
@@ -172,12 +173,9 @@ studentstd_Gpor
 
 ## Default priors on coefficients
 
-Before variable selection, we want to build a good model with all covariates. We first illustrate that very wide priors may be bad when we have many predictors. By default Bambi uses very weakly informative priors on regression coefficients.
-
-
+Before variable selection, we want to build a good model with all covariates. We first illustrate that very wide priors may be bad when we have many predictors. By default Bambi uses very weakly informative priors on regression coefficients. We also ask Bambi to compute the log-likelihood as we will need it to compute LOO-$R^2$ later. We also compute posterior predictive samples for the fitted model, as we will need them to compute Bayesian-$R^2$ later.
 ```{python}
 #| label: fitm_u
-
 
 fitm_u = bmb.Model("Gmat ~ " + " + ".join(predictors), studentstd_Gmat)
 fitm_u_idata = fitm_u.fit(random_seed=SEED, idata_kwargs={"log_likelihood": True})
@@ -200,12 +198,11 @@ coefficients the posterior is quite wide.
 ```{python}
 #| label: fig-fitmu-mcmc_areas
 
-
 pc = az.plot_ridge(
     fitm_u_idata,
     var_names=predictors,
     combined=True,
-    )
+)
 pc.coords = {"column": "ridge"}
 az.add_lines(pc, 0)
 ```
@@ -287,31 +284,40 @@ different priors for coefficients:
 ```{python}
 #| label: fitm_n1
 
-formula = 'Gmat ~ ' + ' + '.join(predictors)
+formula = "Gmat ~ " + " + ".join(predictors)
 
 # Sample from posterior with normal(0, 2.5) prior
-mod_n1 = bmb.Model(formula, data=studentstd_Gmat,
-                    priors={'common': bmb.Prior('Normal', mu=0, sigma=2.5)})
+mod_n1 = bmb.Model(
+    formula,
+    data=studentstd_Gmat,
+    priors={"common": bmb.Prior("Normal", mu=0, sigma=2.5)},
+)
 
-mod_n1_res = mod_n1.fit(draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True})
+mod_n1_res = mod_n1.fit(
+    draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True}
+)
 mod_n1.predict(mod_n1_res, kind="response", random_seed=42)
 mod_n1p_res = mod_n1.prior_predictive(draws=4000, random_seed=42)
+
 
 # Sample from truncated prior
 # For sigma with student_t(3, 0, 3) truncated at lower bound of 5
 def TruncatedStudentT(name, nu, mu, sigma, lower, *args, dims=None, **kwargs):
     _dist = pm.StudentT.dist(nu=nu, mu=mu, sigma=sigma)
     # it fails with upper=None, so we set it to a very high value
-    return pm.Truncated(name, _dist, lower=lower, upper=1E8, *args, dims=dims, **kwargs)
+    return pm.Truncated(name, _dist, lower=lower, upper=1e8, *args, dims=dims, **kwargs)
 
-mod_n1pt = bmb.Model(formula, data=studentstd_Gmat,
-                       priors={
-                           'common': bmb.Prior('Normal', mu=0, sigma=2.5),
-                           'sigma': bmb.Prior('TruncatedStudentT', 
-                                             nu=3, mu=0, sigma=3,
-                                             lower=5,
-                                             dist=TruncatedStudentT)
-                       })
+
+mod_n1pt = bmb.Model(
+    formula,
+    data=studentstd_Gmat,
+    priors={
+        "common": bmb.Prior("Normal", mu=0, sigma=2.5),
+        "sigma": bmb.Prior(
+            "TruncatedStudentT", nu=3, mu=0, sigma=3, lower=5, dist=TruncatedStudentT
+        ),
+    },
+)
 mod_n1pt.build()
 mod_n1pt_res = mod_n1pt.prior_predictive(draws=4000, random_seed=42)
 ```
@@ -321,12 +327,17 @@ mod_n1pt_res = mod_n1pt.prior_predictive(draws=4000, random_seed=42)
 
 
 # normal(0, sqrt(0.3/26)*sd(y))
-scale_b = np.sqrt(0.3/26) * studentstd_Gmat['Gmat'].std()
+scale_b = np.sqrt(0.3 / 26) * studentstd_Gmat["Gmat"].std()
 # Sample from posterior with normal(0, 2.5) prior
-mod_n2 = bmb.Model(formula, data=studentstd_Gmat,
-                    priors={'common': bmb.Prior('Normal', mu=0, sigma=scale_b)})
+mod_n2 = bmb.Model(
+    formula,
+    data=studentstd_Gmat,
+    priors={"common": bmb.Prior("Normal", mu=0, sigma=scale_b)},
+)
 
-mod_n2_res = mod_n2.fit(draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True})
+mod_n2_res = mod_n2.fit(
+    draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True}
+)
 mod_n2.predict(mod_n2_res, kind="response", random_seed=42)
 mod_n2p_res = mod_n2.prior_predictive(draws=4000, random_seed=42)
 ```
@@ -335,21 +346,22 @@ mod_n2p_res = mod_n2.prior_predictive(draws=4000, random_seed=42)
 #| label: fitm_hs
 
 # Horseshoe
-predictor_cols = [col for col in studentstd_Gmat.columns if col != 'Gmat']
-formula = 'Gmat ~ ' + ' + '.join(predictor_cols)
+predictor_cols = [col for col in studentstd_Gmat.columns if col != "Gmat"]
+formula = "Gmat ~ " + " + ".join(predictor_cols)
 
 p = len(predictor_cols)
 p0 = 6
-scale_slab = np.std(studentstd_Gmat['Gmat']) / np.sqrt(p0) * np.sqrt(0.3)
+scale_slab = np.std(studentstd_Gmat["Gmat"]) / np.sqrt(p0) * np.sqrt(0.3)
 scale_global = p0 / (p - p0) / np.sqrt(len(studentstd_Gmat))
+
 
 def horseshoe_regularized(
     name,
     scale_global,
     scale_slab,
-    nu_global=4,      # nu_global in Stan
-    nu_local=1,      # nu_local in Stan
-    slab_df=4,    # slab_df in Stan
+    nu_global=4,  # nu_global in Stan
+    nu_local=1,  # nu_local in Stan
+    slab_df=4,  # slab_df in Stan
     shape=None,
     dims=None,
 ):
@@ -359,11 +371,7 @@ def horseshoe_regularized(
     tau = pm.HalfStudentT(f"{name}_tau", nu=nu_global, sigma=scale_global)
     lam = pm.HalfStudentT(f"{name}_lam", nu=nu_local, sigma=1.0, dims=dims)
 
-    caux = pm.InverseGamma(
-        f"{name}_caux",
-        alpha=slab_df / 2,
-        beta=slab_df / 2,
-    )
+    caux = pm.InverseGamma(f"{name}_caux", alpha=slab_df / 2, beta=slab_df / 2)
 
     c2 = pm.Deterministic(f"{name}_c2", scale_slab**2 * caux)
 
@@ -381,18 +389,20 @@ def horseshoe_regularized(
 
 
 mod_hs = bmb.Model(
-    formula, 
+    formula,
     data=studentstd_Gmat,
     priors={
         "common": bmb.Prior(
             "horseshoe_regularized",
             scale_global=scale_global,
             scale_slab=scale_slab,
-            dist=horseshoe_regularized
+            dist=horseshoe_regularized,
         ),
-    }
+    },
 )
-mod_hs_res = mod_hs.fit(draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True})
+mod_hs_res = mod_hs.fit(
+    draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True}
+)
 mod_hs.predict(mod_hs_res, kind="response", random_seed=42)
 mod_hsp_res = mod_hs.prior_predictive(draws=4000, random_seed=42)
 ```
@@ -400,17 +410,18 @@ mod_hsp_res = mod_hs.prior_predictive(draws=4000, random_seed=42)
 ```{python}
 #| label: fitm
 
-
 # R2D2 - using a scaled approach
 # Since Bambi doesn't have R2D2, we will use a placeholder
 mod_r2d2 = bmb.Model(
-    formula, 
+    formula,
     data=studentstd_Gmat,
     priors={
-        'common': bmb.Prior('Normal', mu=0, sigma=0.5)  # Narrow normal as placeholder
-    }
+        "common": bmb.Prior("Normal", mu=0, sigma=0.5)  # Narrow normal as placeholder
+    },
 )
-mod_r2d2_res = mod_r2d2.fit(draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True})
+mod_r2d2_res = mod_r2d2.fit(
+    draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True}
+)
 mod_r2d2.predict(mod_r2d2_res, kind="response", random_seed=42)
 mod_r2d2p_res = mod_r2d2.prior_predictive(draws=4000, random_seed=42)
 ```
@@ -425,15 +436,17 @@ models = {
     "R2D2": mod_r2d2p_res,
 }
 
-
-bayesian_r2_priors = az.from_dict({"ff": {
-    name: az.bayesian_r2(idata,
-                         group="prior",
-                         pred_mean="mu",
-                         scale="sigma",
-                         summary=False)
-    for name, idata in models.items()
-    }}, sample_dims=["draw"])
+bayesian_r2_priors = az.from_dict(
+    {
+        "ff": {
+            name: az.bayesian_r2(
+                idata, group="prior", pred_mean="mu", scale="sigma", summary=False
+            )
+            for name, idata in models.items()
+        }
+    },
+    sample_dims=["draw"],
+)
 
 pc = az.plot_dist(
     bayesian_r2_priors,
@@ -441,19 +454,17 @@ pc = az.plot_dist(
     cols=None,
     aes={"color": ["__variable__"]},
     visuals={
-            "title":False,
-            "point_estimate": False,
-            "point_estimate_text":False,
-            "credible_interval": False,
+        "title": False,
+        "point_estimate": False,
+        "point_estimate_text": False,
+        "credible_interval": False,
     },
-
-    )
+)
 pc.add_legend("__variable__", title="priors")
 ```
 
 
 ```{python}
-
 # use the truncated studet t prior for the wide normal (just a trick to get more prior predictive samples for the wide normal in the interesting region)
 models = {
     "wide normal": mod_n1pt_res,
@@ -462,32 +473,35 @@ models = {
     "R2D2": mod_r2d2p_res,
 }
 
-bayesian_r2_priors = az.from_dict({"ff": {
-    name: az.bayesian_r2(idata,
-                         group="prior",
-                         pred_mean="mu",
-                         scale="sigma",
-                         summary=False)
-    for name, idata in models.items()
-    }}, sample_dims=["draw"])
-
+bayesian_r2_priors = az.from_dict(
+    {
+        "ff": {
+            name: az.bayesian_r2(
+                idata, group="prior", pred_mean="mu", scale="sigma", summary=False
+            )
+            for name, idata in models.items()
+        }
+    },
+    sample_dims=["draw"],
+)
 
 pc = az.plot_dist(
     bayesian_r2_priors,
     group="ff",
     cols=None,
     aes={"color": ["__variable__"]},
-    visuals={"title":False,
-            "point_estimate": False,
-            "point_estimate_text":False,
-            "credible_interval": False,
+    visuals={
+        "title": False,
+        "point_estimate": False,
+        "point_estimate_text": False,
+        "credible_interval": False,
     },
-    stats={"dist":{"bw_fct": 2}}
+    stats={"dist": {"bw_fct": 2}},
+)
 
-    )
 pc.add_legend("__variable__", title="priors")
 pc.add_title("Bayesian R2")
-pc.get_viz("plot", "priors").set_xlim(0.04,.42)
+pc.get_viz("plot", "priors").set_xlim(0.04, 0.42)
 pc.get_viz("plot", "priors").set_ylim(0, 2.5)
 ```
 
@@ -499,26 +513,28 @@ models = {
     "R2D2": mod_r2d2_res,
 }
 
-bayesian_r2_posteriors = az.from_dict({"ff": {
-    name: az.bayesian_r2(idata,
-                         pred_mean="mu",
-                         scale="sigma",
-                         summary=False)
-    for name, idata in models.items()
-    }}, sample_dims=["draw"])
-
+bayesian_r2_posteriors = az.from_dict(
+    {
+        "ff": {
+            name: az.bayesian_r2(idata, pred_mean="mu", scale="sigma", summary=False)
+            for name, idata in models.items()
+        }
+    },
+    sample_dims=["draw"],
+)
 
 pc = az.plot_dist(
     bayesian_r2_posteriors,
     group="ff",
     cols=None,
     aes={"color": ["__variable__"]},
-    visuals={"title":False,
-            "point_estimate": False,
-            "point_estimate_text":False,
-            "credible_interval": False,
+    visuals={
+        "title": False,
+        "point_estimate": False,
+        "point_estimate_text": False,
+        "credible_interval": False,
     },
-    )
+)
 pc.add_legend("__variable__", title="posteriors")
 pc.add_title("Bayesian R2")
 ```
@@ -532,26 +548,28 @@ models = {
     "R2D2": mod_r2d2_res,
 }
 
-loo_r2_posteriors = az.from_dict({"ff": {
-    name: az.loo_r2(idata,
-                    var_name="Gmat",
-                    summary=False)
-    for name, idata in models.items()
-    }}, sample_dims=["draw"])
-
+loo_r2_posteriors = az.from_dict(
+    {
+        "ff": {
+            name: az.loo_r2(idata, var_name="Gmat", summary=False)
+            for name, idata in models.items()
+        }
+    },
+    sample_dims=["draw"],
+)
 
 pc = az.plot_dist(
     loo_r2_posteriors,
     group="ff",
     cols=None,
     aes={"color": ["__variable__"]},
-    visuals={"title":False,
-            "point_estimate": False,
-            "point_estimate_text":False,
-            "credible_interval": False,
+    visuals={
+        "title": False,
+        "point_estimate": False,
+        "point_estimate_text": False,
+        "credible_interval": False,
     },
-
-    )
+)
 pc.add_legend("__variable__", title="posteriors")
 pc.add_title("LOO-R2")
 ```
@@ -569,7 +587,7 @@ pc = az.plot_ridge(
     mod_r2d2_res,
     var_names=predictors,
     combined=True,
-    )
+)
 
 pc.coords = {"column": "ridge"}
 az.add_lines(pc, 0)
@@ -645,9 +663,7 @@ ppi.select()
 Check the projected posterior for the selected model. The marginals of the projected posterior are all clearly away from 0.
 
 ```{python}
-pc = kpt.plot_forest(ppi,
-                   submodels=[4],
-                  );
+pc = kpt.plot_forest(ppi, submodels=[4])
 pc.coords = {"column": "forest"}
 az.add_lines(pc, 0)
 ```
@@ -659,16 +675,18 @@ We repeat the same, but predicting grade for Portuguese instead of mathematics
 Fit a model with R2D2 prior with mean 1/3 and precision 3.
 
 ```{python}
-formula = 'Gpor ~ ' + ' + '.join(predictors)
+formula = "Gpor ~ " + " + ".join(predictors)
 mod_r2d2_por = bmb.Model(
-    formula, 
+    formula,
     data=student_Gpor,
     dropna=True,
     priors={
-        'common': bmb.Prior('Normal', mu=0, sigma=0.5)  # Narrow normal as placeholder
-    }
+        "common": bmb.Prior("Normal", mu=0, sigma=0.5)  # Narrow normal as placeholder
+    },
 )
-mod_r2d2_por_res = mod_r2d2_por.fit(draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True})
+mod_r2d2_por_res = mod_r2d2_por.fit(
+    draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True}
+)
 mod_r2d2_por.predict(mod_r2d2_por_res, kind="response", random_seed=42)
 ```
 
@@ -688,7 +706,7 @@ pc = az.plot_ridge(
     mod_r2d2_por_res,
     var_names=predictors,
     combined=True,
-    )
+)
 
 pc.coords = {"column": "ridge"}
 az.add_lines(pc, 0)
@@ -718,9 +736,7 @@ ppi_por.select()
 Check the projected posterior for the selected model.
 
 ```{python}
-pc_por = kpt.plot_forest(ppi_por,
-                   submodels=[8],
-                  );
+pc_por = kpt.plot_forest(ppi_por, submodels=[8])
 pc_por.coords = {"column": "forest"}
 az.add_lines(pc_por, 0)
 ```
@@ -729,8 +745,6 @@ az.add_lines(pc_por, 0)
 ### Using the selected model
 
 For further predictions we can use the projected draws. Due to how different packages work, sometimes it can be easier to rerun MCMC conditionally on the selected variables. This gives a slightly different result, but when the reference model has been good the difference tends to be small, and the main benefit form using `kulprit` is still that the selection process itself has not caused overfitting and selection of spurious covariates.
-
-
 
 ## References {.unnumbered}
 
