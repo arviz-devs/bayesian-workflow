@@ -34,7 +34,8 @@ problems.
 ```{python}
 import sys
 import warnings
-sys.path.insert(0, '..')
+
+sys.path.insert(0, "..")
 
 import numpy as np
 import pandas as pd
@@ -49,7 +50,7 @@ from utils import print_stan
 az.style.use("arviz-variat")
 plt.rcParams["figure.dpi"] = 100
 
-warnings.filterwarnings('ignore')
+warnings.filterwarnings("ignore")
 disable_logging()
 
 SEED = 48927  # set random seed for reproducibility
@@ -95,11 +96,11 @@ data_logit = {"M": M, "N": N, "x": x, "y": y}
 
 ```{python}
 #| label: fig-separable_data
-df = pd.DataFrame({'x': x.flatten(), 'y': y})
+df = pd.DataFrame({"x": x.flatten(), "y": y})
 _, ax = plt.subplots(figsize=(6, 3))
 
-ax.scatter(df['x'], df['y'])
-ax.set(yticks=[0, 1], xlabel='x', ylabel='y');
+ax.scatter(df["x"], df["y"])
+ax.set(yticks=[0, 1], xlabel="x", ylabel="y")
 ```
 
 ### Model
@@ -141,7 +142,7 @@ The above diagnostics refer to a documentation ([https://mc-stan.org/misc/warnin
 The following Figure shows the posterior draws as marginal histograms and joint scatterplots. The range of the values is huge, which is typical for improper posterior, but the values of `alpha` and `beta` in any practical application are likely to have much smaller magnitude. In this case, increasing `adapt_delta` and `max_treedepth` would not have solved the problem, and would have just caused waste of modeler and computation time.
 
 ```{python}
-# | label: fig-separable_pairs
+#| label: fig-separable_pairs
 az.plot_pair(
     dt_logit,
     marginal_kind="hist",
@@ -195,10 +196,12 @@ and joint scatterplots of the posterior sample.
 ```{python}
 #| label: fig-separable_prior_pairs
 
-az.plot_pair(dt_logit2,
-    marginal_kind="hist", 
+az.plot_pair(
+    dt_logit2,
+    marginal_kind="hist",
     figure_kwargs={"figsize": (8, 4)},
-    visuals={"divergences":True});
+    visuals={"divergences": True},
+)
 ```
 
 ## A model with unused parameter
@@ -241,10 +244,11 @@ $\widehat{R}$, ESS look good for `alpha` and `beta`, but really bad for `gamma`,
 #| label: fig-unusedparam_pairs
 
 
-az.plot_pair(dt_logit3,
-             marginal_kind="hist", 
-             figure_kwargs={"figsize": (8, 4)},
-visuals={"divergences":True},
+az.plot_pair(
+    dt_logit3,
+    marginal_kind="hist",
+    figure_kwargs={"figsize": (8, 4)},
+    visuals={"divergences": True},
 )
 ```
 
@@ -270,7 +274,7 @@ M = 2
 N = 1000
 x = np.column_stack([np.ones(N), np.sort(np.random.randn(N))])
 y = ((x[:, 0] + np.random.randn(N) / 2) > 0).astype(int)
-data_logit4 = {'M': M, 'N': N, 'x': x, 'y': y}
+data_logit4 = {"M": M, "N": N, "x": x, "y": y}
 ```
 
 ### Model
@@ -314,10 +318,10 @@ correlated.
 
 az.plot_pair(
     dt_logit4,
-    marginal_kind="hist", 
+    marginal_kind="hist",
     figure_kwargs={"figsize": (8, 4)},
-    visuals={"divergences":True},
-);
+    visuals={"divergences": True},
+)
 ```
 
 We can compute the correlation.
@@ -351,17 +355,17 @@ measured by Finnish Meteorological Institute.
 data_kilpis = pd.read_csv("data/kilpisjarvi-summer-temp.csv", sep=";")
 M = 1
 N = len(data_kilpis)
-x = data_kilpis['year'].values.reshape(-1, 1)
+x = data_kilpis["year"].values.reshape(-1, 1)
 y = data_kilpis.iloc[:, 4].values
-data_lin = {'M': M, 'N': N, 'x': x, 'y': y}
+data_lin = {"M": M, "N": N, "x": x, "y": y}
 ```
 
 ```{python}
 #| label: fig-kilpisjarvi_data
 
 _, ax = plt.subplots(figsize=(6, 4))
-ax.scatter(x, y,)
-ax.set(xlabel='Year', ylabel='Summer temp. @Kilpisjärvi')
+ax.scatter(x, y)
+ax.set(xlabel="Year", ylabel="Summer temp. @Kilpisjärvi")
 ```
 
 ### Model
@@ -410,8 +414,8 @@ Here the reason is that the $x$ values are in the range 1952--2013, and the inte
 ### Centered data
 
 ```{python}
-x_centered = data_kilpis['year'].values - 1982.5
-data_lin = {'M': M, 'N': N, 'x': np.atleast_2d(x_centered).T,'y': y}
+x_centered = data_kilpis["year"].values - 1982.5
+data_lin = {"M": M, "N": N, "x": np.atleast_2d(x_centered).T, "y": y}
 ```
 
 ```{python}
@@ -496,7 +500,7 @@ az.summary(dt_tt)
 The $\widehat{R}$ values for `mu` are large and ESS values for `mu` are small indicating convergence problems. The following figure shows the histogram and trace plots of the posterior draws, clearly showing the bimodality and that chains are not mixing between the modes.
 
 ```{python}
-# | label: fig-bimodal1_hist
+#| label: fig-bimodal1_hist
 
 az.plot_dist(
     dt_tt,
@@ -506,7 +510,7 @@ az.plot_dist(
         "point_estimate_text": False,
         "credible_interval": False,
     },
-);
+)
 ```
 
 In this toy example, with random initialization each chain has
@@ -676,8 +680,8 @@ data_pois = {'M': M, 'N': N, 'x': x / 1e3, 'y': y}
 #| label: fig-poisson_data2
 
 _, ax = plt.subplots(figsize=(6, 3))
-ax.scatter(data_pois['x'], data_pois['y'])
-ax.set(xlabel='x', ylabel='y');
+ax.scatter(data_pois["x"], data_pois["y"])
+ax.set(xlabel="x", ylabel="y")
 ```
 
 ```{python}
