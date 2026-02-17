@@ -66,8 +66,8 @@ from utils import print_stan
 from jax import random
 import jax.numpy as jnp
 import numpyro
-from  numpyro import distributions
-from numpyro.infer import NUTS, MCMC, predictive
+from  numpyro import distributions as dist
+from numpyro.infer import NUTS, MCMC, Predictive
 
 ```
 :::
