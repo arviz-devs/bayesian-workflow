@@ -147,7 +147,11 @@ from utils import print_stan
 
 ## Numpyro
 ```{.python}
-## coming soon
+from jax import random
+import jax.numpy as jnp
+import numpyro
+from  numpyro import distributions as dist
+from numpyro.infer import NUTS, MCMC
 ```
 :::
 
@@ -200,7 +204,34 @@ print_stan(mod_lin)
 
 ## Numpyro
 ```{.python}
-## coming soon
+def mod_lin(
+    x,
+    pmualpha_c, # prior mean for alpha_c
+    psalpha, # prior std for alpha
+    pmubeta, # prior mean for beta
+    psbeta, # prior std for beta
+    pssigma, # prior std for half-normal prior for sigma
+    y=None,
+    **kwargs # trick to ignore unused inputs
+):
+    """Gaussian linear model with adjustable priors.
+    """
+    # centering the predictor makes the posterior easier to sample
+    xmean = jnp.mean(x)
+    x_c = x - xmean
+
+    # intercept for centered x
+    alpha_c = numpyro.sample("alpha_c", dist.Normal(pmualpha_c, psalpha))
+    
+    # slope
+    beta = numpyro.sample("beta", dist.Normal(pmubeta, psbeta))
+
+    # standard deviation is constrained to be positive
+    sigma = numpyro.sample("sigma", dist.HalfNormal(pssigma) )
+
+    # ----- likelihood -----
+    mu = alpha_c + beta * x_c
+    numpyro.sample("obs", dist.Normal(mu, sigma), obs=y)
 ```
 :::
 
@@ -232,7 +263,10 @@ dt_fit_lin = az.from_cmdstanpy(fit_lin)
 
 ## Numpyro
 ```{.python}
-## coming soon
+kernel = NUTS(mod_lin)
+mcmc = MCMC(kernel,  num_warmup=1000, num_samples=1000, progress_bar=False)
+mcmc.run(random.PRNGKey(SEED), **data_lin_priors)
+dt_fit_lin = az.from_numpyro(mcmc)
 ```
 
 :::
@@ -327,7 +361,15 @@ pd.DataFrame(estimates, columns=["mean", "5%", "95%"]).round(3)
 
 ## Numpyro
 ```{.python}
-## coming soon
+estimates = []
+for i in range(1, 11):
+    mcmc.run(random.PRNGKey(SEED+i), **data_lin_priors)
+    _beta_100 = az.from_numpyro(mcmc).posterior["beta"] * 100
+    mean_temp = _beta_100.mean().item()
+    q05_temp, q95_temp = az.eti(_beta_100).values
+    estimates.append([mean_temp, q05_temp, q95_temp])
+
+pd.DataFrame(estimates, columns=["mean", "5%", "95%"]).round(3)
 ```
 
 :::
