@@ -120,7 +120,7 @@ import warnings
 import sys
 sys.path.insert(0, '..')
 
-import arviz.preview as az
+import arviz as az
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -265,7 +265,7 @@ dt_fit_lin = az.from_cmdstanpy(fit_lin)
 ```{.python}
 kernel = NUTS(mod_lin)
 mcmc = MCMC(kernel,  num_warmup=1000, num_samples=1000, progress_bar=False)
-mcmc.run(random.PRNGKey(SEED), **data_lin_priors)
+mcmc.run(random.PRNGKey(SEED), **data_lin_priors, extra_fields=("num_steps", "energy"))
 dt_fit_lin = az.from_numpyro(mcmc)
 ```
 
@@ -276,7 +276,7 @@ dt_fit_lin = az.from_numpyro(mcmc)
 There were no convergence issues reported by sampling. We can also explicitly call CmdStan inference diagnostics:
 
 ```{python}
-print(fit_lin.diagnose())
+az.diagnose(dt_fit_lin)
 ```
 
 
