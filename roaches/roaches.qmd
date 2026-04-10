@@ -1,0 +1,1065 @@
+---
+title: "Roaches cross-validation model checking and comparison"
+author: "Aki Vehtari"
+date: 2017-01-10
+date-modified: today
+date-format: iso
+format:
+  html:
+    number-sections: true
+    code-copy: true
+    code-download: true
+    code-tools: true
+bibliography: ../casestudies.bib
+---
+
+This notebook includes the code code for the Bayesian Workflow
+book Chapter 24 *Leave-one-out cross validation model checking and
+comparison: Roaches*.
+
+## Introduction
+
+This case study demonstrates cross-validation model comparison, and
+posterior and cross-validation predictive checking of
+models. Furthermore the notebook demonstrates how to use integrated
+PSIS-LOO with varying intercept ("random effect") models.
+
+**Load packages**
+
+```{python}
+#| label: setup
+#| include: true
+#| cache: false
+import warnings
+import sys
+sys.path.insert(0, '..')
+
+import arviz.preview as az
+import bambi as bmb
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import pymc as pm
+import xarray as xr
+
+az.style.use("arviz-variat")
+az.rcParams["stats.ci_prob"] = 0.95
+plt.rcParams["figure.dpi"] = 72
+SEED = 7412
+```
+
+
+
+::: {.panel-tabset group="ppl"}
+## CmdStanPy
+
+```{python}
+from cmdstanpy import CmdStanModel, disable_logging
+disable_logging()
+from utils import print_stan
+```
+
+## Numpyro
+```{.python}
+
+```
+:::
+
+## Data
+
+The roaches data example comes from Chapter 8.3 of @Gelman-Hill:2007.
+
+> the treatment and control were applied to 160 and 104 apartments,
+respectively, and the outcome measurement $y_i$ in each apartment
+$i$ was the number of roaches caught in a set of traps. Different
+apartments had traps for different numbers of days
+
+In addition to an intercept, the regression predictors for the
+model are the pre-treatment number of roaches `roach1`, the
+treatment indicator `treatment`, and a variable indicating whether
+the apartment is in a building restricted to elderly residents
+`senior`. The distribution of `roach1` is very skewed and we take a
+square root of it. Because the number of days for which the roach
+traps were used is not the same for all apartments in the sample,
+we include it as an `exposure2` by adding $\ln(u_i)$) to the linear
+predictor $\eta_i$ and it can be specified using the `offset`
+argument in `brms`.
+
+Load data
+
+```{python}
+roaches = pd.read_csv("data/roaches.csv")
+roaches["sqrt_roach1"] = np.sqrt(roaches["roach1"])
+roaches.head()
+
+```
+
+## Poisson model
+
+Fit a Poisson regression model with `bambi`
+
+```{python}
+#| results: hide
+#| cache: true
+fit_p = bmb.Model(
+    "y ~ sqrt_roach1 + treatment + senior + offset(log(exposure2))",
+    roaches,
+    family="poisson",
+    link="log",
+    priors={
+        "sqrt_roach1": bmb.Prior("Normal", mu=0, sigma=1),
+        "treatment": bmb.Prior("Normal", mu=0, sigma=1),
+        "senior": bmb.Prior("Normal", mu=0, sigma=1),
+    },
+)
+idata_p = fit_p.fit(random_seed=SEED, idata_kwargs={"log_likelihood": True})
+fit_p.predict(idata_p, kind="response", inplace=True, random_seed=SEED)
+```
+
+Plot posterior
+
+```{python}
+#| label: fig-posterior-poisson
+pc = az.plot_ridge(
+    idata_p,
+    var_names=["sqrt_roach1", "treatment", "senior"],
+    combined=True,
+)
+pc.coords = {"column": "ridge"}
+az.add_lines(pc, 0)
+```
+
+All marginal posteriors are clearly away from zero. We need to do
+some model checking before trusting these.
+
+## Posterior predictive checking
+
+Posterior predictive checking can often detect problems and also
+provide more information about the reason. As the range of counts
+is large, we can use kernel density estimate plot
+[@Sailynoja-Johnson-Martin-etal:2025]. In case of discrete data, ArviZ defaults to using a histogram, which could also be a good option here.
+```{python}
+#| label: fig-ppc_dens-poisson
+pc = az.plot_ppc_dist(idata_p, kind="kde")
+pc.facet_map("set_xlim", limits=(0, 400))
+pc.facet_map("set_xscale", scale="sqrt")
+```
+
+We see that the marginal distribution of model replicated data is
+clearly different from the observed data which are more
+dispersed. Posterior predictive checking can sometimes have
+significant bias due to double use of the data, but in this case
+the discrepancy is so big that further checks are not needed.
+
+Although in this case the model misspecification is obvious with
+kernel density plot, too, for count the often a better choice is a
+rootogram variant proposed by @Sailynoja-Johnson-Martin-etal:2025.
+
+```{python}
+#| label: fig-ppc_rootogram-poisson
+pc = az.plot_ppc_rootogram(idata_p)
+pc.facet_map("set_xscale", scale="sqrt")
+```
+
+### Cross-validation model comparison
+
+For demonstration, we show what would happen in cross validation
+based model comparison if we would ignore posterior predictive
+checking result.
+
+We use Pareto-smoothed importance sampling leave-one-out (PSIS-LOO)
+cross-validation [@Vehtari+etal:PSIS-LOO:2017] as it is very fast to compute.
+
+```{python}
+loo_p = az.loo(idata_p)
+loo_p
+```
+
+We get warning about high Pareto-$\hat{k}$'s in PSIS-LOO
+computation. We store the result for later use.
+
+Now we examine LOO results.
+
+`p_loo` is about 278, which is much higher than the number of
+parameters (4), which indicates bad misspecification, which we did
+already see also with posterior predictive checking. Many high
+Pareto-$\hat{k}$'s in PSIS-LOO without moment matching were
+likely also caused by model misspecification.
+
+For demonstration, we show what would happen if we would try to use cross validation based model comparison to assess predictive relevance of the covariates. We later compare these to results when using better models.
+
+We form 3 models by dropping each of the covariates out at a time.
+
+```{python}
+#| results: hide
+#| cache: true
+fit_p_m1 = bmb.Model(
+    "y ~ treatment + senior + offset(log(exposure2))",
+    roaches,
+    family="poisson",
+    link="log",
+    priors={
+        "treatment": bmb.Prior("Normal", mu=0, sigma=1),
+        "senior": bmb.Prior("Normal", mu=0, sigma=1),
+    },
+)
+idata_p_m1 = fit_p_m1.fit(random_seed=SEED, idata_kwargs={"log_likelihood": True})
+
+fit_p_m2 = bmb.Model(
+    "y ~ sqrt_roach1 + senior + offset(log(exposure2))",
+    roaches,
+    family="poisson",
+    link="log",
+    priors={
+        "sqrt_roach1": bmb.Prior("Normal", mu=0, sigma=1),
+        "senior": bmb.Prior("Normal", mu=0, sigma=1),
+    },
+)
+idata_p_m2 = fit_p_m2.fit(random_seed=SEED, idata_kwargs={"log_likelihood": True})
+
+fit_p_m3 = bmb.Model(
+    "y ~ sqrt_roach1 + treatment + offset(log(exposure2))",
+    roaches,
+    family="poisson",
+    link="log",
+    priors={
+        "sqrt_roach1": bmb.Prior("Normal", mu=0, sigma=1),
+        "treatment": bmb.Prior("Normal", mu=0, sigma=1),
+    },
+)
+idata_p_m3 = fit_p_m3.fit(random_seed=SEED, idata_kwargs={"log_likelihood": True})
+```
+
+```{python}
+az.compare({
+    "Poisson full model": idata_p,
+    "Poisson w/o sqrt(roach1)": idata_p_m1,
+    "Poisson w/o treatment": idata_p_m2,
+    "Poisson w/o senior": idata_p_m3,
+})
+```
+
+Based on `elpd_diff` and `se_diff` the roaches covariate would be
+relevant, but although dropping treatment or senior covariate will
+make a large change to elpd, the uncertainty is also very large and
+cross-validation indicates that these covariates are not
+necessarily relevant. The posterior marginals are conditional on
+the model, but cross-validation is more cautious by not using any
+model for the future data distribution.
+
+
+## Negative binomial model
+
+We change the Poisson model to a more robust negative binomial
+model. Often it would be sensible to start with negative binomial
+model for counts and skip the Poisson model.  The negative-binomial
+shape parameter has the `brms` default prior, which is
+inverse-gamma$(.4, .3)$ [@Vehtari:2024].
+
+```{python}
+#| results: hide
+#| cache: true
+fit_nb = bmb.Model(
+    "y ~ sqrt_roach1 + treatment + senior + offset(log(exposure2))",
+    roaches,
+    family="negativebinomial",
+    link="log",
+    priors={
+        "sqrt_roach1": bmb.Prior("Normal", mu=0, sigma=1),
+        "treatment": bmb.Prior("Normal", mu=0, sigma=1),
+        "senior": bmb.Prior("Normal", mu=0, sigma=1),
+    },
+)
+idata_nb = fit_nb.fit(random_seed=SEED, idata_kwargs={"log_likelihood": True})
+fit_nb.predict(idata_nb, kind="response", inplace=True, random_seed=SEED)
+```
+
+Plot posterior
+
+```{python}
+#| label: fig-posterior-nb
+pc = az.plot_ridge(
+    idata_nb,
+    var_names=["sqrt_roach1", "treatment", "senior"],
+    combined=True,
+)
+pc.coords = {"column": "ridge"}
+az.add_lines(pc, 0)
+```
+
+Treatment effect is much closer to zero, and senior effect has lot
+of probability mass on both sides of 0. So it matters, which model
+we use, and we should trust posteriors only if the model passes
+predictive checking.
+
+
+### Posterior and LOO predictive checking
+
+We use posterior predictive checking to compare marginal data and
+predictive distributions.
+
+```{python}
+#| label: fig-ppc_dens-nb
+pc = az.plot_ppc_dist(idata_nb, kind="kde")
+pc.facet_map("set_xlim", limits=(0, 400))
+pc.facet_map("set_xscale", scale="sqrt")
+```
+
+We see that the negative-binomial model is much better although it
+seems that the model predictive distribution has more mass for
+small counts than the real data. This discrepancy can also be an
+artifact from the kernel density estimate, and it is better to
+examine discrete rootogram
+
+```{python}
+#| label: fig-ppc_rootogram-nb
+pc = az.plot_ppc_rootogram(idata_nb)
+pc.facet_map("set_xlim", limits=(0, 400))
+pc.facet_map("set_xscale", scale="sqrt")
+```
+
+We see that the negative-binomial model is quite good, and there is
+no clear discrepancy based on the predictive intervals and data.
+
+Instead of looking at the marginal distribution, we can look at the
+pointwise predictive distribution and corresponding observations.
+
+```{python}
+#| label: fig-ppc_intervals-nb
+pc = az.plot_ppc_interval(idata_nb)
+pc.facet_map("set_yscale", scale="sqrt")
+```
+
+If the model predictive distributions are well calibrated, then the
+observations should look like randomly drawn from the predictive
+distributions. We can use a `pit_ecdf` to make probability integral
+transformation (PIT) plot to make the comparison of pointwise
+posterior predictive distributions and data. One PIT value is the
+cumulative density of one observation given the corresponding
+conditional predictive distribution. If the pointwise predictive
+distributions are well calibrated, PIT values are (almost)
+uniformly distributed. PIT-ECDF plot compares observed PIT values
+to uniform distribution.
+
+```{python}
+#| label: fig-ppc_pit-nb
+az.plot_ppc_pit(idata_nb)
+```
+
+
+Now that posterior predictive check looks quite good, it is useful
+to be more careful and use LOO predictive checking, too. We first
+run PSIS-LOO computation to check it works.
+
+```{python}
+loo_nb = az.loo(idata_nb)
+loo_nb
+```
+
+We get warning about high Pareto-$\hat k$ and to improve computation accuracy, we re-run with moment matching. We later need some Pareto smoothed importance sampling intermediate computation results and save them, too.
+
+```{python}
+# TODO: Add moment matching.
+```
+
+Let’s look at the LOO results.
+
+```{python}
+# TODO: show results from moment matching.
+```
+
+All Pareto-$\hat{k}$ are good indicating PSIS-LOO computation
+works well.  `p_loo` is closer to the actual number of
+parameters, but still slightly larger than the total number of
+parameters 5 which is slightly suspicious. `p_loo` is small
+compared to the number of observations and we may expect pointwise
+LOO predictive intervals to be similar to pointwise posterior
+predictive intervals, and LOO-PIT-ECDF to look similar to posterior
+PIT-ECDF.
+
+```{python}
+pc = az.plot_loo_interval(idata_nb)
+pc.facet_map("set_yscale", scale="sqrt")
+```
+
+```{python}
+#| label: fig-ppc_loopit-nb
+az.plot_loo_pit(idata_nb)
+```
+
+As we guessed, there is not much difference between LOO and
+posterior intervals, and LOO-PIT-ECDF and PIT-ECDF.
+
+```{python}
+az.compare({
+    "Poisson": idata_p,
+    "Neg-bin": idata_nb,
+})
+```
+
+In LOO model comparison the negative binomial model is much better
+than the Poisson model. As we have made the model checking, we know that
+the Poisson model is misspecified and could be dropped just based
+on that fact. As the difference is very big and many times bigger
+than `diff_se`, we can also be certain that negative binomials
+model has better predictive performance.
+
+As Poisson is a special case of negative-Binomial, instead of using
+cross validation model comparison, we could have also seen that
+Poisson is not a good model by looking at the posterior of the
+over-dispersion parameter (which gets very small values), and there
+would not have been need to fit Poisson model at all.
+
+```{python}
+#| label: fig-posterior-nb_dispersion
+pc = az.plot_dist(idata_nb, var_names="alpha")
+```
+
+Posterior predictive rootogram and LOO-PIT-ECDF looked good, but
+for discrete models where some discrete values have relatively high
+probability it may miss things and it is good to examine more
+carefully how well calibrated predictive probabilities are. In
+roaches, 64% of observations are 0, and it makes sense to look how
+well we predict zeros or non-zeros. To check calibration of binary
+target predictive probabilities, we use PAV-adjusted reliability
+diagram [@Dimitriadis-Gneiting-Jordan:2021,@Sailynoja-Johnson-Martin-etal:2025].
+Although in this case, the difference is small, for demonstration
+we use LOO predictive probabilities instead of posterior predictive
+probabilities for non-zeros. In case of good calibration, the
+calibration line would stay mostly inside of the envelope.
+
+```{python}
+#| label: fig-pava-nb
+pp_binary = (idata_nb.posterior_predictive["y"] > 0).astype(float)
+y_binary = (idata_nb.observed_data["y"] > 0).astype(float)
+
+idata_binary = az.from_dict({
+    "posterior_predictive": {"y": pp_binary},
+    "observed_data": {"y": y_binary},
+})
+pc = az.plot_ppc_pava(idata_binary, var_names="y")
+pc.facet_map("set_xlim", limits=(0, 1))
+```
+
+There is a slight miscalibration indicated by red curve being quite
+much outside of the blue envelope. We later build a zero-inflated
+model to test whether that would improve calibration and predictive
+performance.
+
+## Poisson model with varying intercepts
+
+Sometimes overdispersion is modelled by adding varying intercepts
+("random effects") for each individual. Negative-binomial model can
+be considered as mixture of Poissons with mixing distribution being
+a gamma distribution. It is common to use normal prior for varying
+intercepts in log intensity scale. This kind of varying intercept
+model may fit the data better than negative binomial model for two
+reasons. First, it is possible that the normal variation in log
+intensity scale is closer to actual variation. Second, explicitly
+presenting the latent values and using a prior makes the model
+slightly more flexible as the posterior of the varying intercepts
+can be different from the prior. However, in this case with just
+one observation per varying intercept, it is likely that the
+posterior is close to normal as likelihood contribution from one
+observation for each varying intercept is weak.
+The following example demonstrates computational challenges with
+varying intercept approach.
+
+We add varying intercept for each observation with normal prior
+using the formula term `(1 | id)`.  We use run the sampling four times
+longer to get high enough effective sample sizes.
+
+```{python}
+#| results: hide
+#| cache: true
+roaches["id"] = np.arange(len(roaches))
+roaches["id"] = roaches["id"].astype(str)
+
+fit_pvi = bmb.Model(
+    "y ~ sqrt_roach1 + treatment + senior + (1 | id) + offset(log(exposure2))",
+    roaches,
+    family="poisson",
+    link="log",
+    priors={
+        "sqrt_roach1": bmb.Prior("Normal", mu=0, sigma=1),
+        "treatment": bmb.Prior("Normal", mu=0, sigma=1),
+        "senior": bmb.Prior("Normal", mu=0, sigma=1),
+    },
+)
+idata_pvi = fit_pvi.fit(
+    random_seed=SEED,
+    idata_kwargs={"log_likelihood": True},
+)
+fit_pvi.predict(idata_pvi, kind="response", inplace=True, random_seed=SEED)
+```
+
+### Analyse posterior
+
+Plot posterior
+
+```{python}
+#| label: fig-posterior-poisson_varying
+pc = az.plot_ridge(
+    idata_pvi,
+    var_names=["sqrt_roach1", "treatment", "senior"],
+    combined=True,
+)
+pc.coords = {"column": "ridge"}
+az.add_lines(pc, 0)
+```
+
+The marginals are similar as with negative-binomial model, but
+slightly closer to 0.
+
+### Cross-validation checking
+
+Compute LOO using PSIS-LOO.
+
+```{python}
+loo_pvi = az.loo(idata_pvi)
+loo_pvi
+```
+
+`p_loo` is about 164, which is less than the number of parameters
+267, but it is relatively large compared to to the number of
+observations (`p_loo >>N/5`), which indicates very flexible
+model. In this case, this is due to having an intercept parameter for
+each observation. Removing one observation changes the posterior
+for that intercept so much that importance sampling fails (even
+with Pareto smoothing).  Also the very large number of high $k$
+values is probably due to having very flexible model.
+
+We can try to improve computation with moment matching.
+
+```{python}
+# Add missing code and text
+```
+
+
+```{python}
+az.compare({
+    "Neg-bin": idata_nb,
+    "Poisson var. int.": idata_pvi,
+})
+```
+
+There is not much difference, and the uncertainty is big. The column `diag_diff` shows that the distribution of the differences have thick tails, which indicates that `elpd_diff`, `diff_se`, and `p_worse` can not be fully trusted, and the conclusion is that we can’t know which model has better predictive performance.
+
+To verify, that we can compare PSIS-LOO and KK-fold-CV results, we can run KK-fold-CV also for negative-binomial model.
+
+```{python}
+# Add missing code and text
+```
+
+
+### Posterior predictive checking
+
+We do posterior predictive checking for varying intercept Poisson model.
+
+```{python}
+#| label: fig-ppc_dens-poisson_varying
+pc = az.plot_ppc_dist(idata_pvi, kind="kde")
+pc.facet_map("set_xscale", scale="sqrt")
+```
+
+The match looks perfect, but that can be explained with having one
+parameter for each observation and kernel density estimate hiding something.
+
+
+```{python}
+#| label: fig-ppc_rootogram-pvi
+az.plot_ppc_rootogram(idata_pvi)
+```
+
+PIT-ECDF plot seems to indicate problems
+
+```{python}
+#| label: fig-ppc_pit-poisson_varying
+az.plot_ppc_pit(idata_pvi)
+```
+
+There are too many PIT values near 0.5. If we look at the
+predictive intervals and observations, we see that many the
+observations are in the middle of the posterior predictive
+interval, which can be explained by having very flexible model with
+one parameter for each observation. Posterior predictive checking
+is likely to fail with flexible models (having big `p_loo`).
+
+```{python}
+#| label: fig-ppc_intervals-poisson_varying
+pc = az.plot_ppc_interval(idata_pvi)
+pc.facet_map("set_yscale", scale="sqrt")
+```
+
+LOO-PIT's can take into account the model flexibility, if the
+computation works.  In this case LOO-PIT's look slightly better,
+but still showing problems, but this is because PSIS-LOO fails (as
+discussed above)
+
+```{python}
+#| label: fig-ppc_loopit-poisson_varying
+az.plot_loo_pit(idata_pvi)
+```
+
+## Poisson model with varying intercept and integrated LOO
+
+Removing one observation changes the posterior for that intercept
+so much that importance sampling fails (even with Pareto
+smoothing). We can get improved stability by integrating that
+intercept out with something more accurate than the importance
+sampling [@Vehtari+etal:2016:LOO_for_GLVM].  If there is only one
+group or individual specific parameter then we can integrate that
+out easily with 1D adaptive quadrature. 2 parameters can be handled
+with nested 1D quadratures, but for more parameters nested
+quadrature is likely to be too slow and other integration methods
+are needed.
+
+As we can easily integrate out only 1 (or 2) parameters (per group
+/ individual), it's not easy to make a generic approach for `rstanarm`
+and `brms`, and thus we illustrate the approach with direct Stan model
+code and `cmdstanpy`.
+
+The following Stan model uses individual specific intercept term
+`z[i]` (with common prior with scale `sigmaz`). In the generated
+quantities, the usual `log_lik` computation is replaced with
+integrated approach. We also generate `y_loorep` which is the LOO
+predictive distribution given other parameters than `z`. This is
+needed to get the correct LOO predictive distributions when
+combined with integrated PSIS-LOO.
+
+
+::: {.panel-tabset group="ppl"}
+## CmdStanPy
+
+```{python}
+mod_p_vi = CmdStanModel(stan_file="poisson_vi_integrate.stan")
+print_stan(mod_p_vi)
+```
+
+## Numpyro
+```{.python}
+
+```
+:::
+
+
+We could also move the integrated likelihood to the model block and
+not use MCMC to sample the varying intercepts at all. This would
+make marginal posterior easier for MCMC, but using quadrature
+integration $N$ times for each leapfrog step in Hamiltonian Monte
+Carlo sampling will increase the sampling time more than what would
+be the benefit from the simpler marginal posterior. When we do the
+integration in the generated quantities, the quadrature is computed
+only for each saved iteration making the computation faster.
+
+Next we compile the model, prepare the data, and sample. `integrate_1d_reltol`
+sets the relative tolerance for the adaptive 1D quadrature function
+`integrate_1d` (if with other model and data you see messages about
+error estimate of integral exceeding the given relative tolerance
+times norm of integral, you will get NaNs and need to increase the
+relative tolerance).
+
+We increase the number of sampling iterations to improve effective
+sample size needed for better LOO-PIT plot.
+
+
+::: {.panel-tabset group="ppl"}
+## CmdStanPy
+
+```{python}
+N = len(roaches)
+datap = {
+    "N": N,
+    "P": 3,
+    "offsett": np.log(roaches["exposure2"]).tolist(),
+    "X": roaches[["sqrt_roach1", "treatment", "senior"]].values.tolist(),
+    "y": roaches["y"].tolist(),
+    "integrate_1d_reltol": 1e-6,
+}
+fit_p_vi = mod_p_vi.sample(
+    data=datap,
+    seed=SEED,
+    show_progress=False,
+    iter_sampling = 8000,
+    thin = 8
+)
+
+idata_p_vi = az.from_cmdstanpy(
+    fit_p_vi,
+    posterior_predictive="y_rep",
+    observed_data={"y": roaches["y"].values},
+    log_likelihood={"y": "log_lik"},
+)
+idata_p_vi["posterior_predictive"] = idata_p_vi["posterior_predictive"].ds.rename(
+    {"y_rep": "y", "y_rep_dim_0": "y_dim_0"}
+)
+```
+
+## Numpyro
+```{.python}
+
+```
+:::
+
+
+The posterior is similar as above for varying intercept Poisson model,
+as it should be, as the generated quantities is not affecting
+the posterior.
+
+```{python}
+#| label: fig-posterior-poisson_var_int
+pc = az.plot_ridge(
+    idata_p_vi,
+    var_names=["beta", "sigmaz"],
+    combined=True,
+)
+pc.coords = {"column": "ridge"}
+az.add_lines(pc, 0)
+```
+
+Now the PSIS-LOO doesn't give warnings and the result is close to K-fold-CV.
+
+```{python}
+# FIXME: This looks very bad!
+loo_p_vi = az.loo(idata_p_vi)
+loo_p_vi
+```
+
+```{python}
+az.compare({
+    "Poisson var. int. int-LOO": idata_p_vi,
+    "Neg-bin": idata_nb,
+})
+```
+
+Comparing to the negative binomial model there is not much
+difference, and the difference in `elpd_diff` compared to
+$K$-fold-CV may be partially explained by high variability due to
+thick tails of the pointwise elpd differences.
+
+LOO-PIT plot looks good, although a bit more variation, which is
+probably due to lower effective sample sizes due to more
+challenging posterior than for negative binomial model.
+
+```{python}
+#| label: fig-ppc_loopit-poisson_varying_int
+# FIXME: This looks very bad!
+az.plot_loo_pit(idata_p_vi)
+```
+
+We check the calibration of predictive probabilities for zeros vs
+non-zeros. The calibration plot looks better than with negative
+binomial model. The predicted probabilities have wider range and
+the calibration curve stays better inside the envelope. Not shown
+here, but the varying intercepts are quite close to normally
+distributed (as we expected), and thus the difference to the
+negative binomial would be mostly the different distribution for
+the individual variation.
+
+```{python}
+#| label: fig-pava-p_vi
+pp_binary = (idata_p_vi.posterior_predictive["y"] > 0).astype(float)
+y_binary = (idata_p_vi.observed_data["y"] > 0).astype(float)
+
+idata_binary_pvi = az.from_dict({
+    "posterior_predictive": {"y": pp_binary},
+    "observed_data": {"y": y_binary},
+})
+pc = az.plot_ppc_pava(idata_binary_pvi, var_names="y")
+pc.facet_map("set_xlim", limits=(0, 1))
+```
+
+## Zero-inflated negative-binomial model
+
+As the proportion of zeros is quite high in the data and the
+calibration plot for negative binomial model indicated slight
+miscalibration in prediction of zeros and non-zeros, it is
+worthwhile to test also a zero-inflated negative-binomial model,
+which is a mixture of two models
+
+- logistic regression to model the proportion of extra zero counts
+- negative-binomial model
+
+Fit zero-inflated negative-binomial model.
+
+```{python}
+#| results: hide
+#| cache: true
+fit_zinb = bmb.Model(
+    "y ~ sqrt_roach1 + treatment + senior + offset(log(exposure2))",
+    roaches,
+    family="zero_inflated_negativebinomial",
+    link="log",
+    priors={
+        "sqrt_roach1": bmb.Prior("Normal", mu=0, sigma=1),
+        "treatment": bmb.Prior("Normal", mu=0, sigma=1),
+        "senior": bmb.Prior("Normal", mu=0, sigma=1),
+    },
+)
+idata_zinb = fit_zinb.fit(random_seed=SEED, idata_kwargs={"log_likelihood": True})
+# We need to compute log_prior for the prior/likelihood sensitivity step
+pm.compute_log_prior(idata=idata_zinb, model=fit_zinb.backend.model, extend_inferencedata=True)
+fit_zinb.predict(idata_zinb, kind="response", inplace=True, random_seed=SEED)
+```
+
+Based on PSIS-LOO, zero-inflated negative-binomial is clearly better.
+
+```{python}
+loo_zinb = az.loo(idata_zinb)
+loo_zinb
+```
+
+`p_loo` is close to the total number of parameters in the model
+(9), which is a good sign.
+
+Zero-inflated negative binomial (ZINB) model has clearly better predictive
+performance than the negative binomial (and all diagnostics are good).
+
+```{python}
+az.compare({
+    "Neg-bin": idata_nb,
+    "ZINB": idata_zinb,
+})
+```
+
+Posterior predictive checking looks good, but there is no clear difference when looking at marginal predictive distributions or LOO-PIT.
+
+```{python}
+#| label: fig-ppc_dens-zinb
+pc = az.plot_ppc_dist(idata_zinb, kind="kde")
+pc.facet_map("set_xlim", limits=(0, 400))
+pc.facet_map("set_xscale", scale="sqrt")
+```
+
+```{python}
+#| label: fig-ppc_rootogram-zinb
+pc = az.plot_ppc_rootogram(idata_zinb)
+pc.facet_map("set_xlim", limits=(0, 400))
+pc.facet_map("set_xscale", scale="sqrt")
+```
+
+```{python}
+#| label: fig-ppc_pit-zinb
+az.plot_ppc_pit(idata_zinb)
+```
+
+LOO-PIT-ECDF
+
+```{python}
+#| label: fig-ppc_loopit-zinb
+az.plot_loo_pit(idata_zinb)
+```
+
+Reliability diagram assessing the calibration of predicted
+probabilities of zero vs non-zero looks clearly better than the one
+for negative binomial model.
+
+```{python}
+#| label: fig-pava-zinb
+pp_binary = (idata_zinb.posterior_predictive["y"] > 0).astype(float)
+y_binary = (idata_zinb.observed_data["y"] > 0).astype(float)
+
+idata_binary_zinb = az.from_dict({
+    "posterior_predictive": {"y": pp_binary},
+    "observed_data": {"y": y_binary},
+})
+pc = az.plot_ppc_pava(idata_binary_zinb, var_names="y")
+pc.facet_map("set_xlim", limits=(0, 1))
+```
+
+Although the models are different, with finite data and wide LOO
+predictive distributions, there is a limit in which differences can
+be see in LOO-PIT values. Both negative-binomial and zero-inflated
+negative binomial are close enough the LOO-PIT can't see
+discrepancy from the data, but elpd_loo and calibration plot were
+able to to show that zero-inflation component improves the
+predictive accuracy and calibration.
+
+### Analyse posterior
+
+Plot posterior
+
+```{python}
+#| label: fig-posterior-zinb
+pc = az.plot_ridge(
+    idata_zinb,
+    var_names=["sqrt_roach1", "treatment", "senior"],
+    combined=True,
+)
+pc.coords = {"column": "ridge"}
+```
+
+The posterior marginals for negative-binomial part are similar to marginals
+in the plain negative-binomial model. The marginal effects for the
+logistic part have opposite sign as the logistic part is modelling
+the extra zeros.
+
+The treatment effect is now divided between negative-binomial and
+logistic part. We can use the model to make predictions for the
+expected number of roaches given treatment and no-treatment to get
+one marginal posterior to examine.
+
+Expectations of posterior predictive distributions given
+treatment=0 and treatment=1
+
+```{python}
+roaches_t0 = roaches.copy()
+roaches_t1 = roaches.copy()
+
+roaches_t0["treatment"] = 0
+pred_zinb_t0 = fit_zinb.predict(idata_zinb, data=roaches_t0, kind="response", inplace=False, random_seed=SEED)
+
+roaches_t1["treatment"] = 1
+pred_zinb_t1 = fit_zinb.predict(idata_zinb, data=roaches_t1, kind="response", inplace=False, random_seed=SEED)
+```
+
+Ratio of expected number of roaches with vs without treatment
+
+```{python}
+#| label: fig-effect-zinb
+group = "posterior_predictive"
+mean_t0 = pred_zinb_t0.posterior_predictive["y"].mean(dim="__obs__")
+mean_t1 = pred_zinb_t1.posterior_predictive["y"].mean(dim="__obs__")
+ratio_zinb = az.from_dict({group: {"ratio": mean_t1 / mean_t0}})
+
+
+pc =az.plot_dist(
+      ratio_zinb,
+      group=group,
+      kind="dot",
+      visuals = {"point_estimate": False, 
+            "point_estimate_text": False,
+            "credible_interval": False,
+            "title": {"text": "expected number of roaches\n with vs without treatment"}
+            }
+  )
+
+az.add_lines(pc, 1, color="gray", linestyle="dotted")
+pc.facet_map("set_xlim", limits=(0, 1.01))
+```
+
+The treatment clearly reduces the expected number of roaches.
+
+Assuming our model is causally sensible, we can trust the posterior
+more if the model has well calibrated predictive distributions
+(passes posterior and LOO predictive, and calibration checking).
+For illustration purposes, we compare the posteriors using Poisson,
+negative binomial and zero-inflated negative binomial.
+
+```{python}
+pred_p_t0 = fit_p.predict(idata_p, data=roaches_t0, kind="response", inplace=False, random_seed=SEED)
+pred_p_t1 = fit_p.predict(idata_p, data=roaches_t1, kind="response", inplace=False, random_seed=SEED)
+mean_p_t0 = pred_p_t0.posterior_predictive["y"].mean(dim="__obs__")
+mean_p_t1 = pred_p_t1.posterior_predictive["y"].mean(dim="__obs__")
+ratio_p = mean_p_t1 / mean_p_t0
+
+pred_nb_t0 = fit_nb.predict(idata_nb, data=roaches_t0, kind="response", inplace=False, random_seed=SEED)
+pred_nb_t1 = fit_nb.predict(idata_nb, data=roaches_t1, kind="response", inplace=False, random_seed=SEED)
+mean_nb_t0 = pred_nb_t0.posterior_predictive["y"].mean(dim="__obs__")
+mean_nb_t1 = pred_nb_t1.posterior_predictive["y"].mean(dim="__obs__")
+ratio_nb = mean_nb_t1 / mean_nb_t0
+
+
+ratios = {"NB":az.from_dict({group: {"y": mean_nb_t1 / mean_nb_t0}}),
+          "Poisson":az.from_dict({group: {"y": mean_p_t1 / mean_p_t0}}),
+           "ZINB":az.from_dict({group: {"y": mean_t1 / mean_t0}}),
+          }
+```
+
+```{python}
+#| label: fig-effect-p-nb-zinb
+
+pc = az.plot_dist(
+      ratios,
+      group=group,
+      visuals = {"dist": False}
+  )
+az.add_lines(pc, 1, color="gray", linestyle="dotted")
+pc.add_legend("model")
+```
+
+All models show benefit of treatment, but Poisson model is
+overconfident with too narrow posterior. Posteriors using negative
+binomial (NB) and zero-inflated negative binomial (ZINB) are quite
+similar and in this case it would not probably matter for decision
+making even if the slightly worse negative binomial model would
+have been used.
+
+
+### Prior sensitivity analysis
+
+Finally we make prior sensitivity analysis by power-scaling both
+prior and likelihood. As there is posterior dependency between the
+negative binomial and zero-inflated coefficients, it is not that
+useful to look at the prior sensitivity for the parameters.  We
+focus on the actual quantity of interest, that is, the ratio of
+expected number of roaches with vs without treatment.
+
+```{python}
+idata_zinb.posterior["ratio"] = ratio_zinb.posterior_predictive.dataset["ratio"]
+az.psense_summary(idata_zinb, var_names="ratio")
+```
+
+There is no prior sensitivity and the likelihood is informative.
+
+
+### Predictive relevance of covariates
+
+Let's finally check cross-validation model comparison to see
+whether improved model has effect on the predictive performance
+comparison.
+
+```{python}
+#| results: hide
+#| cache: true
+fit_zinb_m2 = bmb.Model(
+    "y ~ sqrt_roach1 + senior + offset(log(exposure2))",
+    roaches,
+    family="zero_inflated_negativebinomial",
+    link="log",
+    priors={
+        "sqrt_roach1": bmb.Prior("Normal", mu=0, sigma=1),
+        "senior": bmb.Prior("Normal", mu=0, sigma=1),
+    },
+)
+idata_zinb_m2 = fit_zinb_m2.fit(random_seed=SEED, idata_kwargs={"log_likelihood": True})
+```
+
+```{python}
+az.compare({
+    "ZINB full model": idata_zinb,
+    "ZINB w/o treatment": idata_zinb_m2,
+})
+```
+
+Treatment effect improves the predictive performance with 96%
+probability. However, as the distribution of the pointwise
+differences seem to have a thick tail, the estimated probability
+using the normal approximation can be sensitive to a few biggest
+pointwise differences, which are due to the a few biggest numbers
+of roaches observed. Interestingly in this case, both models pass
+model checking, seem to be well specified, the distributions of
+pointwise elpds do not have thick tails, and we are able to
+reliably estimate `elpd_loo` for each model. This indicates that
+`elpd_diff` is likely to be well estimated, but the distribution of
+pointwise differences having thicker tail make `se_diff` and the
+normal approximation based `p_worse` unreliable. The conclusion is
+that the full model has slightly better predictive performance.
+
+As the variation in the number of roaches is high in both treatment
+groups, it is difficult to predict the number of roaches per
+apartment making the difference in predictive performance also
+small, even we can clearly see clear difference in the expected
+number of roaches in the groups.
+
+
+<br />
+
+# References {.unnumbered}
+
+<div id="refs"></div>
+
+# Licenses {.unnumbered}
+
+* Code &copy; 2017--2025, Aki Vehtari, licensed under BSD-3.
+* Text &copy; 2017--2025, Aki Vehtari, licensed under CC-BY-NC 4.0.
