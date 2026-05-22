@@ -1,0 +1,468 @@
+
+---
+title: "Posterior predictive checking: Stochastic learning in dogs"
+author: "Andrew Gelman"
+date: 2022-07-16
+date-modified: today
+date-format: iso
+format:
+  html:
+    number-sections: true
+    code-copy: true
+    code-download: true
+    code-tools: true
+bibliography: ../casestudies.bib
+---
+
+This notebook includes the `CmdStanPy` code for the Bayesian Workflow book
+Chapter 21 *Posterior predictive checking: Stochastic learning in dogs*.
+
+## Introduction
+
+We analyse stochastic learning in dogs data by
+@Bush+Mosteller:1955.
+
+```{python}
+#| label: setup
+#| include: true
+#| cache: false
+import sys
+import warnings
+
+sys.path.insert(0, "..")
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
+from cmdstanpy import CmdStanModel, disable_logging
+from scipy.special import expit
+
+import arviz as az
+
+from utils import print_stan
+
+warnings.filterwarnings("ignore")
+disable_logging()
+
+az.style.use("arviz-variat")
+az.rcParams["stats.ci_prob"] = 0.95
+plt.rcParams["figure.dpi"] = 100
+
+SEED = 123
+rng = np.random.default_rng(SEED)
+
+shock_cmap = ListedColormap(["#fac364", "#7c2695"])
+```
+
+## Data
+
+```{python}
+dogs = pd.read_csv("data/dogs.dat", skiprows=2, sep=r"\s+", header=None)
+shock = (dogs.iloc[:, 1:26].values == "S").astype(int)
+dogs_data = {"y": shock, "J": shock.shape[0], "T": shock.shape[1]}
+```
+
+## Models
+
+```{python}
+dogs_0 = CmdStanModel(stan_file="dogs_0.stan")
+print_stan(dogs_0)
+```
+
+```{python}
+#| label: fit_0
+#| results: hide
+fit_0 = dogs_0.sample(data=dogs_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+dt_0 = az.from_cmdstanpy(fit_0, posterior_predictive=["y_rep"])
+az.summary(dt_0)
+```
+
+```{python}
+dogs_1 = CmdStanModel(stan_file="dogs_1.stan")
+print_stan(dogs_1)
+```
+
+```{python}
+#| label: fit_1
+#| results: hide
+fit_1 = dogs_1.sample(data=dogs_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+dt_1 = az.from_cmdstanpy(fit_1, posterior_predictive=["y_rep"])
+az.summary(dt_1)
+```
+
+```{python}
+dogs_2 = CmdStanModel(stan_file="dogs_2.stan")
+print_stan(dogs_2)
+```
+
+```{python}
+#| label: fit_2
+#| results: hide
+fit_2 = dogs_2.sample(data=dogs_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+dt_2 = az.from_cmdstanpy(fit_2, posterior_predictive=["y_rep"])
+az.summary(dt_2)
+```
+
+```{python}
+dogs_3 = CmdStanModel(stan_file="dogs_3.stan")
+print_stan(dogs_3)
+```
+
+```{python}
+#| label: fit_3
+#| results: hide
+fit_3 = dogs_3.sample(data=dogs_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+dt_3 = az.from_cmdstanpy(fit_3, posterior_predictive=["y_rep"])
+az.summary(dt_3, var_names=["mu_logit_a", "sigma_logit_a"])
+```
+
+```{python}
+dogs_4 = CmdStanModel(stan_file="dogs_4.stan")
+print_stan(dogs_4)
+```
+
+```{python}
+#| label: fit_4
+#| results: hide
+fit_4 = dogs_4.sample(data=dogs_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+dt_4 = az.from_cmdstanpy(fit_4, posterior_predictive=["y_rep"])
+az.summary(dt_4, var_names=["mu_logit_ab", "Sigma_logit_ab"])
+```
+
+```{python}
+dogs_5 = CmdStanModel(stan_file="dogs_5.stan")
+print_stan(dogs_5)
+```
+
+```{python}
+#| label: fit_5
+#| results: hide
+fit_5 = dogs_5.sample(data=dogs_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+dt_5 = az.from_cmdstanpy(fit_5, posterior_predictive=["y_rep"])
+az.summary(dt_5, var_names=["mu_logit_ab", "sigma_logit_ab", "Omega_logit_ab", "a", "b"])
+```
+
+## Plots
+
+```{python}
+def empty_plot(ax, label=""):
+    ax.axis("off")
+    ax.text(0.5, 0.5, label, ha="center", va="center", transform=ax.transAxes, fontsize=8)
+
+
+def plot_dogs(ax, y):
+    J, T = y.shape
+    max_y_times = np.full(J, -1)
+    for j in range(J):
+        shock_times = np.where(y[j] == 1)[0]
+        if len(shock_times) > 0:
+            max_y_times[j] = shock_times.max()
+    order = np.argsort(max_y_times)[::-1]
+    y_ordered = y[order]
+    ax.imshow(y_ordered, aspect="auto", cmap=shock_cmap, origin="lower", interpolation="nearest")
+    ax.set(xticks=[], yticks=[])
+
+
+
+def plot_ppc(axes_row, idata, label):
+    J = dogs_data["J"]
+    T = dogs_data["T"]
+    empty_plot(axes_row[0], label)
+    y_rep = az.extract(idata, group="posterior_predictive", num_samples=6, random_seed=rng)
+    for ax_i, sample_i in enumerate(y_rep.sample.values):
+        plot_dogs(axes_row[ax_i + 1], y_rep.sel(sample=sample_i))
+
+```
+
+```{python}
+#| label: fig-dogs_ppc
+
+J = dogs_data["J"]
+T = dogs_data["T"]
+_, axes = plt.subplots(7, 7, figsize=(10, 10))
+
+empty_plot(axes[0, 0], "Real dogs")
+plot_dogs(axes[0, 1], shock)
+for j in range(2, 7):
+    empty_plot(axes[0, j])
+
+models = [dt_0, dt_1, dt_2, dt_3, dt_4, dt_5]
+labels = [
+    "PPsims from M0:\nlogit model",
+    "PPsims from M1:\n1-parameter\nlog model",
+    "PPsims from M2:\n2-parameter\nlog model",
+    "PPsims from M3:\nhier 1-par\nlog model",
+    "PPsims from M4:\nhier 2-par\nlog model",
+    "PPsims from M5:\nhier 2-par\nlog model\nwith prior",
+]
+
+for row, (idata, label) in enumerate(zip(models, labels), start=1):
+    plot_ppc(axes[row], idata, label)
+```
+
+```{python}
+#| label: fig-dogs_inference
+
+_, axes = plt.subplots(2, 5, figsize=(10, 4))
+
+posterior = az.extract(dt_5, var_names=["a", "b"], num_samples=10, random_seed=rng)
+
+
+for ax, sample_i in zip(axes.flatten(), posterior.sample):
+    a_sim = posterior["a"].sel(sample=sample_i)
+    b_sim = posterior["b"].sel(sample=sample_i)
+    ax.plot([0.55, 1], [0.55, 1], color="lightgray")
+    ax.scatter(a_sim, b_sim)
+    ax.set(xlim=(0.55, 1),
+            ylim=(0.55, 1),
+            aspect="equal",
+            xticks=[0.6, 0.8, 1.0],
+            yticks=[0.6, 0.8, 1.0])
+    if k == 1:
+        ax.set_xlabel("a")
+    else:
+        ax.set_xticklabels([])
+    if i == 0:
+        ax.set_ylabel("b")
+    else:
+        ax.set_yticklabels([])
+fig.suptitle("10 posterior simulations of the parameters of the 30 dogs")
+```
+
+```{python}
+#| label: fig-dogs_point_estimate
+
+ab_median = az.median(dt_5, var_names=["a", "b"])
+
+_, ax = plt.subplots(figsize=(4, 4))
+ax.plot([0.55, 1], [0.55, 1], color="lightgray")
+ax.scatter(ab_median["a"], ab_median["b"])
+ax.set(xlim=(0.55, 1),
+       ylim=(0.55, 1),
+       aspect="equal",
+       xlabel=r"$\hat{a}$",
+       ylabel=r"$\hat{b}$")
+ax.set_title("Posterior medians from fitted model")
+```
+
+```{python}
+new_dogs_mu_logit_ab = np.array([2.4, 1.3])
+new_dogs_sigma_ab = np.array([0.32, 0.40])
+new_dogs_rho_ab = 0
+new_dogs_Sigma_ab = (
+    np.diag(new_dogs_sigma_ab)
+    @ np.array([[1, new_dogs_rho_ab], [new_dogs_rho_ab, 1]])
+    @ np.diag(new_dogs_sigma_ab)
+)
+
+J = 30
+new_dogs_ab = expit(rng.multivariate_normal(new_dogs_mu_logit_ab, new_dogs_Sigma_ab, size=J))
+a = new_dogs_ab[:, 0]
+b = new_dogs_ab[:, 1]
+T = 25
+new_dogs = np.zeros((J, T), dtype=int)
+for j in range(J):
+    prev_shock = 0
+    prev_avoid = 0
+    new_dogs[j, 0] = 1
+    for t in range(1, T):
+        prev_shock += new_dogs[j, t - 1]
+        prev_avoid += 1 - new_dogs[j, t - 1]
+        p = a[j] ** prev_shock * b[j] ** prev_avoid
+        new_dogs[j, t] = rng.binomial(1, p)
+
+new_dogs_data = {"y": new_dogs, "J": J, "T": T}
+```
+
+```{python}
+#| label: new_fit_5
+#| results: hide
+new_fit_5 = dogs_5.sample(data=new_dogs_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+new_dt_5 = az.from_cmdstanpy(new_fit_5)
+az.summary(new_dt_5, var_names=["mu_logit_ab", "sigma_logit_ab", "Omega_logit_ab", "a", "b"])
+```
+
+```{python}
+#| label: fig-dogs_parameters
+
+_, ax = plt.subplots(figsize=(4, 4))
+ax.plot([0.55, 1], [0.55, 1], color="lightgray")
+ax.scatter(a, b)
+ax.set(xlim=(0.55, 1),
+       ylim=(0.55, 1),
+       aspect="equal",
+       xlabel="a",
+       ylabel="b")
+ax.set_title("Simulated parameters")
+```
+
+```{python}
+#| label: fig-dogs_data
+
+_, ax = plt.subplots(figsize=(3, 4))
+plot_dogs(ax, new_dogs)
+ax.set_title("Simulated data")
+```
+
+```{python}
+#| label: fig-dogs_calibration
+
+new_dt = az.from_cmdstanpy(new_fit_5)
+posterior = az.extract(new_dt, var_names=["a", "b"])
+a_post = posterior["a"]
+b_post = posterior["b"]
+
+_, ax = plt.subplots(figsize=(4, 4))
+ax.set(xlim=(0.55, 1),
+       ylim=(0.55, 1),
+       aspect="equal",
+       xlabel="Posterior inference",
+       ylabel="True parameter value")
+
+ax.set_title("Calibration check of posterior intervals")
+ax.plot([0.55, 1], [0.55, 1], color="lightgray")
+
+
+a_median = az.median(a_post, dim="sample")
+quants = a_post.quantile([0.25, 0.75], dim="sample")
+
+ax.scatter(a_median, a, s=10, color="C0")
+ax.plot(quants, [a, a], color="C0", lw=0.5)
+
+
+b_median = az.median(b_post, dim="sample")
+quants = b_post.quantile([0.25, 0.75], dim="sample")
+
+ax.scatter(b_median, b, s=10, color="C1")
+ax.plot(quants, [b, b], color="C1", lw=0.5);
+```
+
+```{python}
+J = 300
+new_dogs_ab = expit(rng.multivariate_normal(new_dogs_mu_logit_ab, new_dogs_Sigma_ab, size=J))
+a = new_dogs_ab[:, 0]
+b = new_dogs_ab[:, 1]
+T = 25
+new_dogs = np.zeros((J, T), dtype=int)
+for j in range(J):
+    prev_shock = 0
+    prev_avoid = 0
+    new_dogs[j, 0] = 1
+    for t in range(1, T):
+        prev_shock += new_dogs[j, t - 1]
+        prev_avoid += 1 - new_dogs[j, t - 1]
+        p = a[j] ** prev_shock * b[j] ** prev_avoid
+        new_dogs[j, t] = rng.binomial(1, p)
+
+new_dogs_data = {"y": new_dogs, "J": J, "T": T}
+```
+
+```{python}
+#| label: new_fit_5_300
+#| results: hide
+new_fit_5 = dogs_5.sample(data=new_dogs_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+new_dt_5 = az.from_cmdstanpy(new_fit_5)
+az.summary(new_dt_5, var_names=["mu_logit_ab", "sigma_logit_ab", "Omega_logit_ab", "a", "b"])
+```
+
+```{python}
+T = 50
+new_dogs = np.zeros((J, T), dtype=int)
+for j in range(J):
+    prev_shock = 0
+    prev_avoid = 0
+    new_dogs[j, 0] = 1
+    for t in range(1, T):
+        prev_shock += new_dogs[j, t - 1]
+        prev_avoid += 1 - new_dogs[j, t - 1]
+        p = a[j] ** prev_shock * b[j] ** prev_avoid
+        new_dogs[j, t] = rng.binomial(1, p)
+
+new_dogs_data = {"y": new_dogs, "J": J, "T": T}
+```
+
+```{python}
+#| label: new_fit_5_50
+#| results: hide
+new_fit_5 = dogs_5.sample(data=new_dogs_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+new_dt_5 = az.from_cmdstanpy(new_fit_5)
+az.summary(new_dt_5, var_names=["mu_logit_ab", "sigma_logit_ab", "Omega_logit_ab", "a", "b"])
+```
+
+```{python}
+#| label: fig-dogs_data_50
+
+_, ax = plt.subplots(figsize=(6, 4))
+plot_dogs(ax, new_dogs)
+ax.set_title("Simulated data:  50 trials")
+```
+
+```{python}
+#| label: fig-dogs_calibration_50
+
+new_dt = az.from_cmdstanpy(new_fit_5)
+posterior = az.extract(new_dt, var_names=["a", "b"])
+a_post = posterior["a"]
+b_post = posterior["b"]
+
+_, ax = plt.subplots(figsize=(4, 4))
+ax.set(xlim=(0.55, 1),
+       ylim=(0.55, 1),
+       aspect="equal",
+       xlabel="Posterior inference",
+       ylabel="True parameter value")
+
+ax.set_title("Calibration check of posterior intervals")
+ax.plot([0.55, 1], [0.55, 1], color="lightgray")
+
+
+a_median = az.median(a_post, dim="sample")
+quants = a_post.quantile([0.25, 0.75], dim="sample")
+
+ax.scatter(a_median, a, s=10, color="C0")
+ax.plot(quants, [a, a], color="C0", lw=0.5)
+
+
+b_median = az.median(b_post, dim="sample")
+quants = b_post.quantile([0.25, 0.75], dim="sample")
+
+ax.scatter(b_median, b, s=10, color="C1")
+ax.plot(quants, [b, b], color="C1", lw=0.5);
+```
+
+## References {.unnumbered}
+
+<div id="refs"></div>
+
+## Licenses {.unnumbered}
+
+* Code &copy; 2023--2025, Andrew Gelman, licensed under BSD-3.
+* Text &copy; 2023--2025, Andrew Gelman, licensed under CC-BY-NC 4.0.
