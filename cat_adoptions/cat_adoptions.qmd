@@ -1,0 +1,583 @@
+---
+title: "Incremental development and testing: Black cat adoptions"
+author: "Richard McElreath and Aki Vehtari"
+date: 2025-12-27
+date-modified: today
+date-format: iso
+format:
+  html:
+    number-sections: true
+    code-copy: true
+    code-download: true
+    code-tools: true
+bibliography: ../casestudies.bib
+jupyter: python3
+---
+
+This notebook includes the code for the Bayesian Workflow book
+Chapter 22 *Incremental development and testing: Black cat adoptions*.
+
+# Introduction
+
+Intro text
+
+```{python}
+#| include: false
+import sys
+sys.path.insert(0, '..')
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
+from scipy.special import expit as inv_logit
+from lifelines import KaplanMeierFitter
+
+import arviz as az
+from cmdstanpy import CmdStanModel
+from utils import print_stan
+
+az.style.use("arviz-variat")
+plt.rcParams["figure.dpi"] = 72
+rng = np.random.default_rng(42)
+```
+
+
+Utility functions for sampling using cmdstanpy and plotting
+
+```{python}
+def cstan(stan_file, data=None, seed=123, chains=4):
+    model = CmdStanModel(stan_file=stan_file)
+    fit = model.sample(
+        data=data,
+        seed=seed,
+        chains=chains,
+        parallel_chains=chains,
+        show_progress=False,
+    )
+    return fit
+
+def plot_km(data, colors=None, ax=None, **kwargs):
+    if ax is None:
+        _, ax = plt.subplots()
+    if colors is None:
+        colors = {1: "black", 2: "orange"}
+    kmf = KaplanMeierFitter()
+    for c in sorted(set(data["color"])):
+        mask = data["color"] == c
+        kmf.fit(
+            data.loc[mask, "days"].values,
+            event_observed=data.loc[mask, "adopted"].values,
+        )
+        kmf.plot_survival_function(
+            ax=ax, color=colors.get(c, "gray"),
+            ci_show=False,
+            linewidth=2,
+            label=f"Color {c}", **kwargs
+        )
+    ax.set_xlabel("Days")
+    ax.set_ylabel("Proportion un-adopted")
+    ax.get_legend().remove()
+    return ax
+
+# We will use these in multiple places, so define them once
+args_dist = {"var_names": ["p"],
+             "cols": ["__variable__"],
+             "aes": {"color": ["p_dim_0"]},
+             "color": ["black", "orange"],
+             "visuals": {"point_estimate": False, 
+                         "point_estimate_text": False,
+                         "credible_interval":False,
+                         "title":{"text":"probability of adoption"}
+                        },
+
+            }
+args_lines = {"ref_dim": "p_dim_0",
+              "aes_by_visuals": {"ref_line": ["color"]},
+             }
+```
+
+# Data
+
+Cat adoptions data is available in rethinking package. We read the data from github, so there is no need to install the rethinking package.
+
+```{python}
+urlfile = "https://raw.githubusercontent.com/rmcelreath/rethinking/master/data/AustinCats.csv"
+d = pd.read_csv(urlfile, sep=";")
+d.info()
+d = d.assign(
+    days=d["days_to_event"],
+    adopted=(d["out_event"] == "Adoption").astype(int),
+    color=np.where(d["color"] == "Black", 1, 2),
+)
+```
+
+Prepare data for Stan models
+
+```{python}
+dat = {
+    "N": int(len(d)),
+    "days": d["days"].astype(int).values,
+    "adopted": d["adopted"].astype(int).values,
+    "color": d["color"].astype(int).values,
+}
+```
+
+Plot individual cats as lines
+
+```{python}
+#| label: fig-cats-data
+n = 100
+idx = rng.choice(dat["N"], size=n, replace=False)
+ymax = dat["days"][idx].max()
+_, ax = plt.subplots()
+ax.set_xlim(0, ymax)
+ax.set_ylim(1, n)
+ax.set_xlabel("Days observed")
+ax.set_ylabel("Cat")
+for i, j in enumerate(idx):
+    cat_color = "black" if dat["color"][j] == 1 else "orange"
+    ax.plot([0, dat["days"][j]], [i, i], lw=4, color=cat_color)
+    if dat["adopted"][j] == 1:
+        ax.scatter(dat["days"][j], i, s=30, color=cat_color, zorder=5)
+```
+
+```{python}
+#| label: fig-cats-data2
+d_sample = d.iloc[idx].copy()
+d_sample["cat_idx"] = range(1, len(d_sample) + 1)
+
+_, ax = plt.subplots(figsize=(6, 3.5))
+for i in d_sample["cat_idx"]:
+    row = d_sample[d_sample["cat_idx"] == i].iloc[0]
+    color_val = "black" if row["color"] == 1 else "orange"
+    ax.plot([0, row["days"]], [i, i], color=color_val, lw=1)
+    if row["adopted"] == 1:
+        ax.scatter(row["days"], i, color=color_val, s=30, zorder=5)
+    else:
+        ax.scatter(row["days"], i, facecolors="none", edgecolors=color_val, s=30, zorder=5)
+
+legend_elements = [
+    Line2D([0], [0], marker="o", color="black", label="Black / Adopted", markersize=6, linestyle="None"),
+    Line2D([0], [0], marker="o", color="orange", label="Other / Adopted", markersize=6, linestyle="None"),
+    Line2D([0], [0], marker="o", color="black", label="Black / Other",
+           markerfacecolor="none", markersize=6, linestyle="None"),
+    Line2D([0], [0], marker="o", color="orange", label="Other / Other",
+           markerfacecolor="none", markersize=6, linestyle="None"),
+]
+ax.legend(handles=legend_elements, loc="upper right")
+ax.set(xlabel="Days observed", ylabel="Cat")
+```
+
+# Generative models
+
+How should we model these data? Think about how they were
+generated.  We start with process of adoption and then add
+observation (censoring) process.
+
+```{python}
+def cat_adopt(day, prob):
+    while day <= 1000:
+        if rng.uniform() <= prob:
+            return day
+        day += 1
+    return day
+
+def sim_cats1(n=10, p=np.array([0.1, 0.2])):
+    color = rng.choice([1, 2], size=n)
+    days = np.array([cat_adopt(1, p[c - 1]) for c in color])
+    return {"N": int(n), "days": days.tolist(), "color": color.tolist(), "adopted": [1] * n}
+```
+
+Simulate using the generative model
+
+```{python}
+synth_cats = sim_cats1(1000)
+```
+
+Plot empirical K-M curves
+
+```{python}
+#| label: fig-cats-km-curves
+synth_df = pd.DataFrame(synth_cats)
+_, ax = plt.subplots()
+plot_km(synth_df, ax=ax)
+ax.set_xlim(0, 50)
+```
+
+```{python}
+#| label: fig-gg-cats-km-curves
+_, ax = plt.subplots(figsize=(6, 3.5))
+plot_km(synth_df, ax=ax)
+ax.set_xlim(0, 50)
+ax.set_ylim(0, 1.02)
+ax.margins(x=0)
+```
+
+## First Stan model
+
+```{python}
+#| output: asis
+print_stan("adoptions_observed.stan")
+```
+
+Prior predictive simulation
+
+```{python}
+n = 12
+sim_prior = rng.beta(1, 10, size=(2, n))
+```
+
+```{python}
+#| label: fig-prior-predictive-1
+_, ax = plt.subplots()
+ax.set(xlim=(0, 50), 
+       ylim=(0, 1),
+       xlabel="Days",
+       ylabel="Proportion un-adopted",
+       title="Prior predictive distribution")
+
+for i in range(n):
+    days_rep = sim_cats1(n=1000, p=sim_prior[:, i])
+    df_rep = pd.DataFrame(days_rep)
+    for c, col in [(1, "black"), (2, "orange")]:
+        mask = df_rep["color"] == c
+        kmf = KaplanMeierFitter()
+        kmf.fit(df_rep.loc[mask, "days"], event_observed=df_rep.loc[mask, "adopted"])
+        ax = kmf.plot_survival_function(ax=ax, color=col, linewidth=2, ci_show=False)
+        ax.get_legend().remove()
+```
+
+Test the first model code using simulated data
+
+```{python}
+p_sim = [0.1, 0.15]
+sim_dat1 = sim_cats1(n=1000, p=np.array(p_sim))
+```
+
+```{python}
+#| output: false
+#| cache: true
+fit1s = cstan("adoptions_observed.stan", data=sim_dat1)
+idata_1s = az.from_cmdstanpy(fit1s)
+```
+
+Posterior summary
+
+```{python}
+az.summary(idata_1s, var_names=["p"])
+```
+
+Posterior with simulated data
+
+```{python}
+#| label: fig-post1-sim
+pc = az.plot_dist(idata_1s, **args_dist)
+az.add_lines(pc, p_sim, **args_lines)
+```
+
+Sample from the posterior using the real data
+
+```{python}
+#| output: false
+#| cache: true
+fit1 = cstan("adoptions_observed.stan", data=dat)
+idata_1 = az.from_cmdstanpy(fit1)
+```
+
+Posterior summary
+
+```{python}
+az.summary(idata_1, var_names=["p"])
+```
+
+Kaplan-Meier posterior simulations
+
+```{python}
+#| label: fig-post1-km
+post1 = fit1.draws_pd()
+_, ax = plt.subplots()
+ax.set(xlim=(0, 50),
+       ylim=(0, 1),
+       xlabel="Days",
+       ylabel="Proportion un-adopted",
+       title="Posterior predictive distribution (1000 cats)")
+n_km = 12
+for i in range(n_km):
+    p_draws = post1.iloc[i][["p[1]", "p[2]"]].values
+    days_rep = sim_cats1(n=1000, p=p_draws)
+    df_rep = pd.DataFrame(days_rep)
+    for c, col in [(1, "black"), (2, "orange")]:
+        mask = df_rep["color"] == c
+        kmf = KaplanMeierFitter()
+        kmf.fit(df_rep.loc[mask, "days"], event_observed=df_rep.loc[mask, "adopted"])
+        ax = kmf.plot_survival_function(ax=ax, color=col, alpha=0.5, linewidth=2, ci_show=False)
+        ax.get_legend().remove()
+```
+
+## Add observation (censoring) model
+
+Simulate from the generative model
+
+```{python}
+def sim_cats2(n=10, p=np.array([0.1, 0.2]), cens=50):
+    color = rng.choice([1, 2], size=n)
+    days = np.array([cat_adopt(1, p[c - 1]) for c in color])
+    adopted = (days < cens).astype(int)
+    days = np.where(adopted == 1, days, cens)
+    return {"N": int(n), "days": days.tolist(), "color": color.tolist(), "adopted": adopted.tolist()}
+```
+
+```{python}
+#| output: asis
+print_stan("adoptions_censored.stan")
+```
+
+Test censoring model using simulated data
+
+```{python}
+sim_dat2 = sim_cats2(n=1000, p=np.array([0.01, 0.02]))
+```
+
+```{python}
+#| output: false
+#| cache: true
+fit2s = cstan("adoptions_censored.stan", data=sim_dat2)
+idata_2s = az.from_cmdstanpy(fit2s)
+```
+
+Posterior summary
+
+```{python}
+az.summary(idata_2s, var_names=["p"])
+```
+
+Posterior with simulated data
+
+```{python}
+#| label: fig-post2-sim
+pc = az.plot_dist(idata_2s, **args_dist)
+az.add_lines(pc, (0.01, 0.02), **args_lines)
+```
+
+
+Test previous model with new censored data
+
+```{python}
+#| output: false
+#| cache: true
+fit1s_cens = cstan("adoptions_observed.stan", data=sim_dat2)
+idata_1s_cens = az.from_cmdstanpy(fit1s_cens)
+```
+
+```{python}
+az.summary(idata_1s_cens, var_names=["p"])
+```
+
+```{python}
+#| label: fig-post1-sim2
+pc = az.plot_dist(idata_1s_cens, **args_dist)
+az.add_lines(pc, (0.01, 0.02), **args_lines)
+```
+
+Sample using real data
+
+```{python}
+#| output: false
+#| cache: true
+fit1_real = cstan("adoptions_observed.stan", data=dat)
+fit2_real = cstan("adoptions_censored.stan", data=dat)
+idata_1_real = az.from_cmdstanpy(fit1_real)
+idata_2_real = az.from_cmdstanpy(fit2_real)
+```
+
+Kaplan-meier posterior simulations
+
+```{python}
+#| label: fig-post1-post2-km
+post1_real = fit1_real.draws_pd()
+post2_real = fit2_real.draws_pd()
+_, ax = plt.subplots()
+ax.set(xlim=(0, 50),
+       ylim=(0, 1),
+       xlabel="Days",
+       ylabel="Proportion un-adopted",
+       title="Posterior predictive distribution (1000 cats)")
+n_km = 12
+for i in range(n_km):
+    p_draws = post2_real.iloc[i][["p[1]", "p[2]"]].values
+    days_rep = sim_cats1(n=1000, p=p_draws)
+    df_rep = pd.DataFrame(days_rep)
+    for c, col in [(1, "black"), (2, "orange")]:
+        mask = df_rep["color"] == c
+        kmf = KaplanMeierFitter()
+        kmf.fit(df_rep.loc[mask, "days"], event_observed=df_rep.loc[mask, "adopted"])
+        kmf.plot_survival_function(ax=ax, color=col, alpha=0.5, linewidth=1,
+        ci_show=False)
+
+n_add = 1
+for i in range(n_add):
+    p_draws = post1_real.iloc[i][["p[1]", "p[2]"]].values
+    days_rep = sim_cats1(n=10000, p=p_draws)
+    df_rep = pd.DataFrame(days_rep)
+    for c, col in [(1, "black"), (2, "orange")]:
+        mask = df_rep["color"] == c
+        kmf = KaplanMeierFitter()
+        kmf.fit(df_rep.loc[mask, "days"], event_observed=df_rep.loc[mask, "adopted"])
+        ax = kmf.plot_survival_function(ax=ax, color=col, alpha=0.5, linewidth=8,
+        ci_show=False)
+        ax.get_legend().remove()
+```
+
+
+## Model that uses parameters for censored observations
+
+```{python}
+#| output: asis
+print_stan("adoptions_imputation.stan")
+```
+
+```{python}
+dat_float = {
+    "N": int(len(d)),
+    "days": d["days"].astype(float).values,
+    "adopted": d["adopted"].astype(int).values,
+    "color": d["color"].astype(int).values,
+}
+```
+
+```{python}
+#| output: false
+#| cache: true
+sim_dat_float = {
+    "N": sim_dat2["N"],
+    "days": [float(x) for x in sim_dat2["days"]],
+    "adopted": sim_dat2["adopted"],
+    "color": sim_dat2["color"],
+}
+fit3s = cstan("adoptions_imputation.stan", data=sim_dat_float)
+idata_3s = az.from_cmdstanpy(fit3s)
+```
+
+Posterior summary
+
+```{python}
+az.summary(idata_3s, var_names=["p"])
+```
+
+## Poisson model
+
+Model that uses Poisson count outcomes instead of duration outcomes to handle censoring. This depends upon constant hazard function though?
+
+```{python}
+#| output: asis
+print_stan("adoptions_poisson.stan")
+```
+
+```{python}
+#| output: false
+#| cache: true
+fit4s = cstan("adoptions_poisson.stan", data=sim_dat_float)
+idata4s = az.from_cmdstanpy(fit4s)
+```
+
+Posterior summary
+
+```{python}
+az.summary(idata4s, var_names=["lambda"])
+```
+
+## Varying effects model
+
+Simulate background traits that differentiate cats of same color.
+
+```{python}
+def sim_cats3(n=10, p=np.array([0.1, 0.2]), cens=50, xsd=np.array([0.1, 0.2])):
+    color = rng.choice([1, 2], size=n)
+    days = np.zeros(n)
+    for i in range(n):
+        z = rng.normal(0, xsd[color[i] - 1])
+        pp = inv_logit(np.log(p[color[i] - 1] / (1 - p[color[i] - 1])) + z)
+        days[i] = cat_adopt(1, pp)
+    adopted = (days < cens).astype(int)
+    days = np.where(adopted == 1, days, cens)
+    return {"N": int(n), "days": days.astype(int).tolist(), "color": color.tolist(), "adopted": adopted.tolist()}
+```
+
+```{python}
+sim_dat3 = sim_cats3(n=1000, p=np.array([0.2, 0.1]), xsd=np.array([0.1, 0.1]))
+```
+
+Varying effects model
+
+```{python}
+#| output: asis
+print_stan("adoptions_varying.stan")
+```
+
+```{python}
+#| output: false
+#| cache: true
+fit2s_vary = cstan("adoptions_censored.stan", data=sim_dat3)
+fit5s = cstan("adoptions_varying.stan", data=sim_dat3)
+idata_5s = az.from_cmdstanpy(fit5s)
+```
+
+# Workflow
+
+## Prior predictive distributuon
+
+Repeatedly sample from prior, simulate observations
+
+Prior draws
+
+```{python}
+n_prior = 100
+p1_prior = rng.beta(1, 10, size=n_prior)
+p2_prior = rng.beta(1, 10, size=n_prior)
+```
+
+```{python}
+def sim_cats2_geom(n=1000, p=np.array([0.01, 0.02]), cens=50):
+    color = rng.choice([1, 2], size=n)
+    days = rng.geometric(p[color - 1], size=n)
+    adopted = (days < cens).astype(int)
+    days = np.where(adopted == 1, days, cens)
+    return {"N": int(n), "days": days.tolist(), "color": color.tolist(), "adopted": adopted.tolist()}
+
+prior_days = np.array([sim_cats2_geom(1, p=np.array([p1_prior[i], p2_prior[i]]))["days"][0]
+                        for i in range(n_prior)])
+```
+
+```{python}
+_, ax = plt.subplots()
+mask_cens = prior_days == 50
+ax.scatter(np.where(~mask_cens)[0], prior_days[~mask_cens], c="C0", marker="s")
+ax.scatter(np.where(mask_cens)[0], prior_days[mask_cens], c="C1", marker="o")
+ax.set(xlabel="simulated cat", ylabel="days")
+```
+
+## Posterior predictive distribution
+
+Sample from posterior, simulate observations.
+Problem with this example: need to impute censored values
+so we'll simulate Kaplan-Meier curves to compare to empirical curve.
+
+Plot empirical K-M curves
+
+```{python}
+#| label: fig-km-2
+_, ax = plt.subplots()
+kmf = KaplanMeierFitter()
+for c, col in [(1, "black"), (2, "orange")]:
+    mask = d["color"] == c
+    kmf.fit(d.loc[mask, "days"], event_observed=d.loc[mask, "adopted"])
+    kmf.plot_survival_function(ax=ax, color=col, linewidth=1,
+                                ci_show=False, label=f"Color {c}")
+ax.set(xlim=(0, 90), xlabel="Days", ylabel="Proportion un-adopted")
+```
+
+# Licenses {.unnumbered}
+
+- Code &copy; 2025, Richard McElreath, licensed under BSD-3.
+- Text &copy; 2025, Richard McElreath, licensed under CC-BY-NC 4.0.
