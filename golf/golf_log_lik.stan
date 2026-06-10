@@ -15,6 +15,8 @@ data {
   array[J] int y;
 }
 parameters {
+  real<lower=0> sigma_angle;
+  real<lower=0> sigma_distance;
   real<lower=0> sigma_epsilon;
   vector[J] p_angle;
   vector[J] p_distance;
