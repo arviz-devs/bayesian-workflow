@@ -309,14 +309,15 @@ observations.
 
 ```{python}
 #| label: fig-sleep-loo-intervals-m2
-pc = az.plot_loo_interval(idata_s2)
-pc.facet_map("labelled_y", text="Reaction time (ms)")
+pc = az.plot_loo_interval(idata_s2,
+                        visuals={"ylabel": {"text": "Reaction time (ms)"}})
 ```
+
 
 ```{python}
 #| label: fig-sleep-loo-intervals-m3
-pc = az.plot_loo_interval(idata_s3)
-pc.facet_map("labelled_y", text="Reaction time (ms)")
+pc = az.plot_loo_interval(idata_s3,
+                        visuals={"ylabel": {"text": "Reaction time (ms)"}})
 ```
 
 If we examine the pointwise differences, we see that model 3 is
@@ -361,14 +362,14 @@ LOO predictive intervals look now better.
 
 ```{python}
 #| label: fig-sleep-loo-intervals-m2t
-pc = az.plot_loo_interval(idata_s2t)
-pc.facet_map("labelled_y", text="Reaction time (ms)")
+pc = az.plot_loo_interval(idata_s2t,
+                        visuals={"ylabel": {"text": "Reaction time (ms)"}})
 ```
 
 ```{python}
 #| label: fig-sleep-loo-intervals-m3t
-pc = az.plot_loo_interval(idata_s3t)
-pc.facet_map("labelled_y", text="Reaction time (ms)")
+pc = az.plot_loo_interval(idata_s3t,
+                        visuals={"ylabel": {"text": "Reaction time (ms)"}})
 ```
 
 We first compare $\mathrm{M}_{3}$ and $\mathrm{M}_{3t}$ to see
