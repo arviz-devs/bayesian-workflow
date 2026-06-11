@@ -1,0 +1,589 @@
+---
+title: "Uncertainty in Bayesian LOO-CV Model Comparison"
+author: "Aki Vehtari"
+date: 2025-06-23
+date-modified: today
+date-format: iso
+format:
+  html:
+    number-sections: true
+    code-copy: true
+    code-download: true
+    code-tools: true
+bibliography: ../casestudies.bib
+---
+
+This notebook includes the code for the Bayesian Workflow book
+Section 9.4 *Model selection using predictive checking and predictive
+performance* (adapted from Section 5 of paper by @Sivula-Magnusson-Vehtari:2025).
+
+## Introduction
+
+We demonstrate the use of uncertainty quantification of the
+predictive performance difference with three real-data examples. We
+assume that the true data generating processes are more complex
+than the models used. We cover all three scenarios
+ 1. very similar predictions,
+ 2. model misspecification,
+ 3. and small data,
+that can affect how well calibrated the normal approximation.
+
+Inference was made using MCMC with 4 chains with 1000 warmup and
+1000 sampling iterations. Convergence diagnostics
+[@Vehtari-Gelman-Simpson-etal:2021] indicated reliable posterior inference. For LOO-CV we used
+PSIS-LOO [@Vehtari+Gelman+Gabry:2017_practical] for
+computation.
+
+**Load packages**
+
+```{python}
+#| label: setup
+#| include: true
+#| cache: false
+import warnings
+import sys
+sys.path.insert(0, '..')
+
+import arviz as az
+import bambi as bmb
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import preliz as pz
+import pymc as pm
+
+az.style.use("arviz-variat")
+az.rcParams["stats.ci_prob"] = 0.95
+plt.rcParams["figure.dpi"] = 72
+SEED = 30423
+```
+
+```{python}
+bambi_kwargs ={"random_seed": SEED, "idata_kwargs": {"log_likelihood": True}, "inference_method":"nutpie"}
+```
+
+## Primate milk
+
+@mcelreath2020statistical describes the primate milk data: *"A
+popular hypothesis has it that primates with larger brains produce
+more energetic milk, so that brains can grow quickly... The
+question here is to what extent energy content of milk, measured
+here by kilocalories, is related to the percent of the brain mass
+that is neocortex... We'll end up needing female body mass as well,
+to see the masking that hides the relationships among the
+variables."* The data include 17 different primate species. The
+target variable is the energy content of milk (kcal.per.g) and the
+covariates are the percent of the brain mass that is neocortex
+(neocortex) and the logarithm of female body mass (log(mass)). The
+covariates and target are centered and scaled to have unit
+variance.
+
+```{python}
+# Load and process the data in a single clean chain
+milk = (
+    pd.read_csv(
+    "https://raw.githubusercontent.com/pymc-devs/resources/master/Rethinking_2/Data/milk.csv",
+    sep=";")
+    .filter(["kcal.per.g", "neocortex.perc", "mass"])
+    .rename(columns={"neocortex.perc": "neocortex"})
+    .assign(log_mass=lambda df: np.log(df["mass"]))
+    .dropna()
+    .drop(columns=["mass"])
+)
+
+# Center the predictor variables (subtract the mean)
+predictors = ["neocortex", "log_mass"]
+milk[predictors] = milk[predictors] - milk[predictors].mean()
+
+milk.head()
+```
+
+We use the following four models with weakly
+informative normal(0, 1) priors for the coefficients and an
+exponential(1) prior for the residual scale:
+\begin{align*}
+  \mathrm{M}_1: \quad & \mathrm{kcal.per.g} \sim \operatorname{normal}(\alpha, \sigma) \\
+  \mathrm{M}_2: \quad& \mathrm{kcal.per.g} \sim \operatorname{normal}(\alpha + \beta_1\times\mathrm{neocortex}, \sigma) \\
+  \mathrm{M}_3: \quad & \mathrm{kcal.per.g} \sim \operatorname{normal}(\alpha + \beta_2\times\mathrm{log(mass)}, \sigma) \\
+  \mathrm{M}_4: \quad & \mathrm{kcal.per.g} \sim \operatorname{normal}(\alpha + \beta_1\times\mathrm{neocortex} + \beta_2\times\mathrm{log(mass)}, \sigma).
+\end{align*}
+
+We fit the models with the `bambi` package.
+
+```{python}
+#| label: milk_models
+#| results: hide
+#| cache: true
+fit_m1 = bmb.Model("kcal.per.g ~ 1", milk)
+dt_m1 = fit_m1.fit(**bambi_kwargs)
+
+fit_m2 = bmb.Model("kcal.per.g ~ neocortex", milk)
+dt_m2 = fit_m2.fit(**bambi_kwargs)
+
+fit_m3 = bmb.Model("kcal.per.g ~ log_mass", milk)
+dt_m3 = fit_m3.fit(**bambi_kwargs)
+
+fit_m4 = bmb.Model("kcal.per.g ~ neocortex + log_mass", milk)
+dt_m4 = fit_m4.fit(**bambi_kwargs)
+```
+We compute LOO-CV estimates using the fast PSIS-LOO method
+[@Vehtari+Gelman+Gabry:2017_practical, @Vehtari+etal:2024:PSIS]
+
+We compare the models $\mathrm{M}_1, \mathrm{M}_2,\mathrm{M}_3,\mathrm{M}_4$.
+
+```{python}
+comp_milk = az.compare({
+    "M_4": dt_m4,
+    "M_3": dt_m3,
+    "M_2": dt_m2,
+    "M_1": dt_m1,
+}, round_to=2)
+comp_milk
+```
+
+We add the probability that a model has worse predictive
+performance than the model with the best predictive performance
+using the normal approximation.
+
+```{python}
+comp_milk_w = comp_milk[["elpd_diff", "dse"]].copy()
+comp_milk_w["p_worse"] = pz.Normal(comp_milk_w["elpd_diff"], comp_milk_w["dse"]).cdf(0)
+comp_milk_w.round(2)
+```
+
+In the paper, the comparison was reported using $M_1$ as the
+baseline, and the probability that a model has better predictive
+performance than the baseline.
+
+```{python}
+comp_milk_ref = az.compare({
+    "M_4": dt_m4,
+    "M_3": dt_m3,
+    "M_2": dt_m2,
+    "M_1": dt_m1,
+}, reference="M_1", 
+round_to=2)
+
+comp_milk_b = comp_milk_ref[["elpd_diff", "dse"]].copy()
+comp_milk_b["p_better"] = pz.Normal(-comp_milk_b["elpd_diff"], comp_milk_b["dse"]).cdf(0)
+comp_milk_b.round(2)
+```
+
+Based on model checking and the distribution of pointwise
+$\widehat{\mathrm{elpd}}_{\mathrm{LOO}, i}$, the models seem to be reasonably
+specified and we are fine with respect to Scenario 2 (model
+misspecification). Models $\mathrm{M}_2$ and $\mathrm{M}_3$ have
+very small $\widehat{\mathrm{elpd}}_{\mathrm{LOO}}$ compared to model
+$\mathrm{M}_1$. The direct use of the normal approximation gives
+probabilities 0.16 and 0.6 that these models have better predictive
+performance than model $\mathrm{M}_1$. As $\widehat{\mathrm{elpd}}_{\mathrm{LOO}}$ is
+small (Scenario 1) and the number of observations is small
+(Scenario 3), we may assume $\widehat{\mathrm{SE}}_{\mathrm{LOO}}$ to be
+underestimated and the error distribution to be more skewed than
+normal. However, since $\widehat{\mathrm{elpd}}_{\mathrm{LOO}}$ is small, we can
+state that there is no practical or statistical difference in the
+predictive performance.
+
+The direct use of $\widehat{\mathrm{elpd}}_{\mathrm{LOO}}(\mathrm{M}_4,\mathrm{M}_1)$
+and $\widehat{\mathrm{SE}}_{\mathrm{LOO}}(\mathrm{M}_4,\mathrm{M}_1)$ would give
+probability $0.96$ that model $\mathrm{M}_4$ has better predictive
+than model $\mathrm{M}_1$. This difference (4.2) is big enough that
+we are fine with respect to Scenario 1, but the number of
+observations is small (Scenario 3), and on expectation we may
+assume $\widehat{\mathrm{SE}}_{\mathrm{LOO}}(\mathrm{M}_4,\mathrm{M}_1)$ to be
+underestimated. If we multiply
+$\widehat{\mathrm{SE}}_{\mathrm{LOO}}(\mathrm{M}_4,\mathrm{M}_1)$ by 2 (heuristic
+based on the limit of equations by @Bengio-Grandvalet:2004) to
+make a more conservative estimate, the probability that model
+$\mathrm{M}_4$ has better predictive performance is bigger than
+0.81. Considering we have only 17 observations, this is quite
+good. Collecting more data is, however, recommended.
+
+As the predictive distribution includes the aleatoric uncertainty
+(modelled by the data model), there is often more uncertainty in
+the predictive performance model comparison than in the posterior
+distribution (see, e.g., @Wang-Gelman:2015). In simple
+models, we can also look at the posterior for the quantities of
+interest. With model $\mathrm{M}_4$, $95\%$ central posterior
+intervals for $\beta_1$ and $\beta_2$ are $(1.1,3.7)$ and
+$(-0.12,-0.04)$ respectively, which indicates data have information
+about the parameters. The covariates neocortex and log(mass) are
+collinear, which causes correlation in the posterior of the
+coefficients, which could make the marginal posteriors overlap 0,
+even if the joint posterior does not, in which case, looking at the
+predictive performance is useful. In this case, although neocortex
+and log(mass) are collinear, they don't have useful information
+alone, and the useful predictive information is along the second
+principal component of their joint distribution, which explains why
+the models with only one of the covariates are not better than the
+intercept-only model.
+
+## Sleep study
+
+@Belenky-Wesensten-Thorne-etal:2003 collected data on the effect
+of chronic sleep restriction. The data
+contains average reaction times (in milliseconds) for 18 subjects
+with sleep restricted to 3 hours per night for 7 consecutive
+nights (days 0 and 1 were adaptation and training and removed
+from this analysis).
+
+```{python}
+sleepstudy = pd.read_csv("data/sleepstudy.csv")
+sleepstudy2 = sleepstudy[sleepstudy["Days"] >= 2].copy()
+```
+
+The compared models are a linear model, a linear model with varying
+intercept for each subject, and a linear model with varying
+intercept and slope for each subject. All models use a normal data
+model. The models were fitted using `bambi`,
+and default priors; prior for the coefficient for
+Days is uniform, the prior for the varying intercept is normal with
+unknown scale having a half-normal prior, and the prior for the
+varying intercept and slope is bivariate normal with unknown scales
+having half-normal priors and correlation having LKJ prior
+[@Lewandowski-Kurowska-Joe:2009].
+
+Using the `bambi` formula notation, the compared models are
+\begin{align*}
+  \mathrm{M}_1: \quad & \mathrm{Reaction} \sim \mathrm{Days} \\
+  \mathrm{M}_2: \quad & \mathrm{Reaction} \sim \mathrm{Days} + (1\,\mid\,\mathrm{Subject}) \\
+  \mathrm{M}_3: \quad & \mathrm{Reaction} \sim \mathrm{Days} + (\mathrm{Days}\,\mid\, \mathrm{Subject}).
+\end{align*}
+
+Based on the study design, $\mathrm{M}_3$ is the appropriate model
+for the analysis, but comparing models is useful for assessing how
+much information the data has about the varying intercepts and
+slopes. For a few LOO-folds with high Pareto-$\hat{k}$ diagnostic
+value ($>0.7$, @Vehtari+etal:2024:PSIS) we re-ran MCMC.
+
+```{python}
+#| label: sleep_models
+#| results: hide
+#| cache: true
+sleepstudy2["Subject"] = sleepstudy2["Subject"].astype(str)
+
+fit_s1 = bmb.Model("Reaction ~ Days", sleepstudy2, family="gaussian")
+idata_s1 = fit_s1.fit(**bambi_kwargs)
+
+fit_s2 = bmb.Model("Reaction ~ Days + (1 | Subject)", sleepstudy2, family="gaussian")
+idata_s2 = fit_s2.fit(**bambi_kwargs)
+
+fit_s3 = bmb.Model("Reaction ~ Days + (Days | Subject)", sleepstudy2, family="gaussian")
+idata_s3 = fit_s3.fit(**bambi_kwargs)
+
+fit_s2.predict(idata_s2, kind="response")
+fit_s3.predict(idata_s3, kind="response")
+```
+
+We compare the models $\mathrm{M}_1, \mathrm{M}_2,\mathrm{M}_3$.
+
+```{python}
+comp_sleep = az.compare({
+    "M_3": idata_s3,
+    "M_2": idata_s2,
+    "M_1": idata_s1,
+})
+comp_sleep_df = comp_sleep[["elpd_diff", "dse"]].copy()
+comp_sleep_df["p_worse"] = pz.Normal(comp_sleep_df["elpd_diff"], comp_sleep_df["dse"]).cdf(0)
+comp_sleep_df.round(2)
+```
+
+Model $\mathrm{M}_3$ is estimated to have better predictive
+performance, but only with 0.9 probability of having better
+performance than model $\mathrm{M}_2$. Model-checking reveals that
+two observations are clear outliers with respect to these models,
+making the normal approximation likely to be poorly calibrated
+(Scenario 3).
+
+The difference is slightly smaller as can be expected as usually elpd estimates
+with high Pareto-k's are optimistic.
+
+Although we can get more accurate `elpd` and `elpd_diff` estimates
+with more computation, the accuracy of the normal approximation for
+the uncertainty in the difference can still be compromised by the
+outliers. Model-checking reveals that two observations are clear
+outliers with respect to these models, making the normal
+approximation likely to be poorly calibrated (Scenario 3). We see
+the outliers, for example, by comparing LOO predictive intervals to
+observations.
+
+```{python}
+#| label: fig-sleep-loo-intervals-m2
+pc = az.plot_loo_interval(idata_s2)
+pc.facet_map("labelled_y", text="Reaction time (ms)")
+```
+
+```{python}
+#| label: fig-sleep-loo-intervals-m3
+pc = az.plot_loo_interval(idata_s3)
+pc.facet_map("labelled_y", text="Reaction time (ms)")
+```
+
+If we examine the pointwise differences, we see that model 3 is
+almost always better, but outliers cause couple values with big
+magnitude, making it more likely that the normal approximation for
+quantifying uncertainty in elpd_diff is not accurate.
+
+```{python}
+#| label: fig-sleep-pointwise-diff
+loo_s2 = az.loo(idata_s2)
+loo_s3 = az.loo(idata_s3)
+pointwise_diff = loo_s3.elpd_i - loo_s2.elpd_i
+
+_, ax = plt.subplots()
+ax.plot(pointwise_diff, ".")
+ax.axhline(y=0, color="gray", alpha=0.5, linestyle="-")
+ax.set(xlabel="Data index", ylabel="pointwise elpd_diff")
+```
+
+We also fitted models using a Student's $t$ model to create models
+$\mathrm{M}_{1t}$, $\mathrm{M}_{2t}$, and $\mathrm{M}_{3t}$. Based
+on model checking, there is no obvious model misspecification.
+
+```{python}
+#| results: hide
+#| cache: true
+fit_s1t = bmb.Model("Reaction ~ Days", sleepstudy2, family="t")
+idata_s1t = fit_s1t.fit(**bambi_kwargs)
+
+fit_s2t = bmb.Model("Reaction ~ Days + (1 | Subject)", sleepstudy2, family="t")
+idata_s2t = fit_s2t.fit(**bambi_kwargs)
+
+fit_s3t = bmb.Model("Reaction ~ Days + (Days | Subject)", sleepstudy2, family="t")
+idata_s3t = fit_s3t.fit(**bambi_kwargs)
+
+
+fit_s2t.predict(idata_s2t, kind="response")
+fit_s3t.predict(idata_s3t, kind="response")
+```
+
+LOO predictive intervals look now better.
+
+```{python}
+#| label: fig-sleep-loo-intervals-m2t
+pc = az.plot_loo_interval(idata_s2t)
+pc.facet_map("labelled_y", text="Reaction time (ms)")
+```
+
+```{python}
+#| label: fig-sleep-loo-intervals-m3t
+pc = az.plot_loo_interval(idata_s3t)
+pc.facet_map("labelled_y", text="Reaction time (ms)")
+```
+
+We first compare $\mathrm{M}_{3}$ and $\mathrm{M}_{3t}$ to see
+whether a Student's $t$ model is more appropriate.
+
+```{python}
+comp_s3_s3t = az.compare({"M_3t": idata_s3t, "M_3": idata_s3})
+comp_s3_s3t_df = comp_s3_s3t[["elpd_diff", "dse"]].copy()
+comp_s3_s3t_df["p_worse"] = pz.Normal(comp_s3_s3t_df["elpd_diff"], comp_s3_s3t_df["dse"]).cdf(0)
+comp_s3_s3t_df.round(3)
+```
+
+Although in this comparison $\mathrm{M}_3$ is misspecified, the
+better specified model $\mathrm{M}_{3t}$ shows much better
+predictive performance, and as we can expect $\widehat{\mathrm{SE}}_{\mathrm{LOO}}$ to be
+inflated, the actual probability that $\mathrm{M}_{3t}$ is better
+than $\mathrm{M}_3$ is likely to be bigger than $0.999$. We then
+compare the three Student's $t$ models:
+
+```{python}
+comp_st = az.compare({
+    "M_3t": idata_s3t,
+    "M_2t": idata_s2t,
+    "M_1t": idata_s1t,
+})
+comp_st_df = comp_st[["elpd_diff", "dse"]].copy()
+comp_st_df["p_worse"] = pz.Normal(comp_st_df["elpd_diff"], comp_st_df["dse"]).cdf(0)
+
+comp_st_df.round(2)
+```
+
+The probability that model $\mathrm{M}_{3t}$ is better than models
+$\mathrm{M}_{1t}$ and $\mathrm{M}_{2t}$ is close to 1. The models
+appear sufficiently well specified, the number of observations is
+bigger than 100, and the differences are not small, so we can
+assume that the normal approximation is well calibrated.
+
+If we examine the pointwise differences, we see that model 3 is
+almost always better, and as there are no outliers, the
+distribution of pointwise elpd differences is such that the normal
+approximation for quantifying uncertainty in elpd_diff is likely to
+be accurate.
+
+```{python}
+#| label: fig-sleep-pointwise-diff-t
+loo_s2t = az.loo(idata_s2t)
+loo_s3t = az.loo(idata_s3t)
+pointwise_diff_t = loo_s3t.elpd_i - loo_s2t.elpd_i
+
+fig, ax = plt.subplots()
+ax.scatter(range(len(pointwise_diff_t)), pointwise_diff_t, alpha=0.7)
+ax.axhline(y=0, color="gray", alpha=0.5, linestyle="-")
+ax.set(xlabel="Data index", ylabel="pointwise elpd_diff")
+```
+
+In this case, the effect of days with sleep constrained to 3 hours
+is so big that the main conclusion stays the same with all the
+models. Still, for example, model $\mathrm{M}_{3t}$ does indicate
+higher variation between subjects than model $\mathrm{M}_{3}$. As
+$\mathrm{M}_{3t}$ passes the model checking and has higher
+predictive performance, we should continue looking at the posterior
+of model $\mathrm{M}_{3t}$.
+
+## Roaches
+
+@Gelman-Hill:2007 describe in Chapter 8.3 the roaches data as
+follows: *"the treatment and control were applied to 160 and 104
+apartments, respectively, and the outcome measurement $y_i$ in
+each apartment $i$ was the number of roaches caught in a set of
+traps. Different apartments had traps for different numbers of
+days".* The goal is to estimate the efficacy of a pest
+management system at reducing the number of roaches.
+
+```{python}
+roaches = pd.read_csv("data/roaches.csv")
+roaches["sqrt_roach1"] = np.sqrt(roaches["roach1"])
+```
+
+The target is the number of roaches (y), and the covariates include
+the square root of the pre-treatment number of roaches
+(sqrt_roach1), a treatment indicator variable (treatment), and a
+variable indicating whether the apartment is in a building
+restricted to elderly residents (senior). As the number of days for
+which the roach traps were used is not the same for all apartments,
+the offset argument includes the logarithm of the number of days
+the traps were used (log(exposure2)). The latent regression model
+presented with `bambi` formula notation is:
+
+$$
+\mathrm{y} \sim
+ \mathrm{sqrt\_roach1} + \mathrm{treatment} + \mathrm{senior} + \mathrm{offset(log(exposure2))}.
+$$
+
+We fit the following models using the `bambi` package.
+\begin{align*}
+  \mathrm{M}_1: \quad & \text{Poisson} \\
+  \mathrm{M}_2: \quad & \text{Negative.binomial} \\
+  \mathrm{M}_3: \quad & \text{Zero-inflated negative-binomial} \\
+\end{align*}
+
+The zero-inflation is modelled using the same latent formula (with
+its own parameters). All coefficients have $\operatorname{normal}(0,1)$ priors
+and the negative-binomial shape parameter has the
+inverse-gamma$(.4, .3)$ prior [@Vehtari:2024].
+
+For the Poisson model we re-ran MCMC for all LOO-folds with high
+Pareto-$\hat{k}$ diagnostic value (>0.7), and for negative-binomial and zero-inflated
+negative-binomial we used moment matching
+[@Paananen+etal:2021:implicit] for a few LOO-folds with high
+Pareto-$\hat{k}$ diagnostic value (>0.7).
+
+```{python}
+#| label: roaches_models
+#| results: hide
+#| cache: true
+roaches_priors = {
+    "sqrt_roach1": bmb.Prior("Normal", mu=0, sigma=1),
+    "treatment": bmb.Prior("Normal", mu=0, sigma=1),
+    "senior": bmb.Prior("Normal", mu=0, sigma=1),
+}
+
+fit_r1 = bmb.Model(
+    "y ~ sqrt_roach1 + treatment + senior + offset(log(exposure2))",
+    roaches,
+    family="poisson",
+    link="log",
+    priors=roaches_priors,
+)
+idata_r1 = fit_r1.fit(**bambi_kwargs)
+
+fit_r2 = bmb.Model(
+    "y ~ sqrt_roach1 + treatment + senior + offset(log(exposure2))",
+    roaches,
+    family="negativebinomial",
+    link="log",
+    priors={
+        **roaches_priors,
+        "alpha": bmb.Prior("InverseGamma", alpha=0.4, beta=0.3),
+    },
+)
+idata_r2 = fit_r2.fit(**bambi_kwargs)
+
+fit_r3 = bmb.Model(
+    "y ~ sqrt_roach1 + treatment + senior + offset(log(exposure2))",
+    roaches,
+    family="zero_inflated_negativebinomial",
+    link="log",
+    priors={
+        **roaches_priors,
+        "alpha": bmb.Prior("InverseGamma", alpha=0.4, beta=0.3),
+    },
+)
+idata_r3 = fit_r3.fit(**bambi_kwargs)
+```
+
+```{python}
+comp_roaches = az.compare({
+    "M_3 (ZINB)": idata_r3,
+    "M_2 (NB)": idata_r2,
+    "M_1 (Poisson)": idata_r1,
+})
+comp_roaches_df = comp_roaches[["elpd_diff", "dse"]].copy()
+comp_roaches_df["p_worse"] = pz.Normal(comp_roaches_df["elpd_diff"], comp_roaches_df["dse"]).cdf(0)
+comp_roaches_df.round(2)
+```
+
+The zero-inflated negative-binomial model ($\mathrm{M}_3$) is
+clearly the best. Based on model checking, the Poisson model
+($\mathrm{M}_1$) is underdispersed which indicates Scenario 2
+(model misspecification), but the difference is so big that we can
+be certain that the zero-inflated negative-binomial model is
+better. As the number of observations is larger than 100, and the
+difference to model $\mathrm{M}_2$ is not small, we may assume the
+normal approximation is well calibrated.
+
+As we had used an ad-hoc square root transformation of
+pre-treatment number of roaches, we fitted a model $\mathrm{M}_4$
+replacing the latent linear term for the square root of
+pre-treatment number of roaches with a spline.
+
+```{python}
+#| results: hide
+#| cache: true
+fit_r4 = bmb.Model(
+    "y ~ bs(sqrt_roach1, df=6) + treatment + senior + offset(log(exposure2))",
+    roaches,
+    family="zero_inflated_negativebinomial",
+    link="log",
+    priors={
+        **roaches_priors,
+        "alpha": bmb.Prior("InverseGamma", alpha=0.4, beta=0.3),
+    },
+)
+idata_r4 = fit_r4.fit(**bambi_kwargs)
+```
+
+```{python}
+comp_r3_r4 = az.compare({"M_4 (ZINB+spline)": idata_r4, "M_3 (ZINB)": idata_r3})
+comp_r3_r4_df = comp_r3_r4[["elpd_diff", "dse"]].copy()
+comp_r3_r4_df["p_worse"] = pz.Normal(comp_r3_r4_df["elpd_diff"], comp_r3_r4_df["dse"]).cdf(0)
+comp_r3_r4_df.round(2)
+```
+
+Model $\mathrm{M}_4$ (with spline) seems to be slightly better, but
+now the difference is so small (Scenario 1) that the normal
+approximation is likely to be not perfectly calibrated. As the
+difference is small, we can proceed with either model.
+
+<br />
+
+# References {.unnumbered}
+
+<div id="refs"></div>
+
+# Licenses {.unnumbered}
+
+* Code &copy; 2025--2026, Aki Vehtari, licensed under BSD-3.
+* Text &copy; 2025--2026, Aki Vehtari, licensed under CC-BY-NC 4.0.
