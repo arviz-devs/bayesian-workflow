@@ -42,7 +42,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
 from cmdstanpy import CmdStanModel, disable_logging
-import arviz.preview as az
+import arviz as az as az
 
 from utils import print_stan
 

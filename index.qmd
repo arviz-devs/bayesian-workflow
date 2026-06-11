@@ -19,12 +19,14 @@ Bürkner, Martin Modrák, Vianey Leos Barajas.
 
 These cases studies has been ported to Python and use the following main libraries:
 
-- [CmdStanPy](https://mc-stan.org/cmdstanpy/) for fitting Stan models
-- [ArviZ](https://python.arviz.org/en/stable/) for MCMC diagnostics, model checking, model comparison and visualization
+- PPLs
+  - [CmdStanPy](https://mc-stan.org/cmdstanpy/)
+  - [numpyro](https://num.pyro.ai/en/stable/)
+- [ArviZ](https://python.arviz.org/en/stable/) for MCMC diagnostics, model checking, model comparison, and visualization
 - [Bambi](https://bambinos.github.io/bambi/) for fitting some models in selected case studies
 - [Kulprit](https://kulprit.readthedocs.io/en/latest/) for variable selection.
 
-For the original R and Stan code, and other information like the book's errata, please refer to the [book website](https://bayesianworkflow.com/).
+For the original R and Stan code, and other information like the book's errata, please refer to the [book website](https://avehtari.github.io/Bayesian-Workflow/).
 
 - If you notice and **error with the code in this repository**, please [submit an issue](https://github.com/arviz-devs/Bayesian-Workflow/issues).
 - If instead you notice an **error in the book** not mentioned in [the errata](errata.html), [submit an issue](https://github.com/avehtari/Bayesian-Workflow/issues) or send an email to the book authors.

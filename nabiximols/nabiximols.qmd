@@ -42,7 +42,7 @@ import warnings
 import sys
 sys.path.insert(0, '..')
 
-import arviz.preview as az
+import arviz as az as az
 import bambi as bmb
 import matplotlib.pyplot as plt
 import numpy as np
