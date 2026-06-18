@@ -1,0 +1,122 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Bayesian Workflow case studies",
+    "section": "",
+    "text": "Information\nThese are the case studies from the Bayesian Workflow book by Andrew Gelman, Aki Vehtari, Richard McElreath with Daniel Simpson, Charles C. Margossian, Yuling Yao, Lauren Kennedy, Jonah Gabry, Paul-Christian Bürkner, Martin Modrák, Vianey Leos Barajas.\nThese cases studies has been ported to Python and use the following main libraries:\nFor the original R and Stan code, and other information like the book’s errata, please refer to the book website.\nHow to cite\nCite the book:\nIf you want to refer to a case study, cite the book and chapter, e.g.\nBibTeX entry:",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Bayesian Workflow book: Website</span>"
+    ]
+  },
+  {
+    "objectID": "index.html#information",
+    "href": "index.html#information",
+    "title": "Bayesian Workflow case studies",
+    "section": "",
+    "text": "PPLs\n\nCmdStanPy\nnumpyro\n\nArviZ for MCMC diagnostics, model checking, model comparison, and visualization\nBambi for fitting some models in selected case studies\nKulprit for variable selection.\n\n\n\nIf you notice and error with the code in this repository, please submit an issue.\nIf instead you notice an error in the book not mentioned in the errata, submit an issue or send an email to the book authors.\n\n\n\n\nGelman, Vehtari, McElreath, Simpson, Margossian, Yao, Kennedy, Gabry, Bürkner, Modrák, Leos Barajas (2026). Bayesian Workflow. CRC Press / Taylor & Francis.\n\n\n\nblah blah (Gelman et al., 2026, Ch 18 code).\n\n\n@book{Bayesian-Workflow:2026,\n  title={Bayesian Workflow},\n  author={Andrew Gelman and Aki Vehtari and Richard McElreath and Daniel Simpson and\n          Charles C. Margossian and Yuling Yao and Lauren Kennedy and Jonah Gabry and\n          Paul-Christian Bürkner and Martin Modrák and Vianey Leos Barajas},\n  year=2026,\n  publisher={CRC Press}\n}",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Bayesian Workflow book: Website</span>"
+    ]
+  },
+  {
+    "objectID": "bioassay/bioassay.html",
+    "href": "bioassay/bioassay.html",
+    "title": "2  Bioassay case study",
+    "section": "",
+    "text": "2.1 Introduction\nThis notebook includes the code for Bayesian Workflow book Section 3.5 A simple example of probabilistic programming.\nWe demonstrate the role of statistical programming environments and probabilistic programming by going through the steps of data analysis and computation in the context of a simple example.\nWe work through an example by Racine-Poon et al. (1986), also included in Section 2.8 of Bayesian Data Analysis (Gelman et al. 2013), of a logistic regression fit to a bioassay experiment.\nimport warnings\nimport sys\nsys.path.insert(0, '..')\n\nimport arviz as az\nimport bambi as bmb\nimport matplotlib.pyplot as plt\nimport numpy as np\nimport pandas as pd\nimport xarray as xr\nfrom scipy.special import expit\n\n\nwarnings.filterwarnings(\"ignore\", category=FutureWarning)\n\naz.style.use(\"arviz-variat\")\naz.rcParams[\"stats.ci_prob\"] = 0.95\nplt.rcParams[\"figure.dpi\"] = 75\nSEED = 7412",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sec 3.5: Bioassay</span>"
+    ]
+  },
+  {
+    "objectID": "bioassay/bioassay.html#introduction",
+    "href": "bioassay/bioassay.html#introduction",
+    "title": "2  Bioassay case study",
+    "section": "",
+    "text": "CmdStanPyNumpyro\n\n\n\nfrom cmdstanpy import CmdStanModel, disable_logging\ndisable_logging()\nfrom utils import print_stan\n\n\n\nfrom jax import random\nimport jax.numpy as jnp\nimport numpyro\nfrom  numpyro import distributions as dist\nfrom numpyro.infer import NUTS, MCMC, Predictive",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sec 3.5: Bioassay</span>"
+    ]
+  },
+  {
+    "objectID": "bioassay/bioassay.html#bioassay-data",
+    "href": "bioassay/bioassay.html#bioassay-data",
+    "title": "2  Bioassay case study",
+    "section": "2.2 Bioassay data",
+    "text": "2.2 Bioassay data\nRead the data from csv\n\ndf_bioassay = pd.read_csv(\"data/bioassay.csv\")\ndf_bioassay\n\n\n\n\n\n\n\n\ndose\nbatch_size\ndeaths\n\n\n\n\n0\n-0.86\n5\n0\n\n\n1\n-0.30\n5\n1\n\n\n2\n-0.05\n5\n3\n\n\n3\n0.73\n5\n5\n\n\n\n\n\n\n\nPlot the data\n\nfig, ax = plt.subplots(figsize=(7, 4))\nax.scatter(df_bioassay[\"dose\"], df_bioassay[\"deaths\"], s=60, color=\"black\")\nax.set(xlabel=\"Dose log(g/ml)\", ylabel=\"# of deaths\")\nax.spines[[\"top\", \"right\"]].set_visible(False)\n\n\n\n\n\n\n\nFigure 2.1\n\n\n\n\n\n\nCmdStanPyNumpyro\n\n\nData as list for CmdStanPy\n\nbioassay_data = {\n    \"J\": len(df_bioassay),\n    \"x\": df_bioassay[\"dose\"].to_list(),\n    \"N\": df_bioassay[\"batch_size\"].to_list(),\n    \"y\": df_bioassay[\"deaths\"].to_list(),\n}\n\n\n\nJ = len(df_bioassay)\nx = df_bioassay[\"dose\"].values\nN = df_bioassay[\"batch_size\"].values\ny = df_bioassay[\"deaths\"].values",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sec 3.5: Bioassay</span>"
+    ]
+  },
+  {
+    "objectID": "bioassay/bioassay.html#stan-models-and-inference",
+    "href": "bioassay/bioassay.html#stan-models-and-inference",
+    "title": "2  Bioassay case study",
+    "section": "2.3 Stan models and inference",
+    "text": "2.3 Stan models and inference\nModel 0 (without priors).\n\nCmdStanPyNumpyro\n\n\n\nmod0 = CmdStanModel(\n    stan_file=str(\"bioassay0.stan\"),\n    stanc_options={\"warn-pedantic\": True},\n)\nprint_stan(mod0)\n\ndata {\n  int&lt;lower=0&gt; J;  \n  vector[J] x;\n  array[J] int&lt;lower=0&gt; N;\n  array[J] int&lt;lower=0, upper=N&gt; y;\n}\nparameters {\n  real a;\n  real b;\n}\nmodel {\n  y ~ binomial_logit(N, a + b * x);\n}\n\n\n\n\ndef mod0(x, N, y=None):\n    a = numpyro.sample(\"a\", dist.Normal(0, 1e6)) # flat prior\n    b = numpyro.sample(\"b\", dist.Normal(0, 1e6)) # flat prior\n    with numpyro.plate(\"J\", len(N)):\n        return numpyro.sample(\"y\", dist.BinomialLogits(total_count=N, logits=a + b*x), obs=y)\n\n\n\nModel 1 (with priors).\n\nCmdStanPyNumpyro\n\n\n\nmod1 = CmdStanModel(\n    stan_file=str(\"bioassay1.stan\"),\n    stanc_options={\"warn-pedantic\": True},\n)\nprint_stan(mod1)\nmod1\n\ndata {\n  int&lt;lower=0&gt; J;  \n  vector[J] x;\n  array[J] int&lt;lower=0&gt; N;\n  array[J] int&lt;lower=0, upper=N&gt; y;\n}\nparameters {\n  real a;\n  real&lt;lower=0&gt; b;\n}\nmodel {\n  {a, b} ~ normal(0, 5);   \n  y ~ binomial_logit(N, a + b * x);\n}\n\n\nCmdStanModel: name=bioassay1\n     stan_file=/home/osvaldo/proyectos/06_Tutoriales/bayesian-workflow/bioassay/bioassay1.stan\n     exe_file=/home/osvaldo/proyectos/06_Tutoriales/bayesian-workflow/bioassay/bioassay1\n     compiler_options=stanc_options={'warn-pedantic': True}, cpp_options={}\n\n\n\n\ndef mod1(x, N, y=None):\n    a = numpyro.sample(\"a\", dist.Normal(0, 5))\n    b = numpyro.sample(\"b\", dist.Normal(0, 5))\n    with numpyro.plate(\"J\", len(N)):\n        return numpyro.sample(\"y\", dist.BinomialLogits(total_count=N, logits=a + b*x), obs=y)\n\n\n\nSample with default settings\n\nCmdStanPyNumpyro\n\n\n\nfit1 = mod1.sample(data=bioassay_data, seed=SEED, show_progress=False)\ndt_bioassay1 = az.from_cmdstanpy(fit1)\n\n\n\n#| label: fit1\n#| results: hide\nkernel = NUTS(mod1)\nmcmc = MCMC(kernel,  num_warmup=1000, num_samples=1000)\nmcmc.run(random.PRNGKey(SEED), x=x, N=N, y=y)\ndt_bioassay1 = az.from_numpyro(mcmc)",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sec 3.5: Bioassay</span>"
+    ]
+  },
+  {
+    "objectID": "bioassay/bioassay.html#posterior-summary",
+    "href": "bioassay/bioassay.html#posterior-summary",
+    "title": "2  Bioassay case study",
+    "section": "2.4 Posterior summary",
+    "text": "2.4 Posterior summary\nPosterior summary and MCMC diagnostics\n\naz.summary(dt_bioassay1)\n\n\n\n\n\n\n\n\nmean\nsd\neti95_lb\neti95_ub\ness_bulk\ness_tail\nr_hat\nmcse_mean\nmcse_sd\n\n\n\n\na\n0.58\n0.78\n-0.89\n2.1\n1564\n1810\n1.00\n0.02\n0.015\n\n\nb\n6.3\n2.53\n2.3\n12\n1750\n1470\n1.00\n0.059\n0.046\n\n\n\n\n\n\n\nPlot 20 logistic curves given 20 posterior draws, and one logistic given the posterior mean\n\nposterior = az.extract(dt_bioassay1, group=\"posterior\")\nposterior_20 = az.extract(dt_bioassay1, group=\"posterior\", num_samples=20, random_seed=SEED)\n\n\n_, ax = plt.subplots(figsize=(8, 3))\nax.scatter(\n    df_bioassay[\"dose\"],\n    df_bioassay[\"deaths\"] / df_bioassay[\"batch_size\"],\n    color=\"black\",\n)\nax.set(xlabel=\"Dose log(g/ml)\", ylabel=\"Pr (death)\")\n\nxs = np.linspace(-1, 1, 200)\nax.plot(\n    xs,\n    expit(posterior_20[\"a\"].values + posterior_20[\"b\"].values * xs[:, None]),\n    color=\"C1\",\n    lw=0.5,\n    alpha=0.6,\n)\n\nax.plot(\n    xs,\n    expit(posterior[\"a\"].mean().item() + posterior[\"b\"].mean().item() * xs),\n    color=\"C0\",\n    lw=2,\n)\n\n\n\n\n\n\n\nFigure 2.2",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sec 3.5: Bioassay</span>"
+    ]
+  },
+  {
+    "objectID": "bioassay/bioassay.html#derived-quantities",
+    "href": "bioassay/bioassay.html#derived-quantities",
+    "title": "2  Bioassay case study",
+    "section": "2.5 Derived quantities",
+    "text": "2.5 Derived quantities\nCompute posterior draws for LD50 in log(g/ml) and in mg/ml\n\nld50_log = -dt_bioassay1.posterior[\"a\"] / dt_bioassay1.posterior[\"b\"]\nld50_mg = 1000 * np.exp(ld50_log)\ndt_bioassay1.posterior[\"LD50_log_g_ml\"] = ld50_log\ndt_bioassay1.posterior[\"LD50_mg_ml\"] = ld50_mg\n\nSummarise LD50 posterior\n\naz.summary(dt_bioassay1, var_names=\"LD50_log_g_ml\")\n\n\n\n\n\n\n\n\nmean\nsd\neti95_lb\neti95_ub\ness_bulk\ness_tail\nr_hat\nmcse_mean\nmcse_sd\n\n\n\n\nLD50_log_g_ml\n-0.084\n0.137\n-0.33\n0.21\n2174\n2689\n1.00\n0.003\n0.0031\n\n\n\n\n\n\n\nQuantile dot plot of the LD50 (mg/ml) posterior\n\npc = az.plot_dist(\n    dt_bioassay1,\n    kind=\"dot\",\n    var_names=\"LD50_mg_ml\",\n    visuals={\"point_estimate_text\":False},\n)\naz.add_lines(pc, [500, 2000]);\n\n\n\n\n\n\n\n\nKernel density plot of the LD50 (mg/ml) posterior\n\npc = az.plot_dist(\n    dt_bioassay1,\n    var_names=\"LD50_mg_ml\",\n    visuals={\"point_estimate_text\":False},\n)\naz.add_lines(pc, [500, 2000]);\n\n\n\n\n\n\n\nFigure 2.3",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sec 3.5: Bioassay</span>"
+    ]
+  },
+  {
+    "objectID": "bioassay/bioassay.html#bambi-model-and-inference",
+    "href": "bioassay/bioassay.html#bambi-model-and-inference",
+    "title": "2  Bioassay case study",
+    "section": "2.6 Bambi model and inference",
+    "text": "2.6 Bambi model and inference\nThe same model with Bambi\n\nmodel = bmb.Model(\n    \"prop(deaths, batch_size) ~ dose\",\n    data=df_bioassay,\n    family=\"binomial\",\n    priors={\n        \"Intercept\": bmb.Prior(\"Normal\", mu=0, sigma=5),\n        \"dose\": bmb.Prior(\"HalfNormal\", sigma=5),\n    },\n)\nidata_bambi = model.fit(random_seed=123)\n\nInitializing NUTS using jitter+adapt_diag...\nMultiprocess sampling (4 chains in 4 jobs)\nNUTS: [Intercept, dose]\n\n\n\n\n\n\n\n\nSampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 5 seconds.\n\n\nSummary of the inference\n\naz.summary(idata_bambi)\n\n\n\n\n\n\n\n\nmean\nsd\neti95_lb\neti95_ub\ness_bulk\ness_tail\nr_hat\nmcse_mean\nmcse_sd\n\n\n\n\nIntercept\n0.62\n0.78\n-0.88\n2.2\n3248\n2047\n1.00\n0.014\n0.01\n\n\ndose\n6.45\n2.54\n2.4\n12\n3732\n2729\n1.00\n0.04\n0.031\n\n\n\n\n\n\n\nWith bambi we can use the built-in plotting functions in the interpret submodule.\n\nplot = bmb.interpret.plot_predictions(model, idata_bambi, \"dose\",\n                                      use_hdi=False,\n                                      fig_kwargs={\"theme\": {\"figure.figsize\": (7, 4)}})\n\nplotter = plot.plot()\nax = plotter._figure.axes[0]\n\nax.scatter(\n    df_bioassay[\"dose\"],\n    df_bioassay[\"deaths\"] / df_bioassay[\"batch_size\"],\n    s=80,\n    color=\"black\",\n)\n# Tweak labels\nax.set(xlabel=\"Dose log(g/ml)\", ylabel=\"Pr(death)\")\nplotter._figure",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sec 3.5: Bioassay</span>"
+    ]
+  },
+  {
+    "objectID": "bioassay/bioassay.html#ld50-posterior",
+    "href": "bioassay/bioassay.html#ld50-posterior",
+    "title": "2  Bioassay case study",
+    "section": "2.7 LD50 posterior",
+    "text": "2.7 LD50 posterior\nCompute posterior draws for lethal dose 50 (LD50) in log(g/ml) and in mg/ml\n\nld50_bambi_log = -idata_bambi.posterior[\"Intercept\"] / idata_bambi.posterior[\"dose\"]\nld50_bambi_mg = 1000 * np.exp(ld50_bambi_log)\nidata_bambi.posterior[\"LD50_log_g_ml\"] = ld50_bambi_log\nidata_bambi.posterior[\"LD50_mg_ml\"] = ld50_bambi_mg\n\nPosterior summary\n\naz.summary(idata_bambi, var_names=[\"LD50_log_g_ml\", \"LD50_mg_ml\"])\n\n\n\n\n\n\n\n\nmean\nsd\neti95_lb\neti95_ub\ness_bulk\ness_tail\nr_hat\nmcse_mean\nmcse_sd\n\n\n\n\nLD50_log_g_ml\n-0.087\n0.131\n-0.32\n0.21\n3549\n3142\n1.00\n0.0022\n0.0023\n\n\nLD50_mg_ml\n925\n128\n720\n1200\n3549\n3142\n1.00\n2.2\n3.8\n\n\n\n\n\n\n\nQuantile dot plot of the LD50 (mg/ml) posterior.\n\npc = az.plot_dist(\n    idata_bambi,\n    kind=\"dot\",\n    var_names=\"LD50_mg_ml\",\n    visuals={\"point_estimate_text\":False},\n)\naz.add_lines(pc, [500, 2000]);\n\n\n\n\n\n\n\nFigure 2.4\n\n\n\n\n\nKernel density plot of the LD50 (mg/ml) posterior.\n\npc = az.plot_dist(\n    idata_bambi,\n    var_names=\"LD50_mg_ml\",\n    visuals={\"point_estimate_text\":False},\n)\naz.add_lines(pc, [500, 2000]);\n\n\n\n\n\n\n\nFigure 2.5",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sec 3.5: Bioassay</span>"
+    ]
+  },
+  {
+    "objectID": "bioassay/bioassay.html#references",
+    "href": "bioassay/bioassay.html#references",
+    "title": "2  Bioassay case study",
+    "section": "References",
+    "text": "References\n\n\nGelman, Andrew, John B Carlin, Hal S Stern, David B Dunson, Aki Vehtari, and Donald B Rubin. 2013. Bayesian Data Analysis. Third edition. CRC Press.\n\n\nRacine-Poon, A., A. P. Grieve, H. Fluhler, and A. F. M. Smith. 1986. “Bayesian Methods in Practice: Experiences in the Pharmaceutical Industry (with Discussion).” Applied Statistics 35: 93–150.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sec 3.5: Bioassay</span>"
+    ]
+  },
+  {
+    "objectID": "bioassay/bioassay.html#licenses",
+    "href": "bioassay/bioassay.html#licenses",
+    "title": "2  Bioassay case study",
+    "section": "Licenses",
+    "text": "Licenses\n\nCode © 2025, Andrew Gelman and Aki Vehtari, licensed under BSD-3.\nText © 2025, Andrew Gelman and Aki Vehtari, licensed under CC-BY-NC 4.0.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Sec 3.5: Bioassay</span>"
+    ]
+  }
+]
