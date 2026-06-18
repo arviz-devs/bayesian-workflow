@@ -34,7 +34,7 @@ import warnings
 import sys
 sys.path.insert(0, '..')
 
-import arviz as az as az
+import arviz as az
 import bambi as bmb
 import matplotlib.pyplot as plt
 import numpy as np
@@ -47,7 +47,7 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 
 az.style.use("arviz-variat")
 az.rcParams["stats.ci_prob"] = 0.95
-plt.rcParams["figure.dpi"] = 100
+plt.rcParams["figure.dpi"] = 75
 SEED = 7412
 ```
 
@@ -250,7 +250,7 @@ dt_bioassay1.posterior["LD50_mg_ml"] = ld50_mg
 Summarise LD50 posterior
 
 ```{python}
-az.summary(dt_bioassay1, var_names=["LD50_log_g_ml", "LD50_mg_ml"])
+az.summary(dt_bioassay1, var_names="LD50_log_g_ml")
 ```
 
 Quantile dot plot of the LD50 (mg/ml) posterior
@@ -290,7 +290,7 @@ model = bmb.Model(
     family="binomial",
     priors={
         "Intercept": bmb.Prior("Normal", mu=0, sigma=5),
-        "dose": bmb.Prior("HalfNormal", sigma=8),
+        "dose": bmb.Prior("HalfNormal", sigma=5),
     },
 )
 idata_bambi = model.fit(random_seed=123)
@@ -305,16 +305,22 @@ az.summary(idata_bambi)
 With `bambi` we can use the built-in plotting functions in the interpret submodule.
 
 ```{python}
-_, ax = bmb.interpret.plot_predictions(model, idata_bambi, "dose", use_hdi=False, fig_kwargs=dict(figsize=(10, 4)))
-# Add data points
-ax[0].scatter(
+plot = bmb.interpret.plot_predictions(model, idata_bambi, "dose",
+                                      use_hdi=False,
+                                      fig_kwargs={"theme": {"figure.figsize": (7, 4)}})
+
+plotter = plot.plot()
+ax = plotter._figure.axes[0]
+
+ax.scatter(
     df_bioassay["dose"],
     df_bioassay["deaths"] / df_bioassay["batch_size"],
     s=80,
     color="black",
 )
 # Tweak labels
-ax[0].set(xlabel="Dose log(g/ml)", ylabel="Pr(death)")
+ax.set(xlabel="Dose log(g/ml)", ylabel="Pr(death)")
+plotter._figure
 ```
 
 

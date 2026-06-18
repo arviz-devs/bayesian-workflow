@@ -4,7 +4,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from xarray import DataArray
-import arviz as az as az
+import arviz as az
 from scipy.special import expit
 
 
