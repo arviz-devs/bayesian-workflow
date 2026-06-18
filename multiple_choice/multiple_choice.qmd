@@ -17,7 +17,7 @@ This notebook includes the code for the Bayesian Workflow book
 Chapter 4 *Introduction to workflow: Modeling performance on a
 multiple choice exam*.
 
-# Introduction
+## Introduction
 
 We demonstrate with an example from Section 4.15 of
 @Gelman-Vehtari:2024, assessing the grading of a multiple-choice test.
