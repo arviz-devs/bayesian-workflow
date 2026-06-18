@@ -16,8 +16,8 @@ book:
       - index.qmd
       - text: "Sec 3.5: Bioassay"
         href: bioassay/bioassay.qmd
-      # - text: "Ch 4: Modeling performance on a multiple choice exam"
-      #   href: multiple_choice/multiple_choice.html
+      - text: "Ch 4: Modeling performance on a multiple choice exam"
+        href: multiple_choice/multiple_choice.qmd
       # - text: "Sec 9.4: Model selection using predictive performance"
       #   href: loo_comparison/loo_comparison.html
       # - text: "Sec 11.4 and 11.6: How many iterations to run and how many digits to report"

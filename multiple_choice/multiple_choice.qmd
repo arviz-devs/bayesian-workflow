@@ -68,7 +68,7 @@ SEED = 123
 np.random.seed(SEED)
 ```
 
-# Stan models
+## Stan models
 
 Compile all Stan programs to use throughout the file
 
@@ -88,7 +88,7 @@ irt_guessing = CmdStanModel(stan_file="irt_guessing.stan")
 irt_guessing_discrimination = CmdStanModel(stan_file="irt_guessing_discrimination.stan")
 ```
 
-# Data
+## Data
 
 Read in data and construct score for each student
 
@@ -135,9 +135,9 @@ data = {
 item_id_0 = [chr(65 + j) for j in range(K)]  # A, B, C, ...
 ```
 
-# Simple models
+## Simple models
 
-## Base model logit_0
+### Base model logit_0
 
 ```{python}
 print_stan(logit_0)
@@ -158,7 +158,7 @@ plot_logit(
 az.summary(dt)
 ```
 
-## Add priors
+### Add priors
 
 ```{python}
 print_stan(logit_prior)
@@ -231,7 +231,7 @@ plot_logit(
 az.summary(dt)
 ```
 
-## Fix the data problems
+### Fix the data problems
 
 ```{python}
 answers.iloc[0, [4, 13, 16]] = ["d", "d", "c"]
@@ -275,7 +275,7 @@ _ = plot_logit_grid(
 
 ```
 
-## Allow for guessing
+### Allow for guessing
 
 ```{python}
 print_stan(logit_guessing)
@@ -302,7 +302,7 @@ _ = plot_logit_grid(
 
 ```
 
-# Multilevel models
+## Multilevel models
 
 In preparation for multilevel model, create long dataset
 
@@ -337,7 +337,7 @@ longdata_ = {
 
 ```
 
-## Multilevel model
+### Multilevel model
 
 ```{python}
 print_stan(logit_guessing_multilevel)
@@ -361,7 +361,7 @@ plot_logit_grid_2(
 az.summary(dt_5, var_names=["mu_a", "sigma_a", "mu_b", "sigma_b"])
 ```
 
-## Multilevel model with correlation
+### Multilevel model with correlation
 
 ```{python}
 print_stan(logit_guessing_multilevel_bivariate)
@@ -390,7 +390,7 @@ plot_logit_grid_2(
 az.summary(dt_6, var_names=["mu_ab", "sigma_ab", "Omega_ab"])
 ```
 
-## Multilevel model with correlation using Cholesky
+### Multilevel model with correlation using Cholesky
 
 ```{python}
 print_stan(logit_guessing_multilevel_bivariate_cholesky)
@@ -419,9 +419,9 @@ plot_logit_grid_2(
 az.summary(dt_7, var_names=["mu_ab", "sigma_ab", "Omega_ab"])
 ```
 
-# Item-response theory (IRT) models
+## Item-response theory (IRT) models
 
-## Item-response model
+### Item-response model
 
 ```{python}
 print_stan(irt_guessing)
@@ -446,7 +446,7 @@ plot_irt(
 )
 ```
 
-## Item-response model with discrimination parameters
+### Item-response model with discrimination parameters
 
 ```{python}
 print_stan(irt_guessing_discrimination)
@@ -472,7 +472,7 @@ plot_irt(
 )
 ```
 
-## Item-response model with discrimination parameters with init
+### Item-response model with discrimination parameters with init
 
 ```{python}
 #| label: fig-final_exams_13
@@ -556,7 +556,7 @@ for k in range(K):
 
 ```
 
-# Prior predictive simulations
+## Prior predictive simulations
 
 ```{python}
 def prior_predictive(x, x_jitt, mu_a, sigma_a, mu_b, sigma_b, seed=None):
@@ -655,7 +655,7 @@ for i in range(10):
 fig.suptitle("10 prior predictive simulations with a ~ normal(0, 50) and b ~ normal(0, 50)", fontsize=8)
 ```
 
-# Breaking the model
+## Breaking the model
 
 ```{python}
 print_stan(logit_guessing_uncentered)
@@ -700,7 +700,7 @@ n_sims = len(a_break)
 
 ```{python}
 #| label: fig-break_1
-fig, ax = plt.subplots(figsize=(4, 3))
+fig, ax = plt.subplots(figsize=(9, 3))
 ax.set_xlim(x_break.min(), x_break.max())
 ax.set_ylim(0, 1)
 ax.set_xlabel("Exam score")
@@ -736,7 +736,7 @@ n_sims = len(a_break)
 
 ```{python}
 #| label: fig-break_2
-fig, ax = plt.subplots(figsize=(4, 3))
+fig, ax = plt.subplots(figsize=(9, 3))
 ax.set_xlim(-2, 2)
 ax.set_ylim(0, 1)
 ax.set_xlabel("Standardized exam score")
@@ -780,11 +780,11 @@ plot_logit_grid_2(
 
 ```
 
-# References {.unnumbered}
+## References {.unnumbered}
 
 <div id="refs"></div>
 
-# Licenses {.unnumbered}
+## Licenses {.unnumbered}
 
 * Code © 2022--2025, Andrew Gelman, licensed under BSD-3.
 * Text © 2022--2025, Andrew Gelman, licensed under CC-BY-NC 4.0.

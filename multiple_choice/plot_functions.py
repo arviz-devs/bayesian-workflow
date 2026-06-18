@@ -29,10 +29,6 @@ def plot_logit(dt, title, xlab, var_y, var_x, guessprob=0):
         X values (possibly jittered) for plotting observed data.
     guessprob : float or ``"estimated"``
         Guessing probability — 0, positive float, or ``"estimated"``.
-
-    Returns
-    -------
-    datatree.DataTree
     """
     var_x = np.asarray(var_x, dtype=float)
 
@@ -74,8 +70,8 @@ def plot_logit(dt, title, xlab, var_y, var_x, guessprob=0):
             color="C0", lw=1.5,
         )
         label = (
-            f"y = {f"{p0_hat:.2f}"} + {f"{1 - p0_hat:.2f}"} "
-            f"invlogit({f"{a_hat:.2f}"} + {f"{b_hat:.2f}"} x)"
+            f"y = {f"{p0_hat:.1f}"} + {f"{1 - p0_hat:.1f}"} "
+            f"invlogit({f"{a_hat:.1f}"} + {f"{b_hat:.1f}"} x)"
         )
         y_text = p0_hat + (1 - p0_hat) * expit(a_hat + b_hat * var_x.mean()) - 0.2
     else:
@@ -97,7 +93,7 @@ def plot_logit(dt, title, xlab, var_y, var_x, guessprob=0):
         else:
             label = (
                 f"y = {gp} + {1 - gp} "
-                f"invlogit({a_hat:.2f} + {b_hat:.2f} x)"
+                f"invlogit({a_hat:.1f} + {b_hat:.1f} x)"
             )
         y_text = gp + (1 - gp) * expit(a_hat + b_hat * var_x.mean()) - 0.2
 
@@ -199,10 +195,6 @@ def plot_logit_grid_2(dt, title, xlab, xvar, y_arr, item_arr, item_id, guessprob
     item_id : array-like
         Display labels for each item (length K).
     guessprob : float
-
-    Returns
-    -------
-    datatree.DataTree
     """
     xvar = np.asarray(xvar, dtype=float)
     y_arr = np.asarray(y_arr)
@@ -221,7 +213,7 @@ def plot_logit_grid_2(dt, title, xlab, xvar, y_arr, item_arr, item_id, guessprob
 
     # ---- grid of logistic curves ------------------------------------------
     fig, axes = plt.subplots(4, 6, figsize=(11, 6), sharex=True, sharey=True)
-    fig.suptitle(title, fontsize=11, y=0.98)
+    fig.suptitle(title, fontsize=11, y=1.04)
 
     x_line = DataArray(np.linspace(xvar.min() - 1, xvar.max() + 1, 300), dims="x")
     gp = float(guessprob)
@@ -254,7 +246,7 @@ def plot_logit_grid_2(dt, title, xlab, xvar, y_arr, item_arr, item_id, guessprob
     se_a = mad_ab["a"].values
     se_b = mad_ab["b"].values
 
-    _, ax = plt.subplots(figsize=(5, 4))
+    _, ax = plt.subplots(figsize=(10, 4))
     ax.set_xlim(np.min(a_hat - se_a), np.max(a_hat + se_a))
     ax.set_ylim(np.min(b_hat - se_b), np.max(b_hat + se_b))
     ax.set_xlabel("a")
@@ -270,9 +262,6 @@ def plot_logit_grid_2(dt, title, xlab, xvar, y_arr, item_arr, item_id, guessprob
             a_hat[k], b_hat[k], str(item_id[k]),
             color="C0", fontsize=9, ha="center", va="center",
         )
-
-
-    return dt
 
 
 def plot_irt(dt, title, y_arr, item_arr, item_id, guessprob=0.25):
@@ -291,10 +280,6 @@ def plot_irt(dt, title, y_arr, item_arr, item_id, guessprob=0.25):
     item_id : array-like
         Display labels for each item (length K).
     guessprob : float
-
-    Returns
-    -------
-    datatree.DataTree
     """
     y_arr = np.asarray(y_arr)
     item_arr = np.asarray(item_arr)
@@ -304,7 +289,6 @@ def plot_irt(dt, title, y_arr, item_arr, item_id, guessprob=0.25):
     item_sums = np.array([y_arr[item_arr == k + 1].sum() for k in range(K)])
     item_order = np.argsort(item_sums, kind="stable")
 
-    var_names = ["alpha", "beta"]
     try:
         az.extract(dt, var_names=["gamma"], num_samples=1)
         has_gamma = True
@@ -368,5 +352,3 @@ def plot_irt(dt, title, y_arr, item_arr, item_id, guessprob=0.25):
 
         ax.set_xlim(x_range)
         ax.set_title(f"item {item_id[k]}", fontsize=8, pad=2)
-
-    return dt
