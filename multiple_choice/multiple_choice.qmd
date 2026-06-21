@@ -360,6 +360,8 @@ print_stan(logit_guessing)
 ## Numpyro
 
 ```{.python}
+import jax
+
 def logit_guessing(x, mu_a, sigma_a, mu_b, sigma_b, y=None):
     x_adj = (x - x.mean()) / x.std()
     a = numpyro.sample("a", dist.Normal(mu_a, sigma_a))
@@ -635,7 +637,7 @@ az.summary(dt_7, var_names=["mu_ab", "sigma_ab", "Omega_ab"])
 
 ## Numpyro
 
-```{python}
+```{.python}
 longdata_7 = {
     **longdata,
     "mu_mu_ab": jnp.array([0., 0.]),
@@ -679,7 +681,7 @@ print_stan(irt_guessing)
 
 ## Numpyro
 
-```{python}
+```{.python}
 def irt_guessing(
     student, item, N, J, K, mu_mu_beta, sigma_mu_beta, mu_sigma_alpha, mu_sigma_beta, y=None
 ):
@@ -1193,7 +1195,7 @@ mcmc.run(
     mu_b=0., sigma_b=1000.,
     y=jnp.array(y_break),
 )
-break_2_fit = az.from_numpyro(mcmc)
+dt_break_2 = az.from_numpyro(mcmc)
 mcmc.print_summary()
 ```
 :::
