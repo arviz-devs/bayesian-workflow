@@ -23,12 +23,6 @@ failure modes in Markov chain Monte Carlo based Bayesian inference,
 how to recognize these using the diagnostics, and how to fix the
 problems.
 
-```{python}
-#| echo: false
-
-
-```
-
 **Load packages**
 
 ```{python}
@@ -53,7 +47,7 @@ plt.rcParams["figure.dpi"] = 100
 warnings.filterwarnings("ignore")
 disable_logging()
 
-SEED = 48927  # set random seed for reproducibility
+SEED = 48927
 np.random.seed(SEED)
 ```
 
@@ -117,6 +111,7 @@ Sample
 ```{python}
 #| label: fit_logit
 fit_logit = mod_logit.sample(data=data_logit, seed=SEED, show_progress=False)
+dt_logit = az.from_cmdstanpy(fit_logit)
 ```
 
 ### Convergence diagnostics
@@ -125,13 +120,12 @@ When running Stan, we get warnings. We can also
 explicitly check the inference diagnostics:
 
 ```{python}
-print(fit_logit.diagnose())
+az.diagnose(dt_logit)
 ```
 
 We can also check $\widehat{R}$ and effective sample size (ESS) diagnostics[@Vehtari-Gelman-Simpson-etal:2021]
 
 ```{python}
-dt_logit = az.from_cmdstanpy(fit_logit)
 az.summary(dt_logit)
 ```
 
@@ -147,7 +141,7 @@ az.plot_pair(
     dt_logit,
     marginal_kind="hist",
     figure_kwargs={"figsize": (8, 4)},
-    visuals={"divergences": True},
+    visuals={"divergence": True},
 )
 ```
 
@@ -172,6 +166,7 @@ Sample
 ```{python}
 #| label: fit_logit2
 fit_logit2 = mod_logit2.sample(data=data_logit, seed=SEED, show_progress=False)
+dt_logit2 = az.from_cmdstanpy(fit_logit2)
 ```
 
 #### Convergence diagnostics
@@ -180,13 +175,12 @@ There were no convergence warnings. We can also
 explicitly check the inference diagnostics:
 
 ```{python}
-print(fit_logit2.diagnose())
+az.diagnose(dt_logit2)
 ```
 
 We check $\widehat{R}$ and ESS values, which in this case all look good.
 
 ```{python}
-dt_logit2 = az.from_cmdstanpy(fit_logit2)
 az.summary(dt_logit2)
 ```
 
@@ -200,7 +194,7 @@ az.plot_pair(
     dt_logit2,
     marginal_kind="hist",
     figure_kwargs={"figsize": (8, 4)},
-    visuals={"divergences": True},
+    visuals={"divergence": True},
 )
 ```
 
@@ -220,6 +214,7 @@ Sample
 ```{python}
 #| label: fit_logit3
 fit_logit3 = mod_logit3.sample(data=data_logit, seed=SEED, show_progress=False)
+dt_logit3 = az.from_cmdstanpy(fit_logit3)
 ```
 
 #### Convergence diagnostics
@@ -228,13 +223,12 @@ There is sampler warning. We can also explicitly call inference
 diagnostics:
 
 ```{python}
-print(fit_logit3.diagnose())
+az.diagnose(dt_logit3)
 ```
 
 Instead of increasing `max_treedepth`, we check the other convergence diagnostics.
 
 ```{python}
-dt_logit3 = az.from_cmdstanpy(fit_logit3)
 az.summary(dt_logit3)
 ```
 
@@ -242,13 +236,11 @@ $\widehat{R}$, ESS look good for `alpha` and `beta`, but really bad for `gamma`,
 
 ```{python}
 #| label: fig-unusedparam_pairs
-
-
 az.plot_pair(
     dt_logit3,
     marginal_kind="hist",
     figure_kwargs={"figsize": (8, 4)},
-    visuals={"divergences": True},
+    visuals={"divergence": True},
 )
 ```
 
@@ -289,9 +281,9 @@ Sample
 
 ```{python}
 #| label: fit_logit4
-
 mod_logit4 = CmdStanModel(stan_file="logit_glm2.stan")
 fit_logit4 = mod_logit4.sample(data=data_logit4, seed=SEED, show_progress=False)
+dt_logit4 = az.from_cmdstanpy(fit_logit4)
 ```
 
 The Stan sampling time per chain with the original data matrix was less than 0.1s per chain. Now the Stan sampling time per chain is several seconds, which is suspicious. There are no automatic convergence diagnostic warnings and checking other diagnostics don't show anything really bad.
@@ -299,11 +291,10 @@ The Stan sampling time per chain with the original data matrix was less than 0.1
 ### Convergence diagnostics
 
 ```{python}
-print(fit_logit4.diagnose())
+az.diagnose(dt_logit4)
 ```
 
 ```{python}
-dt_logit4 = az.from_cmdstanpy(fit_logit4)
 az.summary(dt_logit4)
 ```
 
@@ -315,12 +306,11 @@ correlated.
 
 ```{python}
 #| label: fig-competing_params_pairs
-
 az.plot_pair(
     dt_logit4,
     marginal_kind="hist",
     figure_kwargs={"figsize": (8, 4)},
-    visuals={"divergences": True},
+    visuals={"divergence": True},
 )
 ```
 
@@ -362,7 +352,6 @@ data_lin = {"M": M, "N": N, "x": x, "y": y}
 
 ```{python}
 #| label: fig-kilpisjarvi_data
-
 _, ax = plt.subplots(figsize=(6, 4))
 ax.scatter(x, y)
 ax.set(xlabel="Year", ylabel="Summer temp. @Kilpisjärvi")
@@ -380,6 +369,7 @@ print_stan(mod_lin)
 ```{python}
 #| label: fit_lin_kilpis
 fit_lin = mod_lin.sample(data=data_lin, seed=SEED, show_progress=False)
+dt_lin = az.from_cmdstanpy(fit_lin)
 ```
 
 #### Convergence diagnostics
@@ -387,11 +377,10 @@ fit_lin = mod_lin.sample(data=data_lin, seed=SEED, show_progress=False)
 Stan gives a warning: There were X transitions after warmup that exceeded the maximum treedepth. As in the previous example, there are no other warnings.
 
 ```{python}
-print(fit_lin.diagnose())
+az.diagnose(dt_lin)
 ```
 
 ```{python}
-dt_lin = az.from_cmdstanpy(fit_lin)
 az.summary(dt_lin)
 ```
 
@@ -399,13 +388,12 @@ ESS estimates are above the diagnostic threshold, but lower than we would expect
 
 ```{python}
 #| label: fig-correlating_params_pairs
-
 az.plot_pair(
     dt_lin,
     var_names=["alpha", "beta"],
     marginal_kind="hist",
     figure_kwargs={"figsize": (8, 4)},
-    visuals={"divergences": True},
+    visuals={"divergence": True},
 )
 ```
 
@@ -420,8 +408,8 @@ data_lin = {"M": M, "N": N, "x": np.atleast_2d(x_centered).T, "y": y}
 
 ```{python}
 #| label: fit_lin_kilpis_centered_data
-
 fit_lin = mod_lin.sample(data=data_lin, seed=SEED, show_progress=False)
+dt_lin = az.from_cmdstanpy(fit_lin)
 ```
 
 ### Convergence diagnostics
@@ -429,11 +417,10 @@ fit_lin = mod_lin.sample(data=data_lin, seed=SEED, show_progress=False)
 We check the diagnostics
 
 ```{python}
-print(fit_lin.diagnose())
+az.diagnose(dt_lin)
 ```
 
 ```{python}
-dt_lin = az.from_cmdstanpy(fit_lin)
 az.summary(dt_lin)
 ```
 
@@ -441,13 +428,12 @@ The following figure shows the scatter plot.
 
 ```{python}
 #| label: fig-uncorrelating_params_pairs
-
 az.plot_pair(
     dt_lin,
     var_names=["alpha", "beta"],
     marginal_kind="hist",
     figure_kwargs={"figsize": (8, 4)},
-    visuals={"divergences": True},
+    visuals={"divergence": True},
 )
 ```
 
@@ -482,6 +468,7 @@ Sample
 ```{python}
 #| label: fit_tt_hard
 fit_tt = mod_tt.sample(data=data_tt, seed=SEED, show_progress=False)
+dt_tt = az.from_cmdstanpy(fit_tt)
 ```
 
 #### Convergence diagnostics
@@ -489,11 +476,10 @@ fit_tt = mod_tt.sample(data=data_tt, seed=SEED, show_progress=False)
 We check the diagnostics
 
 ```{python}
-print(fit_tt.diagnose())
+az.diagnose(dt_tt)
 ```
 
 ```{python}
-dt_tt = az.from_cmdstanpy(fit_tt)
 az.summary(dt_tt)
 ```
 
@@ -501,7 +487,6 @@ The $\widehat{R}$ values for `mu` are large and ESS values for `mu` are small in
 
 ```{python}
 #| label: fig-bimodal1_hist
-
 az.plot_dist(
     dt_tt,
     kind="hist",
@@ -542,8 +527,8 @@ data_tt = {"N": N, "y": y}
 
 ```{python}
 #| label: fit_tt_easy
-
 fit_tt = mod_tt.sample(data=data_tt, seed=SEED, show_progress=False)
+dt_tt = az.from_cmdstanpy(fit_tt)
 ```
 
 ### Convergence diagnostics
@@ -551,11 +536,10 @@ fit_tt = mod_tt.sample(data=data_tt, seed=SEED, show_progress=False)
 We check the diagnostics
 
 ```{python}
-print(fit_tt.diagnose())
+az.diagnose(dt_tt)
 ```
 
 ```{python}
-dt_tt = az.from_cmdstanpy(fit_tt)
 az.summary(dt_tt)
 ```
 
@@ -563,7 +547,6 @@ Two modes are visible.
 
 ```{python}
 #| label: fig-bimodal2_hist
-
 az.plot_dist(dt_tt, kind="hist")
 ```
 
@@ -571,7 +554,6 @@ Trace plot is not very useful. It shows the chains are jumping between modes, bu
 
 ```{python}
 #| label: fig-bimodal2_trace
-
 az.plot_trace(dt_tt);
 ```
 
@@ -579,7 +561,6 @@ Rank plot [@Sailynoja+etal:2022:PIT-ECDF] indicates good mixing as all chains ha
 
 ```{python}
 #| label: fig-bimodal2_rank
-
 az.plot_rank(dt_tt)
 ```
 
@@ -594,7 +575,7 @@ We intentionally generate the data so that there are initialization problems, bu
 ### Data
 
 ```{python}
-np.random.seed(SEED)
+np.random.seed(SEED + 6)
 M = 1
 N = 20
 x = 1e3 * np.sort(np.random.randn(N)).reshape(-1, M)
@@ -624,9 +605,9 @@ Sample
 
 ```{python}
 #| label: fit_pois
-
 mod_pois = CmdStanModel(stan_file="pois_glm.stan")
 fit_pois = mod_pois.sample(data=data_pois, seed=SEED, show_progress=False)
+dt_pois = az.from_cmdstanpy(fit_pois)
 ```
 
 We get a lot of warnings about rejecting initial values.
@@ -636,7 +617,7 @@ We get a lot of warnings about rejecting initial values.
 We check the diagnostics:
 
 ```{python}
-print(fit_pois.diagnose())
+az.diagnose(dt_pois)
 ```
 
 ```{python}
@@ -648,12 +629,11 @@ $\widehat{R}$ values are large and ESS values are small, indicating bad mixing. 
 
 ```{python}
 #| label: fig-poisson_pairs
-
 az.plot_pair(
     dt_pois,
     marginal_kind="hist",
     figure_kwargs={"figsize": (8, 4)},
-    visuals={"divergences": True},
+    visuals={"divergence": True},
 )
 ```
 
@@ -678,7 +658,6 @@ data_pois = {'M': M, 'N': N, 'x': x / 1e3, 'y': y}
 
 ```{python}
 #| label: fig-poisson_data2
-
 _, ax = plt.subplots(figsize=(6, 3))
 ax.scatter(data_pois["x"], data_pois["y"])
 ax.set(xlabel="x", ylabel="y")
@@ -686,8 +665,8 @@ ax.set(xlabel="x", ylabel="y")
 
 ```{python}
 #| label: fit_pois_scaled_data
-
 fit_pois = mod_pois.sample(data=data_pois, seed=SEED, show_progress=False)
+dt_pois = az.from_cmdstanpy(fit_pois)
 ```
 
 ### Convergence diagnostics
@@ -695,11 +674,10 @@ fit_pois = mod_pois.sample(data=data_pois, seed=SEED, show_progress=False)
 We check the diagnostics:
 
 ```{python}
-print(fit_pois.diagnose())
+az.diagnose(dt_pois)
 ```
 
 ```{python}
-dt_pois = az.from_cmdstanpy(fit_pois)
 az.summary(dt_pois)
 ```
 
@@ -730,6 +708,7 @@ y = np.repeat([0, 1], N // 2)
 data_logit = {"M": M, "N": N, "x": x, "y": y}
 
 fit_logit_glm4 = mod_logit_glm4.sample(data=data_logit, seed=SEED, show_progress=False)
+dt_logit_glm4 = az.from_cmdstanpy(fit_logit_glm4)
 ```
 
 ### Convergence diagnostics
@@ -737,11 +716,10 @@ fit_logit_glm4 = mod_logit_glm4.sample(data=data_logit, seed=SEED, show_progress
 We check diagnostics
 
 ```{python}
-print(fit_logit_glm4.diagnose())
+az.diagnose(dt_logit_glm4)
 ```
 
 ```{python}
-dt_logit_glm4 = az.from_cmdstanpy(fit_logit_glm4)
 az.summary(dt_logit_glm4)
 ```
 
@@ -749,23 +727,21 @@ The rounded $\widehat{R}$ values look good, ESS values are low. Looking at the m
 
 ```{python}
 #| label: fig-thick_tail_pairs
-
 az.plot_pair(
     dt_logit_glm4,
     marginal_kind="hist",
     figure_kwargs={"figsize": (8, 4)},
-    visuals={"divergences": True},
+    visuals={"divergence": True},
 )
 ```
 
 The dynamic HMC algorithm used by Stan, along with many other MCMC methods, have problems with such thick tails and mixing is
 slow.
 
-Rank plot indicates good mixing as all chains have their lines inside the envelope. The envelope assumes no autocorrelation, hence `az.plot_rank` automatically thins the draws here. This can be disable by passing the argument.`thin=False`.
+Rank plot indicates good mixing as all chains have their lines inside the envelope. The envelope assumes no autocorrelation, hence `az.plot_rank` automatically thins the draws here. This can be disable by passing the argument.`thin=False`. Notice how the envelope looks highly stepped/jagged; because heavy thinning (due to low ESS) leaves so few draws to compute the rank plots and its envelope.
 
 ```{python}
 #| label: fig-thick_tail_rank
-
 az.plot_rank(dt_logit_glm4, var_names=["alpha"])
 ```
 
@@ -827,6 +803,7 @@ Sample
 ```{python}
 #| label: fit_lin
 fit_lin = mod_lin.sample(data=data_lin, seed=SEED, show_progress=False)
+idata_lin = az.from_cmdstanpy(fit_lin)
 ```
 
 We get many warnings about the scale parameter being negative.
@@ -849,11 +826,10 @@ numerical accuracy of the computations.
 We check diagnostics
 
 ```{python}
-print(fit_lin.diagnose())
+az.diagnose(idata_lin)
 ```
 
 ```{python}
-idata_lin = az.from_cmdstanpy(fit_lin)
 az.summary(idata_lin)
 ```
 
