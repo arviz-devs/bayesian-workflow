@@ -103,7 +103,7 @@ format:
     toc-depth: 2
     toc-location: right
     smooth-scroll: true
-    embed-resources: true
+    embed-resources: false
     anchor-sections: true
     math: katex
 
