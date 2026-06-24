@@ -17,7 +17,7 @@ This notebook includes the code for the Bayesian Workflow book
 Chapter 16 *Coding a series of models: Simulated data of movie
 ratings*.
 
-# Introduction
+## Introduction
 
 Consider the following scenario. You are considering which of two
 movies to go see. Both have average online ratings of 4 out of 5
@@ -53,7 +53,7 @@ SEED = 1234
 rng = np.random.default_rng(SEED)
 ```
 
-# Model for two movies
+## Model for two movies
 
 ```{python}
 y_1 = np.array([3, 5])
@@ -89,7 +89,7 @@ az.summary(idata_1, var_names=["theta", "sigma_y"])
 ```
 
 
-# Extending the model to J movies
+## Extending the model to J movies
 
 ```{python}
 J = 40
@@ -160,9 +160,9 @@ ax.set(ylim=(0, 1),
        title="Where you have more data, you have less uncertainty");
 ```
 
-# Item-response model with parameters for raters and for movies
+## Item-response model with parameters for raters and for movies
 
-## Balanced data
+### Balanced data
 
 ```{python}
 J = 40
@@ -234,7 +234,7 @@ axes[1].set(xlabel="Posterior median, 50%, and 95% interval",
             title="Checking the $\\beta_k$'s");
 ```
 
-## Unbalanced data
+### Unbalanced data
 
 ```{python}
 genre = np.array(["romantic"] * (J // 2) + ["crime"] * (J - J // 2))
@@ -290,10 +290,9 @@ axes[0].errorbar(alpha_median[crime_mask], alpha_true[crime_mask], xerr=alpha_q5
 axes[0].errorbar(alpha_median[romantic_mask], alpha_true[romantic_mask], xerr=alpha_q95[romantic_mask]/2, color="C0", lw=0.5, fmt="none")
 axes[0].errorbar(alpha_median[crime_mask], alpha_true[crime_mask], xerr=alpha_q95[crime_mask]/2, color="C1", lw=0.5, fmt="none")
 
-axes[0].set(xlim=[-2.5, 2.5], ylim=[-2.5, 2.5],
-             xlabel="Posterior median, 50%, and 95% interval",
-             ylabel="True parameter value",
-             title="Checking the $\\alpha_j$'s")
+axes[0].set(xlabel="Posterior median, 50%, and 95% interval",
+            ylabel="True parameter value",
+            title="Checking the $\\alpha_j$'s")
 axes[0].plot([-2, 2], [-2, 2], color="0.7")
 axes[0].legend(loc="lower right", frameon=False)
 
@@ -306,17 +305,16 @@ axes[1].errorbar(beta_median[difficult_mask], beta_true[difficult_mask], xerr=be
 axes[1].errorbar(beta_median[nice_mask], beta_true[nice_mask], xerr=beta_q95[nice_mask]/2, color="C0", lw=0.5, fmt="none")
 axes[1].errorbar(beta_median[difficult_mask], beta_true[difficult_mask], xerr=beta_q95[difficult_mask]/2, color="C1", lw=0.5, fmt="none")
 
-axes[1].set(xlim=[-2.5, 2.5], ylim=[-2.5, 2.5],
-             xlabel="Posterior median, 50%, and 95% interval",
-             ylabel="True parameter value",
-             title="Checking the $\\beta_k$'s")
+axes[1].set(xlabel="Posterior median, 50%, and 95% interval",
+            ylabel="True parameter value",
+            title="Checking the $\\beta_k$'s")
 axes[1].plot([-3, 3], [-3, 3], color="0.7")
 axes[1].legend(loc="lower right", frameon=False)
 
 fig.suptitle("Checking fits for model when difficult reviewers were more likely to rate certain genres");
 ```
 
-# Comparison to naive data averaging
+## Comparison to naive data averaging
 
 ```{python}
 ybar = np.array([y[(movie == j) & rated].mean() for j in range(1, J + 1)])
@@ -333,8 +331,7 @@ axes[0].plot(ybar[romantic_mask], a_true[romantic_mask],
                 "C0o", label="Romantic comedies")
 axes[0].plot(ybar[crime_mask], a_true[crime_mask],
                 "C1o", label="Crime movies")
-axes[0].set(
-            xlabel="Raw average rating for movie j",
+axes[0].set(xlabel="Raw average rating for movie j",
             ylabel="True $a_j$",
             title="Problems with raw averaging")
 axes[0].plot([1, 4.5], [1, 4.5], color="gray")
@@ -345,8 +342,7 @@ axes[1].plot(a_post_median[romantic_mask], a_true[romantic_mask],
                 "C0o", label="Romantic comedies")
 axes[1].plot(a_post_median[crime_mask], a_true[crime_mask],
                 "C1o", label="Crime movies")
-axes[1].set(
-            xlabel="Posterior median estimate for movie j",
+axes[1].set(xlabel="Posterior median estimate for movie j",
             ylabel="True $a_j$",
             title="Model-based estimates do better")
 axes[1].plot([1, 4.5], [1, 4.5], color="gray")
@@ -356,11 +352,11 @@ axes[1].legend(loc="lower right", frameon=False);
 
 <br />
 
-# References {.unnumbered}
+## References {.unnumbered}
 
 <div id="refs"></div>
 
-# Licenses {.unnumbered}
+## Licenses {.unnumbered}
 
 * Code &copy; 2022--2025, Andrew Gelman, licensed under BSD-3.
 * Text &copy; 2022--2025, Andrew Gelman, licensed under CC-BY-NC 4.0.
