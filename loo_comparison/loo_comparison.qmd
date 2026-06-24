@@ -568,11 +568,11 @@ difference is small, we can proceed with either model.
 
 <br />
 
-# References {.unnumbered}
+## References {.unnumbered}
 
 <div id="refs"></div>
 
-# Licenses {.unnumbered}
+## Licenses {.unnumbered}
 
 * Code &copy; 2025--2026, Aki Vehtari, licensed under BSD-3.
 * Text &copy; 2025--2026, Aki Vehtari, licensed under CC-BY-NC 4.0.
