@@ -12,7 +12,7 @@ project:
     - movies/movies.qmd
     # - sleep_study/sleep_study.qmd
     # - nabiximols/nabiximols.qmd
-    # - coronavirus/coronavirus.qmd
+    - coronavirus/coronavirus.qmd
     # - timeseries/timeseries.qmd
     # - dogs/dogs.qmd
     # - dogs/dogs_stan.qmd
@@ -62,8 +62,8 @@ website:
       # #   href: sleep_study/sleep_study.html
       # - text: "Ch 18: Predictive model checking and comparison: Clinical trial"
       #   href: nabiximols/nabiximols.html
-      # - text: "Ch 19: Building up to a hierarchical model: Coronavirus testing"
-      #   href: coronavirus/coronavirus.html
+      - text: "Ch 19: Building up to a hierarchical model: Coronavirus testing"
+        href: coronavirus/coronavirus.qmd
       # # - text: "Ch 20: Using a fitted model for decision analysis: Mixture model for time series competition"
       # #   href: timeseries/timeseries.html
       # # - text: "Ch 21: Posterior predictive checking: Stochastic learning in dogs -- brms"

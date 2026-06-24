@@ -61,8 +61,6 @@ Compute posterior with data from @Bendavid-Mulaney-Sood-etal:2020a, 11 April 202
 
 ```{python}
 #| label: fit_1
-#| results: hide
-#| cache: true
 fit_1 = sc_model.sample(
     data=dict(
         y_sample=50,
@@ -115,15 +113,14 @@ az.plot_pair(idata_1,
 Use the shortest posterior interval, which makes more sense than a central interval because of the skewness of the posterior and the hard boundary at 0.
 
 ```{python}
-az.plot_dist(idata_1, var_names="p", ci_prob=0.95, ci_kind="hdi")
+az.plot_dist(idata_1, var_names="p", ci_prob=0.95, ci_kind="hdi");
 ```
 
 Compute posterior with data from @Bendavid-Mulaney-Sood-etal:2020b, 27 April 2020
 
 ```{python}
 #| label: fit_2
-#| results: hide
-#| cache: true
+
 fit_2 = sc_model.sample(
     data=dict(
         y_sample=50,
@@ -172,8 +169,7 @@ Compute posterior using data from @Bendavid-Mulaney-Sood-etal:2020b 27 April 202
 
 ```{python}
 #| label: fit_3a
-#| results: hide
-#| cache: true
+
 santaclara_data = dict(
     y_sample=50,
     n_sample=3330,
@@ -251,8 +247,7 @@ MCMC gets sometimes stuck on minor mode, so we initialize with Pathfinder
 
 ```{python}
 #| label: fit_3b
-#| results: hide
-#| cache: true
+
 pth_3b = sc_model_hierarchical.pathfinder(
     data=santaclara_data,
     max_lbfgs_iters=100,
@@ -342,8 +337,6 @@ Put together the data and fit the model
 
 ```{python}
 #| label: fit_4
-#| results: hide
-#| cache: true
 santaclara_mrp_data = dict(
     N=N,
     y=y.tolist(),
@@ -370,7 +363,7 @@ fit_4 = sc_model_hierarchical_mrp.sample(
     seed=SEED,
     show_progress=False,
 )
-idata_4 = az.from_cmdstanpy(fit_4, log_likelihood="log_lik")
+idata_4 = az.from_cmdstanpy(fit_4)
 ```
 
 Show inferences for some model parameters. In addition to `p_avg`, the population
@@ -385,24 +378,128 @@ print_variables_mrp = [
     "mu_logit_sens", "sigma_logit_sens",
     "p_pop",
 ]
-az.summary(idata_4, var_names=print_variables_mrp, ci_prob=0.95, ci_kind="hdi", kind="stats")
+az.summary(idata_4, var_names=print_variables_mrp,
+coords={"p_pop_dim_0": [0, 1, 2]}, kind="stats")
+```
+
+```{python}
+az.plot_dist(idata_4, var_names="p_avg", ci_prob=0.95, ci_kind="hdi");
 ```
 
 ## Additional prior sensitivity analysis
 
-We use the hierarchical model fit with stronger priors (fit 3b) and
-assess prior-likelihood sensitivity using power-scaling diagnostics.
-Power-scaling perturbs the prior or likelihood by raising them to a
-power $\alpha$, using Pareto-smoothed importance sampling to avoid
-refitting.
+```{python}
+pos_tests = [78, 27, 25]
+tests = [85, 37, 35]
+sens_df = pd.DataFrame(
+    {"pos_tests": pos_tests, "tests": tests,
+     "sample_sens": [p / t for p, t in zip(pos_tests, tests)]}
+)
+
+neg_tests = [368, 30, 70, 1102, 300, 311, 500, 198, 99, 29, 146, 105, 50]
+tests = [371, 30, 70, 1102, 300, 311, 500, 200, 99, 31, 150, 108, 52]
+spec_df = pd.DataFrame(
+    {"neg_tests": neg_tests, "tests": tests,
+     "sample_spec": [n / t for n, t in zip(neg_tests, tests)]}
+)
+
+pos_tests = [50]
+tests = [3330]
+unk_df = pd.DataFrame(
+    {"pos_tests": pos_tests, "tests": tests,
+     "sample_prev": [p / t for p, t in zip(pos_tests, tests)]}
+)
+```
+
+Stan model for prior sensitivity analysis
 
 ```{python}
-az.psense_summary(idata_3b, var_names=["p", "spec", "sens"])
+#| output: asis
+sens_model = CmdStanModel(stan_file="prior-sensitivity.stan")
+print_stan(sens_model)
+```
+
+Data
+
+```{python}
+data = dict(
+    K_pos=len(sens_df),
+    N_pos=sens_df["tests"].tolist(),
+    n_pos=sens_df["pos_tests"].tolist(),
+    K_neg=len(spec_df),
+    N_neg=spec_df["tests"].tolist(),
+    n_neg=spec_df["neg_tests"].tolist(),
+    K_unk=len(unk_df),
+    N_unk=unk_df["tests"].tolist(),
+    n_unk=unk_df["pos_tests"].tolist(),
+)
+```
+
+Empty data frame to store posterior intervals with different priors
+
+```{python}
+ribbon_df = pd.DataFrame(
+    columns=["sigma_sens", "sigma_spec", "prev05", "prev50", "prev95"]
+)
+```
+
+Loop over different prior parameter values
+
+```{python}
+#| label: loop-over-prior-values
+#| cache: true
+sigma_senss = [0.01, 0.25, 0.5, 0.75, 1]
+sigma_specss = [0.01, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+for sigma_sens in sigma_senss:
+    for sigma_spec in sigma_specss:
+        data2 = {**data,
+                 "sigma_sigma_logit_sens": sigma_sens,
+                 "sigma_sigma_logit_spec": sigma_spec}
+        fit = sens_model.sample(
+            data=data2,
+            iter_warmup=int(5e4),
+            iter_sampling=int(5e4),
+            seed=1234,
+            adapt_delta=0.95,
+            show_progress=False,
+        )
+        pis = fit.stan_variable("pi")
+        ribbon_df = pd.concat(
+            [ribbon_df,
+             pd.DataFrame({
+                 "sigma_sens": [f"sensitivity hyperprior = {sigma_sens}"],
+                 "sigma_spec": [sigma_spec],
+                 "prev05": [np.quantile(pis, 0.05)],
+                 "prev50": [np.quantile(pis, 0.5)],
+                 "prev95": [np.quantile(pis, 0.95)],
+             })],
+            ignore_index=True,
+        )
 ```
 
 ```{python}
-#| label: fig-prior-sensitivity
-az.plot_psense_dist(idata_3b, var_names=["p", "spec", "sens"])
+#| label: fig-prior-sensitivity-2
+sens_levels = [f"sensitivity hyperprior = {s}" for s in sigma_senss]
+fig, axes = plt.subplots(1, len(sens_levels), figsize=(10, 2.5),
+                         sharey=True, sharex=True)
+for ax, level in zip(axes, sens_levels):
+    sub = ribbon_df[ribbon_df["sigma_sens"] == level].sort_values("sigma_spec")
+    x = sub["sigma_spec"].to_numpy(dtype=float)
+    y05 = sub["prev05"].to_numpy(dtype=float)
+    y50 = sub["prev50"].to_numpy(dtype=float)
+    y95 = sub["prev95"].to_numpy(dtype=float)
+    ax.fill_between(x, y05, y95, color="0.95")
+    ax.plot(x, y50, color="black", linewidth=0.5)
+    ax.plot(x, y05, color="0.5", linewidth=0.25)
+    ax.plot(x, y95, color="0.5", linewidth=0.25)
+    ax.set(yscale="log", 
+           ylim=(0.0009, 1.1),
+           yticks=[0.001, 0.01, 0.1, 1],
+           xlim=(0, 1),
+           xticks=[0.1, 0.3, 0.5, 0.7, 0.9])
+    ax.set_title(level, fontsize=7)
+fig.text(0.5, -0.03, "specificity hyperprior", ha="center")
+fig.text(-0.02, 0.5, "prevalence", va="center", rotation=90);
 ```
 
 ## References {.unnumbered}
