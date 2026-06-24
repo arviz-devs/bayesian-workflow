@@ -213,8 +213,8 @@ nights (days 0 and 1 were adaptation and training and removed
 from this analysis).
 
 ```{python}
-sleepstudy = pd.read_csv("data/sleepstudy.csv")
-sleepstudy2 = sleepstudy[sleepstudy["Days"] >= 2].copy()
+data = bmb.load_data("sleepstudy")
+sleepstudy2 = data[data["Days"] >= 2].copy()
 ```
 
 The compared models are a linear model, a linear model with varying
@@ -246,10 +246,10 @@ value ($>0.7$, @Vehtari+etal:2024:PSIS) we re-ran MCMC.
 mod_s1 = bmb.Model("Reaction ~ Days", sleepstudy2)
 idata_s1 = mod_s1.fit(**bambi_kwargs)
 
-mod_s2 = bmb.Model("Reaction ~ Days + (1 | Subject)", sleepstudy2)
+mod_s2 = bmb.Model("Reaction ~ Days + (1 | Subject)", sleepstudy2,  categorical="Subject")
 idata_s2 = mod_s2.fit(**bambi_kwargs)
 
-mod_s3 = bmb.Model("Reaction ~ Days + (Days | Subject)", sleepstudy2)
+mod_s3 = bmb.Model("Reaction ~ Days + (Days | Subject)", sleepstudy2,  categorical="Subject")
 idata_s3 = mod_s3.fit(**bambi_kwargs)
 
 mod_s2.predict(idata_s2, kind="response")
@@ -274,8 +274,7 @@ two observations are clear outliers with respect to these models,
 making the normal approximation likely to be poorly calibrated
 (Scenario 3).
 
-The difference is slightly smaller as can be expected as usually elpd estimates
-with high Pareto-k's are optimistic.
+The difference is slightly smaller as can be expected as usually elpd estimates with high Pareto-k's are optimistic.
 
 Although we can get more accurate `elpd` and `elpd_diff` estimates
 with more computation, the accuracy of the normal approximation for
@@ -491,11 +490,17 @@ mod_r2 = bmb.Model(
 )
 idata_r2 = mod_r2.fit(**bambi_kwargs)
 
-mod_r3 = bmb.Model(
+formula = bmb.Formula(
     "y ~ sqrt_roach1 + treatment + senior + offset(log(exposure2))",
+    "psi ~ sqrt_roach1 + treatment + senior + offset(log(exposure2))",
+)
+
+
+mod_r3 = bmb.Model(
+    formula,
     roaches,
     family="zero_inflated_negativebinomial",
-    link="log",
+    link={"mu": "log", "psi": "logit"},
     priors={
         **roaches_priors,
         "alpha": bmb.Prior("InverseGamma", alpha=0.4, beta=0.3),
@@ -531,8 +536,8 @@ pre-treatment number of roaches with a spline.
 #| results: hide
 #| cache: true
 formula = bmb.Formula(
-    "y ~ bs(sqrt_roach1, df=3) + treatment + senior + offset(log(exposure2))",
-    "psi ~ bs(sqrt_roach1, df=3) + treatment + senior + offset(log(exposure2))",
+    "y ~ bs(sqrt_roach1, df=7) + treatment + senior + offset(log(exposure2))",
+    "psi ~ bs(sqrt_roach1, df=7) + treatment + senior + offset(log(exposure2))",
 )
 
 mod_r4 = bmb.Model(
