@@ -24,8 +24,8 @@ book:
         href: digits/digits.qmd
       - text: "Sec 12.3: Illustration of problematic posteriors"
         href: problems/problems.qmd
-      # - text: "Sec 12.4: Declining exponentials"
-      #   href: declining_exponentials/declining_exponentials.html
+      - text: "Sec 12.4: Declining exponentials"
+        href: declining_exponentials/declining_exponentials.qmd
       # # - text: "Ch 16: Coding a series of models: Simulated data of movie ratings"
       # #   href: movies/movies.html
       # # - text: "Ch 17: Prior specification for regression models: Reanalysis of a sleep study"
