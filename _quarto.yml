@@ -1,18 +1,48 @@
 project:
-  type: book
+  type: website
+  output-dir: _book
+  render:
+    - index.qmd
+    - bioassay/bioassay.qmd
+    - multiple_choice/multiple_choice.qmd
+    - loo_comparison/loo_comparison.qmd
+    - digits/digits.qmd
+    - problems/problems.qmd
+    - declining_exponentials/declining_exponentials.qmd
+    - movies/movies.qmd
+    # - sleep_study/sleep_study.qmd
+    # - nabiximols/nabiximols.qmd
+    # - coronavirus/coronavirus.qmd
+    # - timeseries/timeseries.qmd
+    # - dogs/dogs.qmd
+    # - dogs/dogs_stan.qmd
+    # - cat_adoptions/cat_adoptions.qmd
+    # - world_cup/world_cup.qmd
+    # - roaches/roaches.qmd
+    # - golf/golf.qmd
+    # - sharks/sharks.qmd
+    # - birthdays/birthdays.qmd
+    # - variable_selection/variable_selection.qmd
+    # - park_rule/park_rule.qmd
+    # - planetary_motion/planetary_motion.qmd
+    # - sbc/sbc.qmd
 
 execute:
   freeze: auto
 
-book:
+website:
   title: "Bayesian Workflow case studies"
+  
   navbar:
     right:
       - icon: github
         href: https://github.com/arviz-devs/Bayesian-Workflow
         text: GitHub
 
-  chapters:
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
       - index.qmd
       - text: "Sec 3.5: Bioassay"
         href: bioassay/bioassay.qmd
@@ -26,8 +56,8 @@ book:
         href: problems/problems.qmd
       - text: "Sec 12.4: Declining exponentials"
         href: declining_exponentials/declining_exponentials.qmd
-      # # - text: "Ch 16: Coding a series of models: Simulated data of movie ratings"
-      # #   href: movies/movies.html
+      - text: "Ch 16: Coding a series of models: Simulated data of movie ratings"
+        href: movies/movies.qmd
       # # - text: "Ch 17: Prior specification for regression models: Reanalysis of a sleep study"
       # #   href: sleep_study/sleep_study.html
       # - text: "Ch 18: Predictive model checking and comparison: Clinical trial"
@@ -61,24 +91,12 @@ book:
       # # - text: "Ch 31: Simulation-based calibration checking in model development workflow"
       # #   href: sbc/sbc.html
 
-
 page-navigation: true
 reader-mode: true
-sidebar:
-  style: "docked"
-  search: true
-  tools:
-    - icon: github
-      text: github
-      menu:
-        - text: source
-          url:  https://github.com/arviz-devs/Bayesian-Workflow
-        - text: issues
-          url:  https://github.com/arviz-devs/Bayesian-Workflow/issues/new
-
 
 format:
   html:
+    number-sections: true
     encoding: UTF-8
     css: _style.css
     toc: true
