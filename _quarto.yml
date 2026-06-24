@@ -20,8 +20,8 @@ book:
         href: multiple_choice/multiple_choice.qmd
       - text: "Sec 9.4: Model selection using predictive performance"
         href: loo_comparison/loo_comparison.qmd
-      # - text: "Sec 11.4 and 11.6: How many iterations to run and how many digits to report"
-      #   href: digits/digits.html
+      - text: "Sec 11.4 and 11.6: How many iterations to run and how many digits to report"
+        href: digits/digits.qmd
       # - text: "Sec 12.3: Illustration of problematic posteriors"
       #   href: problems/problems.html
       # - text: "Sec 12.4: Declining exponentials"
