@@ -149,8 +149,10 @@ window.Quarto = {
 <link rel="stylesheet" href="../_style.css">
 <meta property="og:title" content="Declining exponentials – Bayesian Workflow case studies in Python">
 <meta property="og:description" content="Python version of the case studies from the Bayesian Workflow book by Gelman, Vehtari, McElreath, et al.">
-<meta property="og:image" content="https://arviz-devs.github.io/bayesian-workflow/declining_exponentials/social_cards/declining_exponentials.png">
+<meta property="og:image" content="https://arviz-devs.github.io/bayesian-workflow/social_cards/declining_exponentials.png">
 <meta property="og:site_name" content="Bayesian Workflow case studies in Python">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -559,7 +561,7 @@ y_i = ae^{-bx_i} + \epsilon_i, \text{ for } i=1,\dots,N,
 <section id="simulated-data" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="simulated-data"><span class="header-section-number">2.1</span> Simulated data</h3>
 <p>To demonstrate our exponential model, we fit it to fake data. We’ll simulate <span class="math inline">\(N=100\)</span> data points with predictors <span class="math inline">\(x\)</span> uniformly distributed between 0 and 10, from the above model with <span class="math inline">\(a=5\)</span>, <span class="math inline">\(b=0.3\)</span>, <span class="math inline">\(\sigma=0.5\)</span>.</p>
-<div id="1c059bd5" class="cell" data-execution_count="3">
+<div id="8e14a5a3" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="fl">0.3</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -620,7 +622,7 @@ Figure&nbsp;1
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fit_1 <span class="op">=</span> mod_1.sample(data<span class="op">=</span>data_1, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posterior summary:</p>
-<div id="be975f4f" class="cell" data-execution_count="6">
+<div id="d3c03177" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dt_1 <span class="op">=</span> az.from_cmdstanpy(fit_1)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>az.summary(dt_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
@@ -712,7 +714,7 @@ Figure&nbsp;1
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fit_1b <span class="op">=</span> mod_1b.sample(data<span class="op">=</span>data_1, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posterior summary:</p>
-<div id="51f9132e" class="cell" data-execution_count="9">
+<div id="bdb54632" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dt_1b <span class="op">=</span> az.from_cmdstanpy(fit_1b)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>az.summary(dt_1b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
@@ -781,7 +783,7 @@ Figure&nbsp;1
 <section id="small-simulated-data" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="small-simulated-data"><span class="header-section-number">2.2</span> Small simulated data</h3>
 <p>With weaker data, though, the constraints could make a difference. We could experiment on this by doing the same simulation but with just <span class="math inline">\(N=10\)</span> data points:</p>
-<div id="72c7a3fe" class="cell" data-execution_count="10">
+<div id="2b792668" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="fl">0.3</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -841,7 +843,7 @@ Figure&nbsp;2
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>fit_2 <span class="op">=</span> mod_1.sample(data<span class="op">=</span>data_2, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posterior summary:</p>
-<div id="95201dd4" class="cell" data-execution_count="13">
+<div id="8258108d" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dt_2 <span class="op">=</span> az.from_cmdstanpy(fit_2)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>az.summary(dt_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
@@ -911,7 +913,7 @@ Figure&nbsp;2
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fit_2b <span class="op">=</span> mod_1b.sample(data<span class="op">=</span>data_2, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posterior summary:</p>
-<div id="ce623cf6" class="cell" data-execution_count="15">
+<div id="1d7c371d" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>dt_2b <span class="op">=</span> az.from_cmdstanpy(fit_2b)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>az.summary(dt_2b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
@@ -1006,7 +1008,7 @@ y_i = ae^{-bx_i} \cdot \epsilon_i, \text{ for } i=1,\dots,N\\
 <span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  sigma ~ normal(<span class="dv">0</span>, <span class="dv">10</span>);</span>
 <span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>As before, we can simulate fake data from this model:</p>
-<div id="3a6864ba" class="cell" data-execution_count="17">
+<div id="3246b52d" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="fl">0.3</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>sigma <span class="op">=</span> <span class="fl">0.5</span></span>
@@ -1067,7 +1069,7 @@ Figure&nbsp;3
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>fit_3 <span class="op">=</span> mod_3.sample(data<span class="op">=</span>data_3, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posterior summary:</p>
-<div id="4de682d1" class="cell" data-execution_count="20">
+<div id="7b6a4af3" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>dt_3 <span class="op">=</span> az.from_cmdstanpy(fit_3)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>az.summary(dt_3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
@@ -1160,7 +1162,7 @@ y_i = (a_1e^{-b_1x_i} + a_2e^{-b_2x_i}) \cdot \epsilon_i, \text{ for } i=1,\dots
 <span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>The coefficients <span class="math inline">\(a\)</span> and the residual standard deviation <span class="math inline">\(\sigma\)</span> are constrained to be positive. The parameters <span class="math inline">\(b\)</span> are also positive—these are supposed to be declining, not increasing, exponentials—and are also constrained to be ordered, so that <span class="math inline">\(b_1&lt;b_2\)</span>. We need this to keep the model <em>identified</em>: Without some sort of restriction, there would be no way from the data to tell which component is labeled 1 and which is 2. So we arbitrarily label the component with lower value of <span class="math inline">\(b\)</span>—that is, the one that declines more slowly—as the first one, and the component with higher value of <span class="math inline">\(b\)</span> to be the second. We added the <code>positive_ordered</code> type to Stan because this sort of identification problem comes up fairly often in applications.</p>
 <p>We’ll try out our model by simulating fake data from a model where the two curves should be cleanly distinguished, setting <span class="math inline">\(b_1=0.1\)</span> and <span class="math inline">\(b_2=2.0\)</span>, a factor of 20 apart in scale. We’ll simulate 1000 data points where the predictors <span class="math inline">\(x\)</span> are uniformly spaced from 0 to 10, and, somewhat arbitrarily, set <span class="math inline">\(a_1=1.0\)</span>, <span class="math inline">\(a_2=0.8\)</span>, and <span class="math inline">\(\sigma=0.2\)</span>. We can then simulate from the lognormal distribution to generate the data <span class="math inline">\(y\)</span>.</p>
-<div id="b6f9f0ad" class="cell" data-execution_count="22">
+<div id="20d580fa" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> np.array([<span class="fl">1.0</span>, <span class="fl">0.8</span>])</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="fl">0.1</span>, <span class="fl">2.0</span>])</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">1000</span></span>
@@ -1223,7 +1225,7 @@ Figure&nbsp;4
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>fit_4 <span class="op">=</span> mod_4.sample(data<span class="op">=</span>data_4, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posterior summary:</p>
-<div id="140ea236" class="cell" data-execution_count="25">
+<div id="21fd8b94" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>dt_4 <span class="op">=</span> az.from_cmdstanpy(fit_4)</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>az.summary(dt_4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
@@ -1314,7 +1316,7 @@ Figure&nbsp;4
 </div>
 <p>The parameters are recovered well, with the only difficulty being <span class="math inline">\(b_2\)</span>, where the estimate is 1.89 but the true value is 2.0—but that is well within the posterior uncertainty. Inference worked just fine on this nonlinear model.</p>
 <p>But now let’s make the problem just slightly more difficult. Instead of setting the two parameters <span class="math inline">\(b\)</span> to 0.1 and 2.0, we’ll make them 0.1 and 0.2, so now only a factor of 2 separates the scales of the two declining exponentials.</p>
-<div id="8f51d543" class="cell" data-execution_count="26">
+<div id="778594d0" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="fl">0.1</span>, <span class="fl">0.2</span>])</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>y_2 <span class="op">=</span> (a[<span class="dv">0</span>] <span class="op">*</span> np.exp(<span class="op">-</span>b[<span class="dv">0</span>] <span class="op">*</span> x) <span class="op">+</span> a[<span class="dv">1</span>] <span class="op">*</span> np.exp(<span class="op">-</span>b[<span class="dv">1</span>] <span class="op">*</span> x)) <span class="op">*</span> epsilon</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>data_5 <span class="op">=</span> {<span class="st">"N"</span>: N, <span class="st">"x"</span>: x, <span class="st">"y"</span>: y_2}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1324,7 +1326,7 @@ Figure&nbsp;4
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>fit_5 <span class="op">=</span> mod_4.sample(data<span class="op">=</span>data_5, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posterior summary:</p>
-<div id="5e56d856" class="cell" data-execution_count="28">
+<div id="faf4f1b2" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>dt_5 <span class="op">=</span> az.from_cmdstanpy(fit_5)</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>az.summary(dt_5, round_to<span class="op">=</span><span class="st">"None"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
@@ -1521,7 +1523,7 @@ Figure&nbsp;6
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>fit_5_with_priors <span class="op">=</span> mod_5_with_priors.sample(data<span class="op">=</span>data_5, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posterior summary:</p>
-<div id="3d163abf" class="cell" data-execution_count="33">
+<div id="8faebd50" class="cell" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>dt_5_with_priors <span class="op">=</span> az.from_cmdstanpy(fit_5_with_priors)</span>
 <span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>az.summary(dt_5_with_priors)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="33">
@@ -2109,7 +2111,7 @@ Figure&nbsp;6
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Declining exponentials"</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> social_cards/declining_exponentials.png</span></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> ../social_cards/declining_exponentials.png</span></span>
 <span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Andrew Gelman"</span></span>
 <span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2022-08-15</span></span>
 <span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>

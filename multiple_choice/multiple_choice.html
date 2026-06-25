@@ -169,8 +169,10 @@ window.Quarto = {
 <link rel="stylesheet" href="../_style.css">
 <meta property="og:title" content="Modeling performance on a multiple choice exam – Bayesian Workflow case studies in Python">
 <meta property="og:description" content="Python version of the case studies from the Bayesian Workflow book by Gelman, Vehtari, McElreath, et al.">
-<meta property="og:image" content="https://arviz-devs.github.io/bayesian-workflow/multiple_choice/social_cards/multiple_choice.png">
+<meta property="og:image" content="https://arviz-devs.github.io/bayesian-workflow/social_cards/multiple_choice.png">
 <meta property="og:site_name" content="Bayesian Workflow case studies in Python">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -580,7 +582,7 @@ window.Quarto = {
 <section id="data" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="data"><span class="header-section-number">3</span> Data</h2>
 <p>Read in data and construct score for each student</p>
-<div id="7bdc6309" class="cell" data-execution_count="3">
+<div id="2edc6ce4" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>responses <span class="op">=</span> pd.read_csv(<span class="st">"data/final_exam_responses.csv"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>answers <span class="op">=</span> pd.read_csv(<span class="st">"data/final_exam_answers.csv"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -623,7 +625,7 @@ max      32.00
 dtype: float64</code></pre>
 </div>
 </div>
-<div id="b26aef03" class="cell" data-execution_count="4">
+<div id="d3c6cd09" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add jitter (random noise) to scores</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>score_jitt <span class="op">=</span> score <span class="op">+</span> np.random.uniform(<span class="op">-</span><span class="fl">0.3</span>, <span class="fl">0.3</span>, J)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -648,7 +650,7 @@ dtype: float64</code></pre>
 <h2 data-number="4" class="anchored" data-anchor-id="simple-models"><span class="header-section-number">4</span> Simple models</h2>
 <section id="base-model-logit_0" class="level3" data-number="4.1">
 <h3 data-number="4.1" class="anchored" data-anchor-id="base-model-logit_0"><span class="header-section-number">4.1</span> Base model logit_0</h3>
-<div id="72300686" class="cell" data-execution_count="5">
+<div id="eee8e731" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>print_stan(logit_0)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dt <span class="op">=</span> az.from_cmdstanpy(logit_0.sample(data<span class="op">=</span>data, show_progress<span class="op">=</span><span class="va">False</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -702,26 +704,26 @@ dtype: float64</code></pre>
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">a</th>
-<td>-11.9</td>
-<td>4.8</td>
+<td>-11.5</td>
+<td>4.7</td>
 <td>-22</td>
-<td>-3.4</td>
-<td>480</td>
-<td>647</td>
+<td>-2.4</td>
+<td>482</td>
+<td>533</td>
 <td>1.01</td>
 <td>0.22</td>
 <td>0.17</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">b</th>
-<td>0.86</td>
+<td>0.82</td>
 <td>0.32</td>
-<td>0.3</td>
+<td>0.22</td>
 <td>1.5</td>
-<td>480</td>
-<td>645</td>
+<td>493</td>
+<td>528</td>
 <td>1.01</td>
-<td>0.015</td>
+<td>0.014</td>
 <td>0.011</td>
 </tr>
 </tbody>
@@ -756,7 +758,7 @@ Figure&nbsp;1
 </section>
 <section id="add-priors" class="level3" data-number="4.2">
 <h3 data-number="4.2" class="anchored" data-anchor-id="add-priors"><span class="header-section-number">4.2</span> Add priors</h3>
-<div id="84d8b75a" class="cell" data-execution_count="7">
+<div id="01f811f1" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>print_stan(logit_prior)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> {</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"J"</span>: J,</span>
@@ -825,26 +827,26 @@ Figure&nbsp;1
 <tr class="odd">
 <th data-quarto-table-cell-role="th">a</th>
 <td>1.76</td>
-<td>0.64</td>
-<td>0.67</td>
-<td>3.2</td>
-<td>1255</td>
-<td>1604</td>
-<td>1.00</td>
+<td>0.63</td>
+<td>0.66</td>
+<td>3.1</td>
+<td>1155</td>
+<td>1691</td>
+<td>1.01</td>
 <td>0.019</td>
-<td>0.014</td>
+<td>0.015</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">b</th>
-<td>1.86</td>
-<td>0.73</td>
-<td>0.65</td>
+<td>1.87</td>
+<td>0.71</td>
+<td>0.6</td>
 <td>3.4</td>
-<td>1206</td>
-<td>1408</td>
-<td>1.00</td>
+<td>1194</td>
+<td>1679</td>
+<td>1.01</td>
 <td>0.021</td>
-<td>0.017</td>
+<td>0.016</td>
 </tr>
 </tbody>
 </table>
@@ -904,7 +906,7 @@ Figure&nbsp;3
 </div>
 </div>
 </div>
-<div id="b89edcb8" class="cell" data-execution_count="10">
+<div id="a0d3b5f9" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data_ <span class="op">=</span>  {</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>        <span class="st">"J"</span>: data[<span class="st">"J"</span>],</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"x"</span>: score_adj.tolist(),</span>
@@ -953,25 +955,25 @@ Figure&nbsp;3
 <th data-quarto-table-cell-role="th">a</th>
 <td>7.7</td>
 <td>2.8</td>
-<td>3.3</td>
+<td>3.4</td>
 <td>14</td>
-<td>1012</td>
-<td>1268</td>
+<td>1299</td>
+<td>1389</td>
 <td>1.00</td>
-<td>0.093</td>
-<td>0.073</td>
+<td>0.08</td>
+<td>0.062</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">b</th>
-<td>-0</td>
-<td>2.1</td>
-<td>-4.1</td>
-<td>4</td>
-<td>988</td>
-<td>1092</td>
+<td>0</td>
+<td>2.08</td>
+<td>-4</td>
+<td>4.4</td>
+<td>968</td>
+<td>1384</td>
 <td>1.00</td>
-<td>0.066</td>
-<td>0.051</td>
+<td>0.067</td>
+<td>0.049</td>
 </tr>
 </tbody>
 </table>
@@ -1005,7 +1007,7 @@ Figure&nbsp;4
 </section>
 <section id="fix-the-data-problems" class="level3" data-number="4.3">
 <h3 data-number="4.3" class="anchored" data-anchor-id="fix-the-data-problems"><span class="header-section-number">4.3</span> Fix the data problems</h3>
-<div id="04f8a291" class="cell" data-execution_count="12">
+<div id="cf557464" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>answers.iloc[<span class="dv">0</span>, [<span class="dv">4</span>, <span class="dv">13</span>, <span class="dv">16</span>]] <span class="op">=</span> [<span class="st">"d"</span>, <span class="st">"d"</span>, <span class="st">"c"</span>]</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Recalculate correct answers</span></span>
@@ -1058,7 +1060,7 @@ Figure&nbsp;5
 </section>
 <section id="allow-for-guessing" class="level3" data-number="4.4">
 <h3 data-number="4.4" class="anchored" data-anchor-id="allow-for-guessing"><span class="header-section-number">4.4</span> Allow for guessing</h3>
-<div id="b85c34bd" class="cell" data-execution_count="14">
+<div id="2d58f8dd" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>print_stan(logit_guessing)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
@@ -1116,7 +1118,7 @@ Figure&nbsp;6
 <section id="multilevel-models" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="multilevel-models"><span class="header-section-number">5</span> Multilevel models</h2>
 <p>In preparation for multilevel model, create long dataset</p>
-<div id="d3492905" class="cell" data-execution_count="16">
+<div id="8bfeb3d9" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> J <span class="op">*</span> K</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> []</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>student <span class="op">=</span> []</span>
@@ -1147,7 +1149,7 @@ Figure&nbsp;6
 </div>
 <section id="multilevel-model" class="level3" data-number="5.1">
 <h3 data-number="5.1" class="anchored" data-anchor-id="multilevel-model"><span class="header-section-number">5.1</span> Multilevel model</h3>
-<div id="f2e63144" class="cell" data-execution_count="17">
+<div id="b2c7d77b" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>print_stan(logit_guessing_multilevel)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>dt_5 <span class="op">=</span> az.from_cmdstanpy(logit_guessing_multilevel.sample(data<span class="op">=</span>longdata_, show_progress<span class="op">=</span><span class="va">False</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -1222,51 +1224,51 @@ Figure&nbsp;6
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">mu_a</th>
-<td>0.87</td>
+<td>0.85</td>
 <td>0.37</td>
-<td>0.11</td>
+<td>0.13</td>
 <td>1.6</td>
-<td>792</td>
-<td>1162</td>
-<td>1.00</td>
-<td>0.013</td>
-<td>0.01</td>
+<td>595</td>
+<td>1373</td>
+<td>1.01</td>
+<td>0.015</td>
+<td>0.012</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">sigma_a</th>
-<td>1.64</td>
-<td>0.36</td>
+<td>1.66</td>
+<td>0.37</td>
 <td>1.1</td>
 <td>2.5</td>
-<td>1075</td>
-<td>1594</td>
+<td>1173</td>
+<td>2132</td>
 <td>1.00</td>
 <td>0.011</td>
 <td>0.01</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">mu_b</th>
-<td>1.084</td>
-<td>0.17</td>
+<td>1.087</td>
+<td>0.171</td>
 <td>0.78</td>
 <td>1.4</td>
-<td>3833</td>
-<td>2792</td>
+<td>3400</td>
+<td>2435</td>
 <td>1.00</td>
-<td>0.0028</td>
-<td>0.002</td>
+<td>0.003</td>
+<td>0.0024</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">sigma_b</th>
-<td>0.254</td>
-<td>0.184</td>
-<td>0.013</td>
-<td>0.69</td>
-<td>1692</td>
-<td>2015</td>
+<td>0.259</td>
+<td>0.192</td>
+<td>0.0099</td>
+<td>0.71</td>
+<td>1436</td>
+<td>1802</td>
 <td>1.00</td>
-<td>0.0042</td>
-<td>0.004</td>
+<td>0.0047</td>
+<td>0.0039</td>
 </tr>
 </tbody>
 </table>
@@ -1312,7 +1314,7 @@ Figure&nbsp;7
 </section>
 <section id="multilevel-model-with-correlation" class="level3" data-number="5.2">
 <h3 data-number="5.2" class="anchored" data-anchor-id="multilevel-model-with-correlation"><span class="header-section-number">5.2</span> Multilevel model with correlation</h3>
-<div id="99f05a1b" class="cell" data-execution_count="19">
+<div id="ac2a4967" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>print_stan(logit_guessing_multilevel_bivariate)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
@@ -1406,50 +1408,50 @@ Figure&nbsp;7
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">mu_ab[0]</th>
-<td>0.82</td>
+<td>0.81</td>
 <td>0.38</td>
-<td>0.051</td>
+<td>0.067</td>
 <td>1.6</td>
-<td>881</td>
-<td>1540</td>
-<td>1.01</td>
-<td>0.013</td>
-<td>0.01</td>
+<td>774</td>
+<td>1457</td>
+<td>1.00</td>
+<td>0.014</td>
+<td>0.011</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">mu_ab[1]</th>
-<td>1.087</td>
-<td>0.177</td>
-<td>0.76</td>
+<td>1.093</td>
+<td>0.178</td>
+<td>0.78</td>
 <td>1.5</td>
-<td>3419</td>
-<td>2713</td>
+<td>3008</td>
+<td>2317</td>
 <td>1.00</td>
-<td>0.0031</td>
-<td>0.0023</td>
+<td>0.0033</td>
+<td>0.0027</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">sigma_ab[0]</th>
 <td>1.7</td>
 <td>0.38</td>
 <td>1.1</td>
-<td>2.6</td>
-<td>1149</td>
-<td>1853</td>
+<td>2.5</td>
+<td>1255</td>
+<td>1568</td>
 <td>1.00</td>
 <td>0.011</td>
-<td>0.01</td>
+<td>0.011</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">sigma_ab[1]</th>
-<td>0.29</td>
+<td>0.3</td>
 <td>0.21</td>
-<td>0.012</td>
-<td>0.8</td>
-<td>1082</td>
-<td>1598</td>
+<td>0.014</td>
+<td>0.81</td>
+<td>1025</td>
+<td>1982</td>
 <td>1.00</td>
-<td>0.0062</td>
+<td>0.0065</td>
 <td>0.0054</td>
 </tr>
 <tr class="odd">
@@ -1466,27 +1468,27 @@ Figure&nbsp;7
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">Omega_ab[0, 1]</th>
-<td>-0.35</td>
-<td>0.48</td>
+<td>-0.37</td>
+<td>0.47</td>
 <td>-0.96</td>
-<td>0.71</td>
-<td>271</td>
-<td>292</td>
-<td>1.01</td>
-<td>0.027</td>
-<td>0.017</td>
+<td>0.69</td>
+<td>251</td>
+<td>338</td>
+<td>1.02</td>
+<td>0.026</td>
+<td>0.016</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">Omega_ab[1, 0]</th>
-<td>-0.35</td>
-<td>0.48</td>
+<td>-0.37</td>
+<td>0.47</td>
 <td>-0.96</td>
-<td>0.71</td>
-<td>271</td>
-<td>292</td>
-<td>1.01</td>
-<td>0.027</td>
-<td>0.017</td>
+<td>0.69</td>
+<td>251</td>
+<td>338</td>
+<td>1.02</td>
+<td>0.026</td>
+<td>0.016</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">Omega_ab[1, 1]</th>
@@ -1544,7 +1546,7 @@ Figure&nbsp;8
 </section>
 <section id="multilevel-model-with-correlation-using-cholesky" class="level3" data-number="5.3">
 <h3 data-number="5.3" class="anchored" data-anchor-id="multilevel-model-with-correlation-using-cholesky"><span class="header-section-number">5.3</span> Multilevel model with correlation using Cholesky</h3>
-<div id="28abdd9c" class="cell" data-execution_count="21">
+<div id="5e44f77e" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>print_stan(logit_guessing_multilevel_bivariate_cholesky)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
@@ -1641,51 +1643,51 @@ Figure&nbsp;8
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">mu_ab[0]</th>
-<td>0.82</td>
-<td>0.38</td>
-<td>0.017</td>
+<td>0.84</td>
+<td>0.39</td>
+<td>0.068</td>
 <td>1.6</td>
-<td>676</td>
-<td>1079</td>
-<td>1.00</td>
-<td>0.015</td>
-<td>0.012</td>
+<td>752</td>
+<td>1084</td>
+<td>1.01</td>
+<td>0.014</td>
+<td>0.011</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">mu_ab[1]</th>
-<td>1.089</td>
-<td>0.178</td>
+<td>1.08</td>
+<td>0.171</td>
 <td>0.76</td>
-<td>1.5</td>
-<td>2105</td>
-<td>1820</td>
+<td>1.4</td>
+<td>2368</td>
+<td>2542</td>
 <td>1.00</td>
-<td>0.0039</td>
-<td>0.0029</td>
+<td>0.0035</td>
+<td>0.0025</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">sigma_ab[0]</th>
-<td>1.71</td>
+<td>1.7</td>
 <td>0.37</td>
 <td>1.1</td>
-<td>2.5</td>
-<td>1145</td>
-<td>1950</td>
+<td>2.6</td>
+<td>1263</td>
+<td>2029</td>
 <td>1.00</td>
 <td>0.011</td>
-<td>0.0099</td>
+<td>0.01</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">sigma_ab[1]</th>
-<td>0.31</td>
-<td>0.22</td>
-<td>0.015</td>
+<td>0.28</td>
+<td>0.21</td>
+<td>0.01</td>
 <td>0.78</td>
-<td>969</td>
-<td>1902</td>
+<td>1052</td>
+<td>1705</td>
 <td>1.00</td>
-<td>0.0068</td>
 <td>0.0061</td>
+<td>0.0053</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">Omega_ab[0, 0]</th>
@@ -1701,27 +1703,27 @@ Figure&nbsp;8
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">Omega_ab[0, 1]</th>
-<td>-0.35</td>
-<td>0.49</td>
+<td>-0.32</td>
+<td>0.5</td>
 <td>-0.96</td>
-<td>0.79</td>
-<td>264</td>
-<td>390</td>
-<td>1.00</td>
-<td>0.028</td>
-<td>0.018</td>
+<td>0.81</td>
+<td>210</td>
+<td>297</td>
+<td>1.01</td>
+<td>0.032</td>
+<td>0.019</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">Omega_ab[1, 0]</th>
-<td>-0.35</td>
-<td>0.49</td>
+<td>-0.32</td>
+<td>0.5</td>
 <td>-0.96</td>
-<td>0.79</td>
-<td>264</td>
-<td>390</td>
-<td>1.00</td>
-<td>0.028</td>
-<td>0.018</td>
+<td>0.81</td>
+<td>210</td>
+<td>297</td>
+<td>1.01</td>
+<td>0.032</td>
+<td>0.019</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">Omega_ab[1, 1]</th>
@@ -1782,7 +1784,7 @@ Figure&nbsp;9
 <h2 data-number="6" class="anchored" data-anchor-id="item-response-theory-irt-models"><span class="header-section-number">6</span> Item-response theory (IRT) models</h2>
 <section id="item-response-model" class="level3" data-number="6.1">
 <h3 data-number="6.1" class="anchored" data-anchor-id="item-response-model"><span class="header-section-number">6.1</span> Item-response model</h3>
-<div id="7feae498" class="cell" data-execution_count="23">
+<div id="9d0e11eb" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>print_stan(irt_guessing)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
@@ -1842,7 +1844,7 @@ Figure&nbsp;10
 </section>
 <section id="item-response-model-with-discrimination-parameters" class="level3" data-number="6.2">
 <h3 data-number="6.2" class="anchored" data-anchor-id="item-response-model-with-discrimination-parameters"><span class="header-section-number">6.2</span> Item-response model with discrimination parameters</h3>
-<div id="96fca529" class="cell" data-execution_count="25">
+<div id="7020c706" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>print_stan(irt_guessing_discrimination)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
@@ -1936,7 +1938,7 @@ Figure&nbsp;12
 </div>
 </div>
 <p>IRT plots</p>
-<div id="d49a5359" class="cell" data-execution_count="28">
+<div id="ea105833" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>posterior <span class="op">=</span> az.extract(dt_13, group<span class="op">=</span><span class="st">"posterior"</span>)</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>alpha_sims <span class="op">=</span> posterior[<span class="st">"alpha"</span>].values</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>beta_sims <span class="op">=</span> posterior[<span class="st">"beta"</span>].values</span>
@@ -2017,7 +2019,7 @@ Figure&nbsp;14
 </section>
 <section id="prior-predictive-simulations" class="level2" data-number="7">
 <h2 data-number="7" class="anchored" data-anchor-id="prior-predictive-simulations"><span class="header-section-number">7</span> Prior predictive simulations</h2>
-<div id="89cb2ea6" class="cell" data-execution_count="31">
+<div id="e716a68c" class="cell" data-execution_count="31">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> prior_predictive(x, x_jitt, mu_a, sigma_a, mu_b, sigma_b, seed<span class="op">=</span><span class="va">None</span>):</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Generate prior predictive simulation"""</span></span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> seed <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
@@ -2203,7 +2205,7 @@ Figure&nbsp;17
 </section>
 <section id="breaking-the-model" class="level2" data-number="8">
 <h2 data-number="8" class="anchored" data-anchor-id="breaking-the-model"><span class="header-section-number">8</span> Breaking the model</h2>
-<div id="91a9a83a" class="cell" data-execution_count="35">
+<div id="be594831" class="cell" data-execution_count="35">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>print_stan(logit_guessing_uncentered)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb50"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
@@ -2225,7 +2227,7 @@ Figure&nbsp;17
 </div>
 </div>
 <p>Simulate data</p>
-<div id="cfd6b52e" class="cell" data-execution_count="36">
+<div id="e58eb862" class="cell" data-execution_count="36">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>J_break <span class="op">=</span> <span class="dv">32</span></span>
 <span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>x_break <span class="op">=</span> np.random.uniform(<span class="dv">10</span>, <span class="dv">20</span>, J_break)</span>
@@ -2247,10 +2249,10 @@ Figure&nbsp;17
 <span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sigma_b"</span>: <span class="dv">1000</span></span>
 <span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="71a2e6ef" class="cell" data-results="hide" data-execution_count="37">
+<div id="b25d045b" class="cell" data-results="hide" data-execution_count="37">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>break_1_fit <span class="op">=</span> logit_guessing_uncentered.sample(data<span class="op">=</span>break_data, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="e73d2409" class="cell" data-execution_count="38">
+<div id="ddd21839" class="cell" data-execution_count="38">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>posterior <span class="op">=</span> az.extract(az.from_cmdstanpy(break_1_fit), group<span class="op">=</span><span class="st">"posterior"</span>)</span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>a_break <span class="op">=</span> posterior[<span class="st">"a"</span>].values.flatten()</span>
 <span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>b_break <span class="op">=</span> posterior[<span class="st">"b"</span>].values.flatten()</span>
@@ -2288,24 +2290,24 @@ Figure&nbsp;18
 </div>
 </div>
 </div>
-<div id="9aa0a6b0" class="cell" data-results="hide" data-execution_count="40">
+<div id="a61e5e31" class="cell" data-results="hide" data-execution_count="40">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>break_2_fit <span class="op">=</span> logit_guessing.sample(data<span class="op">=</span>break_data, show_progress<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(break_2_fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>CmdStanMCMC: model=logit_guessing chains=4['method=sample', 'algorithm=hmc', 'adapt', 'engaged=1']
  csv_files:
-    /tmp/tmpngooznvv/logit_guessingna8ip61s/logit_guessing-20260625163506_1.csv
-    /tmp/tmpngooznvv/logit_guessingna8ip61s/logit_guessing-20260625163506_2.csv
-    /tmp/tmpngooznvv/logit_guessingna8ip61s/logit_guessing-20260625163506_3.csv
-    /tmp/tmpngooznvv/logit_guessingna8ip61s/logit_guessing-20260625163506_4.csv
+    /tmp/tmp28f_vhu6/logit_guessingj3bo3rle/logit_guessing-20260625175742_1.csv
+    /tmp/tmp28f_vhu6/logit_guessingj3bo3rle/logit_guessing-20260625175742_2.csv
+    /tmp/tmp28f_vhu6/logit_guessingj3bo3rle/logit_guessing-20260625175742_3.csv
+    /tmp/tmp28f_vhu6/logit_guessingj3bo3rle/logit_guessing-20260625175742_4.csv
  output_files:
-    /tmp/tmpngooznvv/logit_guessingna8ip61s/logit_guessing-20260625163506_0-stdout.txt
-    /tmp/tmpngooznvv/logit_guessingna8ip61s/logit_guessing-20260625163506_1-stdout.txt
-    /tmp/tmpngooznvv/logit_guessingna8ip61s/logit_guessing-20260625163506_2-stdout.txt
-    /tmp/tmpngooznvv/logit_guessingna8ip61s/logit_guessing-20260625163506_3-stdout.txt</code></pre>
+    /tmp/tmp28f_vhu6/logit_guessingj3bo3rle/logit_guessing-20260625175742_0-stdout.txt
+    /tmp/tmp28f_vhu6/logit_guessingj3bo3rle/logit_guessing-20260625175742_1-stdout.txt
+    /tmp/tmp28f_vhu6/logit_guessingj3bo3rle/logit_guessing-20260625175742_2-stdout.txt
+    /tmp/tmp28f_vhu6/logit_guessingj3bo3rle/logit_guessing-20260625175742_3-stdout.txt</code></pre>
 </div>
 </div>
-<div id="64e79b28" class="cell" data-execution_count="41">
+<div id="c21d2a02" class="cell" data-execution_count="41">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>posterior <span class="op">=</span> az.extract(az.from_cmdstanpy(break_2_fit), group<span class="op">=</span><span class="st">"posterior"</span>)</span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>a_break <span class="op">=</span> posterior[<span class="st">"a"</span>].values.flatten()</span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>b_break <span class="op">=</span> posterior[<span class="st">"b"</span>].values.flatten()</span>
@@ -2896,7 +2898,7 @@ Gelman, A., and A. Vehtari. 2024. <em>Active Statistics: Stories, Games, Problem
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb60" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Modeling performance on a multiple choice exam"</span></span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> social_cards/multiple_choice.png</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> ../social_cards/multiple_choice.png</span></span>
 <span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Andrew Gelman"</span></span>
 <span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2022-08-22</span></span>
 <span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>

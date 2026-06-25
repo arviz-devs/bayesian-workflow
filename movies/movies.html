@@ -168,8 +168,10 @@ window.Quarto = {
 <link rel="stylesheet" href="../_style.css">
 <meta property="og:title" content="Simulated data of movie ratings – Bayesian Workflow case studies in Python">
 <meta property="og:description" content="Python version of the case studies from the Bayesian Workflow book by Gelman, Vehtari, McElreath, et al.">
-<meta property="og:image" content="https://arviz-devs.github.io/bayesian-workflow/movies/social_cards/movies.png">
+<meta property="og:image" content="https://arviz-devs.github.io/bayesian-workflow/social_cards/movies.png">
 <meta property="og:site_name" content="Bayesian Workflow case studies in Python">
+<meta property="og:image:height" content="630">
+<meta property="og:image:width" content="1200">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -552,7 +554,7 @@ window.Quarto = {
 </section>
 <section id="model-for-two-movies" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="model-for-two-movies"><span class="header-section-number">2</span> Model for two movies</h2>
-<div id="248a124e" class="cell" data-execution_count="2">
+<div id="4adee38d" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>y_1 <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">5</span>])</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>y_2 <span class="op">=</span> np.repeat([<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>], [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>])</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.concatenate([y_1, y_2])</span>
@@ -560,7 +562,7 @@ window.Quarto = {
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>movie <span class="op">=</span> np.repeat([<span class="dv">1</span>, <span class="dv">2</span>], [<span class="bu">len</span>(y_1), <span class="bu">len</span>(y_2)])</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>movie_data <span class="op">=</span> {<span class="st">"y"</span>: y, <span class="st">"N"</span>: N, <span class="st">"movie"</span>: movie}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="78fd9bfb" class="cell" data-execution_count="3">
+<div id="be78f8d8" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mod_1 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"ratings_1.stan"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>print_stan(mod_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -592,11 +594,11 @@ window.Quarto = {
 <div id="fit_1" class="cell" data-results="hide" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit_1 <span class="op">=</span> mod_1.sample(data<span class="op">=</span>movie_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="0d4c94a7" class="cell" data-execution_count="5">
+<div id="84752168" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>idata_1 <span class="op">=</span> az.from_cmdstanpy(fit_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posterior summary</p>
-<div id="31f4aca2" class="cell" data-execution_count="6">
+<div id="2b3eddc5" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>az.summary(idata_1, var_names<span class="op">=</span>[<span class="st">"theta"</span>, <span class="st">"sigma_y"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
@@ -663,7 +665,7 @@ window.Quarto = {
 </section>
 <section id="extending-the-model-to-j-movies" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="extending-the-model-to-j-movies"><span class="header-section-number">3</span> Extending the model to J movies</h2>
-<div id="80492f92" class="cell" data-execution_count="7">
+<div id="ea30c2bf" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="dv">40</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>N_ratings <span class="op">=</span> rng.integers(<span class="dv">0</span>, <span class="dv">101</span>, size<span class="op">=</span>J)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> N_ratings.<span class="bu">sum</span>()</span>
@@ -672,7 +674,7 @@ window.Quarto = {
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> rng.normal(np.repeat(theta_true, N_ratings), <span class="fl">2.0</span>)</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>movie_data <span class="op">=</span> {<span class="st">"y"</span>: y, <span class="st">"N"</span>: N, <span class="st">"J"</span>: J, <span class="st">"movie"</span>: movie}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="0bf87441" class="cell" data-execution_count="8">
+<div id="18f164e8" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mod_2 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"ratings_2.stan"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>print_stan(mod_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -697,11 +699,11 @@ window.Quarto = {
 <div id="fit_2" class="cell" data-results="hide" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fit_2 <span class="op">=</span> mod_2.sample(data<span class="op">=</span>movie_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="0c11426c" class="cell" data-execution_count="10">
+<div id="470a51c4" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>idata_2 <span class="op">=</span> az.from_cmdstanpy(fit_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posterior summary</p>
-<div id="c57f98b8" class="cell" data-execution_count="11">
+<div id="8c244903" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>az.summary(idata_2, var_names<span class="op">=</span>[<span class="st">"theta"</span>, <span class="st">"sigma_y"</span>]).head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <div>
@@ -803,7 +805,7 @@ window.Quarto = {
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"True parameter value"</span>,</span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"Comparing parameters $</span><span class="ch">\\</span><span class="st">theta_j$ to their posterior inferences"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-movies_1" class="quarto-float quarto-figure quarto-figure-center anchored" width="698" height="461">
+<div id="fig-movies_1" class="quarto-float quarto-figure quarto-figure-center anchored" height="461" width="698">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-movies_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="movies_files/figure-html/fig-movies_1-output-1.png" id="fig-movies_1" width="698" height="461" class="figure-img">
@@ -824,7 +826,7 @@ Figure&nbsp;1
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"Width of 50% posterior interval"</span>,</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"Where you have more data, you have less uncertainty"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-movies_2" class="quarto-float quarto-figure quarto-figure-center anchored" width="811" height="411">
+<div id="fig-movies_2" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="811">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-movies_2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="movies_files/figure-html/fig-movies_2-output-1.png" id="fig-movies_2" width="811" height="411" class="figure-img">
@@ -841,7 +843,7 @@ Figure&nbsp;2
 <h2 data-number="4" class="anchored" data-anchor-id="item-response-model-with-parameters-for-raters-and-for-movies"><span class="header-section-number">4</span> Item-response model with parameters for raters and for movies</h2>
 <section id="balanced-data" class="level3" data-number="4.1">
 <h3 data-number="4.1" class="anchored" data-anchor-id="balanced-data"><span class="header-section-number">4.1</span> Balanced data</h3>
-<div id="724e23a9" class="cell" data-execution_count="14">
+<div id="5e170963" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="dv">40</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> J <span class="op">*</span> K</span>
@@ -856,7 +858,7 @@ Figure&nbsp;2
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> rng.normal(mu <span class="op">+</span> sigma_a <span class="op">*</span> alpha_true[movie <span class="op">-</span> <span class="dv">1</span>] <span class="op">-</span> sigma_b <span class="op">*</span> beta_true[rater <span class="op">-</span> <span class="dv">1</span>], sigma_y)</span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>data_3 <span class="op">=</span> {<span class="st">"N"</span>: N, <span class="st">"J"</span>: J, <span class="st">"K"</span>: K, <span class="st">"movie"</span>: movie, <span class="st">"rater"</span>: rater, <span class="st">"y"</span>: y}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="148b171c" class="cell" data-execution_count="15">
+<div id="fd87803e" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mod_3 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"ratings_3.stan"</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>print_stan(mod_3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -894,11 +896,11 @@ Figure&nbsp;2
 <div id="fit_3" class="cell" data-results="hide" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fit_3 <span class="op">=</span> mod_3.sample(data<span class="op">=</span>data_3, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="f187faac" class="cell" data-execution_count="17">
+<div id="93f164be" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>idata_3 <span class="op">=</span> az.from_cmdstanpy(fit_3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posterior summary</p>
-<div id="c8ef67c4" class="cell" data-execution_count="18">
+<div id="9589ebf2" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>az.summary(idata_3, var_names<span class="op">=</span>[<span class="st">"mu"</span>, <span class="st">"sigma_a"</span>, <span class="st">"sigma_b"</span>, <span class="st">"sigma_y"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <div>
@@ -1000,7 +1002,7 @@ Figure&nbsp;2
 <span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>            ylabel<span class="op">=</span><span class="st">"True parameter value"</span>,</span>
 <span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">"Checking the $</span><span class="ch">\\</span><span class="st">beta_k$'s"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-movies_3" class="quarto-float quarto-figure quarto-figure-center anchored" width="1011" height="411">
+<div id="fig-movies_3" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="1011">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-movies_3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="movies_files/figure-html/fig-movies_3-output-1.png" id="fig-movies_3" width="1011" height="411" class="figure-img">
@@ -1015,7 +1017,7 @@ Figure&nbsp;3
 </section>
 <section id="unbalanced-data" class="level3" data-number="4.2">
 <h3 data-number="4.2" class="anchored" data-anchor-id="unbalanced-data"><span class="header-section-number">4.2</span> Unbalanced data</h3>
-<div id="c6f9882c" class="cell" data-execution_count="20">
+<div id="60c71966" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>genre <span class="op">=</span> np.array([<span class="st">"romantic"</span>] <span class="op">*</span> (J <span class="op">//</span> <span class="dv">2</span>) <span class="op">+</span> [<span class="st">"crime"</span>] <span class="op">*</span> (J <span class="op">-</span> J <span class="op">//</span> <span class="dv">2</span>))</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>prob_of_rated <span class="op">=</span> np.where(beta_true[rater <span class="op">-</span> <span class="dv">1</span>] <span class="op">&gt;</span> <span class="dv">0</span>,</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                         np.where(genre[movie <span class="op">-</span> <span class="dv">1</span>] <span class="op">==</span> <span class="st">"romantic"</span>, <span class="fl">0.2</span>, <span class="fl">0.7</span>),</span>
@@ -1029,11 +1031,11 @@ Figure&nbsp;3
 <div id="fit_3a" class="cell" data-results="hide" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fit_3a <span class="op">=</span> mod_3.sample(data<span class="op">=</span>data_3a, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="d5ed6438" class="cell" data-execution_count="22">
+<div id="f8330c47" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>idata_3a <span class="op">=</span> az.from_cmdstanpy(fit_3a)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posterior summary</p>
-<div id="6aededc1" class="cell" data-execution_count="23">
+<div id="7f116fe8" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>az.summary(idata_3a, var_names<span class="op">=</span>[<span class="st">"mu"</span>, <span class="st">"sigma_a"</span>, <span class="st">"sigma_b"</span>, <span class="st">"sigma_y"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <div>
@@ -1153,7 +1155,7 @@ Figure&nbsp;3
 <span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"Checking fits for model when difficult reviewers were more likely to rate certain genres"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-movies_4" class="quarto-float quarto-figure quarto-figure-center anchored" width="1211" height="411">
+<div id="fig-movies_4" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="1211">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-movies_4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="movies_files/figure-html/fig-movies_4-output-1.png" id="fig-movies_4" width="1211" height="411" class="figure-img">
@@ -1169,7 +1171,7 @@ Figure&nbsp;4
 </section>
 <section id="comparison-to-naive-data-averaging" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="comparison-to-naive-data-averaging"><span class="header-section-number">5</span> Comparison to naive data averaging</h2>
-<div id="d1e3a637" class="cell" data-execution_count="25">
+<div id="fb5deacf" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ybar <span class="op">=</span> np.array([y[(movie <span class="op">==</span> j) <span class="op">&amp;</span> rated].mean() <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, J <span class="op">+</span> <span class="dv">1</span>)])</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>a_true <span class="op">=</span> mu <span class="op">+</span> sigma_a <span class="op">*</span> alpha_true</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>a_post_median <span class="op">=</span> az.median(idata_3a)[<span class="st">"a"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1199,7 +1201,7 @@ Figure&nbsp;4
 <span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].legend(loc<span class="op">=</span><span class="st">"lower right"</span>, frameon<span class="op">=</span><span class="va">False</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-movies_5" class="quarto-float quarto-figure quarto-figure-center anchored" width="925" height="411">
+<div id="fig-movies_5" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="925">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-movies_5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="movies_files/figure-html/fig-movies_5-output-1.png" id="fig-movies_5" width="925" height="411" class="figure-img">
@@ -1711,7 +1713,7 @@ Figure&nbsp;5
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Simulated data of movie ratings"</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> social_cards/movies.png</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> ../social_cards/movies.png</span></span>
 <span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Andrew Gelman and Aki Vehtari"</span></span>
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2022-08-15</span></span>
 <span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
