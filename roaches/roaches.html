@@ -708,7 +708,7 @@ Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws 
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>pc.coords <span class="op">=</span> {<span class="st">"column"</span>: <span class="st">"ridge"</span>}</span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-posterior-poisson" class="quarto-float quarto-figure quarto-figure-center anchored" width="908" height="276">
+<div id="fig-posterior-poisson" class="quarto-float quarto-figure quarto-figure-center anchored" height="276" width="908">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-posterior-poisson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-posterior-poisson-output-1.png" id="fig-posterior-poisson" width="908" height="276" class="figure-img">
@@ -735,7 +735,7 @@ Consider using plot_ppc variants specific for discrete data, such as plot_ppc_pa
   warn_if_discrete(observed_dist, predictive_dist, kind)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_dens-poisson" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc_dens-poisson" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_dens-poisson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-ppc_dens-poisson-output-2.png" id="fig-ppc_dens-poisson" width="458" height="209" class="figure-img">
@@ -753,7 +753,7 @@ Figure&nbsp;2
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_ppc_rootogram(idata_p)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>pc.facet_map(<span class="st">"set_xscale"</span>, scale<span class="op">=</span><span class="st">"sqrt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_rootogram-poisson" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc_rootogram-poisson" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_rootogram-poisson-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-ppc_rootogram-poisson-output-1.png" id="fig-ppc_rootogram-poisson" width="458" height="209" class="figure-img">
@@ -1064,7 +1064,7 @@ Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws 
 <span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>pc.coords <span class="op">=</span> {<span class="st">"column"</span>: <span class="st">"ridge"</span>}</span>
 <span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-posterior-nb" class="quarto-float quarto-figure quarto-figure-center anchored" width="908" height="276">
+<div id="fig-posterior-nb" class="quarto-float quarto-figure quarto-figure-center anchored" height="276" width="908">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-posterior-nb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-posterior-nb-output-1.png" id="fig-posterior-nb" width="908" height="276" class="figure-img">
@@ -1090,7 +1090,7 @@ Consider using plot_ppc variants specific for discrete data, such as plot_ppc_pa
   warn_if_discrete(observed_dist, predictive_dist, kind)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_dens-nb" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc_dens-nb" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_dens-nb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-ppc_dens-nb-output-2.png" id="fig-ppc_dens-nb" width="458" height="209" class="figure-img">
@@ -1108,7 +1108,7 @@ Figure&nbsp;5
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>pc.facet_map(<span class="st">"set_xlim"</span>, limits<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">400</span>))</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>pc.facet_map(<span class="st">"set_xscale"</span>, scale<span class="op">=</span><span class="st">"sqrt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_rootogram-nb" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc_rootogram-nb" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_rootogram-nb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-ppc_rootogram-nb-output-1.png" id="fig-ppc_rootogram-nb" width="458" height="209" class="figure-img">
@@ -1126,7 +1126,7 @@ Figure&nbsp;6
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_ppc_interval(idata_nb)</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>pc.facet_map(<span class="st">"set_yscale"</span>, scale<span class="op">=</span><span class="st">"sqrt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_intervals-nb" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc_intervals-nb" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_intervals-nb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-ppc_intervals-nb-output-1.png" id="fig-ppc_intervals-nb" width="458" height="209" class="figure-img">
@@ -1142,7 +1142,7 @@ Figure&nbsp;7
 <div id="cell-fig-ppc_pit-nb" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_pit(idata_nb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_pit-nb" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc_pit-nb" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_pit-nb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-ppc_pit-nb-output-1.png" id="fig-ppc_pit-nb" width="458" height="209" class="figure-img">
@@ -1210,7 +1210,7 @@ Pareto k diagnostic values:
 <div id="cell-fig-ppc_loopit-nb" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_nb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_loopit-nb" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc_loopit-nb" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_loopit-nb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-ppc_loopit-nb-output-1.png" id="fig-ppc_loopit-nb" width="458" height="209" class="figure-img">
@@ -1292,7 +1292,7 @@ Figure&nbsp;9
 <div id="cell-fig-posterior-nb_dispersion" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(idata_nb, var_names<span class="op">=</span><span class="st">"alpha"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-posterior-nb_dispersion" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-posterior-nb_dispersion" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-posterior-nb_dispersion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-posterior-nb_dispersion-output-1.png" id="fig-posterior-nb_dispersion" width="458" height="209" class="figure-img">
@@ -1316,7 +1316,7 @@ Figure&nbsp;10
 <span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_ppc_pava(idata_binary, var_names<span class="op">=</span><span class="st">"y"</span>)</span>
 <span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>pc.facet_map(<span class="st">"set_xlim"</span>, limits<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-pava-nb" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-pava-nb" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pava-nb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-pava-nb-output-1.png" id="fig-pava-nb" width="458" height="209" class="figure-img">
@@ -1403,7 +1403,7 @@ The effective sample size per chain is smaller than 100 for some parameters.  A 
 <span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>pc.coords <span class="op">=</span> {<span class="st">"column"</span>: <span class="st">"ridge"</span>}</span>
 <span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-posterior-poisson_varying" class="quarto-float quarto-figure quarto-figure-center anchored" width="908" height="276">
+<div id="fig-posterior-poisson_varying" class="quarto-float quarto-figure quarto-figure-center anchored" height="276" width="908">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-posterior-poisson_varying-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-posterior-poisson_varying-output-1.png" id="fig-posterior-poisson_varying" width="908" height="276" class="figure-img">
@@ -1531,7 +1531,7 @@ Consider using plot_ppc variants specific for discrete data, such as plot_ppc_pa
   warn_if_discrete(observed_dist, predictive_dist, kind)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_dens-poisson_varying" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc_dens-poisson_varying" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_dens-poisson_varying-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-ppc_dens-poisson_varying-output-2.png" id="fig-ppc_dens-poisson_varying" width="458" height="209" class="figure-img">
@@ -1547,7 +1547,7 @@ Figure&nbsp;13
 <div id="cell-fig-ppc_rootogram-pvi" class="cell" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_rootogram(idata_pvi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_rootogram-pvi" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc_rootogram-pvi" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_rootogram-pvi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-ppc_rootogram-pvi-output-1.png" id="fig-ppc_rootogram-pvi" width="458" height="209" class="figure-img">
@@ -1563,7 +1563,7 @@ Figure&nbsp;14
 <div id="cell-fig-ppc_pit-poisson_varying" class="cell" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_pit(idata_pvi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_pit-poisson_varying" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc_pit-poisson_varying" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_pit-poisson_varying-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-ppc_pit-poisson_varying-output-1.png" id="fig-ppc_pit-poisson_varying" width="458" height="209" class="figure-img">
@@ -1580,7 +1580,7 @@ Figure&nbsp;15
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_ppc_interval(idata_pvi)</span>
 <span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>pc.facet_map(<span class="st">"set_yscale"</span>, scale<span class="op">=</span><span class="st">"sqrt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_intervals-poisson_varying" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc_intervals-poisson_varying" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_intervals-poisson_varying-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-ppc_intervals-poisson_varying-output-1.png" id="fig-ppc_intervals-poisson_varying" width="458" height="209" class="figure-img">
@@ -1596,7 +1596,7 @@ Figure&nbsp;16
 <div id="cell-fig-ppc_loopit-poisson_varying" class="cell" data-execution_count="35">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_pvi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_loopit-poisson_varying" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc_loopit-poisson_varying" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_loopit-poisson_varying-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-ppc_loopit-poisson_varying-output-1.png" id="fig-ppc_loopit-poisson_varying" width="458" height="209" class="figure-img">
@@ -1744,7 +1744,7 @@ Figure&nbsp;17
 <span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a>pc.coords <span class="op">=</span> {<span class="st">"column"</span>: <span class="st">"ridge"</span>}</span>
 <span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-posterior-poisson_var_int" class="quarto-float quarto-figure quarto-figure-center anchored" width="908" height="299">
+<div id="fig-posterior-poisson_var_int" class="quarto-float quarto-figure quarto-figure-center anchored" height="299" width="908">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-posterior-poisson_var_int-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-posterior-poisson_var_int-output-1.png" id="fig-posterior-poisson_var_int" width="908" height="299" class="figure-img">
@@ -1842,7 +1842,7 @@ Pareto k diagnostic values:
 <div id="cell-fig-ppc_loopit-poisson_varying_int" class="cell" data-execution_count="41">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_p_vi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_loopit-poisson_varying_int" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc_loopit-poisson_varying_int" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_loopit-poisson_varying_int-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-ppc_loopit-poisson_varying_int-output-1.png" id="fig-ppc_loopit-poisson_varying_int" width="458" height="209" class="figure-img">
@@ -1866,7 +1866,7 @@ Figure&nbsp;19
 <span id="cb86-8"><a href="#cb86-8" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_ppc_pava(idata_binary_pvi, var_names<span class="op">=</span><span class="st">"y"</span>)</span>
 <span id="cb86-9"><a href="#cb86-9" aria-hidden="true" tabindex="-1"></a>pc.facet_map(<span class="st">"set_xlim"</span>, limits<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-pava-p_vi" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-pava-p_vi" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pava-p_vi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-pava-p_vi-output-1.png" id="fig-pava-p_vi" width="458" height="209" class="figure-img">
@@ -2039,7 +2039,7 @@ Consider using plot_ppc variants specific for discrete data, such as plot_ppc_pa
   warn_if_discrete(observed_dist, predictive_dist, kind)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_dens-zinb" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc_dens-zinb" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_dens-zinb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-ppc_dens-zinb-output-2.png" id="fig-ppc_dens-zinb" width="458" height="209" class="figure-img">
@@ -2056,7 +2056,7 @@ Figure&nbsp;21
 <span id="cb99-2"><a href="#cb99-2" aria-hidden="true" tabindex="-1"></a>pc.facet_map(<span class="st">"set_xlim"</span>, limits<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">400</span>))</span>
 <span id="cb99-3"><a href="#cb99-3" aria-hidden="true" tabindex="-1"></a>pc.facet_map(<span class="st">"set_xscale"</span>, scale<span class="op">=</span><span class="st">"sqrt"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_rootogram-zinb" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc_rootogram-zinb" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_rootogram-zinb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-ppc_rootogram-zinb-output-1.png" id="fig-ppc_rootogram-zinb" width="458" height="209" class="figure-img">
@@ -2071,7 +2071,7 @@ Figure&nbsp;22
 <div id="cell-fig-ppc_pit-zinb" class="cell" data-execution_count="48">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_pit(idata_zinb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_pit-zinb" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc_pit-zinb" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_pit-zinb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-ppc_pit-zinb-output-1.png" id="fig-ppc_pit-zinb" width="458" height="209" class="figure-img">
@@ -2087,7 +2087,7 @@ Figure&nbsp;23
 <div id="cell-fig-ppc_loopit-zinb" class="cell" data-execution_count="49">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb101"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_zinb)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_loopit-zinb" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc_loopit-zinb" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_loopit-zinb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-ppc_loopit-zinb-output-1.png" id="fig-ppc_loopit-zinb" width="458" height="209" class="figure-img">
@@ -2111,7 +2111,7 @@ Figure&nbsp;24
 <span id="cb102-8"><a href="#cb102-8" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_ppc_pava(idata_binary_zinb, var_names<span class="op">=</span><span class="st">"y"</span>)</span>
 <span id="cb102-9"><a href="#cb102-9" aria-hidden="true" tabindex="-1"></a>pc.facet_map(<span class="st">"set_xlim"</span>, limits<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-pava-zinb" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-pava-zinb" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pava-zinb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-pava-zinb-output-1.png" id="fig-pava-zinb" width="458" height="209" class="figure-img">
@@ -2135,7 +2135,7 @@ Figure&nbsp;25
 <span id="cb103-5"><a href="#cb103-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb103-6"><a href="#cb103-6" aria-hidden="true" tabindex="-1"></a>pc.coords <span class="op">=</span> {<span class="st">"column"</span>: <span class="st">"ridge"</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-posterior-zinb" class="quarto-float quarto-figure quarto-figure-center anchored" width="908" height="276">
+<div id="fig-posterior-zinb" class="quarto-float quarto-figure quarto-figure-center anchored" height="276" width="908">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-posterior-zinb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-posterior-zinb-output-1.png" id="fig-posterior-zinb" width="908" height="276" class="figure-img">
@@ -2182,7 +2182,7 @@ Figure&nbsp;26
 <span id="cb105-18"><a href="#cb105-18" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, <span class="dv">1</span>, color<span class="op">=</span><span class="st">"gray"</span>, linestyle<span class="op">=</span><span class="st">"dotted"</span>)</span>
 <span id="cb105-19"><a href="#cb105-19" aria-hidden="true" tabindex="-1"></a>pc.facet_map(<span class="st">"set_xlim"</span>, limits<span class="op">=</span>(<span class="dv">0</span>, <span class="fl">1.01</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-effect-zinb" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-effect-zinb" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-effect-zinb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-effect-zinb-output-1.png" id="fig-effect-zinb" width="458" height="209" class="figure-img">
@@ -2224,7 +2224,7 @@ Figure&nbsp;27
 <span id="cb107-6"><a href="#cb107-6" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, <span class="dv">1</span>, color<span class="op">=</span><span class="st">"gray"</span>, linestyle<span class="op">=</span><span class="st">"dotted"</span>)</span>
 <span id="cb107-7"><a href="#cb107-7" aria-hidden="true" tabindex="-1"></a>pc.add_legend(<span class="st">"model"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-effect-p-nb-zinb" class="quarto-float quarto-figure quarto-figure-center anchored" width="454" height="209">
+<div id="fig-effect-p-nb-zinb" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="454">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-effect-p-nb-zinb-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="roaches_files/figure-html/fig-effect-p-nb-zinb-output-1.png" id="fig-effect-p-nb-zinb" width="454" height="209" class="figure-img">
