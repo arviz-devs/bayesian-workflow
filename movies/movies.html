@@ -438,6 +438,12 @@ window.Quarto = {
  <span class="menu-text">Ch 19: Building up to a hierarchical model: Coronavirus testing</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../dogs/dogs_stan.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ch 21: Posterior predictive checking: Stochastic learning in dogs – Stan</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -488,7 +494,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2026-06-24</p>
+      <p class="date-modified">2026-06-25</p>
     </div>
   </div>
     
@@ -781,7 +787,7 @@ window.Quarto = {
 <span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"True parameter value"</span>,</span>
 <span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"Comparing parameters $</span><span class="ch">\\</span><span class="st">theta_j$ to their posterior inferences"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-movies_1" class="quarto-float quarto-figure quarto-figure-center anchored" height="461" width="698">
+<div id="fig-movies_1" class="quarto-float quarto-figure quarto-figure-center anchored" width="698" height="461">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-movies_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="movies_files/figure-html/fig-movies_1-output-1.png" id="fig-movies_1" width="698" height="461" class="figure-img">
@@ -802,7 +808,7 @@ Figure&nbsp;1
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"Width of 50% posterior interval"</span>,</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"Where you have more data, you have less uncertainty"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-movies_2" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="811">
+<div id="fig-movies_2" class="quarto-float quarto-figure quarto-figure-center anchored" width="811" height="411">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-movies_2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="movies_files/figure-html/fig-movies_2-output-1.png" id="fig-movies_2" width="811" height="411" class="figure-img">
@@ -978,7 +984,7 @@ Figure&nbsp;2
 <span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>            ylabel<span class="op">=</span><span class="st">"True parameter value"</span>,</span>
 <span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">"Checking the $</span><span class="ch">\\</span><span class="st">beta_k$'s"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-movies_3" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="1011">
+<div id="fig-movies_3" class="quarto-float quarto-figure quarto-figure-center anchored" width="1011" height="411">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-movies_3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="movies_files/figure-html/fig-movies_3-output-1.png" id="fig-movies_3" width="1011" height="411" class="figure-img">
@@ -1131,7 +1137,7 @@ Figure&nbsp;3
 <span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"Checking fits for model when difficult reviewers were more likely to rate certain genres"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-movies_4" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="1211">
+<div id="fig-movies_4" class="quarto-float quarto-figure quarto-figure-center anchored" width="1211" height="411">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-movies_4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="movies_files/figure-html/fig-movies_4-output-1.png" id="fig-movies_4" width="1211" height="411" class="figure-img">
@@ -1177,7 +1183,7 @@ Figure&nbsp;4
 <span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].legend(loc<span class="op">=</span><span class="st">"lower right"</span>, frameon<span class="op">=</span><span class="va">False</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-movies_5" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="925">
+<div id="fig-movies_5" class="quarto-float quarto-figure quarto-figure-center anchored" width="925" height="411">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-movies_5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="movies_files/figure-html/fig-movies_5-output-1.png" id="fig-movies_5" width="925" height="411" class="figure-img">
