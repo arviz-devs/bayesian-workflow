@@ -1,5 +1,6 @@
 ---
 title: "Illustration of simple problematic posteriors"
+image: ../social_cards/problems.png
 author: "Aki Vehtari"
 date: 2021-06-10
 date-modified: today
