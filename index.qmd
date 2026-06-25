@@ -1,5 +1,6 @@
 ---
 title: "Bayesian Workflow book: Case studies in Python"
+image: social-card.png
 date: 2026-01-05
 date-modified: today
 date-format: iso
