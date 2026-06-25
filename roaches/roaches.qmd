@@ -1,5 +1,6 @@
 ---
 title: "Roaches cross-validation model checking and comparison"
+image: social_cards/roaches.png
 author: "Aki Vehtari"
 date: 2017-01-10
 date-modified: today

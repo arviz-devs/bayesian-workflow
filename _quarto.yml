@@ -3,6 +3,7 @@ project:
   output-dir: _book
   resources:
     - social-card.png
+    - social_cards/
   render:
     - index.qmd
     - bioassay/bioassay.qmd

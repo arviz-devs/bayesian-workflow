@@ -54,7 +54,7 @@ from scipy.special import expit, logit, logsumexp
 
 az.style.use("arviz-variat")
 az.rcParams["stats.ci_prob"] = 0.95
-plt.rcParams["figure.dpi"] = 75
+plt.rcParams["figure.dpi"] = 100
 SEED = 1234
 ```
 
@@ -142,7 +142,6 @@ Mills provided two models with specified priors. The first one is a normal regre
 mod_normal = bmb.Model(
     "cu ~ group*week + (1|id)",
     cu_df,
-    family="gaussian",
     priors={
         "Intercept": bmb.Prior("Normal", mu=14, sigma=1.5),
         "group": bmb.Prior("Normal", mu=0, sigma=11),
@@ -315,7 +314,7 @@ mod_normal.compute_log_likelihood(idata_predi, data=cu_df_predi)
 log_lik = az.extract(idata_predi, group="log_likelihood")
 p3 = np.exp(log_lik).reduce(logsumexp, dim="sample") - np.log(S)
 
-fig, ax = plt.subplots(figsize=(7, 4))
+_, ax = plt.subplots(figsize=(7, 4))
 ax.bar(cu_df_predi["cu"], p3, alpha=0.4)
 ax.plot(cu_df_predi["cu"], p3, color="C0")
 ax.vlines(12, 0, p[cu_values == 12].item(), color="grey", linestyle="--")
@@ -367,7 +366,6 @@ Fit the normal model with scaled target.
 mod_normal_scaled = bmb.Model(
     "cu_scaled ~ group*week + (1|id)",
     cu_df,
-    family="gaussian",
     priors={
         "Intercept": bmb.Prior("Normal", mu=0, sigma=1.5),
         "group": bmb.Prior("Normal", mu=0, sigma=11),
@@ -1214,13 +1212,13 @@ By dropping out the aleatoric part from the LOO-CV predictions we do see clear d
 
 <br />
 
-# References {.unnumbered}
+## References {.unnumbered}
 
 <div id="refs"></div>
 
 <br />
 
-# Licenses {.unnumbered}
+## Licenses {.unnumbered}
 
 * Code &copy; 2024, Aki Vehtari, licensed under BSD-3.
 * Text &copy; 2024, Aki Vehtari, licensed under CC-BY-NC 4.0.
