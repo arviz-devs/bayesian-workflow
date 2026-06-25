@@ -1,7 +1,7 @@
 
 ---
 title: "Posterior predictive checking: Stochastic learning in dogs"
-image: social_cards/dogs_stan.png
+image: ../social_cards/dogs_stan.png
 author: "Andrew Gelman"
 date: 2022-07-16
 date-modified: today

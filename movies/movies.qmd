@@ -1,6 +1,6 @@
 ---
 title: "Simulated data of movie ratings"
-image: social_cards/movies.png
+image: ../social_cards/movies.png
 author: "Andrew Gelman and Aki Vehtari"
 date: 2022-08-15
 date-modified: today

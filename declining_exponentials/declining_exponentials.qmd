@@ -1,6 +1,6 @@
 ---
 title: "Declining exponentials"
-image: social_cards/declining_exponentials.png
+image: ../social_cards/declining_exponentials.png
 author: "Andrew Gelman"
 date: 2022-08-15
 date-modified: today

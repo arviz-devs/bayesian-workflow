@@ -1,6 +1,6 @@
 ---
 title: "Sensitivity and specificity in coronavirus testing"
-image: social_cards/coronavirus.png
+image: ../social_cards/coronavirus.png
 author: "Andrew Gelman and Aki Vehtari"
 date: 2022-08-22
 date-modified: today
