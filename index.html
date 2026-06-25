@@ -8,7 +8,7 @@
 
 <meta name="dcterms.date" content="2026-01-05">
 
-<title>Bayesian Workflow book: Website – Bayesian Workflow case studies</title>
+<title>Bayesian Workflow book: Case studies in Python – Bayesian Workflow case studies in Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -47,6 +47,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-417abd72d9d5519e9586d81ca9fa65b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-6f481ce8c257ef2bee601a71a2a7fa51.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-417abd72d9d5519e9586d81ca9fa65b3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -279,7 +282,7 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Bayesian Workflow case studies</span>
+    <span class="navbar-title">Bayesian Workflow case studies in Python</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -305,7 +308,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Bayesian Workflow book: Website</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Bayesian Workflow book: Case studies in Python</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -328,7 +331,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Bayesian Workflow book: Website</span></a>
+ <span class="menu-text">Bayesian Workflow book: Case studies in Python</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -397,12 +400,6 @@ window.Quarto = {
  <span class="menu-text">Ch 24: Leave-one-out cross validation model checking and comparison: Roaches</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./golf/golf.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Ch 25: Model building and expansion: Golf putting</span></a>
-  </div>
-</li>
     </ul>
     </div>
 </nav>
@@ -423,7 +420,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Bayesian Workflow book: Website</h1>
+<h1 class="title">Bayesian Workflow book: Case studies in Python</h1>
 </div>
 
 
@@ -454,8 +451,15 @@ window.Quarto = {
 
 <section id="information" class="level2">
 <h2 class="anchored" data-anchor-id="information">Information</h2>
-<p>These are the case studies from the <strong>Bayesian Workflow</strong> book by <a href="http://www.stat.columbia.edu/~gelman/">Andrew Gelman</a>, <a href="https://users.aalto.fi/ave/">Aki Vehtari</a>, <a href="https://xcelab.net/rm/">Richard McElreath</a> with Daniel Simpson, Charles C. Margossian, Yuling Yao, Lauren Kennedy, Jonah Gabry, Paul-Christian Bürkner, Martin Modrák, Vianey Leos Barajas.</p>
-<p>These cases studies has been ported to Python and use the following main libraries:</p>
+<div class="quarto-layout-panel" data-layout="[ 85, 15 ]">
+<div class="quarto-layout-row">
+<div id="first-column" class="quarto-layout-cell" style="flex-basis: 85.0%;justify-content: flex-start;">
+<p>These are the Python version of the case studies from the <strong>Bayesian Workflow</strong> book by <a href="http://www.stat.columbia.edu/~gelman/">Andrew Gelman</a>, <a href="https://users.aalto.fi/ave/">Aki Vehtari</a>, <a href="https://xcelab.net/rm/">Richard McElreath</a> with Daniel Simpson, <a href="https://charlesm93.github.io/">Charles C. Margossian</a>, <a href="https://yulingyao.com/">Yuling Yao</a>, <a href="https://jazzystats.com/">Lauren Kennedy</a>, <a href="https://jgabry.github.io/">Jonah Gabry</a>, <a href="https://paulbuerkner.com/">Paul-Christian Bürkner</a>, <a href="https://www.martinmodrak.cz/">Martin Modrák</a>, <a href="https://www.vleosbarajas.com/">Vianey Leos Barajas</a>.</p>
+<p>Published by CRC Press in 2026. Copyright by the authors.</p>
+<ul>
+<li>Buy the book via <a href="https://www.routledge.com/Bayesian-Workflow/Gelman-Vehtari-McElreath-Simpson-Margossian-Yao-Kennedy-Gabry-Burkner-Modrak-Barajas/p/book/9780367490140">publisher’s website</a>. 20% Discount code: 26ESA2.</li>
+</ul>
+<p>These cases studies use the following Python libraries for Bayesian modeling and workflow:</p>
 <ul>
 <li>PPLs
 <ul>
@@ -471,10 +475,13 @@ window.Quarto = {
 <li>If you notice and <strong>error with the code in this repository</strong>, please <a href="https://github.com/arviz-devs/Bayesian-Workflow/issues">submit an issue</a>.</li>
 <li>If instead you notice an <strong>error in the book</strong> not mentioned in <a href="errata.html">the errata</a>, <a href="https://github.com/avehtari/Bayesian-Workflow/issues">submit an issue</a> or send an email to the book authors.</li>
 </ul>
-<p><strong>How to cite</strong></p>
+<details>
+<summary>
+How to cite
+</summary>
 <p>Cite the book:</p>
 <blockquote class="blockquote">
-<p>Gelman, Vehtari, McElreath, Simpson, Margossian, Yao, Kennedy, Gabry, Bürkner, Modrák, Leos Barajas (2026). <em>Bayesian Workflow</em>. CRC Press / Taylor &amp; Francis.</p>
+<p>Gelman, Vehtari, McElreath, Simpson, Margossian, Yao, Kennedy, Gabry, Bürkner, Modrák, Leos Barajas (2026). <em>Bayesian Workflow</em>. Chapman &amp; Hall.</p>
 </blockquote>
 <p>If you want to refer to a case study, cite the book and chapter, e.g.</p>
 <blockquote class="blockquote">
@@ -487,8 +494,15 @@ window.Quarto = {
           Charles C. Margossian and Yuling Yao and Lauren Kennedy and Jonah Gabry and
           Paul-Christian Bürkner and Martin Modrák and Vianey Leos Barajas},
   year=2026,
-  publisher={CRC Press}
+  publisher={Chapman &amp; Hall}
 }</code></pre>
+</details>
+</div>
+<div id="second-column" class="quarto-layout-cell" style="flex-basis: 15.0%;justify-content: center;">
+<p><a href="9780367490188.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="9780367490188.png" class="img-fluid" alt="Cover of the Bayesian Workflow book" width="120"></a></p>
+</div>
+</div>
+</div>
 
 
 
@@ -918,6 +932,38 @@ window.Quarto = {
   </div>
 </nav>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
