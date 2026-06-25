@@ -44,7 +44,7 @@ import xarray as xr
 
 az.style.use("arviz-variat")
 az.rcParams["stats.ci_prob"] = 0.95
-plt.rcParams["figure.dpi"] = 72
+plt.rcParams["figure.dpi"] = 100
 SEED = 7412
 ```
 
@@ -690,7 +690,7 @@ idata_p_vi = az.from_cmdstanpy(
     observed_data={"y": roaches["y"].values},
     log_likelihood={"y": "log_lik"},
 )
-idata_p_vi["posterior_predictive"] = idata_p_vi["posterior_predictive"].ds.rename(
+idata_p_vi["posterior_predictive"] = idata_p_vi["posterior_predictive"].ds.astype(int).rename(
     {"y_rep": "y", "y_rep_dim_0": "y_dim_0"}
 )
 ```
@@ -720,7 +720,6 @@ az.add_lines(pc, 0)
 Now the PSIS-LOO doesn't give warnings and the result is close to K-fold-CV.
 
 ```{python}
-# FIXME: This looks very bad!
 loo_p_vi = az.loo(idata_p_vi)
 loo_p_vi
 ```
@@ -758,8 +757,8 @@ the individual variation.
 
 ```{python}
 #| label: fig-pava-p_vi
-pp_binary = (idata_p_vi.posterior_predictive["y"] > 0).astype(float)
-y_binary = (idata_p_vi.observed_data["y"] > 0).astype(float)
+pp_binary = (idata_p_vi.posterior_predictive["y"] > 0).astype(int)
+y_binary = (idata_p_vi.observed_data["y"] > 0).astype(int)
 
 idata_binary_pvi = az.from_dict({
     "posterior_predictive": {"y": pp_binary},
@@ -1055,11 +1054,11 @@ number of roaches in the groups.
 
 <br />
 
-# References {.unnumbered}
+## References {.unnumbered}
 
 <div id="refs"></div>
 
-# Licenses {.unnumbered}
+## Licenses {.unnumbered}
 
 * Code &copy; 2017--2025, Aki Vehtari, licensed under BSD-3.
 * Text &copy; 2017--2025, Aki Vehtari, licensed under CC-BY-NC 4.0.

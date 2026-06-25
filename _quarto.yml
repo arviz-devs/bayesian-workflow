@@ -18,7 +18,7 @@ project:
     - dogs/dogs_stan.qmd
     - cat_adoptions/cat_adoptions.qmd
     # - world_cup/world_cup.qmd
-    # - roaches/roaches.qmd
+    - roaches/roaches.qmd
     # - golf/golf.qmd
     # - sharks/sharks.qmd
     # - birthdays/birthdays.qmd
@@ -74,8 +74,8 @@ website:
         href: cat_adoptions/cat_adoptions.html
       # # - text: "Ch 23: Debugging a model: World Cup football"
       # #   href: world_cup/world_cup.html
-      # - text: "Ch 24: Leave-one-out cross validation model checking and comparison: Roaches"
-      #   href: roaches/roaches.html
+      - text: "Ch 24: Leave-one-out cross validation model checking and comparison: Roaches"
+        href: roaches/roaches.html
       # - text: "Ch 25: Model building and expansion: Golf putting"
       #   href: golf/golf.html
       # # - text: "Ch 26: Model building with latent variables: Markov models for animal movement"
