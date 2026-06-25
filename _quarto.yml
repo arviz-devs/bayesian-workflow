@@ -16,7 +16,7 @@ project:
     # - timeseries/timeseries.qmd
     # - dogs/dogs.qmd
     - dogs/dogs_stan.qmd
-    # - cat_adoptions/cat_adoptions.qmd
+    - cat_adoptions/cat_adoptions.qmd
     # - world_cup/world_cup.qmd
     # - roaches/roaches.qmd
     # - golf/golf.qmd
@@ -70,8 +70,8 @@ website:
       # #   href: dogs/dogs.html
       - text: "Ch 21: Posterior predictive checking: Stochastic learning in dogs -- Stan"
         href: dogs/dogs_stan.html
-      # - text: "Ch 22: Incremental development and testing: Black cat adoptions"
-      #   href: cat_adoptions/cat_adoptions.html
+      - text: "Ch 22: Incremental development and testing: Black cat adoptions"
+        href: cat_adoptions/cat_adoptions.html
       # # - text: "Ch 23: Debugging a model: World Cup football"
       # #   href: world_cup/world_cup.html
       # - text: "Ch 24: Leave-one-out cross validation model checking and comparison: Roaches"

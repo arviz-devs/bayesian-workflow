@@ -17,7 +17,7 @@ jupyter: python3
 This notebook includes the code for the Bayesian Workflow book
 Chapter 22 *Incremental development and testing: Black cat adoptions*.
 
-# Introduction
+## Introduction
 
 Intro text
 
@@ -97,7 +97,7 @@ args_lines = {"ref_dim": "p_dim_0",
              }
 ```
 
-# Data
+## Data
 
 Cat adoptions data is available in rethinking package. We read the data from github, so there is no need to install the rethinking package.
 
@@ -131,10 +131,10 @@ n = 100
 idx = rng.choice(dat["N"], size=n, replace=False)
 ymax = dat["days"][idx].max()
 _, ax = plt.subplots()
-ax.set_xlim(0, ymax)
-ax.set_ylim(1, n)
-ax.set_xlabel("Days observed")
-ax.set_ylabel("Cat")
+ax.set(xlim=(0, ymax),
+       ylim=(1, n),
+       xlabel="Days observed",
+       ylabel="Cat")
 for i, j in enumerate(idx):
     cat_color = "black" if dat["color"][j] == 1 else "orange"
     ax.plot([0, dat["days"][j]], [i, i], lw=4, color=cat_color)
@@ -169,7 +169,7 @@ ax.legend(handles=legend_elements, loc="upper right")
 ax.set(xlabel="Days observed", ylabel="Cat")
 ```
 
-# Generative models
+## Generative models
 
 How should we model these data? Think about how they were
 generated.  We start with process of adoption and then add
@@ -209,12 +209,13 @@ ax.set_xlim(0, 50)
 #| label: fig-gg-cats-km-curves
 _, ax = plt.subplots(figsize=(6, 3.5))
 plot_km(synth_df, ax=ax)
-ax.set_xlim(0, 50)
-ax.set_ylim(0, 1.02)
+ax.set(xlim=(0, 50),
+       ylim=(0, 1.02)
+)
 ax.margins(x=0)
 ```
 
-## First Stan model
+### First Stan model
 
 ```{python}
 #| output: asis
@@ -315,7 +316,7 @@ for i in range(n_km):
         ax.get_legend().remove()
 ```
 
-## Add observation (censoring) model
+### Add observation (censoring) model
 
 Simulate from the generative model
 
@@ -430,7 +431,7 @@ for i in range(n_add):
 ```
 
 
-## Model that uses parameters for censored observations
+### Model that uses parameters for censored observations
 
 ```{python}
 #| output: asis
@@ -465,7 +466,7 @@ Posterior summary
 az.summary(idata_3s, var_names=["p"])
 ```
 
-## Poisson model
+### Poisson model
 
 Model that uses Poisson count outcomes instead of duration outcomes to handle censoring. This depends upon constant hazard function though?
 
@@ -487,7 +488,7 @@ Posterior summary
 az.summary(idata4s, var_names=["lambda"])
 ```
 
-## Varying effects model
+### Varying effects model
 
 Simulate background traits that differentiate cats of same color.
 
@@ -523,9 +524,9 @@ fit5s = cstan("adoptions_varying.stan", data=sim_dat3)
 idata_5s = az.from_cmdstanpy(fit5s)
 ```
 
-# Workflow
+## Workflow
 
-## Prior predictive distributuon
+### Prior predictive distribution
 
 Repeatedly sample from prior, simulate observations
 
@@ -557,7 +558,7 @@ ax.scatter(np.where(mask_cens)[0], prior_days[mask_cens], c="C1", marker="o")
 ax.set(xlabel="simulated cat", ylabel="days")
 ```
 
-## Posterior predictive distribution
+### Posterior predictive distribution
 
 Sample from posterior, simulate observations.
 Problem with this example: need to impute censored values
@@ -574,10 +575,13 @@ for c, col in [(1, "black"), (2, "orange")]:
     kmf.fit(d.loc[mask, "days"], event_observed=d.loc[mask, "adopted"])
     kmf.plot_survival_function(ax=ax, color=col, linewidth=1,
                                 ci_show=False, label=f"Color {c}")
-ax.set(xlim=(0, 90), xlabel="Days", ylabel="Proportion un-adopted")
+ax.set(xlim=(0, 90),
+       xlabel="Days",
+       ylabel="Proportion un-adopted",
+)
 ```
 
-# Licenses {.unnumbered}
+## Licenses {.unnumbered}
 
 - Code &copy; 2025, Richard McElreath, licensed under BSD-3.
 - Text &copy; 2025, Richard McElreath, licensed under CC-BY-NC 4.0.
