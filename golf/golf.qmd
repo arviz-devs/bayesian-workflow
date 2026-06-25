@@ -16,7 +16,7 @@ bibliography: ../casestudies.bib
 This notebook includes the code for Bayesian Workflow book chapter
 25 *Model building and expansion: Golf putting*.
 
-# Introduction
+## Introduction
 
 We demonstrate the basic workflow of Bayesian modeling using an
 example of a set of models fit to data on golf putting.
@@ -75,7 +75,7 @@ def cmdstan_inits(fit, chains=4):
 ```
 
 
-# Data
+## Data
 
 The following graph shows data from professional golfers on the proportion of successful
 putts as a function of distance from the hole [from @Berry:1995].  Unsurprisingly, the
@@ -103,7 +103,7 @@ for i in range(J):
 The error bars associated with each point $j$ in the above graph are simple classical standard deviations,
 $\sqrt{\hat{p}_j(1-\hat{p}_j)/n_j}$, where $\hat{p}_j=y_j/n_j$ is the success rate for putts taken at distance $x_j$.
 
-# Logistic regression
+## Logistic regression
 
 Can we model the probability of success in golf putting as a function
 of distance from the hole?  Given usual statistical practice, the
@@ -184,7 +184,7 @@ median parameter estimates for the remaining models.  Our focus
 here is on the sequence of models that we fit, not so much on
 uncertainty in particular model fits.
 
-# Modeling from first principles
+## Modeling from first principles
 
 As an alternative to logistic regression, we shall build a model from
 first principles and fit it to the data.
@@ -203,9 +203,10 @@ r_plot = r
 R_plot = R
 
 _, ax = plt.subplots()
-ax.set_xlim(-R_plot, dist + 3 * R_plot)
-ax.set_ylim(-2 * R_plot, 2 * R_plot)
-ax.set_aspect("equal")
+ax.set(xlim=(-R_plot, dist + 3 * R_plot),
+       ylim=(-2 * R_plot, 2 * R_plot),
+       aspect="equal",
+)
 ax.axis("off")
 
 circle_ball = plt.Circle((0, 0), r_plot, fill=True, color="gray")
@@ -248,9 +249,11 @@ factors interfere with this goal, so that the actual angle follows a normal dist
 #| label: fig-golf-sketch-2
 
 ax = pz.Normal(0, 1).plot_pdf(legend=False, figsize=(7, 3))
-ax.set_xlim(-4, 4)
-ax.set_xlabel("Angle of shot")
-ax.set(xticks=[-2, 0, 2], xticklabels=[r"$-2\sigma$", "0", r"$2\sigma$"])
+ax.set(xlim=(-4, 4),
+       xlabel="Angle of shot",
+       xticks=[-2, 0, 2],
+       xticklabels=[r"$-2\sigma$", "0", r"$2\sigma$"],
+)
 ax.spines[["left"]].set_visible(False);
 ```
 
@@ -377,7 +380,7 @@ plt.legend()
 
 The custom nonlinear model fits the data much better.  This is not to say that the model is perfect---any experience of golf will reveal that the angle is not the only factor determining whether the ball goes in the hole---but it seems like a useful start.
 
-# Testing the fitted model on new data
+## Testing the fitted model on new data
 
 Several years after fitting the above model, we were presented with a newer and more comprehensive dataset on professional golf putting [@Broadie:2018].  For simplicity we'll just look here at the summary data, probabilities of the ball going into the hole for shots up to 75 feet from the hole.  The graph below shows these new data (in red), along with our earlier dataset (in blue) and the already-fit geometry-based model from before, extending to the range of the new data.
 
@@ -404,7 +407,7 @@ be that golfers are better than they used to be.
 
 Beyond 20 feet, the empirical success rates become lower than would be predicted by the old model. These are much more difficult attempts, even after accounting for the increased angular precision required as distance goes up.  In addition, the new data look smoother, which perhaps is a reflection of more comprehensive data collection.
 
-# A new model accounting for how hard the ball is hit
+## A new model accounting for how hard the ball is hit
 
 To get the ball in the hole, the angle isn't the only thing you
 need to control; you also need to hit the ball just hard enough.
@@ -578,7 +581,7 @@ With such large values of $n_j$, the binomial likelihood enforces
 an extremely close fit at these first few points, and that drives
 the entire fit of the model.
 
-# Expanding the model by including a fudge factor
+## Expanding the model by including a fudge factor
 
 To fix this problem we took the data model, $y_j \sim
 \mathrm{binomial}(n_j, p_j)$, and added an independent error term to each observation.  There is no easy way to add error directly to the binomial distribution---we could replace it with its
@@ -705,7 +708,7 @@ approximation, not so much for these particular data but rather
 because it was a sort of admission of failure to not be able to
 directly use the binomial model.
 
-# Binomial with errors in logit scale
+## Binomial with errors in logit scale
 
 What we wanted to do was to keep the binomial model and then add
 the error on the logistic scale or something like that, something
@@ -784,7 +787,7 @@ ax.scatter(golf_new["x"], golf_new["y"] / golf_new["n"], color="C4", zorder=3)
 There are now problems with the fit in the low range of $x$.
 Clearly the additive error in logit scale is not good.
 
-# Binomial with proportional errors
+## Binomial with proportional errors
 
 Instead of additive errors in logit scale, we next fit a
 three-parameter model that scales all the probabilities down from
@@ -970,10 +973,11 @@ ax.scatter(golf_new["x"], golf_new["y"] / golf_new["n"], color="C7", zorder=3)
 
 posterior_mean_residual_8 = az.mean(dt_8.posterior["residual"], round_to="None")
 _, ax = plt.subplots()
-ax.set_xlim(0, 1.1 * golf_new["x"].max())
-ax.set_xlabel("Distance from hole (feet)")
-ax.set_ylabel("y/n - fitted E(y/n)")
-ax.set_title("Residuals from fitted model")
+ax.set(xlim=(0, 1.1 * golf_new["x"].max()),
+       xlabel="Distance from hole (feet)",
+       ylabel="y/n - fitted E(y/n)",
+       title="Residuals from fitted model"
+)
 ax.axhline(0, color="gray", linestyle="--")
 ax.plot(golf_new["x"], posterior_mean_residual_8)
 ```
@@ -1008,6 +1012,8 @@ we add more parameters, we also use cross-validation to compare the models. As w
 
 ```{python}
 gq_ll = CmdStanModel(stan_file=str("golf_log_lik.stan"))
+gq_ll_7 = CmdStanModel(stan_file=str("golf_log_lik_7.stan"))
+gq_ll_8 = CmdStanModel(stan_file=str("golf_log_lik_8.stan"))
 ```
 
 When calling generated quantities, we pass only the required variables which allowed us to write more compact Stan code for the `log_lik` computation.
@@ -1016,11 +1022,17 @@ When calling generated quantities, we pass only the required variables which all
 #| results: hide
 def compute_loo(fit, gq_model, data):
     gq = gq_model.generate_quantities(data, previous_fit=fit)
-    return az.loo(az.from_cmdstanpy(gq, log_likelihood="log_lik"))
+    log_lik = gq.stan_variable("log_lik")
+    n_chains = fit.chains
+    n_draws = fit.num_draws_sampling
+    idata = az.from_dict(
+        {"log_likelihood": {"y": log_lik.reshape(n_chains, n_draws, -1)}}
+    )
+    return az.loo(idata, reff=1)
 
 loo_6 = compute_loo(fit_6, gq_ll, golf_new_data)
-loo_7 = compute_loo(fit_7, gq_ll, golf_new_data)
-loo_8 = compute_loo(fit_8, gq_ll, golf_new_data)
+loo_7 = compute_loo(fit_7, gq_ll_7, golf_new_data)
+loo_8 = compute_loo(fit_8, gq_ll_8, golf_new_data)
 ```
 
 As we have integrated out the `epsilon` parameters, the effective number of parameters match the number of remaining parameters, except for the last model where `distance_tolerance` and `overshot` parameters are not well informed by the likelihood separately.
@@ -1059,11 +1071,11 @@ learned about this aspect of the model.
 
 <br />
 
-# References {.unnumbered}
+## References {.unnumbered}
 
 <div id="refs"></div>
 
-# Licenses {.unnumbered}
+## Licenses {.unnumbered}
 
 * Code &copy; 2019--2026, Andrew Gelman and Aki Vehtari, licensed under BSD-3.
 * Text &copy; 2019--2026, Andrew Gelman and Aki Vehtari, licensed under CC-BY-NC 4.0.

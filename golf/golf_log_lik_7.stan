@@ -19,6 +19,7 @@ parameters {
   real<lower=0> sigma_distance;
   real<lower=0> sigma_epsilon;
   vector<lower=0, upper=1>[J] epsilon;
+  real<lower=0> distance_tolerance;
   vector[J] p_angle;
   vector[J] p_distance;
 }
@@ -31,8 +32,8 @@ generated quantities {
                               0,
                               positive_infinity(), // this works better than 1!
                               append_array({sigma_epsilon}, {p}),
-			      {0}, // not used, but an empty array not allowed
-			      append_array({n[j]}, {y[j]}),
-			      1e-6));
+		              {0}, // not used, but an empty array not allowed
+		              append_array({n[j]}, {y[j]}),
+		              1e-6));
   }
 }
