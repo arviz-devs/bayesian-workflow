@@ -44,7 +44,7 @@ import xarray as xr
 
 az.style.use("arviz-variat")
 az.rcParams["stats.ci_prob"] = 0.95
-plt.rcParams["figure.dpi"] = 100
+plt.rcParams["figure.dpi"] = 75
 SEED = 7412
 ```
 
@@ -83,7 +83,7 @@ square root of it. Because the number of days for which the roach
 traps were used is not the same for all apartments in the sample,
 we include it as an `exposure2` by adding $\ln(u_i)$) to the linear
 predictor $\eta_i$ and it can be specified using the `offset`
-argument in `brms`.
+argument in `bambi`.
 
 Load data
 
@@ -252,9 +252,7 @@ model for the future data distribution.
 
 We change the Poisson model to a more robust negative binomial
 model. Often it would be sensible to start with negative binomial
-model for counts and skip the Poisson model.  The negative-binomial
-shape parameter has the `brms` default prior, which is
-inverse-gamma$(.4, .3)$ [@Vehtari:2024].
+model for counts and skip the Poisson model.
 
 ```{python}
 #| results: hide
@@ -615,9 +613,8 @@ quadrature is likely to be too slow and other integration methods
 are needed.
 
 As we can easily integrate out only 1 (or 2) parameters (per group
-/ individual), it's not easy to make a generic approach for `rstanarm`
-and `brms`, and thus we illustrate the approach with direct Stan model
-code and `cmdstanpy`.
+/ individual), it's not easy to make a generic approach for `bambi`,
+and thus we illustrate the approach with direct Stan model code and `cmdstanpy`.
 
 The following Stan model uses individual specific intercept term
 `z[i]` (with common prior with scale `sigmaz`). In the generated
@@ -686,12 +683,12 @@ fit_p_vi = mod_p_vi.sample(
 
 idata_p_vi = az.from_cmdstanpy(
     fit_p_vi,
-    posterior_predictive="y_rep",
+    posterior_predictive="y_loorep",
     observed_data={"y": roaches["y"].values},
     log_likelihood={"y": "log_lik"},
 )
 idata_p_vi["posterior_predictive"] = idata_p_vi["posterior_predictive"].ds.astype(int).rename(
-    {"y_rep": "y", "y_rep_dim_0": "y_dim_0"}
+    {"y_loorep": "y", "y_loorep_dim_0": "y_dim_0"}
 )
 ```
 
@@ -742,7 +739,6 @@ challenging posterior than for negative binomial model.
 
 ```{python}
 #| label: fig-ppc_loopit-poisson_varying_int
-# FIXME: This looks very bad!
 az.plot_loo_pit(idata_p_vi)
 ```
 
