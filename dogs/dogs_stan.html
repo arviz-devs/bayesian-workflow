@@ -169,10 +169,8 @@ window.Quarto = {
 <link rel="stylesheet" href="../_style.css">
 <meta property="og:title" content="Posterior predictive checking: Stochastic learning in dogs – Bayesian Workflow case studies in Python">
 <meta property="og:description" content="Python version of the case studies from the Bayesian Workflow book by Gelman, Vehtari, McElreath, et al.">
-<meta property="og:image" content="https://arviz-devs.github.io/bayesian-workflow/dogs/dogs_stan_files/figure-html/fig-dogs_ppc-output-1.png">
+<meta property="og:image" content="https://arviz-devs.github.io/bayesian-workflow/dogs/social_cards/dogs_stan.png">
 <meta property="og:site_name" content="Bayesian Workflow case studies in Python">
-<meta property="og:image:height" content="2023">
-<meta property="og:image:width" content="2023">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -559,7 +557,7 @@ window.Quarto = {
 </section>
 <section id="data" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="data"><span class="header-section-number">2</span> Data</h2>
-<div id="ec22b36f" class="cell" data-execution_count="2">
+<div id="359f7802" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dogs <span class="op">=</span> pd.read_csv(<span class="st">"data/dogs.dat"</span>, skiprows<span class="op">=</span><span class="dv">2</span>, sep<span class="op">=</span><span class="vs">r"</span><span class="dv">\s</span><span class="op">+</span><span class="vs">"</span>, header<span class="op">=</span><span class="va">None</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>shock <span class="op">=</span> (dogs.iloc[:, <span class="dv">1</span>:<span class="dv">26</span>].values <span class="op">==</span> <span class="st">"S"</span>).astype(<span class="bu">int</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>dogs_data <span class="op">=</span> {<span class="st">"y"</span>: shock, <span class="st">"J"</span>: shock.shape[<span class="dv">0</span>], <span class="st">"T"</span>: shock.shape[<span class="dv">1</span>]}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -567,7 +565,7 @@ window.Quarto = {
 </section>
 <section id="models" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="models"><span class="header-section-number">3</span> Models</h2>
-<div id="98564da9" class="cell" data-execution_count="3">
+<div id="03df6cc0" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dogs_0 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_0.stan"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_0)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -609,7 +607,7 @@ window.Quarto = {
 <div id="fit_0" class="cell" data-results="hide" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit_0 <span class="op">=</span> dogs_0.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="07a15f8f" class="cell" data-execution_count="5">
+<div id="d9a41518" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>dt_0 <span class="op">=</span> az.from_cmdstanpy(fit_0, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>az.summary(dt_0)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
@@ -771,7 +769,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="57e7f477" class="cell" data-execution_count="6">
+<div id="73daccca" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dogs_1 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_1.stan"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -812,7 +810,7 @@ window.Quarto = {
 <div id="fit_1" class="cell" data-results="hide" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fit_1 <span class="op">=</span> dogs_1.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="c43a2f19" class="cell" data-execution_count="8">
+<div id="10e99560" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>dt_1 <span class="op">=</span> az.from_cmdstanpy(fit_1, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>az.summary(dt_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
@@ -974,7 +972,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="c8b09693" class="cell" data-execution_count="9">
+<div id="4e9445ca" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dogs_2 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_2.stan"</span>)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -1032,7 +1030,7 @@ window.Quarto = {
 <div id="fit_2" class="cell" data-results="hide" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fit_2 <span class="op">=</span> dogs_2.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="0a075e8e" class="cell" data-execution_count="11">
+<div id="3a047d31" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>dt_2 <span class="op">=</span> az.from_cmdstanpy(fit_2, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>az.summary(dt_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
@@ -1085,7 +1083,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="49819f1c" class="cell" data-execution_count="12">
+<div id="481be241" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dogs_3 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_3.stan"</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -1130,7 +1128,7 @@ window.Quarto = {
 <div id="fit_3" class="cell" data-results="hide" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>fit_3 <span class="op">=</span> dogs_3.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="59609253" class="cell" data-execution_count="14">
+<div id="fda6174f" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>dt_3 <span class="op">=</span> az.from_cmdstanpy(fit_3, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>az.summary(dt_3, var_names<span class="op">=</span>[<span class="st">"mu_logit_a"</span>, <span class="st">"sigma_logit_a"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
@@ -1155,27 +1153,27 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">mu_logit_a</th>
-<td>1.867</td>
-<td>0.085</td>
+<td>1.866</td>
+<td>0.086</td>
 <td>1.7</td>
 <td>2</td>
-<td>2918</td>
-<td>3157</td>
+<td>2586</td>
+<td>2820</td>
 <td>1.00</td>
-<td>0.0016</td>
-<td>0.0011</td>
+<td>0.0017</td>
+<td>0.0013</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">sigma_logit_a</th>
-<td>0.319</td>
-<td>0.092</td>
-<td>0.15</td>
-<td>0.51</td>
-<td>609</td>
-<td>472</td>
-<td>1.01</td>
-<td>0.0036</td>
-<td>0.0028</td>
+<td>0.317</td>
+<td>0.09</td>
+<td>0.16</td>
+<td>0.5</td>
+<td>681</td>
+<td>463</td>
+<td>1.00</td>
+<td>0.0032</td>
+<td>0.0023</td>
 </tr>
 </tbody>
 </table>
@@ -1183,7 +1181,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="cdf31cf9" class="cell" data-execution_count="15">
+<div id="ec72c31f" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dogs_4 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_4.stan"</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -1247,7 +1245,7 @@ window.Quarto = {
 <div id="fit_4" class="cell" data-results="hide" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>fit_4 <span class="op">=</span> dogs_4.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="60829609" class="cell" data-execution_count="17">
+<div id="4a0dcefc" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>dt_4 <span class="op">=</span> az.from_cmdstanpy(fit_4, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>az.summary(dt_4, var_names<span class="op">=</span>[<span class="st">"mu_logit_ab"</span>, <span class="st">"Sigma_logit_ab"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
@@ -1272,75 +1270,75 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">mu_logit_ab[0]</th>
-<td>2.42</td>
-<td>0.23</td>
+<td>2.43</td>
+<td>0.218</td>
 <td>2</td>
 <td>2.9</td>
-<td>911</td>
-<td>498</td>
-<td>1.00</td>
-<td>0.0085</td>
-<td>0.0069</td>
+<td>1413</td>
+<td>2095</td>
+<td>1.01</td>
+<td>0.0058</td>
+<td>0.0043</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">mu_logit_ab[1]</th>
-<td>1.33</td>
-<td>0.23</td>
+<td>1.31</td>
+<td>0.22</td>
 <td>0.9</td>
 <td>1.8</td>
-<td>1269</td>
-<td>1560</td>
-<td>1.00</td>
-<td>0.0065</td>
-<td>0.0061</td>
+<td>1447</td>
+<td>1310</td>
+<td>1.01</td>
+<td>0.0058</td>
+<td>0.005</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">Sigma_logit_ab[0, 0]</th>
-<td>0.53</td>
-<td>0.38</td>
-<td>0.064</td>
-<td>1.5</td>
-<td>340</td>
-<td>470</td>
-<td>1.01</td>
-<td>0.017</td>
-<td>0.021</td>
+<td>0.51</td>
+<td>0.36</td>
+<td>0.062</td>
+<td>1.4</td>
+<td>324</td>
+<td>584</td>
+<td>1.02</td>
+<td>0.018</td>
+<td>0.027</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">Sigma_logit_ab[0, 1]</th>
-<td>-0.37</td>
-<td>0.38</td>
-<td>-1.4</td>
-<td>0.097</td>
-<td>280</td>
-<td>337</td>
-<td>1.01</td>
-<td>0.02</td>
-<td>0.027</td>
+<td>-0.33</td>
+<td>0.35</td>
+<td>-1.2</td>
+<td>0.11</td>
+<td>190</td>
+<td>819</td>
+<td>1.03</td>
+<td>0.026</td>
+<td>0.034</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">Sigma_logit_ab[1, 0]</th>
-<td>-0.37</td>
-<td>0.38</td>
-<td>-1.4</td>
-<td>0.097</td>
-<td>280</td>
-<td>337</td>
-<td>1.01</td>
-<td>0.02</td>
-<td>0.027</td>
+<td>-0.33</td>
+<td>0.35</td>
+<td>-1.2</td>
+<td>0.11</td>
+<td>190</td>
+<td>819</td>
+<td>1.03</td>
+<td>0.026</td>
+<td>0.034</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">Sigma_logit_ab[1, 1]</th>
-<td>0.71</td>
-<td>0.61</td>
-<td>0.064</td>
-<td>2.3</td>
-<td>270</td>
-<td>258</td>
+<td>0.66</td>
+<td>0.6</td>
+<td>0.079</td>
+<td>2.1</td>
+<td>320</td>
+<td>385</td>
 <td>1.01</td>
-<td>0.028</td>
-<td>0.049</td>
+<td>0.027</td>
+<td>0.052</td>
 </tr>
 </tbody>
 </table>
@@ -1348,7 +1346,7 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div id="5a67d63d" class="cell" data-execution_count="18">
+<div id="98202a95" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>dogs_5 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_5.stan"</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_5)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -1420,7 +1418,7 @@ window.Quarto = {
 <div id="fit_5" class="cell" data-results="hide" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>fit_5 <span class="op">=</span> dogs_5.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="097b5c65" class="cell" data-execution_count="20">
+<div id="a115183f" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>dt_5 <span class="op">=</span> az.from_cmdstanpy(fit_5, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>az.summary(dt_5, var_names<span class="op">=</span>[<span class="st">"mu_logit_ab"</span>, <span class="st">"sigma_logit_ab"</span>, <span class="st">"Omega_logit_ab"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
@@ -1445,51 +1443,51 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">mu_logit_ab[0]</th>
-<td>2.435</td>
-<td>0.183</td>
+<td>2.439</td>
+<td>0.186</td>
 <td>2.1</td>
 <td>2.8</td>
-<td>2336</td>
-<td>2054</td>
+<td>2797</td>
+<td>2492</td>
 <td>1.00</td>
-<td>0.0038</td>
-<td>0.0029</td>
+<td>0.0035</td>
+<td>0.0026</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">mu_logit_ab[1]</th>
-<td>1.296</td>
+<td>1.29</td>
 <td>0.156</td>
-<td>0.99</td>
+<td>0.98</td>
 <td>1.6</td>
-<td>2305</td>
-<td>2346</td>
+<td>2864</td>
+<td>2526</td>
 <td>1.00</td>
-<td>0.0033</td>
-<td>0.0027</td>
+<td>0.003</td>
+<td>0.0023</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">sigma_logit_ab[0]</th>
-<td>0.31</td>
-<td>0.192</td>
-<td>0.018</td>
-<td>0.71</td>
-<td>1187</td>
-<td>1448</td>
+<td>0.32</td>
+<td>0.193</td>
+<td>0.017</td>
+<td>0.72</td>
+<td>1212</td>
+<td>1863</td>
 <td>1.00</td>
 <td>0.0054</td>
-<td>0.0035</td>
+<td>0.0036</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">sigma_logit_ab[1]</th>
-<td>0.4</td>
+<td>0.41</td>
 <td>0.24</td>
-<td>0.028</td>
-<td>0.94</td>
-<td>1127</td>
-<td>1458</td>
-<td>1.01</td>
-<td>0.0067</td>
-<td>0.0061</td>
+<td>0.032</td>
+<td>0.96</td>
+<td>1044</td>
+<td>1274</td>
+<td>1.00</td>
+<td>0.0071</td>
+<td>0.0059</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">Omega_logit_ab[0, 0]</th>
@@ -1518,49 +1516,49 @@ window.Quarto = {
 <tr class="odd">
 <th data-quarto-table-cell-role="th">b[25]</th>
 <td>0.778</td>
-<td>0.058</td>
-<td>0.65</td>
+<td>0.059</td>
+<td>0.64</td>
 <td>0.89</td>
-<td>4609</td>
-<td>2750</td>
+<td>4367</td>
+<td>2650</td>
 <td>1.00</td>
-<td>0.00088</td>
 <td>0.0009</td>
+<td>0.00089</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">b[26]</th>
-<td>0.736</td>
-<td>0.086</td>
-<td>0.52</td>
+<td>0.732</td>
+<td>0.088</td>
+<td>0.51</td>
 <td>0.85</td>
-<td>2436</td>
-<td>2486</td>
+<td>2556</td>
+<td>3014</td>
 <td>1.00</td>
 <td>0.0018</td>
-<td>0.0021</td>
+<td>0.002</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">b[27]</th>
-<td>0.792</td>
-<td>0.054</td>
+<td>0.791</td>
+<td>0.052</td>
 <td>0.68</td>
 <td>0.89</td>
-<td>4588</td>
-<td>2618</td>
+<td>5865</td>
+<td>3049</td>
 <td>1.00</td>
-<td>0.00081</td>
-<td>0.00077</td>
+<td>0.00068</td>
+<td>0.00057</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">b[28]</th>
-<td>0.826</td>
-<td>0.046</td>
+<td>0.827</td>
+<td>0.047</td>
 <td>0.74</td>
 <td>0.92</td>
-<td>2620</td>
-<td>3075</td>
+<td>2869</td>
+<td>3136</td>
 <td>1.00</td>
-<td>0.00092</td>
+<td>0.00089</td>
 <td>0.00065</td>
 </tr>
 <tr class="odd">
@@ -1569,11 +1567,11 @@ window.Quarto = {
 <td>0.054</td>
 <td>0.67</td>
 <td>0.89</td>
-<td>3984</td>
-<td>2725</td>
+<td>5441</td>
+<td>2990</td>
 <td>1.00</td>
-<td>0.00084</td>
-<td>0.00084</td>
+<td>0.00073</td>
+<td>0.00068</td>
 </tr>
 </tbody>
 </table>
@@ -1585,7 +1583,7 @@ window.Quarto = {
 </section>
 <section id="plots" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="plots"><span class="header-section-number">4</span> Plots</h2>
-<div id="1c56b87e" class="cell" data-execution_count="21">
+<div id="b66ae87a" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> empty_plot(ax, label<span class="op">=</span><span class="st">""</span>):</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    ax.text(<span class="fl">0.5</span>, <span class="fl">0.5</span>, label, ha<span class="op">=</span><span class="st">"center"</span>, va<span class="op">=</span><span class="st">"center"</span>, transform<span class="op">=</span>ax.transAxes, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
@@ -1636,7 +1634,7 @@ window.Quarto = {
 <span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row, (idata, label) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(models, labels), start<span class="op">=</span><span class="dv">1</span>):</span>
 <span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>    plot_ppc(axes[row], idata, label)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-dogs_ppc" class="quarto-float quarto-figure quarto-figure-center anchored" height="1011" width="1011">
+<div id="fig-dogs_ppc" class="quarto-float quarto-figure quarto-figure-center anchored" width="1011" height="1011">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-dogs_ppc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="dogs_stan_files/figure-html/fig-dogs_ppc-output-1.png" id="fig-dogs_ppc" width="1011" height="1011" class="figure-img">
@@ -1684,7 +1682,7 @@ Figure&nbsp;1
 </figure>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-dogs_inference-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="1004">
+<div id="fig-dogs_inference-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="1004" height="411">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-dogs_inference-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="dogs_stan_files/figure-html/fig-dogs_inference-output-2.png" id="fig-dogs_inference-2" data-ref-parent="fig-dogs_inference" width="1004" height="411" class="figure-img">
@@ -1717,7 +1715,7 @@ Figure&nbsp;2
 <span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">hat{b}</span><span class="dv">$</span><span class="vs">"</span>)</span>
 <span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Posterior medians from fitted model"</span>, fontsize<span class="op">=</span><span class="dv">11</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-dogs_point_estimate" class="quarto-float quarto-figure quarto-figure-center anchored" height="399" width="411">
+<div id="fig-dogs_point_estimate" class="quarto-float quarto-figure quarto-figure-center anchored" width="411" height="399">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-dogs_point_estimate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="dogs_stan_files/figure-html/fig-dogs_point_estimate-output-1.png" id="fig-dogs_point_estimate" width="411" height="399" class="figure-img">
@@ -1729,7 +1727,7 @@ Figure&nbsp;3
 </div>
 </div>
 </div>
-<div id="b9089f48" class="cell" data-execution_count="25">
+<div id="04dd2b7b" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>new_dogs_mu_logit_ab <span class="op">=</span> np.array([<span class="fl">2.4</span>, <span class="fl">1.3</span>])</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>new_dogs_sigma_ab <span class="op">=</span> np.array([<span class="fl">0.32</span>, <span class="fl">0.40</span>])</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>new_dogs_rho_ab <span class="op">=</span> <span class="dv">0</span></span>
@@ -1760,7 +1758,7 @@ Figure&nbsp;3
 <div id="new_fit_5" class="cell" data-results="hide" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>new_fit_5 <span class="op">=</span> dogs_5.sample(data<span class="op">=</span>new_dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="88765558" class="cell" data-execution_count="27">
+<div id="25533f99" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>new_dt_5 <span class="op">=</span> az.from_cmdstanpy(new_fit_5)</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>az.summary(new_dt_5, var_names<span class="op">=</span>[<span class="st">"mu_logit_ab"</span>, <span class="st">"sigma_logit_ab"</span>, <span class="st">"Omega_logit_ab"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="27">
@@ -1785,51 +1783,51 @@ Figure&nbsp;3
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">mu_logit_ab[0]</th>
-<td>2.483</td>
-<td>0.199</td>
+<td>2.486</td>
+<td>0.197</td>
 <td>2.1</td>
 <td>2.9</td>
-<td>2666</td>
-<td>2402</td>
+<td>3132</td>
+<td>2734</td>
 <td>1.00</td>
-<td>0.0039</td>
-<td>0.0029</td>
+<td>0.0035</td>
+<td>0.0025</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">mu_logit_ab[1]</th>
-<td>1.168</td>
+<td>1.169</td>
 <td>0.153</td>
 <td>0.86</td>
 <td>1.5</td>
-<td>2396</td>
-<td>2240</td>
+<td>2780</td>
+<td>2878</td>
 <td>1.00</td>
-<td>0.0031</td>
-<td>0.0024</td>
+<td>0.0029</td>
+<td>0.0023</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">sigma_logit_ab[0]</th>
-<td>0.33</td>
+<td>0.34</td>
 <td>0.24</td>
-<td>0.013</td>
-<td>0.87</td>
-<td>905</td>
-<td>1853</td>
+<td>0.019</td>
+<td>0.9</td>
+<td>1131</td>
+<td>2043</td>
 <td>1.00</td>
-<td>0.008</td>
-<td>0.0058</td>
+<td>0.0071</td>
+<td>0.0056</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">sigma_logit_ab[1]</th>
-<td>0.41</td>
-<td>0.208</td>
-<td>0.038</td>
+<td>0.4</td>
+<td>0.21</td>
+<td>0.031</td>
 <td>0.83</td>
-<td>1091</td>
-<td>1565</td>
+<td>846</td>
+<td>1314</td>
 <td>1.00</td>
-<td>0.0062</td>
-<td>0.0042</td>
+<td>0.0071</td>
+<td>0.0052</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">Omega_logit_ab[0, 0]</th>
@@ -1857,63 +1855,63 @@ Figure&nbsp;3
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">b[25]</th>
-<td>0.74</td>
-<td>0.066</td>
-<td>0.58</td>
-<td>0.85</td>
-<td>3825</td>
-<td>3147</td>
+<td>0.741</td>
+<td>0.065</td>
+<td>0.59</td>
+<td>0.84</td>
+<td>3451</td>
+<td>2709</td>
 <td>1.00</td>
+<td>0.0012</td>
 <td>0.0011</td>
-<td>0.00098</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">b[26]</th>
-<td>0.698</td>
-<td>0.097</td>
-<td>0.45</td>
+<td>0.699</td>
+<td>0.096</td>
+<td>0.44</td>
 <td>0.83</td>
-<td>1999</td>
-<td>2687</td>
+<td>1739</td>
+<td>3063</td>
 <td>1.00</td>
-<td>0.0021</td>
-<td>0.0021</td>
+<td>0.0022</td>
+<td>0.0024</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">b[27]</th>
-<td>0.72</td>
+<td>0.722</td>
 <td>0.085</td>
-<td>0.5</td>
+<td>0.51</td>
 <td>0.84</td>
-<td>3063</td>
-<td>2995</td>
+<td>3348</td>
+<td>3374</td>
 <td>1.00</td>
-<td>0.0015</td>
-<td>0.0018</td>
+<td>0.0016</td>
+<td>0.0017</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">b[28]</th>
 <td>0.771</td>
-<td>0.056</td>
+<td>0.055</td>
 <td>0.65</td>
 <td>0.88</td>
-<td>5122</td>
-<td>3054</td>
+<td>5884</td>
+<td>3419</td>
 <td>1.00</td>
-<td>0.00077</td>
-<td>0.00068</td>
+<td>0.00071</td>
+<td>0.00064</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">b[29]</th>
-<td>0.796</td>
-<td>0.052</td>
+<td>0.795</td>
+<td>0.053</td>
 <td>0.69</td>
 <td>0.9</td>
-<td>3378</td>
-<td>3277</td>
+<td>3959</td>
+<td>3064</td>
 <td>1.00</td>
-<td>0.00089</td>
-<td>0.00071</td>
+<td>0.00085</td>
+<td>0.00069</td>
 </tr>
 </tbody>
 </table>
@@ -1935,7 +1933,7 @@ Figure&nbsp;3
 <span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"b"</span>)</span>
 <span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Simulated parameters"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-dogs_parameters" class="quarto-float quarto-figure quarto-figure-center anchored" height="409" width="411">
+<div id="fig-dogs_parameters" class="quarto-float quarto-figure quarto-figure-center anchored" width="411" height="409">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-dogs_parameters-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="dogs_stan_files/figure-html/fig-dogs_parameters-output-1.png" id="fig-dogs_parameters" width="411" height="409" class="figure-img">
@@ -1952,7 +1950,7 @@ Figure&nbsp;4
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>plot_dogs(ax, new_dogs)</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Simulated data"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-dogs_data" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="511">
+<div id="fig-dogs_data" class="quarto-float quarto-figure quarto-figure-center anchored" width="511" height="411">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-dogs_data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="dogs_stan_files/figure-html/fig-dogs_data-output-1.png" id="fig-dogs_data" width="511" height="411" class="figure-img">
@@ -1996,7 +1994,7 @@ Figure&nbsp;5
 <span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a>ax.scatter(b_median, b, s<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">"C1"</span>)</span>
 <span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a>ax.plot(quants, [b, b], color<span class="op">=</span><span class="st">"C1"</span>, lw<span class="op">=</span><span class="fl">0.5</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-dogs_calibration" class="quarto-float quarto-figure quarto-figure-center anchored" height="403" width="411">
+<div id="fig-dogs_calibration" class="quarto-float quarto-figure quarto-figure-center anchored" width="411" height="403">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-dogs_calibration-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="dogs_stan_files/figure-html/fig-dogs_calibration-output-1.png" id="fig-dogs_calibration" width="411" height="403" class="figure-img">
@@ -2008,7 +2006,7 @@ Figure&nbsp;6
 </div>
 </div>
 </div>
-<div id="6fd31628" class="cell" data-execution_count="31">
+<div id="0b12a639" class="cell" data-execution_count="31">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="dv">300</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>new_dogs_ab <span class="op">=</span> expit(rng.multivariate_normal(new_dogs_mu_logit_ab, new_dogs_Sigma_ab, size<span class="op">=</span>J))</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> new_dogs_ab[:, <span class="dv">0</span>]</span>
@@ -2030,7 +2028,7 @@ Figure&nbsp;6
 <div id="new_fit_5_300" class="cell" data-results="hide" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>new_fit_5 <span class="op">=</span> dogs_5.sample(data<span class="op">=</span>new_dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="bb5f5717" class="cell" data-execution_count="33">
+<div id="d1bd7dcc" class="cell" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>new_dt_5 <span class="op">=</span> az.from_cmdstanpy(new_fit_5)</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>az.summary(new_dt_5, var_names<span class="op">=</span>[<span class="st">"mu_logit_ab"</span>, <span class="st">"sigma_logit_ab"</span>, <span class="st">"Omega_logit_ab"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="33">
@@ -2055,51 +2053,51 @@ Figure&nbsp;6
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">mu_logit_ab[0]</th>
-<td>2.509</td>
-<td>0.062</td>
+<td>2.512</td>
+<td>0.059</td>
 <td>2.4</td>
 <td>2.6</td>
-<td>2186</td>
-<td>2416</td>
+<td>2291</td>
+<td>2657</td>
 <td>1.00</td>
-<td>0.0013</td>
-<td>0.00091</td>
+<td>0.0012</td>
+<td>0.00087</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">mu_logit_ab[1]</th>
-<td>1.269</td>
-<td>0.045</td>
+<td>1.266</td>
+<td>0.044</td>
 <td>1.2</td>
 <td>1.4</td>
-<td>2108</td>
-<td>2819</td>
+<td>1884</td>
+<td>2190</td>
 <td>1.00</td>
-<td>0.00097</td>
-<td>0.00065</td>
+<td>0.001</td>
+<td>0.0007</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">sigma_logit_ab[0]</th>
-<td>0.28</td>
-<td>0.124</td>
-<td>0.026</td>
-<td>0.49</td>
-<td>372</td>
-<td>861</td>
+<td>0.27</td>
+<td>0.129</td>
+<td>0.016</td>
+<td>0.48</td>
+<td>317</td>
+<td>845</td>
 <td>1.01</td>
-<td>0.0065</td>
-<td>0.0038</td>
+<td>0.0072</td>
+<td>0.0042</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">sigma_logit_ab[1]</th>
-<td>0.29</td>
-<td>0.069</td>
-<td>0.14</td>
+<td>0.288</td>
+<td>0.071</td>
+<td>0.13</td>
 <td>0.42</td>
-<td>616</td>
-<td>680</td>
+<td>733</td>
+<td>659</td>
 <td>1.00</td>
-<td>0.0029</td>
-<td>0.0023</td>
+<td>0.0027</td>
+<td>0.0022</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">Omega_logit_ab[0, 0]</th>
@@ -2127,63 +2125,63 @@ Figure&nbsp;6
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">b[295]</th>
-<td>0.765</td>
+<td>0.766</td>
 <td>0.046</td>
 <td>0.66</td>
 <td>0.84</td>
-<td>6146</td>
-<td>2724</td>
+<td>6502</td>
+<td>3013</td>
 <td>1.00</td>
-<td>0.00061</td>
-<td>0.00056</td>
+<td>0.00058</td>
+<td>0.00057</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">b[296]</th>
-<td>0.765</td>
-<td>0.043</td>
+<td>0.766</td>
+<td>0.042</td>
 <td>0.67</td>
 <td>0.84</td>
-<td>5028</td>
-<td>2561</td>
+<td>4919</td>
+<td>2392</td>
 <td>1.00</td>
-<td>0.00061</td>
-<td>0.00052</td>
+<td>0.00059</td>
+<td>0.0005</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">b[297]</th>
 <td>0.77</td>
 <td>0.043</td>
-<td>0.68</td>
-<td>0.85</td>
-<td>6667</td>
-<td>2939</td>
+<td>0.67</td>
+<td>0.84</td>
+<td>6544</td>
+<td>2756</td>
 <td>1.00</td>
 <td>0.00054</td>
-<td>0.00044</td>
+<td>0.00047</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">b[298]</th>
 <td>0.745</td>
 <td>0.05</td>
-<td>0.62</td>
+<td>0.63</td>
 <td>0.83</td>
-<td>3414</td>
-<td>2488</td>
-<td>1.01</td>
+<td>3089</td>
+<td>2776</td>
+<td>1.00</td>
+<td>0.00094</td>
 <td>0.00083</td>
-<td>0.00071</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">b[299]</th>
-<td>0.809</td>
+<td>0.808</td>
 <td>0.0342</td>
 <td>0.74</td>
 <td>0.87</td>
-<td>4765</td>
-<td>3056</td>
+<td>5370</td>
+<td>3101</td>
 <td>1.00</td>
-<td>0.0005</td>
-<td>0.00037</td>
+<td>0.00047</td>
+<td>0.00034</td>
 </tr>
 </tbody>
 </table>
@@ -2192,7 +2190,7 @@ Figure&nbsp;6
 </div>
 </div>
 </div>
-<div id="8db18c9a" class="cell" data-execution_count="34">
+<div id="d50fb73c" class="cell" data-execution_count="34">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="dv">50</span></span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>new_dogs <span class="op">=</span> np.zeros((J, T), dtype<span class="op">=</span><span class="bu">int</span>)</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(J):</span>
@@ -2210,7 +2208,7 @@ Figure&nbsp;6
 <div id="new_fit_5_50" class="cell" data-results="hide" data-execution_count="35">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>new_fit_5 <span class="op">=</span> dogs_5.sample(data<span class="op">=</span>new_dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="9e05ee3f" class="cell" data-execution_count="36">
+<div id="322a5092" class="cell" data-execution_count="36">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>new_dt_5 <span class="op">=</span> az.from_cmdstanpy(new_fit_5)</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>az.summary(new_dt_5, var_names<span class="op">=</span>[<span class="st">"mu_logit_ab"</span>, <span class="st">"sigma_logit_ab"</span>, <span class="st">"Omega_logit_ab"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="36">
@@ -2235,50 +2233,50 @@ Figure&nbsp;6
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">mu_logit_ab[0]</th>
-<td>2.345</td>
-<td>0.056</td>
+<td>2.347</td>
+<td>0.058</td>
 <td>2.2</td>
 <td>2.5</td>
-<td>1980</td>
-<td>2441</td>
+<td>2244</td>
+<td>3163</td>
 <td>1.00</td>
-<td>0.0013</td>
+<td>0.0012</td>
 <td>0.00088</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">mu_logit_ab[1]</th>
-<td>1.34</td>
+<td>1.339</td>
 <td>0.047</td>
 <td>1.2</td>
 <td>1.4</td>
-<td>1574</td>
-<td>2285</td>
+<td>1636</td>
+<td>2238</td>
 <td>1.00</td>
 <td>0.0012</td>
-<td>0.00083</td>
+<td>0.00081</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">sigma_logit_ab[0]</th>
-<td>0.349</td>
-<td>0.074</td>
-<td>0.19</td>
+<td>0.34</td>
+<td>0.084</td>
+<td>0.15</td>
 <td>0.49</td>
-<td>649</td>
-<td>603</td>
+<td>525</td>
+<td>436</td>
 <td>1.00</td>
-<td>0.003</td>
-<td>0.0023</td>
+<td>0.0039</td>
+<td>0.0032</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">sigma_logit_ab[1]</th>
-<td>0.459</td>
-<td>0.058</td>
+<td>0.456</td>
+<td>0.057</td>
 <td>0.36</td>
 <td>0.58</td>
-<td>1382</td>
-<td>2225</td>
+<td>1402</td>
+<td>2046</td>
 <td>1.00</td>
-<td>0.0016</td>
+<td>0.0015</td>
 <td>0.0011</td>
 </tr>
 <tr class="odd">
@@ -2307,63 +2305,63 @@ Figure&nbsp;6
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">b[295]</th>
-<td>0.79</td>
-<td>0.057</td>
-<td>0.66</td>
-<td>0.89</td>
-<td>5140</td>
-<td>2908</td>
+<td>0.791</td>
+<td>0.055</td>
+<td>0.67</td>
+<td>0.88</td>
+<td>5407</td>
+<td>3202</td>
 <td>1.00</td>
-<td>0.0008</td>
-<td>0.00064</td>
+<td>0.00075</td>
+<td>0.00058</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">b[296]</th>
 <td>0.754</td>
-<td>0.07</td>
+<td>0.069</td>
 <td>0.6</td>
 <td>0.87</td>
-<td>3823</td>
-<td>2965</td>
+<td>6049</td>
+<td>2558</td>
 <td>1.00</td>
-<td>0.0012</td>
-<td>0.00096</td>
+<td>0.0009</td>
+<td>0.00072</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">b[297]</th>
-<td>0.733</td>
-<td>0.075</td>
-<td>0.56</td>
-<td>0.85</td>
-<td>3938</td>
-<td>3010</td>
+<td>0.734</td>
+<td>0.073</td>
+<td>0.57</td>
+<td>0.86</td>
+<td>5146</td>
+<td>2920</td>
 <td>1.00</td>
-<td>0.0012</td>
-<td>0.00096</td>
+<td>0.0011</td>
+<td>0.00082</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">b[298]</th>
-<td>0.694</td>
-<td>0.077</td>
-<td>0.52</td>
-<td>0.82</td>
-<td>3909</td>
-<td>2995</td>
+<td>0.69</td>
+<td>0.08</td>
+<td>0.5</td>
+<td>0.83</td>
+<td>5661</td>
+<td>2843</td>
 <td>1.00</td>
-<td>0.0012</td>
-<td>0.001</td>
+<td>0.0011</td>
+<td>0.00094</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">b[299]</th>
-<td>0.759</td>
-<td>0.065</td>
+<td>0.76</td>
+<td>0.067</td>
 <td>0.61</td>
 <td>0.87</td>
-<td>4458</td>
-<td>2695</td>
+<td>5372</td>
+<td>2685</td>
 <td>1.00</td>
-<td>0.00098</td>
-<td>0.00081</td>
+<td>0.00094</td>
+<td>0.0008</td>
 </tr>
 </tbody>
 </table>
@@ -2377,7 +2375,7 @@ Figure&nbsp;6
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>plot_dogs(ax, new_dogs)</span>
 <span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Simulated data:  50 trials"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-dogs_data_50" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="511">
+<div id="fig-dogs_data_50" class="quarto-float quarto-figure quarto-figure-center anchored" width="511" height="411">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-dogs_data_50-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="dogs_stan_files/figure-html/fig-dogs_data_50-output-1.png" id="fig-dogs_data_50" width="511" height="411" class="figure-img">
@@ -2421,7 +2419,7 @@ Figure&nbsp;7
 <span id="cb45-29"><a href="#cb45-29" aria-hidden="true" tabindex="-1"></a>ax.scatter(b_median, b, s<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">"C1"</span>)</span>
 <span id="cb45-30"><a href="#cb45-30" aria-hidden="true" tabindex="-1"></a>ax.plot(quants, [b, b], color<span class="op">=</span><span class="st">"C1"</span>, lw<span class="op">=</span><span class="fl">0.5</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-dogs_calibration_50" class="quarto-float quarto-figure quarto-figure-center anchored" height="403" width="411">
+<div id="fig-dogs_calibration_50" class="quarto-float quarto-figure quarto-figure-center anchored" width="411" height="403">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-dogs_calibration_50-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="dogs_stan_files/figure-html/fig-dogs_calibration_50-output-1.png" id="fig-dogs_calibration_50" width="411" height="403" class="figure-img">
@@ -2934,476 +2932,477 @@ Bush, R. R., and F. Mosteller. 1955. <em>Stochastic Models for Learning</em>. Wi
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb46" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Posterior predictive checking: Stochastic learning in dogs"</span></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Andrew Gelman"</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2022-07-16</span></span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="an">date-format:</span><span class="co"> iso</span></span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
-<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
-<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-download: true</span></span>
-<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> ../casestudies.bib</span></span>
-<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>This notebook includes the <span class="in">`CmdStanPy`</span> code for the Bayesian Workflow book</span>
-<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>Chapter 21 *Posterior predictive checking: Stochastic learning in dogs*.</span>
-<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
-<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a>We analyse stochastic learning in dogs data by</span>
-<span id="cb46-22"><a href="#cb46-22" aria-hidden="true" tabindex="-1"></a>@Bush+Mosteller:1955.</span>
-<span id="cb46-23"><a href="#cb46-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-26"><a href="#cb46-26" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-27"><a href="#cb46-27" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
-<span id="cb46-28"><a href="#cb46-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: true</span></span>
-<span id="cb46-29"><a href="#cb46-29" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: false</span></span>
-<span id="cb46-30"><a href="#cb46-30" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb46-31"><a href="#cb46-31" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb46-32"><a href="#cb46-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-33"><a href="#cb46-33" aria-hidden="true" tabindex="-1"></a>sys.path.insert(<span class="dv">0</span>, <span class="st">".."</span>)</span>
-<span id="cb46-34"><a href="#cb46-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-35"><a href="#cb46-35" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb46-36"><a href="#cb46-36" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb46-37"><a href="#cb46-37" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb46-38"><a href="#cb46-38" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.colors <span class="im">import</span> ListedColormap</span>
-<span id="cb46-39"><a href="#cb46-39" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cmdstanpy <span class="im">import</span> CmdStanModel, disable_logging</span>
-<span id="cb46-40"><a href="#cb46-40" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> expit</span>
-<span id="cb46-41"><a href="#cb46-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-42"><a href="#cb46-42" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> arviz <span class="im">as</span> az</span>
-<span id="cb46-43"><a href="#cb46-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-44"><a href="#cb46-44" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> print_stan</span>
-<span id="cb46-45"><a href="#cb46-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-46"><a href="#cb46-46" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span>
-<span id="cb46-47"><a href="#cb46-47" aria-hidden="true" tabindex="-1"></a>disable_logging()</span>
-<span id="cb46-48"><a href="#cb46-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-49"><a href="#cb46-49" aria-hidden="true" tabindex="-1"></a>az.style.use(<span class="st">"arviz-variat"</span>)</span>
-<span id="cb46-50"><a href="#cb46-50" aria-hidden="true" tabindex="-1"></a>az.rcParams[<span class="st">"stats.ci_prob"</span>] <span class="op">=</span> <span class="fl">0.95</span></span>
-<span id="cb46-51"><a href="#cb46-51" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.dpi"</span>] <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb46-52"><a href="#cb46-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-53"><a href="#cb46-53" aria-hidden="true" tabindex="-1"></a>SEED <span class="op">=</span> <span class="dv">123</span></span>
-<span id="cb46-54"><a href="#cb46-54" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(SEED)</span>
-<span id="cb46-55"><a href="#cb46-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-56"><a href="#cb46-56" aria-hidden="true" tabindex="-1"></a>shock_cmap <span class="op">=</span> ListedColormap([<span class="st">"#fac364"</span>, <span class="st">"#7c2695"</span>])</span>
-<span id="cb46-57"><a href="#cb46-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-58"><a href="#cb46-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-59"><a href="#cb46-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data</span></span>
-<span id="cb46-60"><a href="#cb46-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-63"><a href="#cb46-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-64"><a href="#cb46-64" aria-hidden="true" tabindex="-1"></a>dogs <span class="op">=</span> pd.read_csv(<span class="st">"data/dogs.dat"</span>, skiprows<span class="op">=</span><span class="dv">2</span>, sep<span class="op">=</span><span class="vs">r"</span><span class="dv">\s</span><span class="op">+</span><span class="vs">"</span>, header<span class="op">=</span><span class="va">None</span>)</span>
-<span id="cb46-65"><a href="#cb46-65" aria-hidden="true" tabindex="-1"></a>shock <span class="op">=</span> (dogs.iloc[:, <span class="dv">1</span>:<span class="dv">26</span>].values <span class="op">==</span> <span class="st">"S"</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb46-66"><a href="#cb46-66" aria-hidden="true" tabindex="-1"></a>dogs_data <span class="op">=</span> {<span class="st">"y"</span>: shock, <span class="st">"J"</span>: shock.shape[<span class="dv">0</span>], <span class="st">"T"</span>: shock.shape[<span class="dv">1</span>]}</span>
-<span id="cb46-67"><a href="#cb46-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-68"><a href="#cb46-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-69"><a href="#cb46-69" aria-hidden="true" tabindex="-1"></a><span class="fu">## Models</span></span>
-<span id="cb46-70"><a href="#cb46-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-73"><a href="#cb46-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-74"><a href="#cb46-74" aria-hidden="true" tabindex="-1"></a>dogs_0 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_0.stan"</span>)</span>
-<span id="cb46-75"><a href="#cb46-75" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_0)</span>
-<span id="cb46-76"><a href="#cb46-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-77"><a href="#cb46-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-80"><a href="#cb46-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-81"><a href="#cb46-81" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_0</span></span>
-<span id="cb46-82"><a href="#cb46-82" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb46-83"><a href="#cb46-83" aria-hidden="true" tabindex="-1"></a>fit_0 <span class="op">=</span> dogs_0.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb46-84"><a href="#cb46-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-85"><a href="#cb46-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-88"><a href="#cb46-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-89"><a href="#cb46-89" aria-hidden="true" tabindex="-1"></a>dt_0 <span class="op">=</span> az.from_cmdstanpy(fit_0, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
-<span id="cb46-90"><a href="#cb46-90" aria-hidden="true" tabindex="-1"></a>az.summary(dt_0)</span>
-<span id="cb46-91"><a href="#cb46-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-92"><a href="#cb46-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-95"><a href="#cb46-95" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-96"><a href="#cb46-96" aria-hidden="true" tabindex="-1"></a>dogs_1 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_1.stan"</span>)</span>
-<span id="cb46-97"><a href="#cb46-97" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_1)</span>
-<span id="cb46-98"><a href="#cb46-98" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-99"><a href="#cb46-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-102"><a href="#cb46-102" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-103"><a href="#cb46-103" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_1</span></span>
-<span id="cb46-104"><a href="#cb46-104" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb46-105"><a href="#cb46-105" aria-hidden="true" tabindex="-1"></a>fit_1 <span class="op">=</span> dogs_1.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb46-106"><a href="#cb46-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-107"><a href="#cb46-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-110"><a href="#cb46-110" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-111"><a href="#cb46-111" aria-hidden="true" tabindex="-1"></a>dt_1 <span class="op">=</span> az.from_cmdstanpy(fit_1, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
-<span id="cb46-112"><a href="#cb46-112" aria-hidden="true" tabindex="-1"></a>az.summary(dt_1)</span>
-<span id="cb46-113"><a href="#cb46-113" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-114"><a href="#cb46-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-117"><a href="#cb46-117" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-118"><a href="#cb46-118" aria-hidden="true" tabindex="-1"></a>dogs_2 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_2.stan"</span>)</span>
-<span id="cb46-119"><a href="#cb46-119" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_2)</span>
-<span id="cb46-120"><a href="#cb46-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-121"><a href="#cb46-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-124"><a href="#cb46-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-125"><a href="#cb46-125" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_2</span></span>
-<span id="cb46-126"><a href="#cb46-126" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb46-127"><a href="#cb46-127" aria-hidden="true" tabindex="-1"></a>fit_2 <span class="op">=</span> dogs_2.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb46-128"><a href="#cb46-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-129"><a href="#cb46-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-132"><a href="#cb46-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-133"><a href="#cb46-133" aria-hidden="true" tabindex="-1"></a>dt_2 <span class="op">=</span> az.from_cmdstanpy(fit_2, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
-<span id="cb46-134"><a href="#cb46-134" aria-hidden="true" tabindex="-1"></a>az.summary(dt_2)</span>
-<span id="cb46-135"><a href="#cb46-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-136"><a href="#cb46-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-139"><a href="#cb46-139" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-140"><a href="#cb46-140" aria-hidden="true" tabindex="-1"></a>dogs_3 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_3.stan"</span>)</span>
-<span id="cb46-141"><a href="#cb46-141" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_3)</span>
-<span id="cb46-142"><a href="#cb46-142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-143"><a href="#cb46-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-146"><a href="#cb46-146" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-147"><a href="#cb46-147" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_3</span></span>
-<span id="cb46-148"><a href="#cb46-148" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb46-149"><a href="#cb46-149" aria-hidden="true" tabindex="-1"></a>fit_3 <span class="op">=</span> dogs_3.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb46-150"><a href="#cb46-150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-151"><a href="#cb46-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-154"><a href="#cb46-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-155"><a href="#cb46-155" aria-hidden="true" tabindex="-1"></a>dt_3 <span class="op">=</span> az.from_cmdstanpy(fit_3, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
-<span id="cb46-156"><a href="#cb46-156" aria-hidden="true" tabindex="-1"></a>az.summary(dt_3, var_names<span class="op">=</span>[<span class="st">"mu_logit_a"</span>, <span class="st">"sigma_logit_a"</span>])</span>
-<span id="cb46-157"><a href="#cb46-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-158"><a href="#cb46-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-161"><a href="#cb46-161" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-162"><a href="#cb46-162" aria-hidden="true" tabindex="-1"></a>dogs_4 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_4.stan"</span>)</span>
-<span id="cb46-163"><a href="#cb46-163" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_4)</span>
-<span id="cb46-164"><a href="#cb46-164" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-165"><a href="#cb46-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-168"><a href="#cb46-168" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-169"><a href="#cb46-169" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_4</span></span>
-<span id="cb46-170"><a href="#cb46-170" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb46-171"><a href="#cb46-171" aria-hidden="true" tabindex="-1"></a>fit_4 <span class="op">=</span> dogs_4.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb46-172"><a href="#cb46-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-173"><a href="#cb46-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-176"><a href="#cb46-176" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-177"><a href="#cb46-177" aria-hidden="true" tabindex="-1"></a>dt_4 <span class="op">=</span> az.from_cmdstanpy(fit_4, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
-<span id="cb46-178"><a href="#cb46-178" aria-hidden="true" tabindex="-1"></a>az.summary(dt_4, var_names<span class="op">=</span>[<span class="st">"mu_logit_ab"</span>, <span class="st">"Sigma_logit_ab"</span>])</span>
-<span id="cb46-179"><a href="#cb46-179" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-180"><a href="#cb46-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-183"><a href="#cb46-183" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-184"><a href="#cb46-184" aria-hidden="true" tabindex="-1"></a>dogs_5 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_5.stan"</span>)</span>
-<span id="cb46-185"><a href="#cb46-185" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_5)</span>
-<span id="cb46-186"><a href="#cb46-186" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-187"><a href="#cb46-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-190"><a href="#cb46-190" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-191"><a href="#cb46-191" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_5</span></span>
-<span id="cb46-192"><a href="#cb46-192" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb46-193"><a href="#cb46-193" aria-hidden="true" tabindex="-1"></a>fit_5 <span class="op">=</span> dogs_5.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb46-194"><a href="#cb46-194" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-195"><a href="#cb46-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-198"><a href="#cb46-198" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-199"><a href="#cb46-199" aria-hidden="true" tabindex="-1"></a>dt_5 <span class="op">=</span> az.from_cmdstanpy(fit_5, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
-<span id="cb46-200"><a href="#cb46-200" aria-hidden="true" tabindex="-1"></a>az.summary(dt_5, var_names<span class="op">=</span>[<span class="st">"mu_logit_ab"</span>, <span class="st">"sigma_logit_ab"</span>, <span class="st">"Omega_logit_ab"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>])</span>
-<span id="cb46-201"><a href="#cb46-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-202"><a href="#cb46-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-203"><a href="#cb46-203" aria-hidden="true" tabindex="-1"></a><span class="fu">## Plots</span></span>
-<span id="cb46-204"><a href="#cb46-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-207"><a href="#cb46-207" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-208"><a href="#cb46-208" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> empty_plot(ax, label<span class="op">=</span><span class="st">""</span>):</span>
-<span id="cb46-209"><a href="#cb46-209" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
-<span id="cb46-210"><a href="#cb46-210" aria-hidden="true" tabindex="-1"></a>    ax.text(<span class="fl">0.5</span>, <span class="fl">0.5</span>, label, ha<span class="op">=</span><span class="st">"center"</span>, va<span class="op">=</span><span class="st">"center"</span>, transform<span class="op">=</span>ax.transAxes, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
-<span id="cb46-211"><a href="#cb46-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> social_cards/dogs_stan.png</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Andrew Gelman"</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2022-07-16</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="an">date-format:</span><span class="co"> iso</span></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-download: true</span></span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> ../casestudies.bib</span></span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-17"><a href="#cb46-17" aria-hidden="true" tabindex="-1"></a>This notebook includes the <span class="in">`CmdStanPy`</span> code for the Bayesian Workflow book</span>
+<span id="cb46-18"><a href="#cb46-18" aria-hidden="true" tabindex="-1"></a>Chapter 21 *Posterior predictive checking: Stochastic learning in dogs*.</span>
+<span id="cb46-19"><a href="#cb46-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-20"><a href="#cb46-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb46-21"><a href="#cb46-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-22"><a href="#cb46-22" aria-hidden="true" tabindex="-1"></a>We analyse stochastic learning in dogs data by</span>
+<span id="cb46-23"><a href="#cb46-23" aria-hidden="true" tabindex="-1"></a>@Bush+Mosteller:1955.</span>
+<span id="cb46-24"><a href="#cb46-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-27"><a href="#cb46-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-28"><a href="#cb46-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb46-29"><a href="#cb46-29" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: true</span></span>
+<span id="cb46-30"><a href="#cb46-30" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: false</span></span>
+<span id="cb46-31"><a href="#cb46-31" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb46-32"><a href="#cb46-32" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb46-33"><a href="#cb46-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-34"><a href="#cb46-34" aria-hidden="true" tabindex="-1"></a>sys.path.insert(<span class="dv">0</span>, <span class="st">".."</span>)</span>
+<span id="cb46-35"><a href="#cb46-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-36"><a href="#cb46-36" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb46-37"><a href="#cb46-37" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb46-38"><a href="#cb46-38" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb46-39"><a href="#cb46-39" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.colors <span class="im">import</span> ListedColormap</span>
+<span id="cb46-40"><a href="#cb46-40" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cmdstanpy <span class="im">import</span> CmdStanModel, disable_logging</span>
+<span id="cb46-41"><a href="#cb46-41" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> expit</span>
+<span id="cb46-42"><a href="#cb46-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-43"><a href="#cb46-43" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> arviz <span class="im">as</span> az</span>
+<span id="cb46-44"><a href="#cb46-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-45"><a href="#cb46-45" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> print_stan</span>
+<span id="cb46-46"><a href="#cb46-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-47"><a href="#cb46-47" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span>
+<span id="cb46-48"><a href="#cb46-48" aria-hidden="true" tabindex="-1"></a>disable_logging()</span>
+<span id="cb46-49"><a href="#cb46-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-50"><a href="#cb46-50" aria-hidden="true" tabindex="-1"></a>az.style.use(<span class="st">"arviz-variat"</span>)</span>
+<span id="cb46-51"><a href="#cb46-51" aria-hidden="true" tabindex="-1"></a>az.rcParams[<span class="st">"stats.ci_prob"</span>] <span class="op">=</span> <span class="fl">0.95</span></span>
+<span id="cb46-52"><a href="#cb46-52" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.dpi"</span>] <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb46-53"><a href="#cb46-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-54"><a href="#cb46-54" aria-hidden="true" tabindex="-1"></a>SEED <span class="op">=</span> <span class="dv">123</span></span>
+<span id="cb46-55"><a href="#cb46-55" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(SEED)</span>
+<span id="cb46-56"><a href="#cb46-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-57"><a href="#cb46-57" aria-hidden="true" tabindex="-1"></a>shock_cmap <span class="op">=</span> ListedColormap([<span class="st">"#fac364"</span>, <span class="st">"#7c2695"</span>])</span>
+<span id="cb46-58"><a href="#cb46-58" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-59"><a href="#cb46-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-60"><a href="#cb46-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data</span></span>
+<span id="cb46-61"><a href="#cb46-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-64"><a href="#cb46-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-65"><a href="#cb46-65" aria-hidden="true" tabindex="-1"></a>dogs <span class="op">=</span> pd.read_csv(<span class="st">"data/dogs.dat"</span>, skiprows<span class="op">=</span><span class="dv">2</span>, sep<span class="op">=</span><span class="vs">r"</span><span class="dv">\s</span><span class="op">+</span><span class="vs">"</span>, header<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb46-66"><a href="#cb46-66" aria-hidden="true" tabindex="-1"></a>shock <span class="op">=</span> (dogs.iloc[:, <span class="dv">1</span>:<span class="dv">26</span>].values <span class="op">==</span> <span class="st">"S"</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb46-67"><a href="#cb46-67" aria-hidden="true" tabindex="-1"></a>dogs_data <span class="op">=</span> {<span class="st">"y"</span>: shock, <span class="st">"J"</span>: shock.shape[<span class="dv">0</span>], <span class="st">"T"</span>: shock.shape[<span class="dv">1</span>]}</span>
+<span id="cb46-68"><a href="#cb46-68" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-69"><a href="#cb46-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-70"><a href="#cb46-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## Models</span></span>
+<span id="cb46-71"><a href="#cb46-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-74"><a href="#cb46-74" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-75"><a href="#cb46-75" aria-hidden="true" tabindex="-1"></a>dogs_0 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_0.stan"</span>)</span>
+<span id="cb46-76"><a href="#cb46-76" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_0)</span>
+<span id="cb46-77"><a href="#cb46-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-78"><a href="#cb46-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-81"><a href="#cb46-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-82"><a href="#cb46-82" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_0</span></span>
+<span id="cb46-83"><a href="#cb46-83" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb46-84"><a href="#cb46-84" aria-hidden="true" tabindex="-1"></a>fit_0 <span class="op">=</span> dogs_0.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb46-85"><a href="#cb46-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-86"><a href="#cb46-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-89"><a href="#cb46-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-90"><a href="#cb46-90" aria-hidden="true" tabindex="-1"></a>dt_0 <span class="op">=</span> az.from_cmdstanpy(fit_0, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
+<span id="cb46-91"><a href="#cb46-91" aria-hidden="true" tabindex="-1"></a>az.summary(dt_0)</span>
+<span id="cb46-92"><a href="#cb46-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-93"><a href="#cb46-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-96"><a href="#cb46-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-97"><a href="#cb46-97" aria-hidden="true" tabindex="-1"></a>dogs_1 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_1.stan"</span>)</span>
+<span id="cb46-98"><a href="#cb46-98" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_1)</span>
+<span id="cb46-99"><a href="#cb46-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-100"><a href="#cb46-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-103"><a href="#cb46-103" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-104"><a href="#cb46-104" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_1</span></span>
+<span id="cb46-105"><a href="#cb46-105" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb46-106"><a href="#cb46-106" aria-hidden="true" tabindex="-1"></a>fit_1 <span class="op">=</span> dogs_1.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb46-107"><a href="#cb46-107" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-108"><a href="#cb46-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-111"><a href="#cb46-111" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-112"><a href="#cb46-112" aria-hidden="true" tabindex="-1"></a>dt_1 <span class="op">=</span> az.from_cmdstanpy(fit_1, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
+<span id="cb46-113"><a href="#cb46-113" aria-hidden="true" tabindex="-1"></a>az.summary(dt_1)</span>
+<span id="cb46-114"><a href="#cb46-114" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-115"><a href="#cb46-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-118"><a href="#cb46-118" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-119"><a href="#cb46-119" aria-hidden="true" tabindex="-1"></a>dogs_2 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_2.stan"</span>)</span>
+<span id="cb46-120"><a href="#cb46-120" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_2)</span>
+<span id="cb46-121"><a href="#cb46-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-122"><a href="#cb46-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-125"><a href="#cb46-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-126"><a href="#cb46-126" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_2</span></span>
+<span id="cb46-127"><a href="#cb46-127" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb46-128"><a href="#cb46-128" aria-hidden="true" tabindex="-1"></a>fit_2 <span class="op">=</span> dogs_2.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb46-129"><a href="#cb46-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-130"><a href="#cb46-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-133"><a href="#cb46-133" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-134"><a href="#cb46-134" aria-hidden="true" tabindex="-1"></a>dt_2 <span class="op">=</span> az.from_cmdstanpy(fit_2, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
+<span id="cb46-135"><a href="#cb46-135" aria-hidden="true" tabindex="-1"></a>az.summary(dt_2)</span>
+<span id="cb46-136"><a href="#cb46-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-137"><a href="#cb46-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-140"><a href="#cb46-140" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-141"><a href="#cb46-141" aria-hidden="true" tabindex="-1"></a>dogs_3 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_3.stan"</span>)</span>
+<span id="cb46-142"><a href="#cb46-142" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_3)</span>
+<span id="cb46-143"><a href="#cb46-143" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-144"><a href="#cb46-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-147"><a href="#cb46-147" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-148"><a href="#cb46-148" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_3</span></span>
+<span id="cb46-149"><a href="#cb46-149" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb46-150"><a href="#cb46-150" aria-hidden="true" tabindex="-1"></a>fit_3 <span class="op">=</span> dogs_3.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb46-151"><a href="#cb46-151" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-152"><a href="#cb46-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-155"><a href="#cb46-155" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-156"><a href="#cb46-156" aria-hidden="true" tabindex="-1"></a>dt_3 <span class="op">=</span> az.from_cmdstanpy(fit_3, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
+<span id="cb46-157"><a href="#cb46-157" aria-hidden="true" tabindex="-1"></a>az.summary(dt_3, var_names<span class="op">=</span>[<span class="st">"mu_logit_a"</span>, <span class="st">"sigma_logit_a"</span>])</span>
+<span id="cb46-158"><a href="#cb46-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-159"><a href="#cb46-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-162"><a href="#cb46-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-163"><a href="#cb46-163" aria-hidden="true" tabindex="-1"></a>dogs_4 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_4.stan"</span>)</span>
+<span id="cb46-164"><a href="#cb46-164" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_4)</span>
+<span id="cb46-165"><a href="#cb46-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-166"><a href="#cb46-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-169"><a href="#cb46-169" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-170"><a href="#cb46-170" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_4</span></span>
+<span id="cb46-171"><a href="#cb46-171" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb46-172"><a href="#cb46-172" aria-hidden="true" tabindex="-1"></a>fit_4 <span class="op">=</span> dogs_4.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb46-173"><a href="#cb46-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-174"><a href="#cb46-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-177"><a href="#cb46-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-178"><a href="#cb46-178" aria-hidden="true" tabindex="-1"></a>dt_4 <span class="op">=</span> az.from_cmdstanpy(fit_4, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
+<span id="cb46-179"><a href="#cb46-179" aria-hidden="true" tabindex="-1"></a>az.summary(dt_4, var_names<span class="op">=</span>[<span class="st">"mu_logit_ab"</span>, <span class="st">"Sigma_logit_ab"</span>])</span>
+<span id="cb46-180"><a href="#cb46-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-181"><a href="#cb46-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-184"><a href="#cb46-184" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-185"><a href="#cb46-185" aria-hidden="true" tabindex="-1"></a>dogs_5 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"dogs_5.stan"</span>)</span>
+<span id="cb46-186"><a href="#cb46-186" aria-hidden="true" tabindex="-1"></a>print_stan(dogs_5)</span>
+<span id="cb46-187"><a href="#cb46-187" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-188"><a href="#cb46-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-191"><a href="#cb46-191" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-192"><a href="#cb46-192" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_5</span></span>
+<span id="cb46-193"><a href="#cb46-193" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb46-194"><a href="#cb46-194" aria-hidden="true" tabindex="-1"></a>fit_5 <span class="op">=</span> dogs_5.sample(data<span class="op">=</span>dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb46-195"><a href="#cb46-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-196"><a href="#cb46-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-199"><a href="#cb46-199" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-200"><a href="#cb46-200" aria-hidden="true" tabindex="-1"></a>dt_5 <span class="op">=</span> az.from_cmdstanpy(fit_5, posterior_predictive<span class="op">=</span>[<span class="st">"y_rep"</span>])</span>
+<span id="cb46-201"><a href="#cb46-201" aria-hidden="true" tabindex="-1"></a>az.summary(dt_5, var_names<span class="op">=</span>[<span class="st">"mu_logit_ab"</span>, <span class="st">"sigma_logit_ab"</span>, <span class="st">"Omega_logit_ab"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>])</span>
+<span id="cb46-202"><a href="#cb46-202" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-203"><a href="#cb46-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-204"><a href="#cb46-204" aria-hidden="true" tabindex="-1"></a><span class="fu">## Plots</span></span>
+<span id="cb46-205"><a href="#cb46-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-208"><a href="#cb46-208" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-209"><a href="#cb46-209" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> empty_plot(ax, label<span class="op">=</span><span class="st">""</span>):</span>
+<span id="cb46-210"><a href="#cb46-210" aria-hidden="true" tabindex="-1"></a>    ax.axis(<span class="st">"off"</span>)</span>
+<span id="cb46-211"><a href="#cb46-211" aria-hidden="true" tabindex="-1"></a>    ax.text(<span class="fl">0.5</span>, <span class="fl">0.5</span>, label, ha<span class="op">=</span><span class="st">"center"</span>, va<span class="op">=</span><span class="st">"center"</span>, transform<span class="op">=</span>ax.transAxes, fontsize<span class="op">=</span><span class="dv">8</span>)</span>
 <span id="cb46-212"><a href="#cb46-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-213"><a href="#cb46-213" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_dogs(ax, y):</span>
-<span id="cb46-214"><a href="#cb46-214" aria-hidden="true" tabindex="-1"></a>    J, T <span class="op">=</span> y.shape</span>
-<span id="cb46-215"><a href="#cb46-215" aria-hidden="true" tabindex="-1"></a>    max_y_times <span class="op">=</span> np.full(J, <span class="op">-</span><span class="dv">1</span>)</span>
-<span id="cb46-216"><a href="#cb46-216" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(J):</span>
-<span id="cb46-217"><a href="#cb46-217" aria-hidden="true" tabindex="-1"></a>        shock_times <span class="op">=</span> np.where(y[j] <span class="op">==</span> <span class="dv">1</span>)[<span class="dv">0</span>]</span>
-<span id="cb46-218"><a href="#cb46-218" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(shock_times) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb46-219"><a href="#cb46-219" aria-hidden="true" tabindex="-1"></a>            max_y_times[j] <span class="op">=</span> shock_times.<span class="bu">max</span>()</span>
-<span id="cb46-220"><a href="#cb46-220" aria-hidden="true" tabindex="-1"></a>    order <span class="op">=</span> np.argsort(max_y_times)[::<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb46-221"><a href="#cb46-221" aria-hidden="true" tabindex="-1"></a>    y_ordered <span class="op">=</span> y[order]</span>
-<span id="cb46-222"><a href="#cb46-222" aria-hidden="true" tabindex="-1"></a>    ax.imshow(y_ordered, aspect<span class="op">=</span><span class="st">"auto"</span>, cmap<span class="op">=</span>shock_cmap, origin<span class="op">=</span><span class="st">"lower"</span>, interpolation<span class="op">=</span><span class="st">"nearest"</span>)</span>
-<span id="cb46-223"><a href="#cb46-223" aria-hidden="true" tabindex="-1"></a>    ax.<span class="bu">set</span>(xticks<span class="op">=</span>[], yticks<span class="op">=</span>[])</span>
-<span id="cb46-224"><a href="#cb46-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-213"><a href="#cb46-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-214"><a href="#cb46-214" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_dogs(ax, y):</span>
+<span id="cb46-215"><a href="#cb46-215" aria-hidden="true" tabindex="-1"></a>    J, T <span class="op">=</span> y.shape</span>
+<span id="cb46-216"><a href="#cb46-216" aria-hidden="true" tabindex="-1"></a>    max_y_times <span class="op">=</span> np.full(J, <span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb46-217"><a href="#cb46-217" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(J):</span>
+<span id="cb46-218"><a href="#cb46-218" aria-hidden="true" tabindex="-1"></a>        shock_times <span class="op">=</span> np.where(y[j] <span class="op">==</span> <span class="dv">1</span>)[<span class="dv">0</span>]</span>
+<span id="cb46-219"><a href="#cb46-219" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(shock_times) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb46-220"><a href="#cb46-220" aria-hidden="true" tabindex="-1"></a>            max_y_times[j] <span class="op">=</span> shock_times.<span class="bu">max</span>()</span>
+<span id="cb46-221"><a href="#cb46-221" aria-hidden="true" tabindex="-1"></a>    order <span class="op">=</span> np.argsort(max_y_times)[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb46-222"><a href="#cb46-222" aria-hidden="true" tabindex="-1"></a>    y_ordered <span class="op">=</span> y[order]</span>
+<span id="cb46-223"><a href="#cb46-223" aria-hidden="true" tabindex="-1"></a>    ax.imshow(y_ordered, aspect<span class="op">=</span><span class="st">"auto"</span>, cmap<span class="op">=</span>shock_cmap, origin<span class="op">=</span><span class="st">"lower"</span>, interpolation<span class="op">=</span><span class="st">"nearest"</span>)</span>
+<span id="cb46-224"><a href="#cb46-224" aria-hidden="true" tabindex="-1"></a>    ax.<span class="bu">set</span>(xticks<span class="op">=</span>[], yticks<span class="op">=</span>[])</span>
 <span id="cb46-225"><a href="#cb46-225" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb46-226"><a href="#cb46-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-227"><a href="#cb46-227" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_ppc(axes_row, idata, label):</span>
-<span id="cb46-228"><a href="#cb46-228" aria-hidden="true" tabindex="-1"></a>    J <span class="op">=</span> dogs_data[<span class="st">"J"</span>]</span>
-<span id="cb46-229"><a href="#cb46-229" aria-hidden="true" tabindex="-1"></a>    T <span class="op">=</span> dogs_data[<span class="st">"T"</span>]</span>
-<span id="cb46-230"><a href="#cb46-230" aria-hidden="true" tabindex="-1"></a>    empty_plot(axes_row[<span class="dv">0</span>], label)</span>
-<span id="cb46-231"><a href="#cb46-231" aria-hidden="true" tabindex="-1"></a>    y_rep <span class="op">=</span> az.extract(idata, group<span class="op">=</span><span class="st">"posterior_predictive"</span>, num_samples<span class="op">=</span><span class="dv">6</span>, random_seed<span class="op">=</span>rng)</span>
-<span id="cb46-232"><a href="#cb46-232" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax_i, sample_i <span class="kw">in</span> <span class="bu">enumerate</span>(y_rep.sample.values):</span>
-<span id="cb46-233"><a href="#cb46-233" aria-hidden="true" tabindex="-1"></a>        plot_dogs(axes_row[ax_i <span class="op">+</span> <span class="dv">1</span>], y_rep.sel(sample<span class="op">=</span>sample_i))</span>
-<span id="cb46-234"><a href="#cb46-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-235"><a href="#cb46-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-236"><a href="#cb46-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-239"><a href="#cb46-239" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-240"><a href="#cb46-240" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dogs_ppc</span></span>
-<span id="cb46-241"><a href="#cb46-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-242"><a href="#cb46-242" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> dogs_data[<span class="st">"J"</span>]</span>
-<span id="cb46-243"><a href="#cb46-243" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> dogs_data[<span class="st">"T"</span>]</span>
-<span id="cb46-244"><a href="#cb46-244" aria-hidden="true" tabindex="-1"></a>_, axes <span class="op">=</span> plt.subplots(<span class="dv">7</span>, <span class="dv">7</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">10</span>))</span>
-<span id="cb46-245"><a href="#cb46-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-246"><a href="#cb46-246" aria-hidden="true" tabindex="-1"></a>empty_plot(axes[<span class="dv">0</span>, <span class="dv">0</span>], <span class="st">"Real dogs"</span>)</span>
-<span id="cb46-247"><a href="#cb46-247" aria-hidden="true" tabindex="-1"></a>plot_dogs(axes[<span class="dv">0</span>, <span class="dv">1</span>], shock)</span>
-<span id="cb46-248"><a href="#cb46-248" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">7</span>):</span>
-<span id="cb46-249"><a href="#cb46-249" aria-hidden="true" tabindex="-1"></a>    empty_plot(axes[<span class="dv">0</span>, j])</span>
-<span id="cb46-250"><a href="#cb46-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-251"><a href="#cb46-251" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [dt_0, dt_1, dt_2, dt_3, dt_4, dt_5]</span>
-<span id="cb46-252"><a href="#cb46-252" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [</span>
-<span id="cb46-253"><a href="#cb46-253" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PPsims from M0:</span><span class="ch">\n</span><span class="st">logit model"</span>,</span>
-<span id="cb46-254"><a href="#cb46-254" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PPsims from M1:</span><span class="ch">\n</span><span class="st">1-parameter</span><span class="ch">\n</span><span class="st">log model"</span>,</span>
-<span id="cb46-255"><a href="#cb46-255" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PPsims from M2:</span><span class="ch">\n</span><span class="st">2-parameter</span><span class="ch">\n</span><span class="st">log model"</span>,</span>
-<span id="cb46-256"><a href="#cb46-256" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PPsims from M3:</span><span class="ch">\n</span><span class="st">hier 1-par</span><span class="ch">\n</span><span class="st">log model"</span>,</span>
-<span id="cb46-257"><a href="#cb46-257" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PPsims from M4:</span><span class="ch">\n</span><span class="st">hier 2-par</span><span class="ch">\n</span><span class="st">log model"</span>,</span>
-<span id="cb46-258"><a href="#cb46-258" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PPsims from M5:</span><span class="ch">\n</span><span class="st">hier 2-par</span><span class="ch">\n</span><span class="st">log model</span><span class="ch">\n</span><span class="st">with prior"</span>,</span>
-<span id="cb46-259"><a href="#cb46-259" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb46-260"><a href="#cb46-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-261"><a href="#cb46-261" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row, (idata, label) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(models, labels), start<span class="op">=</span><span class="dv">1</span>):</span>
-<span id="cb46-262"><a href="#cb46-262" aria-hidden="true" tabindex="-1"></a>    plot_ppc(axes[row], idata, label)</span>
-<span id="cb46-263"><a href="#cb46-263" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-264"><a href="#cb46-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-267"><a href="#cb46-267" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-268"><a href="#cb46-268" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dogs_inference</span></span>
-<span id="cb46-269"><a href="#cb46-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-270"><a href="#cb46-270" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>), sharex<span class="op">=</span><span class="va">True</span>, sharey<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb46-271"><a href="#cb46-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-272"><a href="#cb46-272" aria-hidden="true" tabindex="-1"></a>posterior <span class="op">=</span> az.extract(dt_5, var_names<span class="op">=</span>[<span class="st">"a"</span>, <span class="st">"b"</span>], num_samples<span class="op">=</span><span class="dv">10</span>, random_seed<span class="op">=</span>SEED)</span>
-<span id="cb46-273"><a href="#cb46-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-227"><a href="#cb46-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-228"><a href="#cb46-228" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_ppc(axes_row, idata, label):</span>
+<span id="cb46-229"><a href="#cb46-229" aria-hidden="true" tabindex="-1"></a>    J <span class="op">=</span> dogs_data[<span class="st">"J"</span>]</span>
+<span id="cb46-230"><a href="#cb46-230" aria-hidden="true" tabindex="-1"></a>    T <span class="op">=</span> dogs_data[<span class="st">"T"</span>]</span>
+<span id="cb46-231"><a href="#cb46-231" aria-hidden="true" tabindex="-1"></a>    empty_plot(axes_row[<span class="dv">0</span>], label)</span>
+<span id="cb46-232"><a href="#cb46-232" aria-hidden="true" tabindex="-1"></a>    y_rep <span class="op">=</span> az.extract(idata, group<span class="op">=</span><span class="st">"posterior_predictive"</span>, num_samples<span class="op">=</span><span class="dv">6</span>, random_seed<span class="op">=</span>rng)</span>
+<span id="cb46-233"><a href="#cb46-233" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax_i, sample_i <span class="kw">in</span> <span class="bu">enumerate</span>(y_rep.sample.values):</span>
+<span id="cb46-234"><a href="#cb46-234" aria-hidden="true" tabindex="-1"></a>        plot_dogs(axes_row[ax_i <span class="op">+</span> <span class="dv">1</span>], y_rep.sel(sample<span class="op">=</span>sample_i))</span>
+<span id="cb46-235"><a href="#cb46-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-236"><a href="#cb46-236" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-237"><a href="#cb46-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-240"><a href="#cb46-240" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-241"><a href="#cb46-241" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dogs_ppc</span></span>
+<span id="cb46-242"><a href="#cb46-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-243"><a href="#cb46-243" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> dogs_data[<span class="st">"J"</span>]</span>
+<span id="cb46-244"><a href="#cb46-244" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> dogs_data[<span class="st">"T"</span>]</span>
+<span id="cb46-245"><a href="#cb46-245" aria-hidden="true" tabindex="-1"></a>_, axes <span class="op">=</span> plt.subplots(<span class="dv">7</span>, <span class="dv">7</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">10</span>))</span>
+<span id="cb46-246"><a href="#cb46-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-247"><a href="#cb46-247" aria-hidden="true" tabindex="-1"></a>empty_plot(axes[<span class="dv">0</span>, <span class="dv">0</span>], <span class="st">"Real dogs"</span>)</span>
+<span id="cb46-248"><a href="#cb46-248" aria-hidden="true" tabindex="-1"></a>plot_dogs(axes[<span class="dv">0</span>, <span class="dv">1</span>], shock)</span>
+<span id="cb46-249"><a href="#cb46-249" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="dv">7</span>):</span>
+<span id="cb46-250"><a href="#cb46-250" aria-hidden="true" tabindex="-1"></a>    empty_plot(axes[<span class="dv">0</span>, j])</span>
+<span id="cb46-251"><a href="#cb46-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-252"><a href="#cb46-252" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> [dt_0, dt_1, dt_2, dt_3, dt_4, dt_5]</span>
+<span id="cb46-253"><a href="#cb46-253" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [</span>
+<span id="cb46-254"><a href="#cb46-254" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PPsims from M0:</span><span class="ch">\n</span><span class="st">logit model"</span>,</span>
+<span id="cb46-255"><a href="#cb46-255" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PPsims from M1:</span><span class="ch">\n</span><span class="st">1-parameter</span><span class="ch">\n</span><span class="st">log model"</span>,</span>
+<span id="cb46-256"><a href="#cb46-256" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PPsims from M2:</span><span class="ch">\n</span><span class="st">2-parameter</span><span class="ch">\n</span><span class="st">log model"</span>,</span>
+<span id="cb46-257"><a href="#cb46-257" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PPsims from M3:</span><span class="ch">\n</span><span class="st">hier 1-par</span><span class="ch">\n</span><span class="st">log model"</span>,</span>
+<span id="cb46-258"><a href="#cb46-258" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PPsims from M4:</span><span class="ch">\n</span><span class="st">hier 2-par</span><span class="ch">\n</span><span class="st">log model"</span>,</span>
+<span id="cb46-259"><a href="#cb46-259" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PPsims from M5:</span><span class="ch">\n</span><span class="st">hier 2-par</span><span class="ch">\n</span><span class="st">log model</span><span class="ch">\n</span><span class="st">with prior"</span>,</span>
+<span id="cb46-260"><a href="#cb46-260" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb46-261"><a href="#cb46-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-262"><a href="#cb46-262" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> row, (idata, label) <span class="kw">in</span> <span class="bu">enumerate</span>(<span class="bu">zip</span>(models, labels), start<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb46-263"><a href="#cb46-263" aria-hidden="true" tabindex="-1"></a>    plot_ppc(axes[row], idata, label)</span>
+<span id="cb46-264"><a href="#cb46-264" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-265"><a href="#cb46-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-268"><a href="#cb46-268" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-269"><a href="#cb46-269" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dogs_inference</span></span>
+<span id="cb46-270"><a href="#cb46-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-271"><a href="#cb46-271" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>), sharex<span class="op">=</span><span class="va">True</span>, sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb46-272"><a href="#cb46-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-273"><a href="#cb46-273" aria-hidden="true" tabindex="-1"></a>posterior <span class="op">=</span> az.extract(dt_5, var_names<span class="op">=</span>[<span class="st">"a"</span>, <span class="st">"b"</span>], num_samples<span class="op">=</span><span class="dv">10</span>, random_seed<span class="op">=</span>SEED)</span>
 <span id="cb46-274"><a href="#cb46-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-275"><a href="#cb46-275" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, sample_i <span class="kw">in</span> <span class="bu">zip</span>(axes.flatten(), posterior.sample):</span>
-<span id="cb46-276"><a href="#cb46-276" aria-hidden="true" tabindex="-1"></a>    a_sim <span class="op">=</span> posterior[<span class="st">"a"</span>].sel(sample<span class="op">=</span>sample_i)</span>
-<span id="cb46-277"><a href="#cb46-277" aria-hidden="true" tabindex="-1"></a>    b_sim <span class="op">=</span> posterior[<span class="st">"b"</span>].sel(sample<span class="op">=</span>sample_i)</span>
-<span id="cb46-278"><a href="#cb46-278" aria-hidden="true" tabindex="-1"></a>    ax.plot([<span class="fl">0.55</span>, <span class="dv">1</span>], [<span class="fl">0.55</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">"lightgray"</span>)</span>
-<span id="cb46-279"><a href="#cb46-279" aria-hidden="true" tabindex="-1"></a>    ax.scatter(a_sim, b_sim)</span>
-<span id="cb46-280"><a href="#cb46-280" aria-hidden="true" tabindex="-1"></a>    ax.<span class="bu">set</span>(xlim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
-<span id="cb46-281"><a href="#cb46-281" aria-hidden="true" tabindex="-1"></a>            ylim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
-<span id="cb46-282"><a href="#cb46-282" aria-hidden="true" tabindex="-1"></a>            aspect<span class="op">=</span><span class="st">"equal"</span>,</span>
-<span id="cb46-283"><a href="#cb46-283" aria-hidden="true" tabindex="-1"></a>            xticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
-<span id="cb46-284"><a href="#cb46-284" aria-hidden="true" tabindex="-1"></a>            yticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>])</span>
-<span id="cb46-285"><a href="#cb46-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-286"><a href="#cb46-286" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes[:,<span class="dv">0</span>]:</span>
-<span id="cb46-287"><a href="#cb46-287" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"b"</span>)</span>
-<span id="cb46-288"><a href="#cb46-288" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes[<span class="dv">1</span>,:]:</span>
-<span id="cb46-289"><a href="#cb46-289" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"a"</span>)</span>
-<span id="cb46-290"><a href="#cb46-290" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"10 posterior simulations of the parameters of the 30 dogs"</span>)</span>
-<span id="cb46-291"><a href="#cb46-291" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-292"><a href="#cb46-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-295"><a href="#cb46-295" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-296"><a href="#cb46-296" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dogs_point_estimate</span></span>
-<span id="cb46-297"><a href="#cb46-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-298"><a href="#cb46-298" aria-hidden="true" tabindex="-1"></a>ab_median <span class="op">=</span> az.median(dt_5, var_names<span class="op">=</span>[<span class="st">"a"</span>, <span class="st">"b"</span>])</span>
-<span id="cb46-299"><a href="#cb46-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-300"><a href="#cb46-300" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb46-301"><a href="#cb46-301" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="fl">0.55</span>, <span class="dv">1</span>], [<span class="fl">0.55</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">"lightgray"</span>)</span>
-<span id="cb46-302"><a href="#cb46-302" aria-hidden="true" tabindex="-1"></a>ax.scatter(ab_median[<span class="st">"a"</span>], ab_median[<span class="st">"b"</span>])</span>
-<span id="cb46-303"><a href="#cb46-303" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
-<span id="cb46-304"><a href="#cb46-304" aria-hidden="true" tabindex="-1"></a>       ylim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
-<span id="cb46-305"><a href="#cb46-305" aria-hidden="true" tabindex="-1"></a>       aspect<span class="op">=</span><span class="st">"equal"</span>,</span>
-<span id="cb46-306"><a href="#cb46-306" aria-hidden="true" tabindex="-1"></a>       xticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
-<span id="cb46-307"><a href="#cb46-307" aria-hidden="true" tabindex="-1"></a>       yticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
-<span id="cb46-308"><a href="#cb46-308" aria-hidden="true" tabindex="-1"></a>       xlabel<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">hat{a}</span><span class="dv">$</span><span class="vs">"</span>,</span>
-<span id="cb46-309"><a href="#cb46-309" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">hat{b}</span><span class="dv">$</span><span class="vs">"</span>)</span>
-<span id="cb46-310"><a href="#cb46-310" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Posterior medians from fitted model"</span>, fontsize<span class="op">=</span><span class="dv">11</span>)<span class="op">;</span></span>
-<span id="cb46-311"><a href="#cb46-311" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-312"><a href="#cb46-312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-315"><a href="#cb46-315" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-316"><a href="#cb46-316" aria-hidden="true" tabindex="-1"></a>new_dogs_mu_logit_ab <span class="op">=</span> np.array([<span class="fl">2.4</span>, <span class="fl">1.3</span>])</span>
-<span id="cb46-317"><a href="#cb46-317" aria-hidden="true" tabindex="-1"></a>new_dogs_sigma_ab <span class="op">=</span> np.array([<span class="fl">0.32</span>, <span class="fl">0.40</span>])</span>
-<span id="cb46-318"><a href="#cb46-318" aria-hidden="true" tabindex="-1"></a>new_dogs_rho_ab <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb46-319"><a href="#cb46-319" aria-hidden="true" tabindex="-1"></a>new_dogs_Sigma_ab <span class="op">=</span> (</span>
-<span id="cb46-320"><a href="#cb46-320" aria-hidden="true" tabindex="-1"></a>    np.diag(new_dogs_sigma_ab)</span>
-<span id="cb46-321"><a href="#cb46-321" aria-hidden="true" tabindex="-1"></a>    <span class="op">@</span> np.array([[<span class="dv">1</span>, new_dogs_rho_ab], [new_dogs_rho_ab, <span class="dv">1</span>]])</span>
-<span id="cb46-322"><a href="#cb46-322" aria-hidden="true" tabindex="-1"></a>    <span class="op">@</span> np.diag(new_dogs_sigma_ab)</span>
-<span id="cb46-323"><a href="#cb46-323" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb46-324"><a href="#cb46-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-325"><a href="#cb46-325" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="dv">30</span></span>
-<span id="cb46-326"><a href="#cb46-326" aria-hidden="true" tabindex="-1"></a>new_dogs_ab <span class="op">=</span> expit(rng.multivariate_normal(new_dogs_mu_logit_ab, new_dogs_Sigma_ab, size<span class="op">=</span>J))</span>
-<span id="cb46-327"><a href="#cb46-327" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> new_dogs_ab[:, <span class="dv">0</span>]</span>
-<span id="cb46-328"><a href="#cb46-328" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> new_dogs_ab[:, <span class="dv">1</span>]</span>
-<span id="cb46-329"><a href="#cb46-329" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="dv">25</span></span>
-<span id="cb46-330"><a href="#cb46-330" aria-hidden="true" tabindex="-1"></a>new_dogs <span class="op">=</span> np.zeros((J, T), dtype<span class="op">=</span><span class="bu">int</span>)</span>
-<span id="cb46-331"><a href="#cb46-331" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(J):</span>
-<span id="cb46-332"><a href="#cb46-332" aria-hidden="true" tabindex="-1"></a>    prev_shock <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb46-333"><a href="#cb46-333" aria-hidden="true" tabindex="-1"></a>    prev_avoid <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb46-334"><a href="#cb46-334" aria-hidden="true" tabindex="-1"></a>    new_dogs[j, <span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb46-335"><a href="#cb46-335" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, T):</span>
-<span id="cb46-336"><a href="#cb46-336" aria-hidden="true" tabindex="-1"></a>        prev_shock <span class="op">+=</span> new_dogs[j, t <span class="op">-</span> <span class="dv">1</span>]</span>
-<span id="cb46-337"><a href="#cb46-337" aria-hidden="true" tabindex="-1"></a>        prev_avoid <span class="op">+=</span> <span class="dv">1</span> <span class="op">-</span> new_dogs[j, t <span class="op">-</span> <span class="dv">1</span>]</span>
-<span id="cb46-338"><a href="#cb46-338" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> a[j] <span class="op">**</span> prev_shock <span class="op">*</span> b[j] <span class="op">**</span> prev_avoid</span>
-<span id="cb46-339"><a href="#cb46-339" aria-hidden="true" tabindex="-1"></a>        new_dogs[j, t] <span class="op">=</span> rng.binomial(<span class="dv">1</span>, p)</span>
-<span id="cb46-340"><a href="#cb46-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-341"><a href="#cb46-341" aria-hidden="true" tabindex="-1"></a>new_dogs_data <span class="op">=</span> {<span class="st">"y"</span>: new_dogs, <span class="st">"J"</span>: J, <span class="st">"T"</span>: T}</span>
-<span id="cb46-342"><a href="#cb46-342" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-343"><a href="#cb46-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-346"><a href="#cb46-346" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-347"><a href="#cb46-347" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: new_fit_5</span></span>
-<span id="cb46-348"><a href="#cb46-348" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb46-349"><a href="#cb46-349" aria-hidden="true" tabindex="-1"></a>new_fit_5 <span class="op">=</span> dogs_5.sample(data<span class="op">=</span>new_dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb46-350"><a href="#cb46-350" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-351"><a href="#cb46-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-354"><a href="#cb46-354" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-355"><a href="#cb46-355" aria-hidden="true" tabindex="-1"></a>new_dt_5 <span class="op">=</span> az.from_cmdstanpy(new_fit_5)</span>
-<span id="cb46-356"><a href="#cb46-356" aria-hidden="true" tabindex="-1"></a>az.summary(new_dt_5, var_names<span class="op">=</span>[<span class="st">"mu_logit_ab"</span>, <span class="st">"sigma_logit_ab"</span>, <span class="st">"Omega_logit_ab"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>])</span>
-<span id="cb46-357"><a href="#cb46-357" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-358"><a href="#cb46-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-361"><a href="#cb46-361" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-362"><a href="#cb46-362" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dogs_parameters</span></span>
-<span id="cb46-363"><a href="#cb46-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-364"><a href="#cb46-364" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb46-365"><a href="#cb46-365" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="fl">0.55</span>, <span class="dv">1</span>], [<span class="fl">0.55</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">"lightgray"</span>)</span>
-<span id="cb46-366"><a href="#cb46-366" aria-hidden="true" tabindex="-1"></a>ax.scatter(a, b)</span>
-<span id="cb46-367"><a href="#cb46-367" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
-<span id="cb46-368"><a href="#cb46-368" aria-hidden="true" tabindex="-1"></a>       ylim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
-<span id="cb46-369"><a href="#cb46-369" aria-hidden="true" tabindex="-1"></a>       xticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
-<span id="cb46-370"><a href="#cb46-370" aria-hidden="true" tabindex="-1"></a>       yticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
-<span id="cb46-371"><a href="#cb46-371" aria-hidden="true" tabindex="-1"></a>       aspect<span class="op">=</span><span class="st">"equal"</span>,</span>
-<span id="cb46-372"><a href="#cb46-372" aria-hidden="true" tabindex="-1"></a>       xlabel<span class="op">=</span><span class="st">"a"</span>,</span>
-<span id="cb46-373"><a href="#cb46-373" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"b"</span>)</span>
-<span id="cb46-374"><a href="#cb46-374" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Simulated parameters"</span>)<span class="op">;</span></span>
-<span id="cb46-375"><a href="#cb46-375" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-376"><a href="#cb46-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-379"><a href="#cb46-379" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-380"><a href="#cb46-380" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dogs_data</span></span>
-<span id="cb46-381"><a href="#cb46-381" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-382"><a href="#cb46-382" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span>
-<span id="cb46-383"><a href="#cb46-383" aria-hidden="true" tabindex="-1"></a>plot_dogs(ax, new_dogs)</span>
-<span id="cb46-384"><a href="#cb46-384" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Simulated data"</span>)<span class="op">;</span></span>
-<span id="cb46-385"><a href="#cb46-385" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-386"><a href="#cb46-386" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-389"><a href="#cb46-389" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-390"><a href="#cb46-390" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dogs_calibration</span></span>
-<span id="cb46-391"><a href="#cb46-391" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-392"><a href="#cb46-392" aria-hidden="true" tabindex="-1"></a>new_dt <span class="op">=</span> az.from_cmdstanpy(new_fit_5)</span>
-<span id="cb46-393"><a href="#cb46-393" aria-hidden="true" tabindex="-1"></a>posterior <span class="op">=</span> az.extract(new_dt, var_names<span class="op">=</span>[<span class="st">"a"</span>, <span class="st">"b"</span>])</span>
-<span id="cb46-394"><a href="#cb46-394" aria-hidden="true" tabindex="-1"></a>a_post <span class="op">=</span> posterior[<span class="st">"a"</span>]</span>
-<span id="cb46-395"><a href="#cb46-395" aria-hidden="true" tabindex="-1"></a>b_post <span class="op">=</span> posterior[<span class="st">"b"</span>]</span>
-<span id="cb46-396"><a href="#cb46-396" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-397"><a href="#cb46-397" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb46-398"><a href="#cb46-398" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
-<span id="cb46-399"><a href="#cb46-399" aria-hidden="true" tabindex="-1"></a>       ylim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
-<span id="cb46-400"><a href="#cb46-400" aria-hidden="true" tabindex="-1"></a>       xticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
-<span id="cb46-401"><a href="#cb46-401" aria-hidden="true" tabindex="-1"></a>       yticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
-<span id="cb46-402"><a href="#cb46-402" aria-hidden="true" tabindex="-1"></a>       aspect<span class="op">=</span><span class="st">"equal"</span>,</span>
-<span id="cb46-403"><a href="#cb46-403" aria-hidden="true" tabindex="-1"></a>       xlabel<span class="op">=</span><span class="st">"Posterior inference"</span>,</span>
-<span id="cb46-404"><a href="#cb46-404" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"True parameter value"</span>)</span>
-<span id="cb46-405"><a href="#cb46-405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-406"><a href="#cb46-406" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Calibration check of posterior intervals"</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb46-407"><a href="#cb46-407" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="fl">0.55</span>, <span class="dv">1</span>], [<span class="fl">0.55</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">"lightgray"</span>)</span>
-<span id="cb46-408"><a href="#cb46-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-275"><a href="#cb46-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-276"><a href="#cb46-276" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, sample_i <span class="kw">in</span> <span class="bu">zip</span>(axes.flatten(), posterior.sample):</span>
+<span id="cb46-277"><a href="#cb46-277" aria-hidden="true" tabindex="-1"></a>    a_sim <span class="op">=</span> posterior[<span class="st">"a"</span>].sel(sample<span class="op">=</span>sample_i)</span>
+<span id="cb46-278"><a href="#cb46-278" aria-hidden="true" tabindex="-1"></a>    b_sim <span class="op">=</span> posterior[<span class="st">"b"</span>].sel(sample<span class="op">=</span>sample_i)</span>
+<span id="cb46-279"><a href="#cb46-279" aria-hidden="true" tabindex="-1"></a>    ax.plot([<span class="fl">0.55</span>, <span class="dv">1</span>], [<span class="fl">0.55</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">"lightgray"</span>)</span>
+<span id="cb46-280"><a href="#cb46-280" aria-hidden="true" tabindex="-1"></a>    ax.scatter(a_sim, b_sim)</span>
+<span id="cb46-281"><a href="#cb46-281" aria-hidden="true" tabindex="-1"></a>    ax.<span class="bu">set</span>(xlim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
+<span id="cb46-282"><a href="#cb46-282" aria-hidden="true" tabindex="-1"></a>            ylim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
+<span id="cb46-283"><a href="#cb46-283" aria-hidden="true" tabindex="-1"></a>            aspect<span class="op">=</span><span class="st">"equal"</span>,</span>
+<span id="cb46-284"><a href="#cb46-284" aria-hidden="true" tabindex="-1"></a>            xticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
+<span id="cb46-285"><a href="#cb46-285" aria-hidden="true" tabindex="-1"></a>            yticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>])</span>
+<span id="cb46-286"><a href="#cb46-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-287"><a href="#cb46-287" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes[:,<span class="dv">0</span>]:</span>
+<span id="cb46-288"><a href="#cb46-288" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"b"</span>)</span>
+<span id="cb46-289"><a href="#cb46-289" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes[<span class="dv">1</span>,:]:</span>
+<span id="cb46-290"><a href="#cb46-290" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"a"</span>)</span>
+<span id="cb46-291"><a href="#cb46-291" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"10 posterior simulations of the parameters of the 30 dogs"</span>)</span>
+<span id="cb46-292"><a href="#cb46-292" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-293"><a href="#cb46-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-296"><a href="#cb46-296" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-297"><a href="#cb46-297" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dogs_point_estimate</span></span>
+<span id="cb46-298"><a href="#cb46-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-299"><a href="#cb46-299" aria-hidden="true" tabindex="-1"></a>ab_median <span class="op">=</span> az.median(dt_5, var_names<span class="op">=</span>[<span class="st">"a"</span>, <span class="st">"b"</span>])</span>
+<span id="cb46-300"><a href="#cb46-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-301"><a href="#cb46-301" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb46-302"><a href="#cb46-302" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="fl">0.55</span>, <span class="dv">1</span>], [<span class="fl">0.55</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">"lightgray"</span>)</span>
+<span id="cb46-303"><a href="#cb46-303" aria-hidden="true" tabindex="-1"></a>ax.scatter(ab_median[<span class="st">"a"</span>], ab_median[<span class="st">"b"</span>])</span>
+<span id="cb46-304"><a href="#cb46-304" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
+<span id="cb46-305"><a href="#cb46-305" aria-hidden="true" tabindex="-1"></a>       ylim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
+<span id="cb46-306"><a href="#cb46-306" aria-hidden="true" tabindex="-1"></a>       aspect<span class="op">=</span><span class="st">"equal"</span>,</span>
+<span id="cb46-307"><a href="#cb46-307" aria-hidden="true" tabindex="-1"></a>       xticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
+<span id="cb46-308"><a href="#cb46-308" aria-hidden="true" tabindex="-1"></a>       yticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
+<span id="cb46-309"><a href="#cb46-309" aria-hidden="true" tabindex="-1"></a>       xlabel<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">hat{a}</span><span class="dv">$</span><span class="vs">"</span>,</span>
+<span id="cb46-310"><a href="#cb46-310" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="vs">r"</span><span class="dv">$</span><span class="er">\</span><span class="vs">hat{b}</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb46-311"><a href="#cb46-311" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Posterior medians from fitted model"</span>, fontsize<span class="op">=</span><span class="dv">11</span>)<span class="op">;</span></span>
+<span id="cb46-312"><a href="#cb46-312" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-313"><a href="#cb46-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-316"><a href="#cb46-316" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-317"><a href="#cb46-317" aria-hidden="true" tabindex="-1"></a>new_dogs_mu_logit_ab <span class="op">=</span> np.array([<span class="fl">2.4</span>, <span class="fl">1.3</span>])</span>
+<span id="cb46-318"><a href="#cb46-318" aria-hidden="true" tabindex="-1"></a>new_dogs_sigma_ab <span class="op">=</span> np.array([<span class="fl">0.32</span>, <span class="fl">0.40</span>])</span>
+<span id="cb46-319"><a href="#cb46-319" aria-hidden="true" tabindex="-1"></a>new_dogs_rho_ab <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb46-320"><a href="#cb46-320" aria-hidden="true" tabindex="-1"></a>new_dogs_Sigma_ab <span class="op">=</span> (</span>
+<span id="cb46-321"><a href="#cb46-321" aria-hidden="true" tabindex="-1"></a>    np.diag(new_dogs_sigma_ab)</span>
+<span id="cb46-322"><a href="#cb46-322" aria-hidden="true" tabindex="-1"></a>    <span class="op">@</span> np.array([[<span class="dv">1</span>, new_dogs_rho_ab], [new_dogs_rho_ab, <span class="dv">1</span>]])</span>
+<span id="cb46-323"><a href="#cb46-323" aria-hidden="true" tabindex="-1"></a>    <span class="op">@</span> np.diag(new_dogs_sigma_ab)</span>
+<span id="cb46-324"><a href="#cb46-324" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb46-325"><a href="#cb46-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-326"><a href="#cb46-326" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="dv">30</span></span>
+<span id="cb46-327"><a href="#cb46-327" aria-hidden="true" tabindex="-1"></a>new_dogs_ab <span class="op">=</span> expit(rng.multivariate_normal(new_dogs_mu_logit_ab, new_dogs_Sigma_ab, size<span class="op">=</span>J))</span>
+<span id="cb46-328"><a href="#cb46-328" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> new_dogs_ab[:, <span class="dv">0</span>]</span>
+<span id="cb46-329"><a href="#cb46-329" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> new_dogs_ab[:, <span class="dv">1</span>]</span>
+<span id="cb46-330"><a href="#cb46-330" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb46-331"><a href="#cb46-331" aria-hidden="true" tabindex="-1"></a>new_dogs <span class="op">=</span> np.zeros((J, T), dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb46-332"><a href="#cb46-332" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(J):</span>
+<span id="cb46-333"><a href="#cb46-333" aria-hidden="true" tabindex="-1"></a>    prev_shock <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb46-334"><a href="#cb46-334" aria-hidden="true" tabindex="-1"></a>    prev_avoid <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb46-335"><a href="#cb46-335" aria-hidden="true" tabindex="-1"></a>    new_dogs[j, <span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb46-336"><a href="#cb46-336" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, T):</span>
+<span id="cb46-337"><a href="#cb46-337" aria-hidden="true" tabindex="-1"></a>        prev_shock <span class="op">+=</span> new_dogs[j, t <span class="op">-</span> <span class="dv">1</span>]</span>
+<span id="cb46-338"><a href="#cb46-338" aria-hidden="true" tabindex="-1"></a>        prev_avoid <span class="op">+=</span> <span class="dv">1</span> <span class="op">-</span> new_dogs[j, t <span class="op">-</span> <span class="dv">1</span>]</span>
+<span id="cb46-339"><a href="#cb46-339" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> a[j] <span class="op">**</span> prev_shock <span class="op">*</span> b[j] <span class="op">**</span> prev_avoid</span>
+<span id="cb46-340"><a href="#cb46-340" aria-hidden="true" tabindex="-1"></a>        new_dogs[j, t] <span class="op">=</span> rng.binomial(<span class="dv">1</span>, p)</span>
+<span id="cb46-341"><a href="#cb46-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-342"><a href="#cb46-342" aria-hidden="true" tabindex="-1"></a>new_dogs_data <span class="op">=</span> {<span class="st">"y"</span>: new_dogs, <span class="st">"J"</span>: J, <span class="st">"T"</span>: T}</span>
+<span id="cb46-343"><a href="#cb46-343" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-344"><a href="#cb46-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-347"><a href="#cb46-347" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-348"><a href="#cb46-348" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: new_fit_5</span></span>
+<span id="cb46-349"><a href="#cb46-349" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb46-350"><a href="#cb46-350" aria-hidden="true" tabindex="-1"></a>new_fit_5 <span class="op">=</span> dogs_5.sample(data<span class="op">=</span>new_dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb46-351"><a href="#cb46-351" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-352"><a href="#cb46-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-355"><a href="#cb46-355" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-356"><a href="#cb46-356" aria-hidden="true" tabindex="-1"></a>new_dt_5 <span class="op">=</span> az.from_cmdstanpy(new_fit_5)</span>
+<span id="cb46-357"><a href="#cb46-357" aria-hidden="true" tabindex="-1"></a>az.summary(new_dt_5, var_names<span class="op">=</span>[<span class="st">"mu_logit_ab"</span>, <span class="st">"sigma_logit_ab"</span>, <span class="st">"Omega_logit_ab"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>])</span>
+<span id="cb46-358"><a href="#cb46-358" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-359"><a href="#cb46-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-362"><a href="#cb46-362" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-363"><a href="#cb46-363" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dogs_parameters</span></span>
+<span id="cb46-364"><a href="#cb46-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-365"><a href="#cb46-365" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb46-366"><a href="#cb46-366" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="fl">0.55</span>, <span class="dv">1</span>], [<span class="fl">0.55</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">"lightgray"</span>)</span>
+<span id="cb46-367"><a href="#cb46-367" aria-hidden="true" tabindex="-1"></a>ax.scatter(a, b)</span>
+<span id="cb46-368"><a href="#cb46-368" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
+<span id="cb46-369"><a href="#cb46-369" aria-hidden="true" tabindex="-1"></a>       ylim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
+<span id="cb46-370"><a href="#cb46-370" aria-hidden="true" tabindex="-1"></a>       xticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
+<span id="cb46-371"><a href="#cb46-371" aria-hidden="true" tabindex="-1"></a>       yticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
+<span id="cb46-372"><a href="#cb46-372" aria-hidden="true" tabindex="-1"></a>       aspect<span class="op">=</span><span class="st">"equal"</span>,</span>
+<span id="cb46-373"><a href="#cb46-373" aria-hidden="true" tabindex="-1"></a>       xlabel<span class="op">=</span><span class="st">"a"</span>,</span>
+<span id="cb46-374"><a href="#cb46-374" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"b"</span>)</span>
+<span id="cb46-375"><a href="#cb46-375" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Simulated parameters"</span>)<span class="op">;</span></span>
+<span id="cb46-376"><a href="#cb46-376" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-377"><a href="#cb46-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-380"><a href="#cb46-380" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-381"><a href="#cb46-381" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dogs_data</span></span>
+<span id="cb46-382"><a href="#cb46-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-383"><a href="#cb46-383" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span>
+<span id="cb46-384"><a href="#cb46-384" aria-hidden="true" tabindex="-1"></a>plot_dogs(ax, new_dogs)</span>
+<span id="cb46-385"><a href="#cb46-385" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Simulated data"</span>)<span class="op">;</span></span>
+<span id="cb46-386"><a href="#cb46-386" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-387"><a href="#cb46-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-390"><a href="#cb46-390" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-391"><a href="#cb46-391" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dogs_calibration</span></span>
+<span id="cb46-392"><a href="#cb46-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-393"><a href="#cb46-393" aria-hidden="true" tabindex="-1"></a>new_dt <span class="op">=</span> az.from_cmdstanpy(new_fit_5)</span>
+<span id="cb46-394"><a href="#cb46-394" aria-hidden="true" tabindex="-1"></a>posterior <span class="op">=</span> az.extract(new_dt, var_names<span class="op">=</span>[<span class="st">"a"</span>, <span class="st">"b"</span>])</span>
+<span id="cb46-395"><a href="#cb46-395" aria-hidden="true" tabindex="-1"></a>a_post <span class="op">=</span> posterior[<span class="st">"a"</span>]</span>
+<span id="cb46-396"><a href="#cb46-396" aria-hidden="true" tabindex="-1"></a>b_post <span class="op">=</span> posterior[<span class="st">"b"</span>]</span>
+<span id="cb46-397"><a href="#cb46-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-398"><a href="#cb46-398" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb46-399"><a href="#cb46-399" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
+<span id="cb46-400"><a href="#cb46-400" aria-hidden="true" tabindex="-1"></a>       ylim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
+<span id="cb46-401"><a href="#cb46-401" aria-hidden="true" tabindex="-1"></a>       xticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
+<span id="cb46-402"><a href="#cb46-402" aria-hidden="true" tabindex="-1"></a>       yticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
+<span id="cb46-403"><a href="#cb46-403" aria-hidden="true" tabindex="-1"></a>       aspect<span class="op">=</span><span class="st">"equal"</span>,</span>
+<span id="cb46-404"><a href="#cb46-404" aria-hidden="true" tabindex="-1"></a>       xlabel<span class="op">=</span><span class="st">"Posterior inference"</span>,</span>
+<span id="cb46-405"><a href="#cb46-405" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"True parameter value"</span>)</span>
+<span id="cb46-406"><a href="#cb46-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-407"><a href="#cb46-407" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Calibration check of posterior intervals"</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb46-408"><a href="#cb46-408" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="fl">0.55</span>, <span class="dv">1</span>], [<span class="fl">0.55</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">"lightgray"</span>)</span>
 <span id="cb46-409"><a href="#cb46-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-410"><a href="#cb46-410" aria-hidden="true" tabindex="-1"></a>a_median <span class="op">=</span> az.median(a_post, dim<span class="op">=</span><span class="st">"sample"</span>)</span>
-<span id="cb46-411"><a href="#cb46-411" aria-hidden="true" tabindex="-1"></a>quants <span class="op">=</span> a_post.quantile([<span class="fl">0.25</span>, <span class="fl">0.75</span>], dim<span class="op">=</span><span class="st">"sample"</span>)</span>
-<span id="cb46-412"><a href="#cb46-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-413"><a href="#cb46-413" aria-hidden="true" tabindex="-1"></a>ax.scatter(a_median, a, s<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">"C0"</span>)</span>
-<span id="cb46-414"><a href="#cb46-414" aria-hidden="true" tabindex="-1"></a>ax.plot(quants, [a, a], color<span class="op">=</span><span class="st">"C0"</span>, lw<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb46-415"><a href="#cb46-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-410"><a href="#cb46-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-411"><a href="#cb46-411" aria-hidden="true" tabindex="-1"></a>a_median <span class="op">=</span> az.median(a_post, dim<span class="op">=</span><span class="st">"sample"</span>)</span>
+<span id="cb46-412"><a href="#cb46-412" aria-hidden="true" tabindex="-1"></a>quants <span class="op">=</span> a_post.quantile([<span class="fl">0.25</span>, <span class="fl">0.75</span>], dim<span class="op">=</span><span class="st">"sample"</span>)</span>
+<span id="cb46-413"><a href="#cb46-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-414"><a href="#cb46-414" aria-hidden="true" tabindex="-1"></a>ax.scatter(a_median, a, s<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">"C0"</span>)</span>
+<span id="cb46-415"><a href="#cb46-415" aria-hidden="true" tabindex="-1"></a>ax.plot(quants, [a, a], color<span class="op">=</span><span class="st">"C0"</span>, lw<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb46-416"><a href="#cb46-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-417"><a href="#cb46-417" aria-hidden="true" tabindex="-1"></a>b_median <span class="op">=</span> az.median(b_post, dim<span class="op">=</span><span class="st">"sample"</span>)</span>
-<span id="cb46-418"><a href="#cb46-418" aria-hidden="true" tabindex="-1"></a>quants <span class="op">=</span> b_post.quantile([<span class="fl">0.25</span>, <span class="fl">0.75</span>], dim<span class="op">=</span><span class="st">"sample"</span>)</span>
-<span id="cb46-419"><a href="#cb46-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-420"><a href="#cb46-420" aria-hidden="true" tabindex="-1"></a>ax.scatter(b_median, b, s<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">"C1"</span>)</span>
-<span id="cb46-421"><a href="#cb46-421" aria-hidden="true" tabindex="-1"></a>ax.plot(quants, [b, b], color<span class="op">=</span><span class="st">"C1"</span>, lw<span class="op">=</span><span class="fl">0.5</span>)<span class="op">;</span></span>
-<span id="cb46-422"><a href="#cb46-422" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-423"><a href="#cb46-423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-426"><a href="#cb46-426" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-427"><a href="#cb46-427" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="dv">300</span></span>
-<span id="cb46-428"><a href="#cb46-428" aria-hidden="true" tabindex="-1"></a>new_dogs_ab <span class="op">=</span> expit(rng.multivariate_normal(new_dogs_mu_logit_ab, new_dogs_Sigma_ab, size<span class="op">=</span>J))</span>
-<span id="cb46-429"><a href="#cb46-429" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> new_dogs_ab[:, <span class="dv">0</span>]</span>
-<span id="cb46-430"><a href="#cb46-430" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> new_dogs_ab[:, <span class="dv">1</span>]</span>
-<span id="cb46-431"><a href="#cb46-431" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="dv">25</span></span>
-<span id="cb46-432"><a href="#cb46-432" aria-hidden="true" tabindex="-1"></a>new_dogs <span class="op">=</span> np.zeros((J, T), dtype<span class="op">=</span><span class="bu">int</span>)</span>
-<span id="cb46-433"><a href="#cb46-433" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(J):</span>
-<span id="cb46-434"><a href="#cb46-434" aria-hidden="true" tabindex="-1"></a>    prev_shock <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb46-435"><a href="#cb46-435" aria-hidden="true" tabindex="-1"></a>    prev_avoid <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb46-436"><a href="#cb46-436" aria-hidden="true" tabindex="-1"></a>    new_dogs[j, <span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb46-437"><a href="#cb46-437" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, T):</span>
-<span id="cb46-438"><a href="#cb46-438" aria-hidden="true" tabindex="-1"></a>        prev_shock <span class="op">+=</span> new_dogs[j, t <span class="op">-</span> <span class="dv">1</span>]</span>
-<span id="cb46-439"><a href="#cb46-439" aria-hidden="true" tabindex="-1"></a>        prev_avoid <span class="op">+=</span> <span class="dv">1</span> <span class="op">-</span> new_dogs[j, t <span class="op">-</span> <span class="dv">1</span>]</span>
-<span id="cb46-440"><a href="#cb46-440" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> a[j] <span class="op">**</span> prev_shock <span class="op">*</span> b[j] <span class="op">**</span> prev_avoid</span>
-<span id="cb46-441"><a href="#cb46-441" aria-hidden="true" tabindex="-1"></a>        new_dogs[j, t] <span class="op">=</span> rng.binomial(<span class="dv">1</span>, p)</span>
-<span id="cb46-442"><a href="#cb46-442" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-443"><a href="#cb46-443" aria-hidden="true" tabindex="-1"></a>new_dogs_data <span class="op">=</span> {<span class="st">"y"</span>: new_dogs, <span class="st">"J"</span>: J, <span class="st">"T"</span>: T}</span>
-<span id="cb46-444"><a href="#cb46-444" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-445"><a href="#cb46-445" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-448"><a href="#cb46-448" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-449"><a href="#cb46-449" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: new_fit_5_300</span></span>
-<span id="cb46-450"><a href="#cb46-450" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb46-451"><a href="#cb46-451" aria-hidden="true" tabindex="-1"></a>new_fit_5 <span class="op">=</span> dogs_5.sample(data<span class="op">=</span>new_dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb46-452"><a href="#cb46-452" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-453"><a href="#cb46-453" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-456"><a href="#cb46-456" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-457"><a href="#cb46-457" aria-hidden="true" tabindex="-1"></a>new_dt_5 <span class="op">=</span> az.from_cmdstanpy(new_fit_5)</span>
-<span id="cb46-458"><a href="#cb46-458" aria-hidden="true" tabindex="-1"></a>az.summary(new_dt_5, var_names<span class="op">=</span>[<span class="st">"mu_logit_ab"</span>, <span class="st">"sigma_logit_ab"</span>, <span class="st">"Omega_logit_ab"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>])</span>
-<span id="cb46-459"><a href="#cb46-459" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-460"><a href="#cb46-460" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-463"><a href="#cb46-463" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-464"><a href="#cb46-464" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="dv">50</span></span>
-<span id="cb46-465"><a href="#cb46-465" aria-hidden="true" tabindex="-1"></a>new_dogs <span class="op">=</span> np.zeros((J, T), dtype<span class="op">=</span><span class="bu">int</span>)</span>
-<span id="cb46-466"><a href="#cb46-466" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(J):</span>
-<span id="cb46-467"><a href="#cb46-467" aria-hidden="true" tabindex="-1"></a>    prev_shock <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb46-468"><a href="#cb46-468" aria-hidden="true" tabindex="-1"></a>    prev_avoid <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb46-469"><a href="#cb46-469" aria-hidden="true" tabindex="-1"></a>    new_dogs[j, <span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb46-470"><a href="#cb46-470" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, T):</span>
-<span id="cb46-471"><a href="#cb46-471" aria-hidden="true" tabindex="-1"></a>        prev_shock <span class="op">+=</span> new_dogs[j, t <span class="op">-</span> <span class="dv">1</span>]</span>
-<span id="cb46-472"><a href="#cb46-472" aria-hidden="true" tabindex="-1"></a>        prev_avoid <span class="op">+=</span> <span class="dv">1</span> <span class="op">-</span> new_dogs[j, t <span class="op">-</span> <span class="dv">1</span>]</span>
-<span id="cb46-473"><a href="#cb46-473" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> a[j] <span class="op">**</span> prev_shock <span class="op">*</span> b[j] <span class="op">**</span> prev_avoid</span>
-<span id="cb46-474"><a href="#cb46-474" aria-hidden="true" tabindex="-1"></a>        new_dogs[j, t] <span class="op">=</span> rng.binomial(<span class="dv">1</span>, p)</span>
-<span id="cb46-475"><a href="#cb46-475" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-476"><a href="#cb46-476" aria-hidden="true" tabindex="-1"></a>new_dogs_data <span class="op">=</span> {<span class="st">"y"</span>: new_dogs, <span class="st">"J"</span>: J, <span class="st">"T"</span>: T}</span>
-<span id="cb46-477"><a href="#cb46-477" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-478"><a href="#cb46-478" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-481"><a href="#cb46-481" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-482"><a href="#cb46-482" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: new_fit_5_50</span></span>
-<span id="cb46-483"><a href="#cb46-483" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb46-484"><a href="#cb46-484" aria-hidden="true" tabindex="-1"></a>new_fit_5 <span class="op">=</span> dogs_5.sample(data<span class="op">=</span>new_dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb46-485"><a href="#cb46-485" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-486"><a href="#cb46-486" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-489"><a href="#cb46-489" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-490"><a href="#cb46-490" aria-hidden="true" tabindex="-1"></a>new_dt_5 <span class="op">=</span> az.from_cmdstanpy(new_fit_5)</span>
-<span id="cb46-491"><a href="#cb46-491" aria-hidden="true" tabindex="-1"></a>az.summary(new_dt_5, var_names<span class="op">=</span>[<span class="st">"mu_logit_ab"</span>, <span class="st">"sigma_logit_ab"</span>, <span class="st">"Omega_logit_ab"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>])</span>
-<span id="cb46-492"><a href="#cb46-492" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-493"><a href="#cb46-493" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-496"><a href="#cb46-496" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-497"><a href="#cb46-497" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dogs_data_50</span></span>
-<span id="cb46-498"><a href="#cb46-498" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-499"><a href="#cb46-499" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span>
-<span id="cb46-500"><a href="#cb46-500" aria-hidden="true" tabindex="-1"></a>plot_dogs(ax, new_dogs)</span>
-<span id="cb46-501"><a href="#cb46-501" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Simulated data:  50 trials"</span>)<span class="op">;</span></span>
-<span id="cb46-502"><a href="#cb46-502" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-503"><a href="#cb46-503" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-506"><a href="#cb46-506" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb46-507"><a href="#cb46-507" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dogs_calibration_50</span></span>
-<span id="cb46-508"><a href="#cb46-508" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-509"><a href="#cb46-509" aria-hidden="true" tabindex="-1"></a>new_dt <span class="op">=</span> az.from_cmdstanpy(new_fit_5)</span>
-<span id="cb46-510"><a href="#cb46-510" aria-hidden="true" tabindex="-1"></a>posterior <span class="op">=</span> az.extract(new_dt, var_names<span class="op">=</span>[<span class="st">"a"</span>, <span class="st">"b"</span>])</span>
-<span id="cb46-511"><a href="#cb46-511" aria-hidden="true" tabindex="-1"></a>a_post <span class="op">=</span> posterior[<span class="st">"a"</span>]</span>
-<span id="cb46-512"><a href="#cb46-512" aria-hidden="true" tabindex="-1"></a>b_post <span class="op">=</span> posterior[<span class="st">"b"</span>]</span>
-<span id="cb46-513"><a href="#cb46-513" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-514"><a href="#cb46-514" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
-<span id="cb46-515"><a href="#cb46-515" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
-<span id="cb46-516"><a href="#cb46-516" aria-hidden="true" tabindex="-1"></a>       ylim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
-<span id="cb46-517"><a href="#cb46-517" aria-hidden="true" tabindex="-1"></a>       xticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
-<span id="cb46-518"><a href="#cb46-518" aria-hidden="true" tabindex="-1"></a>       yticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
-<span id="cb46-519"><a href="#cb46-519" aria-hidden="true" tabindex="-1"></a>       aspect<span class="op">=</span><span class="st">"equal"</span>,</span>
-<span id="cb46-520"><a href="#cb46-520" aria-hidden="true" tabindex="-1"></a>       xlabel<span class="op">=</span><span class="st">"Posterior inference"</span>,</span>
-<span id="cb46-521"><a href="#cb46-521" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"True parameter value"</span>)</span>
-<span id="cb46-522"><a href="#cb46-522" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-523"><a href="#cb46-523" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Calibration check of posterior intervals"</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
-<span id="cb46-524"><a href="#cb46-524" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="fl">0.55</span>, <span class="dv">1</span>], [<span class="fl">0.55</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">"lightgray"</span>)</span>
-<span id="cb46-525"><a href="#cb46-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-417"><a href="#cb46-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-418"><a href="#cb46-418" aria-hidden="true" tabindex="-1"></a>b_median <span class="op">=</span> az.median(b_post, dim<span class="op">=</span><span class="st">"sample"</span>)</span>
+<span id="cb46-419"><a href="#cb46-419" aria-hidden="true" tabindex="-1"></a>quants <span class="op">=</span> b_post.quantile([<span class="fl">0.25</span>, <span class="fl">0.75</span>], dim<span class="op">=</span><span class="st">"sample"</span>)</span>
+<span id="cb46-420"><a href="#cb46-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-421"><a href="#cb46-421" aria-hidden="true" tabindex="-1"></a>ax.scatter(b_median, b, s<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">"C1"</span>)</span>
+<span id="cb46-422"><a href="#cb46-422" aria-hidden="true" tabindex="-1"></a>ax.plot(quants, [b, b], color<span class="op">=</span><span class="st">"C1"</span>, lw<span class="op">=</span><span class="fl">0.5</span>)<span class="op">;</span></span>
+<span id="cb46-423"><a href="#cb46-423" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-424"><a href="#cb46-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-427"><a href="#cb46-427" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-428"><a href="#cb46-428" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="dv">300</span></span>
+<span id="cb46-429"><a href="#cb46-429" aria-hidden="true" tabindex="-1"></a>new_dogs_ab <span class="op">=</span> expit(rng.multivariate_normal(new_dogs_mu_logit_ab, new_dogs_Sigma_ab, size<span class="op">=</span>J))</span>
+<span id="cb46-430"><a href="#cb46-430" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> new_dogs_ab[:, <span class="dv">0</span>]</span>
+<span id="cb46-431"><a href="#cb46-431" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> new_dogs_ab[:, <span class="dv">1</span>]</span>
+<span id="cb46-432"><a href="#cb46-432" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="dv">25</span></span>
+<span id="cb46-433"><a href="#cb46-433" aria-hidden="true" tabindex="-1"></a>new_dogs <span class="op">=</span> np.zeros((J, T), dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb46-434"><a href="#cb46-434" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(J):</span>
+<span id="cb46-435"><a href="#cb46-435" aria-hidden="true" tabindex="-1"></a>    prev_shock <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb46-436"><a href="#cb46-436" aria-hidden="true" tabindex="-1"></a>    prev_avoid <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb46-437"><a href="#cb46-437" aria-hidden="true" tabindex="-1"></a>    new_dogs[j, <span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb46-438"><a href="#cb46-438" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, T):</span>
+<span id="cb46-439"><a href="#cb46-439" aria-hidden="true" tabindex="-1"></a>        prev_shock <span class="op">+=</span> new_dogs[j, t <span class="op">-</span> <span class="dv">1</span>]</span>
+<span id="cb46-440"><a href="#cb46-440" aria-hidden="true" tabindex="-1"></a>        prev_avoid <span class="op">+=</span> <span class="dv">1</span> <span class="op">-</span> new_dogs[j, t <span class="op">-</span> <span class="dv">1</span>]</span>
+<span id="cb46-441"><a href="#cb46-441" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> a[j] <span class="op">**</span> prev_shock <span class="op">*</span> b[j] <span class="op">**</span> prev_avoid</span>
+<span id="cb46-442"><a href="#cb46-442" aria-hidden="true" tabindex="-1"></a>        new_dogs[j, t] <span class="op">=</span> rng.binomial(<span class="dv">1</span>, p)</span>
+<span id="cb46-443"><a href="#cb46-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-444"><a href="#cb46-444" aria-hidden="true" tabindex="-1"></a>new_dogs_data <span class="op">=</span> {<span class="st">"y"</span>: new_dogs, <span class="st">"J"</span>: J, <span class="st">"T"</span>: T}</span>
+<span id="cb46-445"><a href="#cb46-445" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-446"><a href="#cb46-446" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-449"><a href="#cb46-449" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-450"><a href="#cb46-450" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: new_fit_5_300</span></span>
+<span id="cb46-451"><a href="#cb46-451" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb46-452"><a href="#cb46-452" aria-hidden="true" tabindex="-1"></a>new_fit_5 <span class="op">=</span> dogs_5.sample(data<span class="op">=</span>new_dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb46-453"><a href="#cb46-453" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-454"><a href="#cb46-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-457"><a href="#cb46-457" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-458"><a href="#cb46-458" aria-hidden="true" tabindex="-1"></a>new_dt_5 <span class="op">=</span> az.from_cmdstanpy(new_fit_5)</span>
+<span id="cb46-459"><a href="#cb46-459" aria-hidden="true" tabindex="-1"></a>az.summary(new_dt_5, var_names<span class="op">=</span>[<span class="st">"mu_logit_ab"</span>, <span class="st">"sigma_logit_ab"</span>, <span class="st">"Omega_logit_ab"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>])</span>
+<span id="cb46-460"><a href="#cb46-460" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-461"><a href="#cb46-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-464"><a href="#cb46-464" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-465"><a href="#cb46-465" aria-hidden="true" tabindex="-1"></a>T <span class="op">=</span> <span class="dv">50</span></span>
+<span id="cb46-466"><a href="#cb46-466" aria-hidden="true" tabindex="-1"></a>new_dogs <span class="op">=</span> np.zeros((J, T), dtype<span class="op">=</span><span class="bu">int</span>)</span>
+<span id="cb46-467"><a href="#cb46-467" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(J):</span>
+<span id="cb46-468"><a href="#cb46-468" aria-hidden="true" tabindex="-1"></a>    prev_shock <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb46-469"><a href="#cb46-469" aria-hidden="true" tabindex="-1"></a>    prev_avoid <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb46-470"><a href="#cb46-470" aria-hidden="true" tabindex="-1"></a>    new_dogs[j, <span class="dv">0</span>] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb46-471"><a href="#cb46-471" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, T):</span>
+<span id="cb46-472"><a href="#cb46-472" aria-hidden="true" tabindex="-1"></a>        prev_shock <span class="op">+=</span> new_dogs[j, t <span class="op">-</span> <span class="dv">1</span>]</span>
+<span id="cb46-473"><a href="#cb46-473" aria-hidden="true" tabindex="-1"></a>        prev_avoid <span class="op">+=</span> <span class="dv">1</span> <span class="op">-</span> new_dogs[j, t <span class="op">-</span> <span class="dv">1</span>]</span>
+<span id="cb46-474"><a href="#cb46-474" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> a[j] <span class="op">**</span> prev_shock <span class="op">*</span> b[j] <span class="op">**</span> prev_avoid</span>
+<span id="cb46-475"><a href="#cb46-475" aria-hidden="true" tabindex="-1"></a>        new_dogs[j, t] <span class="op">=</span> rng.binomial(<span class="dv">1</span>, p)</span>
+<span id="cb46-476"><a href="#cb46-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-477"><a href="#cb46-477" aria-hidden="true" tabindex="-1"></a>new_dogs_data <span class="op">=</span> {<span class="st">"y"</span>: new_dogs, <span class="st">"J"</span>: J, <span class="st">"T"</span>: T}</span>
+<span id="cb46-478"><a href="#cb46-478" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-479"><a href="#cb46-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-482"><a href="#cb46-482" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-483"><a href="#cb46-483" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: new_fit_5_50</span></span>
+<span id="cb46-484"><a href="#cb46-484" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb46-485"><a href="#cb46-485" aria-hidden="true" tabindex="-1"></a>new_fit_5 <span class="op">=</span> dogs_5.sample(data<span class="op">=</span>new_dogs_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb46-486"><a href="#cb46-486" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-487"><a href="#cb46-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-490"><a href="#cb46-490" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-491"><a href="#cb46-491" aria-hidden="true" tabindex="-1"></a>new_dt_5 <span class="op">=</span> az.from_cmdstanpy(new_fit_5)</span>
+<span id="cb46-492"><a href="#cb46-492" aria-hidden="true" tabindex="-1"></a>az.summary(new_dt_5, var_names<span class="op">=</span>[<span class="st">"mu_logit_ab"</span>, <span class="st">"sigma_logit_ab"</span>, <span class="st">"Omega_logit_ab"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>])</span>
+<span id="cb46-493"><a href="#cb46-493" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-494"><a href="#cb46-494" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-497"><a href="#cb46-497" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-498"><a href="#cb46-498" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dogs_data_50</span></span>
+<span id="cb46-499"><a href="#cb46-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-500"><a href="#cb46-500" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span>
+<span id="cb46-501"><a href="#cb46-501" aria-hidden="true" tabindex="-1"></a>plot_dogs(ax, new_dogs)</span>
+<span id="cb46-502"><a href="#cb46-502" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Simulated data:  50 trials"</span>)<span class="op">;</span></span>
+<span id="cb46-503"><a href="#cb46-503" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-504"><a href="#cb46-504" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-507"><a href="#cb46-507" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb46-508"><a href="#cb46-508" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-dogs_calibration_50</span></span>
+<span id="cb46-509"><a href="#cb46-509" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-510"><a href="#cb46-510" aria-hidden="true" tabindex="-1"></a>new_dt <span class="op">=</span> az.from_cmdstanpy(new_fit_5)</span>
+<span id="cb46-511"><a href="#cb46-511" aria-hidden="true" tabindex="-1"></a>posterior <span class="op">=</span> az.extract(new_dt, var_names<span class="op">=</span>[<span class="st">"a"</span>, <span class="st">"b"</span>])</span>
+<span id="cb46-512"><a href="#cb46-512" aria-hidden="true" tabindex="-1"></a>a_post <span class="op">=</span> posterior[<span class="st">"a"</span>]</span>
+<span id="cb46-513"><a href="#cb46-513" aria-hidden="true" tabindex="-1"></a>b_post <span class="op">=</span> posterior[<span class="st">"b"</span>]</span>
+<span id="cb46-514"><a href="#cb46-514" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-515"><a href="#cb46-515" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb46-516"><a href="#cb46-516" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
+<span id="cb46-517"><a href="#cb46-517" aria-hidden="true" tabindex="-1"></a>       ylim<span class="op">=</span>(<span class="fl">0.55</span>, <span class="dv">1</span>),</span>
+<span id="cb46-518"><a href="#cb46-518" aria-hidden="true" tabindex="-1"></a>       xticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
+<span id="cb46-519"><a href="#cb46-519" aria-hidden="true" tabindex="-1"></a>       yticks<span class="op">=</span>[<span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>],</span>
+<span id="cb46-520"><a href="#cb46-520" aria-hidden="true" tabindex="-1"></a>       aspect<span class="op">=</span><span class="st">"equal"</span>,</span>
+<span id="cb46-521"><a href="#cb46-521" aria-hidden="true" tabindex="-1"></a>       xlabel<span class="op">=</span><span class="st">"Posterior inference"</span>,</span>
+<span id="cb46-522"><a href="#cb46-522" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"True parameter value"</span>)</span>
+<span id="cb46-523"><a href="#cb46-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-524"><a href="#cb46-524" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Calibration check of posterior intervals"</span>, fontsize<span class="op">=</span><span class="dv">11</span>)</span>
+<span id="cb46-525"><a href="#cb46-525" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="fl">0.55</span>, <span class="dv">1</span>], [<span class="fl">0.55</span>, <span class="dv">1</span>], color<span class="op">=</span><span class="st">"lightgray"</span>)</span>
 <span id="cb46-526"><a href="#cb46-526" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-527"><a href="#cb46-527" aria-hidden="true" tabindex="-1"></a>a_median <span class="op">=</span> az.median(a_post, dim<span class="op">=</span><span class="st">"sample"</span>)</span>
-<span id="cb46-528"><a href="#cb46-528" aria-hidden="true" tabindex="-1"></a>quants <span class="op">=</span> a_post.quantile([<span class="fl">0.25</span>, <span class="fl">0.75</span>], dim<span class="op">=</span><span class="st">"sample"</span>)</span>
-<span id="cb46-529"><a href="#cb46-529" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-530"><a href="#cb46-530" aria-hidden="true" tabindex="-1"></a>ax.scatter(a_median, a, s<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">"C0"</span>)</span>
-<span id="cb46-531"><a href="#cb46-531" aria-hidden="true" tabindex="-1"></a>ax.plot(quants, [a, a], color<span class="op">=</span><span class="st">"C0"</span>, lw<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb46-532"><a href="#cb46-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-527"><a href="#cb46-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-528"><a href="#cb46-528" aria-hidden="true" tabindex="-1"></a>a_median <span class="op">=</span> az.median(a_post, dim<span class="op">=</span><span class="st">"sample"</span>)</span>
+<span id="cb46-529"><a href="#cb46-529" aria-hidden="true" tabindex="-1"></a>quants <span class="op">=</span> a_post.quantile([<span class="fl">0.25</span>, <span class="fl">0.75</span>], dim<span class="op">=</span><span class="st">"sample"</span>)</span>
+<span id="cb46-530"><a href="#cb46-530" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-531"><a href="#cb46-531" aria-hidden="true" tabindex="-1"></a>ax.scatter(a_median, a, s<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">"C0"</span>)</span>
+<span id="cb46-532"><a href="#cb46-532" aria-hidden="true" tabindex="-1"></a>ax.plot(quants, [a, a], color<span class="op">=</span><span class="st">"C0"</span>, lw<span class="op">=</span><span class="fl">0.5</span>)</span>
 <span id="cb46-533"><a href="#cb46-533" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-534"><a href="#cb46-534" aria-hidden="true" tabindex="-1"></a>b_median <span class="op">=</span> az.median(b_post, dim<span class="op">=</span><span class="st">"sample"</span>)</span>
-<span id="cb46-535"><a href="#cb46-535" aria-hidden="true" tabindex="-1"></a>quants <span class="op">=</span> b_post.quantile([<span class="fl">0.25</span>, <span class="fl">0.75</span>], dim<span class="op">=</span><span class="st">"sample"</span>)</span>
-<span id="cb46-536"><a href="#cb46-536" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-537"><a href="#cb46-537" aria-hidden="true" tabindex="-1"></a>ax.scatter(b_median, b, s<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">"C1"</span>)</span>
-<span id="cb46-538"><a href="#cb46-538" aria-hidden="true" tabindex="-1"></a>ax.plot(quants, [b, b], color<span class="op">=</span><span class="st">"C1"</span>, lw<span class="op">=</span><span class="fl">0.5</span>)<span class="op">;</span></span>
-<span id="cb46-539"><a href="#cb46-539" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb46-540"><a href="#cb46-540" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-541"><a href="#cb46-541" aria-hidden="true" tabindex="-1"></a><span class="fu">## References {.unnumbered}</span></span>
-<span id="cb46-542"><a href="#cb46-542" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-543"><a href="#cb46-543" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">"refs"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
-<span id="cb46-544"><a href="#cb46-544" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-545"><a href="#cb46-545" aria-hidden="true" tabindex="-1"></a><span class="fu">## Licenses {.unnumbered}</span></span>
-<span id="cb46-546"><a href="#cb46-546" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-547"><a href="#cb46-547" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Code <span class="dv">&amp;copy;</span> 2023--2025, Andrew Gelman, licensed under BSD-3.</span>
-<span id="cb46-548"><a href="#cb46-548" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Text <span class="dv">&amp;copy;</span> 2023--2025, Andrew Gelman, licensed under CC-BY-NC 4.0.</span>
+<span id="cb46-534"><a href="#cb46-534" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-535"><a href="#cb46-535" aria-hidden="true" tabindex="-1"></a>b_median <span class="op">=</span> az.median(b_post, dim<span class="op">=</span><span class="st">"sample"</span>)</span>
+<span id="cb46-536"><a href="#cb46-536" aria-hidden="true" tabindex="-1"></a>quants <span class="op">=</span> b_post.quantile([<span class="fl">0.25</span>, <span class="fl">0.75</span>], dim<span class="op">=</span><span class="st">"sample"</span>)</span>
+<span id="cb46-537"><a href="#cb46-537" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-538"><a href="#cb46-538" aria-hidden="true" tabindex="-1"></a>ax.scatter(b_median, b, s<span class="op">=</span><span class="dv">10</span>, color<span class="op">=</span><span class="st">"C1"</span>)</span>
+<span id="cb46-539"><a href="#cb46-539" aria-hidden="true" tabindex="-1"></a>ax.plot(quants, [b, b], color<span class="op">=</span><span class="st">"C1"</span>, lw<span class="op">=</span><span class="fl">0.5</span>)<span class="op">;</span></span>
+<span id="cb46-540"><a href="#cb46-540" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb46-541"><a href="#cb46-541" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-542"><a href="#cb46-542" aria-hidden="true" tabindex="-1"></a><span class="fu">## References {.unnumbered}</span></span>
+<span id="cb46-543"><a href="#cb46-543" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-544"><a href="#cb46-544" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">"refs"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb46-545"><a href="#cb46-545" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-546"><a href="#cb46-546" aria-hidden="true" tabindex="-1"></a><span class="fu">## Licenses {.unnumbered}</span></span>
+<span id="cb46-547"><a href="#cb46-547" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-548"><a href="#cb46-548" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Code <span class="dv">&amp;copy;</span> 2023--2025, Andrew Gelman, licensed under BSD-3.</span>
+<span id="cb46-549"><a href="#cb46-549" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Text <span class="dv">&amp;copy;</span> 2023--2025, Andrew Gelman, licensed under CC-BY-NC 4.0.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

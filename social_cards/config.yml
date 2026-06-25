@@ -1,0 +1,65 @@
+# For each rendered page, select which figure from _book/<dir>/<page>_files/figure-html/
+# should appear on the right side of the social card.
+# The left side always uses 9780367490188.png (book cover).
+#
+# Then put the filename (basename only) below.
+
+cover: 9780367490188.png
+output_dir: social_cards
+book_dir: _book
+
+pages:
+  bioassay:
+    dir: bioassay
+    page: bioassay
+    figure: fig-bioassay-posterior-plot-output-1.png
+
+  multiple_choice:
+    dir: multiple_choice
+    page: multiple_choice
+    figure: fig-final_exams_1-output-2.png
+
+  loo_comparison:
+    dir: loo_comparison
+    page: loo_comparison
+    figure: fig-sleep-loo-intervals-m3t-output-1.png
+
+  digits:
+    dir: digits
+    page: digits
+    figure: fig-kilpisjarvi_fit-output-1.png
+
+  problems:
+    dir: problems
+    page: problems
+    figure: fig-separable_prior_pairs-output-1.png
+
+  declining_exponentials:
+    dir: declining_exponentials
+    page: declining_exponentials
+    figure: fig-sumexp-true-and-one-component-output-1.png
+
+  movies:
+    dir: movies
+    page: movies
+    figure: fig-movies_5-output-1.png
+
+  coronavirus:
+    dir: coronavirus
+    page: coronavirus
+    figure: fig-specificity_priorsense_1-output-1.png
+
+  dogs_stan:
+    dir: dogs
+    page: dogs_stan
+    figure: fig-dogs_ppc-output-1.png
+
+  cat_adoptions:
+    dir: cat_adoptions
+    page: cat_adoptions
+    figure: fig-post1-sim2-output-1.png
+
+  roaches:
+    dir: roaches
+    page: roaches
+    figure: fig-ppc_pit-nb-output-1.png

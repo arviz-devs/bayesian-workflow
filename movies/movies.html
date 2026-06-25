@@ -168,10 +168,8 @@ window.Quarto = {
 <link rel="stylesheet" href="../_style.css">
 <meta property="og:title" content="Simulated data of movie ratings – Bayesian Workflow case studies in Python">
 <meta property="og:description" content="Python version of the case studies from the Bayesian Workflow book by Gelman, Vehtari, McElreath, et al.">
-<meta property="og:image" content="https://arviz-devs.github.io/bayesian-workflow/movies/movies_files/figure-html/fig-movies_1-output-1.png">
+<meta property="og:image" content="https://arviz-devs.github.io/bayesian-workflow/movies/social_cards/movies.png">
 <meta property="og:site_name" content="Bayesian Workflow case studies in Python">
-<meta property="og:image:height" content="923">
-<meta property="og:image:width" content="1396">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -554,7 +552,7 @@ window.Quarto = {
 </section>
 <section id="model-for-two-movies" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="model-for-two-movies"><span class="header-section-number">2</span> Model for two movies</h2>
-<div id="b65eeb1e" class="cell" data-execution_count="2">
+<div id="248a124e" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>y_1 <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">5</span>])</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>y_2 <span class="op">=</span> np.repeat([<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>], [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>])</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.concatenate([y_1, y_2])</span>
@@ -562,7 +560,7 @@ window.Quarto = {
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>movie <span class="op">=</span> np.repeat([<span class="dv">1</span>, <span class="dv">2</span>], [<span class="bu">len</span>(y_1), <span class="bu">len</span>(y_2)])</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>movie_data <span class="op">=</span> {<span class="st">"y"</span>: y, <span class="st">"N"</span>: N, <span class="st">"movie"</span>: movie}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="ad5fe5f1" class="cell" data-execution_count="3">
+<div id="78fd9bfb" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mod_1 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"ratings_1.stan"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>print_stan(mod_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -594,11 +592,11 @@ window.Quarto = {
 <div id="fit_1" class="cell" data-results="hide" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit_1 <span class="op">=</span> mod_1.sample(data<span class="op">=</span>movie_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="93133236" class="cell" data-execution_count="5">
+<div id="0d4c94a7" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>idata_1 <span class="op">=</span> az.from_cmdstanpy(fit_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posterior summary</p>
-<div id="5d21721a" class="cell" data-execution_count="6">
+<div id="31f4aca2" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>az.summary(idata_1, var_names<span class="op">=</span>[<span class="st">"theta"</span>, <span class="st">"sigma_y"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
@@ -623,23 +621,23 @@ window.Quarto = {
 <tr class="odd">
 <th data-quarto-table-cell-role="th">theta[0]</th>
 <td>3.64</td>
-<td>0.56</td>
+<td>0.57</td>
 <td>2.5</td>
 <td>4.7</td>
-<td>2853</td>
-<td>1223</td>
+<td>2666</td>
+<td>1543</td>
 <td>1.00</td>
-<td>0.01</td>
+<td>0.011</td>
 <td>0.007</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">theta[1]</th>
-<td>3.988</td>
+<td>3.99</td>
 <td>0.102</td>
 <td>3.8</td>
 <td>4.2</td>
-<td>3133</td>
-<td>2504</td>
+<td>3165</td>
+<td>2527</td>
 <td>1.00</td>
 <td>0.0018</td>
 <td>0.0013</td>
@@ -650,11 +648,11 @@ window.Quarto = {
 <td>0.073</td>
 <td>0.89</td>
 <td>1.2</td>
-<td>3210</td>
-<td>2864</td>
+<td>3603</td>
+<td>3055</td>
 <td>1.00</td>
-<td>0.0013</td>
-<td>0.00094</td>
+<td>0.0012</td>
+<td>0.00087</td>
 </tr>
 </tbody>
 </table>
@@ -665,7 +663,7 @@ window.Quarto = {
 </section>
 <section id="extending-the-model-to-j-movies" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="extending-the-model-to-j-movies"><span class="header-section-number">3</span> Extending the model to J movies</h2>
-<div id="aca3434a" class="cell" data-execution_count="7">
+<div id="80492f92" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="dv">40</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>N_ratings <span class="op">=</span> rng.integers(<span class="dv">0</span>, <span class="dv">101</span>, size<span class="op">=</span>J)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> N_ratings.<span class="bu">sum</span>()</span>
@@ -674,7 +672,7 @@ window.Quarto = {
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> rng.normal(np.repeat(theta_true, N_ratings), <span class="fl">2.0</span>)</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>movie_data <span class="op">=</span> {<span class="st">"y"</span>: y, <span class="st">"N"</span>: N, <span class="st">"J"</span>: J, <span class="st">"movie"</span>: movie}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="6cb8ec48" class="cell" data-execution_count="8">
+<div id="0bf87441" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mod_2 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"ratings_2.stan"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>print_stan(mod_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -699,11 +697,11 @@ window.Quarto = {
 <div id="fit_2" class="cell" data-results="hide" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fit_2 <span class="op">=</span> mod_2.sample(data<span class="op">=</span>movie_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="b8e25491" class="cell" data-execution_count="10">
+<div id="0c11426c" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>idata_2 <span class="op">=</span> az.from_cmdstanpy(fit_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posterior summary</p>
-<div id="2f350200" class="cell" data-execution_count="11">
+<div id="c57f98b8" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>az.summary(idata_2, var_names<span class="op">=</span>[<span class="st">"theta"</span>, <span class="st">"sigma_y"</span>]).head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <div>
@@ -727,63 +725,63 @@ window.Quarto = {
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">theta[0]</th>
-<td>3.717</td>
+<td>3.721</td>
 <td>0.198</td>
 <td>3.3</td>
 <td>4.1</td>
-<td>5965</td>
-<td>2796</td>
+<td>5983</td>
+<td>2444</td>
 <td>1.00</td>
 <td>0.0026</td>
-<td>0.0017</td>
+<td>0.0019</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">theta[1]</th>
-<td>2.416</td>
-<td>0.201</td>
+<td>2.415</td>
+<td>0.204</td>
 <td>2</td>
 <td>2.8</td>
-<td>5996</td>
-<td>2930</td>
+<td>6284</td>
+<td>3415</td>
 <td>1.00</td>
 <td>0.0026</td>
 <td>0.0018</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">theta[2]</th>
-<td>3.057</td>
-<td>0.198</td>
+<td>3.059</td>
+<td>0.201</td>
 <td>2.7</td>
-<td>3.4</td>
-<td>5720</td>
-<td>3251</td>
+<td>3.5</td>
+<td>5946</td>
+<td>2887</td>
 <td>1.00</td>
 <td>0.0026</td>
 <td>0.0019</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">theta[3]</th>
-<td>3.248</td>
-<td>0.307</td>
+<td>3.251</td>
+<td>0.314</td>
 <td>2.6</td>
-<td>3.8</td>
-<td>5290</td>
-<td>2933</td>
+<td>3.9</td>
+<td>6071</td>
+<td>2797</td>
 <td>1.00</td>
-<td>0.0042</td>
-<td>0.003</td>
+<td>0.004</td>
+<td>0.0029</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">theta[4]</th>
-<td>3.73</td>
-<td>0.44</td>
+<td>3.72</td>
+<td>0.417</td>
 <td>2.9</td>
-<td>4.6</td>
-<td>3704</td>
-<td>1538</td>
+<td>4.5</td>
+<td>5512</td>
+<td>2671</td>
 <td>1.00</td>
-<td>0.0072</td>
-<td>0.005</td>
+<td>0.0056</td>
+<td>0.0039</td>
 </tr>
 </tbody>
 </table>
@@ -843,7 +841,7 @@ Figure&nbsp;2
 <h2 data-number="4" class="anchored" data-anchor-id="item-response-model-with-parameters-for-raters-and-for-movies"><span class="header-section-number">4</span> Item-response model with parameters for raters and for movies</h2>
 <section id="balanced-data" class="level3" data-number="4.1">
 <h3 data-number="4.1" class="anchored" data-anchor-id="balanced-data"><span class="header-section-number">4.1</span> Balanced data</h3>
-<div id="6fdd2ef7" class="cell" data-execution_count="14">
+<div id="724e23a9" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="dv">40</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="dv">100</span></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> J <span class="op">*</span> K</span>
@@ -858,7 +856,7 @@ Figure&nbsp;2
 <span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> rng.normal(mu <span class="op">+</span> sigma_a <span class="op">*</span> alpha_true[movie <span class="op">-</span> <span class="dv">1</span>] <span class="op">-</span> sigma_b <span class="op">*</span> beta_true[rater <span class="op">-</span> <span class="dv">1</span>], sigma_y)</span>
 <span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>data_3 <span class="op">=</span> {<span class="st">"N"</span>: N, <span class="st">"J"</span>: J, <span class="st">"K"</span>: K, <span class="st">"movie"</span>: movie, <span class="st">"rater"</span>: rater, <span class="st">"y"</span>: y}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="1a2f8a9c" class="cell" data-execution_count="15">
+<div id="148b171c" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mod_3 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"ratings_3.stan"</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>print_stan(mod_3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -896,11 +894,11 @@ Figure&nbsp;2
 <div id="fit_3" class="cell" data-results="hide" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fit_3 <span class="op">=</span> mod_3.sample(data<span class="op">=</span>data_3, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="ac4c225f" class="cell" data-execution_count="17">
+<div id="f187faac" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>idata_3 <span class="op">=</span> az.from_cmdstanpy(fit_3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posterior summary</p>
-<div id="54c7a4c6" class="cell" data-execution_count="18">
+<div id="c8ef67c4" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>az.summary(idata_3, var_names<span class="op">=</span>[<span class="st">"mu"</span>, <span class="st">"sigma_a"</span>, <span class="st">"sigma_b"</span>, <span class="st">"sigma_y"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <div>
@@ -929,7 +927,7 @@ Figure&nbsp;2
 <td>3</td>
 <td>3.4</td>
 <td>1073</td>
-<td>1630</td>
+<td>1620</td>
 <td>1.00</td>
 <td>0.003</td>
 <td>0.0022</td>
@@ -1017,7 +1015,7 @@ Figure&nbsp;3
 </section>
 <section id="unbalanced-data" class="level3" data-number="4.2">
 <h3 data-number="4.2" class="anchored" data-anchor-id="unbalanced-data"><span class="header-section-number">4.2</span> Unbalanced data</h3>
-<div id="4ed7e38d" class="cell" data-execution_count="20">
+<div id="c6f9882c" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>genre <span class="op">=</span> np.array([<span class="st">"romantic"</span>] <span class="op">*</span> (J <span class="op">//</span> <span class="dv">2</span>) <span class="op">+</span> [<span class="st">"crime"</span>] <span class="op">*</span> (J <span class="op">-</span> J <span class="op">//</span> <span class="dv">2</span>))</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>prob_of_rated <span class="op">=</span> np.where(beta_true[rater <span class="op">-</span> <span class="dv">1</span>] <span class="op">&gt;</span> <span class="dv">0</span>,</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                         np.where(genre[movie <span class="op">-</span> <span class="dv">1</span>] <span class="op">==</span> <span class="st">"romantic"</span>, <span class="fl">0.2</span>, <span class="fl">0.7</span>),</span>
@@ -1031,11 +1029,11 @@ Figure&nbsp;3
 <div id="fit_3a" class="cell" data-results="hide" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fit_3a <span class="op">=</span> mod_3.sample(data<span class="op">=</span>data_3a, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="65fd9f6c" class="cell" data-execution_count="22">
+<div id="d5ed6438" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>idata_3a <span class="op">=</span> az.from_cmdstanpy(fit_3a)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posterior summary</p>
-<div id="d5b2b505" class="cell" data-execution_count="23">
+<div id="6aededc1" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>az.summary(idata_3a, var_names<span class="op">=</span>[<span class="st">"mu"</span>, <span class="st">"sigma_a"</span>, <span class="st">"sigma_b"</span>, <span class="st">"sigma_y"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
 <div>
@@ -1171,7 +1169,7 @@ Figure&nbsp;4
 </section>
 <section id="comparison-to-naive-data-averaging" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="comparison-to-naive-data-averaging"><span class="header-section-number">5</span> Comparison to naive data averaging</h2>
-<div id="d2f11847" class="cell" data-execution_count="25">
+<div id="d1e3a637" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ybar <span class="op">=</span> np.array([y[(movie <span class="op">==</span> j) <span class="op">&amp;</span> rated].mean() <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, J <span class="op">+</span> <span class="dv">1</span>)])</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>a_true <span class="op">=</span> mu <span class="op">+</span> sigma_a <span class="op">*</span> alpha_true</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>a_post_median <span class="op">=</span> az.median(idata_3a)[<span class="st">"a"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1713,366 +1711,367 @@ Figure&nbsp;5
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Simulated data of movie ratings"</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Andrew Gelman and Aki Vehtari"</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2022-08-15</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="an">date-format:</span><span class="co"> iso</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-download: true</span></span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> ../casestudies.bib</span></span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>This notebook includes the code for the Bayesian Workflow book</span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>Chapter 16 *Coding a series of models: Simulated data of movie</span>
-<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>ratings*.</span>
-<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
-<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a>Consider the following scenario. You are considering which of two</span>
-<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>movies to go see. Both have average online ratings of 4 out of 5</span>
-<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>stars, but one is based on 2 ratings and the other is based on 100.</span>
-<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>Which movie should you choose?</span>
-<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a>**Load packages**</span>
-<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
-<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: true</span></span>
-<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: false</span></span>
-<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a>sys.path.insert(<span class="dv">0</span>, <span class="st">'..'</span>)</span>
-<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> arviz <span class="im">as</span> az</span>
-<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
-<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cmdstanpy <span class="im">import</span> CmdStanModel, disable_logging</span>
-<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> print_stan</span>
-<span id="cb30-47"><a href="#cb30-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-48"><a href="#cb30-48" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span>
-<span id="cb30-49"><a href="#cb30-49" aria-hidden="true" tabindex="-1"></a>disable_logging()</span>
-<span id="cb30-50"><a href="#cb30-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-51"><a href="#cb30-51" aria-hidden="true" tabindex="-1"></a>az.style.use(<span class="st">"arviz-variat"</span>)</span>
-<span id="cb30-52"><a href="#cb30-52" aria-hidden="true" tabindex="-1"></a>az.rcParams[<span class="st">"stats.ci_prob"</span>] <span class="op">=</span> <span class="fl">0.95</span></span>
-<span id="cb30-53"><a href="#cb30-53" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.dpi"</span>] <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb30-54"><a href="#cb30-54" aria-hidden="true" tabindex="-1"></a>SEED <span class="op">=</span> <span class="dv">1234</span></span>
-<span id="cb30-55"><a href="#cb30-55" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(SEED)</span>
-<span id="cb30-56"><a href="#cb30-56" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-57"><a href="#cb30-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-58"><a href="#cb30-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model for two movies</span></span>
-<span id="cb30-59"><a href="#cb30-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-62"><a href="#cb30-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-63"><a href="#cb30-63" aria-hidden="true" tabindex="-1"></a>y_1 <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">5</span>])</span>
-<span id="cb30-64"><a href="#cb30-64" aria-hidden="true" tabindex="-1"></a>y_2 <span class="op">=</span> np.repeat([<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>], [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>])</span>
-<span id="cb30-65"><a href="#cb30-65" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.concatenate([y_1, y_2])</span>
-<span id="cb30-66"><a href="#cb30-66" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">len</span>(y)</span>
-<span id="cb30-67"><a href="#cb30-67" aria-hidden="true" tabindex="-1"></a>movie <span class="op">=</span> np.repeat([<span class="dv">1</span>, <span class="dv">2</span>], [<span class="bu">len</span>(y_1), <span class="bu">len</span>(y_2)])</span>
-<span id="cb30-68"><a href="#cb30-68" aria-hidden="true" tabindex="-1"></a>movie_data <span class="op">=</span> {<span class="st">"y"</span>: y, <span class="st">"N"</span>: N, <span class="st">"movie"</span>: movie}</span>
-<span id="cb30-69"><a href="#cb30-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-70"><a href="#cb30-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-73"><a href="#cb30-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-74"><a href="#cb30-74" aria-hidden="true" tabindex="-1"></a>mod_1 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"ratings_1.stan"</span>)</span>
-<span id="cb30-75"><a href="#cb30-75" aria-hidden="true" tabindex="-1"></a>print_stan(mod_1)</span>
-<span id="cb30-76"><a href="#cb30-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-77"><a href="#cb30-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> social_cards/movies.png</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Andrew Gelman and Aki Vehtari"</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2022-08-15</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="an">date-format:</span><span class="co"> iso</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-download: true</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> ../casestudies.bib</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>This notebook includes the code for the Bayesian Workflow book</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>Chapter 16 *Coding a series of models: Simulated data of movie</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>ratings*.</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a>Consider the following scenario. You are considering which of two</span>
+<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a>movies to go see. Both have average online ratings of 4 out of 5</span>
+<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a>stars, but one is based on 2 ratings and the other is based on 100.</span>
+<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a>Which movie should you choose?</span>
+<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a>**Load packages**</span>
+<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: true</span></span>
+<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: false</span></span>
+<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a>sys.path.insert(<span class="dv">0</span>, <span class="st">'..'</span>)</span>
+<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-40"><a href="#cb30-40" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> arviz <span class="im">as</span> az</span>
+<span id="cb30-41"><a href="#cb30-41" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cmdstanpy <span class="im">import</span> CmdStanModel, disable_logging</span>
+<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-47"><a href="#cb30-47" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> print_stan</span>
+<span id="cb30-48"><a href="#cb30-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-49"><a href="#cb30-49" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span>
+<span id="cb30-50"><a href="#cb30-50" aria-hidden="true" tabindex="-1"></a>disable_logging()</span>
+<span id="cb30-51"><a href="#cb30-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-52"><a href="#cb30-52" aria-hidden="true" tabindex="-1"></a>az.style.use(<span class="st">"arviz-variat"</span>)</span>
+<span id="cb30-53"><a href="#cb30-53" aria-hidden="true" tabindex="-1"></a>az.rcParams[<span class="st">"stats.ci_prob"</span>] <span class="op">=</span> <span class="fl">0.95</span></span>
+<span id="cb30-54"><a href="#cb30-54" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.dpi"</span>] <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb30-55"><a href="#cb30-55" aria-hidden="true" tabindex="-1"></a>SEED <span class="op">=</span> <span class="dv">1234</span></span>
+<span id="cb30-56"><a href="#cb30-56" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(SEED)</span>
+<span id="cb30-57"><a href="#cb30-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-58"><a href="#cb30-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-59"><a href="#cb30-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## Model for two movies</span></span>
+<span id="cb30-60"><a href="#cb30-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-63"><a href="#cb30-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-64"><a href="#cb30-64" aria-hidden="true" tabindex="-1"></a>y_1 <span class="op">=</span> np.array([<span class="dv">3</span>, <span class="dv">5</span>])</span>
+<span id="cb30-65"><a href="#cb30-65" aria-hidden="true" tabindex="-1"></a>y_2 <span class="op">=</span> np.repeat([<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>], [<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>])</span>
+<span id="cb30-66"><a href="#cb30-66" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.concatenate([y_1, y_2])</span>
+<span id="cb30-67"><a href="#cb30-67" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">len</span>(y)</span>
+<span id="cb30-68"><a href="#cb30-68" aria-hidden="true" tabindex="-1"></a>movie <span class="op">=</span> np.repeat([<span class="dv">1</span>, <span class="dv">2</span>], [<span class="bu">len</span>(y_1), <span class="bu">len</span>(y_2)])</span>
+<span id="cb30-69"><a href="#cb30-69" aria-hidden="true" tabindex="-1"></a>movie_data <span class="op">=</span> {<span class="st">"y"</span>: y, <span class="st">"N"</span>: N, <span class="st">"movie"</span>: movie}</span>
+<span id="cb30-70"><a href="#cb30-70" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-71"><a href="#cb30-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-74"><a href="#cb30-74" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-75"><a href="#cb30-75" aria-hidden="true" tabindex="-1"></a>mod_1 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"ratings_1.stan"</span>)</span>
+<span id="cb30-76"><a href="#cb30-76" aria-hidden="true" tabindex="-1"></a>print_stan(mod_1)</span>
+<span id="cb30-77"><a href="#cb30-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb30-78"><a href="#cb30-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-79"><a href="#cb30-79" aria-hidden="true" tabindex="-1"></a>Sample</span>
-<span id="cb30-80"><a href="#cb30-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-83"><a href="#cb30-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-84"><a href="#cb30-84" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_1</span></span>
-<span id="cb30-85"><a href="#cb30-85" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb30-86"><a href="#cb30-86" aria-hidden="true" tabindex="-1"></a>fit_1 <span class="op">=</span> mod_1.sample(data<span class="op">=</span>movie_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb30-87"><a href="#cb30-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-88"><a href="#cb30-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-91"><a href="#cb30-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-92"><a href="#cb30-92" aria-hidden="true" tabindex="-1"></a>idata_1 <span class="op">=</span> az.from_cmdstanpy(fit_1)</span>
-<span id="cb30-93"><a href="#cb30-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-94"><a href="#cb30-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-95"><a href="#cb30-95" aria-hidden="true" tabindex="-1"></a>Posterior summary</span>
-<span id="cb30-96"><a href="#cb30-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-99"><a href="#cb30-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-100"><a href="#cb30-100" aria-hidden="true" tabindex="-1"></a>az.summary(idata_1, var_names<span class="op">=</span>[<span class="st">"theta"</span>, <span class="st">"sigma_y"</span>])</span>
-<span id="cb30-101"><a href="#cb30-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-102"><a href="#cb30-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-79"><a href="#cb30-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-80"><a href="#cb30-80" aria-hidden="true" tabindex="-1"></a>Sample</span>
+<span id="cb30-81"><a href="#cb30-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-84"><a href="#cb30-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-85"><a href="#cb30-85" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_1</span></span>
+<span id="cb30-86"><a href="#cb30-86" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb30-87"><a href="#cb30-87" aria-hidden="true" tabindex="-1"></a>fit_1 <span class="op">=</span> mod_1.sample(data<span class="op">=</span>movie_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb30-88"><a href="#cb30-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-89"><a href="#cb30-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-92"><a href="#cb30-92" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-93"><a href="#cb30-93" aria-hidden="true" tabindex="-1"></a>idata_1 <span class="op">=</span> az.from_cmdstanpy(fit_1)</span>
+<span id="cb30-94"><a href="#cb30-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-95"><a href="#cb30-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-96"><a href="#cb30-96" aria-hidden="true" tabindex="-1"></a>Posterior summary</span>
+<span id="cb30-97"><a href="#cb30-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-100"><a href="#cb30-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-101"><a href="#cb30-101" aria-hidden="true" tabindex="-1"></a>az.summary(idata_1, var_names<span class="op">=</span>[<span class="st">"theta"</span>, <span class="st">"sigma_y"</span>])</span>
+<span id="cb30-102"><a href="#cb30-102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb30-103"><a href="#cb30-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-104"><a href="#cb30-104" aria-hidden="true" tabindex="-1"></a><span class="fu">## Extending the model to J movies</span></span>
-<span id="cb30-105"><a href="#cb30-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-108"><a href="#cb30-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-109"><a href="#cb30-109" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="dv">40</span></span>
-<span id="cb30-110"><a href="#cb30-110" aria-hidden="true" tabindex="-1"></a>N_ratings <span class="op">=</span> rng.integers(<span class="dv">0</span>, <span class="dv">101</span>, size<span class="op">=</span>J)</span>
-<span id="cb30-111"><a href="#cb30-111" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> N_ratings.<span class="bu">sum</span>()</span>
-<span id="cb30-112"><a href="#cb30-112" aria-hidden="true" tabindex="-1"></a>movie <span class="op">=</span> np.repeat(np.arange(<span class="dv">1</span>, J <span class="op">+</span> <span class="dv">1</span>), N_ratings)</span>
-<span id="cb30-113"><a href="#cb30-113" aria-hidden="true" tabindex="-1"></a>theta_true <span class="op">=</span> rng.normal(<span class="fl">3.0</span>, <span class="fl">0.5</span>, size<span class="op">=</span>J)</span>
-<span id="cb30-114"><a href="#cb30-114" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> rng.normal(np.repeat(theta_true, N_ratings), <span class="fl">2.0</span>)</span>
-<span id="cb30-115"><a href="#cb30-115" aria-hidden="true" tabindex="-1"></a>movie_data <span class="op">=</span> {<span class="st">"y"</span>: y, <span class="st">"N"</span>: N, <span class="st">"J"</span>: J, <span class="st">"movie"</span>: movie}</span>
-<span id="cb30-116"><a href="#cb30-116" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-117"><a href="#cb30-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-104"><a href="#cb30-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-105"><a href="#cb30-105" aria-hidden="true" tabindex="-1"></a><span class="fu">## Extending the model to J movies</span></span>
+<span id="cb30-106"><a href="#cb30-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-109"><a href="#cb30-109" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-110"><a href="#cb30-110" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="dv">40</span></span>
+<span id="cb30-111"><a href="#cb30-111" aria-hidden="true" tabindex="-1"></a>N_ratings <span class="op">=</span> rng.integers(<span class="dv">0</span>, <span class="dv">101</span>, size<span class="op">=</span>J)</span>
+<span id="cb30-112"><a href="#cb30-112" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> N_ratings.<span class="bu">sum</span>()</span>
+<span id="cb30-113"><a href="#cb30-113" aria-hidden="true" tabindex="-1"></a>movie <span class="op">=</span> np.repeat(np.arange(<span class="dv">1</span>, J <span class="op">+</span> <span class="dv">1</span>), N_ratings)</span>
+<span id="cb30-114"><a href="#cb30-114" aria-hidden="true" tabindex="-1"></a>theta_true <span class="op">=</span> rng.normal(<span class="fl">3.0</span>, <span class="fl">0.5</span>, size<span class="op">=</span>J)</span>
+<span id="cb30-115"><a href="#cb30-115" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> rng.normal(np.repeat(theta_true, N_ratings), <span class="fl">2.0</span>)</span>
+<span id="cb30-116"><a href="#cb30-116" aria-hidden="true" tabindex="-1"></a>movie_data <span class="op">=</span> {<span class="st">"y"</span>: y, <span class="st">"N"</span>: N, <span class="st">"J"</span>: J, <span class="st">"movie"</span>: movie}</span>
+<span id="cb30-117"><a href="#cb30-117" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb30-118"><a href="#cb30-118" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb30-119"><a href="#cb30-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-122"><a href="#cb30-122" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-123"><a href="#cb30-123" aria-hidden="true" tabindex="-1"></a>mod_2 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"ratings_2.stan"</span>)</span>
-<span id="cb30-124"><a href="#cb30-124" aria-hidden="true" tabindex="-1"></a>print_stan(mod_2)</span>
-<span id="cb30-125"><a href="#cb30-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-126"><a href="#cb30-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-120"><a href="#cb30-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-123"><a href="#cb30-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-124"><a href="#cb30-124" aria-hidden="true" tabindex="-1"></a>mod_2 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"ratings_2.stan"</span>)</span>
+<span id="cb30-125"><a href="#cb30-125" aria-hidden="true" tabindex="-1"></a>print_stan(mod_2)</span>
+<span id="cb30-126"><a href="#cb30-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb30-127"><a href="#cb30-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-128"><a href="#cb30-128" aria-hidden="true" tabindex="-1"></a>Sample</span>
-<span id="cb30-129"><a href="#cb30-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-132"><a href="#cb30-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-133"><a href="#cb30-133" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_2</span></span>
-<span id="cb30-134"><a href="#cb30-134" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb30-135"><a href="#cb30-135" aria-hidden="true" tabindex="-1"></a>fit_2 <span class="op">=</span> mod_2.sample(data<span class="op">=</span>movie_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb30-136"><a href="#cb30-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-137"><a href="#cb30-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-140"><a href="#cb30-140" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-141"><a href="#cb30-141" aria-hidden="true" tabindex="-1"></a>idata_2 <span class="op">=</span> az.from_cmdstanpy(fit_2)</span>
-<span id="cb30-142"><a href="#cb30-142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-143"><a href="#cb30-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-144"><a href="#cb30-144" aria-hidden="true" tabindex="-1"></a>Posterior summary</span>
-<span id="cb30-145"><a href="#cb30-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-148"><a href="#cb30-148" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-149"><a href="#cb30-149" aria-hidden="true" tabindex="-1"></a>az.summary(idata_2, var_names<span class="op">=</span>[<span class="st">"theta"</span>, <span class="st">"sigma_y"</span>]).head()</span>
-<span id="cb30-150"><a href="#cb30-150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-151"><a href="#cb30-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-128"><a href="#cb30-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-129"><a href="#cb30-129" aria-hidden="true" tabindex="-1"></a>Sample</span>
+<span id="cb30-130"><a href="#cb30-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-133"><a href="#cb30-133" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-134"><a href="#cb30-134" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_2</span></span>
+<span id="cb30-135"><a href="#cb30-135" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb30-136"><a href="#cb30-136" aria-hidden="true" tabindex="-1"></a>fit_2 <span class="op">=</span> mod_2.sample(data<span class="op">=</span>movie_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb30-137"><a href="#cb30-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-138"><a href="#cb30-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-141"><a href="#cb30-141" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-142"><a href="#cb30-142" aria-hidden="true" tabindex="-1"></a>idata_2 <span class="op">=</span> az.from_cmdstanpy(fit_2)</span>
+<span id="cb30-143"><a href="#cb30-143" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-144"><a href="#cb30-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-145"><a href="#cb30-145" aria-hidden="true" tabindex="-1"></a>Posterior summary</span>
+<span id="cb30-146"><a href="#cb30-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-149"><a href="#cb30-149" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-150"><a href="#cb30-150" aria-hidden="true" tabindex="-1"></a>az.summary(idata_2, var_names<span class="op">=</span>[<span class="st">"theta"</span>, <span class="st">"sigma_y"</span>]).head()</span>
+<span id="cb30-151"><a href="#cb30-151" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb30-152"><a href="#cb30-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-153"><a href="#cb30-153" aria-hidden="true" tabindex="-1"></a>Comparing parameters $\theta_j$ to their posterior inferences</span>
-<span id="cb30-154"><a href="#cb30-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-157"><a href="#cb30-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-158"><a href="#cb30-158" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-movies_1</span></span>
-<span id="cb30-159"><a href="#cb30-159" aria-hidden="true" tabindex="-1"></a>median <span class="op">=</span>az.median(idata_2.posterior[<span class="st">"theta"</span>])</span>
-<span id="cb30-160"><a href="#cb30-160" aria-hidden="true" tabindex="-1"></a>q_50 <span class="op">=</span>az.iqr(idata_2.posterior[<span class="st">"theta"</span>])</span>
-<span id="cb30-161"><a href="#cb30-161" aria-hidden="true" tabindex="-1"></a>q_95 <span class="op">=</span>az.iqr(idata_2.posterior[<span class="st">"theta"</span>], quantiles<span class="op">=</span>[<span class="fl">0.025</span>, <span class="fl">0.975</span>])</span>
-<span id="cb30-162"><a href="#cb30-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-163"><a href="#cb30-163" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>))</span>
-<span id="cb30-164"><a href="#cb30-164" aria-hidden="true" tabindex="-1"></a>ax.errorbar(median, theta_true, xerr<span class="op">=</span>q_50<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"k"</span>, lw<span class="op">=</span><span class="dv">2</span>, fmt<span class="op">=</span><span class="st">"."</span>)</span>
-<span id="cb30-165"><a href="#cb30-165" aria-hidden="true" tabindex="-1"></a>ax.errorbar(median, theta_true, xerr<span class="op">=</span>q_95<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"k"</span>, lw<span class="op">=</span><span class="fl">0.5</span>, fmt<span class="op">=</span><span class="st">"none"</span>)</span>
-<span id="cb30-166"><a href="#cb30-166" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="dv">1</span>, <span class="dv">5</span>], [<span class="dv">1</span>, <span class="dv">5</span>], color<span class="op">=</span><span class="st">"0.7"</span>, zorder<span class="op">=-</span><span class="dv">1</span>)</span>
-<span id="cb30-167"><a href="#cb30-167" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Posterior median, 50%, and 95</span><span class="sc">% i</span><span class="st">nterval"</span>,</span>
-<span id="cb30-168"><a href="#cb30-168" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"True parameter value"</span>,</span>
-<span id="cb30-169"><a href="#cb30-169" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"Comparing parameters $</span><span class="ch">\\</span><span class="st">theta_j$ to their posterior inferences"</span>)<span class="op">;</span></span>
-<span id="cb30-170"><a href="#cb30-170" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-171"><a href="#cb30-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-172"><a href="#cb30-172" aria-hidden="true" tabindex="-1"></a>Where you have more data, you have less uncertainty</span>
-<span id="cb30-173"><a href="#cb30-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-176"><a href="#cb30-176" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-177"><a href="#cb30-177" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-movies_2</span></span>
-<span id="cb30-178"><a href="#cb30-178" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
-<span id="cb30-179"><a href="#cb30-179" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 6</span></span>
-<span id="cb30-180"><a href="#cb30-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-181"><a href="#cb30-181" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
-<span id="cb30-182"><a href="#cb30-182" aria-hidden="true" tabindex="-1"></a>ax.plot(N_ratings, q_50, <span class="st">"ko"</span>)</span>
-<span id="cb30-183"><a href="#cb30-183" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb30-184"><a href="#cb30-184" aria-hidden="true" tabindex="-1"></a>       xlabel<span class="op">=</span><span class="st">"Number of ratings"</span>,</span>
-<span id="cb30-185"><a href="#cb30-185" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"Width of 50% posterior interval"</span>,</span>
-<span id="cb30-186"><a href="#cb30-186" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"Where you have more data, you have less uncertainty"</span>)<span class="op">;</span></span>
-<span id="cb30-187"><a href="#cb30-187" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-188"><a href="#cb30-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-189"><a href="#cb30-189" aria-hidden="true" tabindex="-1"></a><span class="fu">## Item-response model with parameters for raters and for movies</span></span>
-<span id="cb30-190"><a href="#cb30-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-191"><a href="#cb30-191" aria-hidden="true" tabindex="-1"></a><span class="fu">### Balanced data</span></span>
-<span id="cb30-192"><a href="#cb30-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-195"><a href="#cb30-195" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-196"><a href="#cb30-196" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="dv">40</span></span>
-<span id="cb30-197"><a href="#cb30-197" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb30-198"><a href="#cb30-198" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> J <span class="op">*</span> K</span>
-<span id="cb30-199"><a href="#cb30-199" aria-hidden="true" tabindex="-1"></a>movie <span class="op">=</span> np.repeat(np.arange(<span class="dv">1</span>, J <span class="op">+</span> <span class="dv">1</span>), K)</span>
-<span id="cb30-200"><a href="#cb30-200" aria-hidden="true" tabindex="-1"></a>rater <span class="op">=</span> np.tile(np.arange(<span class="dv">1</span>, K <span class="op">+</span> <span class="dv">1</span>), J)</span>
-<span id="cb30-201"><a href="#cb30-201" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> <span class="dv">3</span></span>
-<span id="cb30-202"><a href="#cb30-202" aria-hidden="true" tabindex="-1"></a>sigma_a <span class="op">=</span> <span class="fl">0.5</span></span>
-<span id="cb30-203"><a href="#cb30-203" aria-hidden="true" tabindex="-1"></a>sigma_b <span class="op">=</span> <span class="fl">0.5</span></span>
-<span id="cb30-204"><a href="#cb30-204" aria-hidden="true" tabindex="-1"></a>sigma_y <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb30-205"><a href="#cb30-205" aria-hidden="true" tabindex="-1"></a>alpha_true <span class="op">=</span> rng.normal(<span class="dv">0</span>, <span class="dv">1</span>, size<span class="op">=</span>J)</span>
-<span id="cb30-206"><a href="#cb30-206" aria-hidden="true" tabindex="-1"></a>beta_true <span class="op">=</span> rng.normal(<span class="dv">0</span>, <span class="dv">1</span>, size<span class="op">=</span>K)</span>
-<span id="cb30-207"><a href="#cb30-207" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> rng.normal(mu <span class="op">+</span> sigma_a <span class="op">*</span> alpha_true[movie <span class="op">-</span> <span class="dv">1</span>] <span class="op">-</span> sigma_b <span class="op">*</span> beta_true[rater <span class="op">-</span> <span class="dv">1</span>], sigma_y)</span>
-<span id="cb30-208"><a href="#cb30-208" aria-hidden="true" tabindex="-1"></a>data_3 <span class="op">=</span> {<span class="st">"N"</span>: N, <span class="st">"J"</span>: J, <span class="st">"K"</span>: K, <span class="st">"movie"</span>: movie, <span class="st">"rater"</span>: rater, <span class="st">"y"</span>: y}</span>
-<span id="cb30-209"><a href="#cb30-209" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-210"><a href="#cb30-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-153"><a href="#cb30-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-154"><a href="#cb30-154" aria-hidden="true" tabindex="-1"></a>Comparing parameters $\theta_j$ to their posterior inferences</span>
+<span id="cb30-155"><a href="#cb30-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-158"><a href="#cb30-158" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-159"><a href="#cb30-159" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-movies_1</span></span>
+<span id="cb30-160"><a href="#cb30-160" aria-hidden="true" tabindex="-1"></a>median <span class="op">=</span>az.median(idata_2.posterior[<span class="st">"theta"</span>])</span>
+<span id="cb30-161"><a href="#cb30-161" aria-hidden="true" tabindex="-1"></a>q_50 <span class="op">=</span>az.iqr(idata_2.posterior[<span class="st">"theta"</span>])</span>
+<span id="cb30-162"><a href="#cb30-162" aria-hidden="true" tabindex="-1"></a>q_95 <span class="op">=</span>az.iqr(idata_2.posterior[<span class="st">"theta"</span>], quantiles<span class="op">=</span>[<span class="fl">0.025</span>, <span class="fl">0.975</span>])</span>
+<span id="cb30-163"><a href="#cb30-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-164"><a href="#cb30-164" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>))</span>
+<span id="cb30-165"><a href="#cb30-165" aria-hidden="true" tabindex="-1"></a>ax.errorbar(median, theta_true, xerr<span class="op">=</span>q_50<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"k"</span>, lw<span class="op">=</span><span class="dv">2</span>, fmt<span class="op">=</span><span class="st">"."</span>)</span>
+<span id="cb30-166"><a href="#cb30-166" aria-hidden="true" tabindex="-1"></a>ax.errorbar(median, theta_true, xerr<span class="op">=</span>q_95<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"k"</span>, lw<span class="op">=</span><span class="fl">0.5</span>, fmt<span class="op">=</span><span class="st">"none"</span>)</span>
+<span id="cb30-167"><a href="#cb30-167" aria-hidden="true" tabindex="-1"></a>ax.plot([<span class="dv">1</span>, <span class="dv">5</span>], [<span class="dv">1</span>, <span class="dv">5</span>], color<span class="op">=</span><span class="st">"0.7"</span>, zorder<span class="op">=-</span><span class="dv">1</span>)</span>
+<span id="cb30-168"><a href="#cb30-168" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Posterior median, 50%, and 95</span><span class="sc">% i</span><span class="st">nterval"</span>,</span>
+<span id="cb30-169"><a href="#cb30-169" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"True parameter value"</span>,</span>
+<span id="cb30-170"><a href="#cb30-170" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"Comparing parameters $</span><span class="ch">\\</span><span class="st">theta_j$ to their posterior inferences"</span>)<span class="op">;</span></span>
+<span id="cb30-171"><a href="#cb30-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-172"><a href="#cb30-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-173"><a href="#cb30-173" aria-hidden="true" tabindex="-1"></a>Where you have more data, you have less uncertainty</span>
+<span id="cb30-174"><a href="#cb30-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-177"><a href="#cb30-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-178"><a href="#cb30-178" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-movies_2</span></span>
+<span id="cb30-179"><a href="#cb30-179" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
+<span id="cb30-180"><a href="#cb30-180" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 6</span></span>
+<span id="cb30-181"><a href="#cb30-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-182"><a href="#cb30-182" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
+<span id="cb30-183"><a href="#cb30-183" aria-hidden="true" tabindex="-1"></a>ax.plot(N_ratings, q_50, <span class="st">"ko"</span>)</span>
+<span id="cb30-184"><a href="#cb30-184" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(ylim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb30-185"><a href="#cb30-185" aria-hidden="true" tabindex="-1"></a>       xlabel<span class="op">=</span><span class="st">"Number of ratings"</span>,</span>
+<span id="cb30-186"><a href="#cb30-186" aria-hidden="true" tabindex="-1"></a>       ylabel<span class="op">=</span><span class="st">"Width of 50% posterior interval"</span>,</span>
+<span id="cb30-187"><a href="#cb30-187" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="st">"Where you have more data, you have less uncertainty"</span>)<span class="op">;</span></span>
+<span id="cb30-188"><a href="#cb30-188" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-189"><a href="#cb30-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-190"><a href="#cb30-190" aria-hidden="true" tabindex="-1"></a><span class="fu">## Item-response model with parameters for raters and for movies</span></span>
+<span id="cb30-191"><a href="#cb30-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-192"><a href="#cb30-192" aria-hidden="true" tabindex="-1"></a><span class="fu">### Balanced data</span></span>
+<span id="cb30-193"><a href="#cb30-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-196"><a href="#cb30-196" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-197"><a href="#cb30-197" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="dv">40</span></span>
+<span id="cb30-198"><a href="#cb30-198" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb30-199"><a href="#cb30-199" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> J <span class="op">*</span> K</span>
+<span id="cb30-200"><a href="#cb30-200" aria-hidden="true" tabindex="-1"></a>movie <span class="op">=</span> np.repeat(np.arange(<span class="dv">1</span>, J <span class="op">+</span> <span class="dv">1</span>), K)</span>
+<span id="cb30-201"><a href="#cb30-201" aria-hidden="true" tabindex="-1"></a>rater <span class="op">=</span> np.tile(np.arange(<span class="dv">1</span>, K <span class="op">+</span> <span class="dv">1</span>), J)</span>
+<span id="cb30-202"><a href="#cb30-202" aria-hidden="true" tabindex="-1"></a>mu <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb30-203"><a href="#cb30-203" aria-hidden="true" tabindex="-1"></a>sigma_a <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb30-204"><a href="#cb30-204" aria-hidden="true" tabindex="-1"></a>sigma_b <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb30-205"><a href="#cb30-205" aria-hidden="true" tabindex="-1"></a>sigma_y <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb30-206"><a href="#cb30-206" aria-hidden="true" tabindex="-1"></a>alpha_true <span class="op">=</span> rng.normal(<span class="dv">0</span>, <span class="dv">1</span>, size<span class="op">=</span>J)</span>
+<span id="cb30-207"><a href="#cb30-207" aria-hidden="true" tabindex="-1"></a>beta_true <span class="op">=</span> rng.normal(<span class="dv">0</span>, <span class="dv">1</span>, size<span class="op">=</span>K)</span>
+<span id="cb30-208"><a href="#cb30-208" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> rng.normal(mu <span class="op">+</span> sigma_a <span class="op">*</span> alpha_true[movie <span class="op">-</span> <span class="dv">1</span>] <span class="op">-</span> sigma_b <span class="op">*</span> beta_true[rater <span class="op">-</span> <span class="dv">1</span>], sigma_y)</span>
+<span id="cb30-209"><a href="#cb30-209" aria-hidden="true" tabindex="-1"></a>data_3 <span class="op">=</span> {<span class="st">"N"</span>: N, <span class="st">"J"</span>: J, <span class="st">"K"</span>: K, <span class="st">"movie"</span>: movie, <span class="st">"rater"</span>: rater, <span class="st">"y"</span>: y}</span>
+<span id="cb30-210"><a href="#cb30-210" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb30-211"><a href="#cb30-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-214"><a href="#cb30-214" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-215"><a href="#cb30-215" aria-hidden="true" tabindex="-1"></a>mod_3 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"ratings_3.stan"</span>)</span>
-<span id="cb30-216"><a href="#cb30-216" aria-hidden="true" tabindex="-1"></a>print_stan(mod_3)</span>
-<span id="cb30-217"><a href="#cb30-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-218"><a href="#cb30-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-219"><a href="#cb30-219" aria-hidden="true" tabindex="-1"></a>Sample</span>
-<span id="cb30-220"><a href="#cb30-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-223"><a href="#cb30-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-224"><a href="#cb30-224" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_3</span></span>
-<span id="cb30-225"><a href="#cb30-225" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb30-226"><a href="#cb30-226" aria-hidden="true" tabindex="-1"></a>fit_3 <span class="op">=</span> mod_3.sample(data<span class="op">=</span>data_3, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb30-227"><a href="#cb30-227" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-228"><a href="#cb30-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-231"><a href="#cb30-231" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-232"><a href="#cb30-232" aria-hidden="true" tabindex="-1"></a>idata_3 <span class="op">=</span> az.from_cmdstanpy(fit_3)</span>
-<span id="cb30-233"><a href="#cb30-233" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-234"><a href="#cb30-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-235"><a href="#cb30-235" aria-hidden="true" tabindex="-1"></a>Posterior summary</span>
-<span id="cb30-236"><a href="#cb30-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-239"><a href="#cb30-239" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-240"><a href="#cb30-240" aria-hidden="true" tabindex="-1"></a>az.summary(idata_3, var_names<span class="op">=</span>[<span class="st">"mu"</span>, <span class="st">"sigma_a"</span>, <span class="st">"sigma_b"</span>, <span class="st">"sigma_y"</span>])</span>
-<span id="cb30-241"><a href="#cb30-241" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-242"><a href="#cb30-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-243"><a href="#cb30-243" aria-hidden="true" tabindex="-1"></a>Checking the $\alpha_j$'s and $\beta_k$'s</span>
-<span id="cb30-244"><a href="#cb30-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-247"><a href="#cb30-247" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-248"><a href="#cb30-248" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-movies_3</span></span>
-<span id="cb30-249"><a href="#cb30-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-250"><a href="#cb30-250" aria-hidden="true" tabindex="-1"></a>alpha_median <span class="op">=</span> az.median(idata_3.posterior[<span class="st">"alpha"</span>])</span>
-<span id="cb30-251"><a href="#cb30-251" aria-hidden="true" tabindex="-1"></a>alpha_q50 <span class="op">=</span> az.iqr(idata_3.posterior[<span class="st">"alpha"</span>])</span>
-<span id="cb30-252"><a href="#cb30-252" aria-hidden="true" tabindex="-1"></a>alpha_q90 <span class="op">=</span> az.iqr(idata_3.posterior[<span class="st">"alpha"</span>], quantiles<span class="op">=</span>[<span class="fl">0.025</span>, <span class="fl">0.975</span>])</span>
-<span id="cb30-253"><a href="#cb30-253" aria-hidden="true" tabindex="-1"></a>beta_median <span class="op">=</span> az.median(idata_3.posterior[<span class="st">"beta"</span>])</span>
-<span id="cb30-254"><a href="#cb30-254" aria-hidden="true" tabindex="-1"></a>beta_q50 <span class="op">=</span> az.iqr(idata_3.posterior[<span class="st">"beta"</span>])</span>
-<span id="cb30-255"><a href="#cb30-255" aria-hidden="true" tabindex="-1"></a>beta_q90 <span class="op">=</span> az.iqr(idata_3.posterior[<span class="st">"beta"</span>], quantiles<span class="op">=</span>[<span class="fl">0.025</span>, <span class="fl">0.975</span>])</span>
-<span id="cb30-256"><a href="#cb30-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-257"><a href="#cb30-257" aria-hidden="true" tabindex="-1"></a>_, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
-<span id="cb30-258"><a href="#cb30-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-259"><a href="#cb30-259" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].errorbar(alpha_median, alpha_true, xerr<span class="op">=</span>alpha_q50<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"k"</span>, lw<span class="op">=</span><span class="dv">2</span>, fmt<span class="op">=</span><span class="st">"."</span>)</span>
-<span id="cb30-260"><a href="#cb30-260" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].errorbar(alpha_median, alpha_true, xerr<span class="op">=</span>alpha_q90<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"k"</span>, lw<span class="op">=</span><span class="fl">0.5</span>, fmt<span class="op">=</span><span class="st">"none"</span>)</span>
-<span id="cb30-261"><a href="#cb30-261" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].plot([<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>], [<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>], color<span class="op">=</span><span class="st">"0.7"</span>)</span>
-<span id="cb30-262"><a href="#cb30-262" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Posterior median, 50%, and 95</span><span class="sc">% i</span><span class="st">nterval"</span>,</span>
-<span id="cb30-263"><a href="#cb30-263" aria-hidden="true" tabindex="-1"></a>            ylabel<span class="op">=</span><span class="st">"True parameter value"</span>,</span>
-<span id="cb30-264"><a href="#cb30-264" aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">"Checking the $</span><span class="ch">\\</span><span class="st">alpha_j$'s"</span>)</span>
-<span id="cb30-265"><a href="#cb30-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-212"><a href="#cb30-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-215"><a href="#cb30-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-216"><a href="#cb30-216" aria-hidden="true" tabindex="-1"></a>mod_3 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"ratings_3.stan"</span>)</span>
+<span id="cb30-217"><a href="#cb30-217" aria-hidden="true" tabindex="-1"></a>print_stan(mod_3)</span>
+<span id="cb30-218"><a href="#cb30-218" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-219"><a href="#cb30-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-220"><a href="#cb30-220" aria-hidden="true" tabindex="-1"></a>Sample</span>
+<span id="cb30-221"><a href="#cb30-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-224"><a href="#cb30-224" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-225"><a href="#cb30-225" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_3</span></span>
+<span id="cb30-226"><a href="#cb30-226" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb30-227"><a href="#cb30-227" aria-hidden="true" tabindex="-1"></a>fit_3 <span class="op">=</span> mod_3.sample(data<span class="op">=</span>data_3, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb30-228"><a href="#cb30-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-229"><a href="#cb30-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-232"><a href="#cb30-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-233"><a href="#cb30-233" aria-hidden="true" tabindex="-1"></a>idata_3 <span class="op">=</span> az.from_cmdstanpy(fit_3)</span>
+<span id="cb30-234"><a href="#cb30-234" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-235"><a href="#cb30-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-236"><a href="#cb30-236" aria-hidden="true" tabindex="-1"></a>Posterior summary</span>
+<span id="cb30-237"><a href="#cb30-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-240"><a href="#cb30-240" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-241"><a href="#cb30-241" aria-hidden="true" tabindex="-1"></a>az.summary(idata_3, var_names<span class="op">=</span>[<span class="st">"mu"</span>, <span class="st">"sigma_a"</span>, <span class="st">"sigma_b"</span>, <span class="st">"sigma_y"</span>])</span>
+<span id="cb30-242"><a href="#cb30-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-243"><a href="#cb30-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-244"><a href="#cb30-244" aria-hidden="true" tabindex="-1"></a>Checking the $\alpha_j$'s and $\beta_k$'s</span>
+<span id="cb30-245"><a href="#cb30-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-248"><a href="#cb30-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-249"><a href="#cb30-249" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-movies_3</span></span>
+<span id="cb30-250"><a href="#cb30-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-251"><a href="#cb30-251" aria-hidden="true" tabindex="-1"></a>alpha_median <span class="op">=</span> az.median(idata_3.posterior[<span class="st">"alpha"</span>])</span>
+<span id="cb30-252"><a href="#cb30-252" aria-hidden="true" tabindex="-1"></a>alpha_q50 <span class="op">=</span> az.iqr(idata_3.posterior[<span class="st">"alpha"</span>])</span>
+<span id="cb30-253"><a href="#cb30-253" aria-hidden="true" tabindex="-1"></a>alpha_q90 <span class="op">=</span> az.iqr(idata_3.posterior[<span class="st">"alpha"</span>], quantiles<span class="op">=</span>[<span class="fl">0.025</span>, <span class="fl">0.975</span>])</span>
+<span id="cb30-254"><a href="#cb30-254" aria-hidden="true" tabindex="-1"></a>beta_median <span class="op">=</span> az.median(idata_3.posterior[<span class="st">"beta"</span>])</span>
+<span id="cb30-255"><a href="#cb30-255" aria-hidden="true" tabindex="-1"></a>beta_q50 <span class="op">=</span> az.iqr(idata_3.posterior[<span class="st">"beta"</span>])</span>
+<span id="cb30-256"><a href="#cb30-256" aria-hidden="true" tabindex="-1"></a>beta_q90 <span class="op">=</span> az.iqr(idata_3.posterior[<span class="st">"beta"</span>], quantiles<span class="op">=</span>[<span class="fl">0.025</span>, <span class="fl">0.975</span>])</span>
+<span id="cb30-257"><a href="#cb30-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-258"><a href="#cb30-258" aria-hidden="true" tabindex="-1"></a>_, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb30-259"><a href="#cb30-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-260"><a href="#cb30-260" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].errorbar(alpha_median, alpha_true, xerr<span class="op">=</span>alpha_q50<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"k"</span>, lw<span class="op">=</span><span class="dv">2</span>, fmt<span class="op">=</span><span class="st">"."</span>)</span>
+<span id="cb30-261"><a href="#cb30-261" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].errorbar(alpha_median, alpha_true, xerr<span class="op">=</span>alpha_q90<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"k"</span>, lw<span class="op">=</span><span class="fl">0.5</span>, fmt<span class="op">=</span><span class="st">"none"</span>)</span>
+<span id="cb30-262"><a href="#cb30-262" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].plot([<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>], [<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>], color<span class="op">=</span><span class="st">"0.7"</span>)</span>
+<span id="cb30-263"><a href="#cb30-263" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Posterior median, 50%, and 95</span><span class="sc">% i</span><span class="st">nterval"</span>,</span>
+<span id="cb30-264"><a href="#cb30-264" aria-hidden="true" tabindex="-1"></a>            ylabel<span class="op">=</span><span class="st">"True parameter value"</span>,</span>
+<span id="cb30-265"><a href="#cb30-265" aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">"Checking the $</span><span class="ch">\\</span><span class="st">alpha_j$'s"</span>)</span>
 <span id="cb30-266"><a href="#cb30-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-267"><a href="#cb30-267" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].errorbar(beta_median, beta_true, xerr<span class="op">=</span>beta_q50<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"k"</span>, lw<span class="op">=</span><span class="dv">2</span>, fmt<span class="op">=</span><span class="st">"."</span>)</span>
-<span id="cb30-268"><a href="#cb30-268" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].errorbar(beta_median, beta_true, xerr<span class="op">=</span>beta_q90<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"k"</span>, lw<span class="op">=</span><span class="fl">0.5</span>, fmt<span class="op">=</span><span class="st">"none"</span>)</span>
-<span id="cb30-269"><a href="#cb30-269" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].plot([<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>], [<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>], color<span class="op">=</span><span class="st">"0.7"</span>)</span>
-<span id="cb30-270"><a href="#cb30-270" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Posterior median, 50%, and 95</span><span class="sc">% i</span><span class="st">nterval"</span>,</span>
-<span id="cb30-271"><a href="#cb30-271" aria-hidden="true" tabindex="-1"></a>            ylabel<span class="op">=</span><span class="st">"True parameter value"</span>,</span>
-<span id="cb30-272"><a href="#cb30-272" aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">"Checking the $</span><span class="ch">\\</span><span class="st">beta_k$'s"</span>)<span class="op">;</span></span>
-<span id="cb30-273"><a href="#cb30-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-274"><a href="#cb30-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-275"><a href="#cb30-275" aria-hidden="true" tabindex="-1"></a><span class="fu">### Unbalanced data</span></span>
-<span id="cb30-276"><a href="#cb30-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-279"><a href="#cb30-279" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-280"><a href="#cb30-280" aria-hidden="true" tabindex="-1"></a>genre <span class="op">=</span> np.array([<span class="st">"romantic"</span>] <span class="op">*</span> (J <span class="op">//</span> <span class="dv">2</span>) <span class="op">+</span> [<span class="st">"crime"</span>] <span class="op">*</span> (J <span class="op">-</span> J <span class="op">//</span> <span class="dv">2</span>))</span>
-<span id="cb30-281"><a href="#cb30-281" aria-hidden="true" tabindex="-1"></a>prob_of_rated <span class="op">=</span> np.where(beta_true[rater <span class="op">-</span> <span class="dv">1</span>] <span class="op">&gt;</span> <span class="dv">0</span>,</span>
-<span id="cb30-282"><a href="#cb30-282" aria-hidden="true" tabindex="-1"></a>                         np.where(genre[movie <span class="op">-</span> <span class="dv">1</span>] <span class="op">==</span> <span class="st">"romantic"</span>, <span class="fl">0.2</span>, <span class="fl">0.7</span>),</span>
-<span id="cb30-283"><a href="#cb30-283" aria-hidden="true" tabindex="-1"></a>                         np.where(genre[movie <span class="op">-</span> <span class="dv">1</span>] <span class="op">==</span> <span class="st">"romantic"</span>, <span class="fl">0.7</span>, <span class="fl">0.2</span>))</span>
-<span id="cb30-284"><a href="#cb30-284" aria-hidden="true" tabindex="-1"></a>rated <span class="op">=</span> rng.random(N) <span class="op">&lt;</span> prob_of_rated</span>
-<span id="cb30-285"><a href="#cb30-285" aria-hidden="true" tabindex="-1"></a>data_3a <span class="op">=</span> {<span class="st">"N"</span>: rated.<span class="bu">sum</span>(), <span class="st">"J"</span>: J, <span class="st">"K"</span>: K,</span>
-<span id="cb30-286"><a href="#cb30-286" aria-hidden="true" tabindex="-1"></a>           <span class="st">"movie"</span>: movie[rated], <span class="st">"rater"</span>: rater[rated],</span>
-<span id="cb30-287"><a href="#cb30-287" aria-hidden="true" tabindex="-1"></a>           <span class="st">"y"</span>: y[rated]}</span>
-<span id="cb30-288"><a href="#cb30-288" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-289"><a href="#cb30-289" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-290"><a href="#cb30-290" aria-hidden="true" tabindex="-1"></a>Sample</span>
-<span id="cb30-291"><a href="#cb30-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-294"><a href="#cb30-294" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-295"><a href="#cb30-295" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_3a</span></span>
-<span id="cb30-296"><a href="#cb30-296" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb30-297"><a href="#cb30-297" aria-hidden="true" tabindex="-1"></a>fit_3a <span class="op">=</span> mod_3.sample(data<span class="op">=</span>data_3a, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb30-298"><a href="#cb30-298" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-299"><a href="#cb30-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-302"><a href="#cb30-302" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-303"><a href="#cb30-303" aria-hidden="true" tabindex="-1"></a>idata_3a <span class="op">=</span> az.from_cmdstanpy(fit_3a)</span>
-<span id="cb30-304"><a href="#cb30-304" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-305"><a href="#cb30-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-306"><a href="#cb30-306" aria-hidden="true" tabindex="-1"></a>Posterior summary</span>
-<span id="cb30-307"><a href="#cb30-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-310"><a href="#cb30-310" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-311"><a href="#cb30-311" aria-hidden="true" tabindex="-1"></a>az.summary(idata_3a, var_names<span class="op">=</span>[<span class="st">"mu"</span>, <span class="st">"sigma_a"</span>, <span class="st">"sigma_b"</span>, <span class="st">"sigma_y"</span>])</span>
-<span id="cb30-312"><a href="#cb30-312" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-313"><a href="#cb30-313" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-314"><a href="#cb30-314" aria-hidden="true" tabindex="-1"></a>Checking fits for model when difficult reviewers were more likely to rate certain genres</span>
-<span id="cb30-315"><a href="#cb30-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-318"><a href="#cb30-318" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-319"><a href="#cb30-319" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-movies_4</span></span>
-<span id="cb30-320"><a href="#cb30-320" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
-<span id="cb30-321"><a href="#cb30-321" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
-<span id="cb30-322"><a href="#cb30-322" aria-hidden="true" tabindex="-1"></a>alpha_median <span class="op">=</span> az.median(idata_3a.posterior[<span class="st">"alpha"</span>])</span>
-<span id="cb30-323"><a href="#cb30-323" aria-hidden="true" tabindex="-1"></a>alpha_q50 <span class="op">=</span> az.iqr(idata_3a.posterior[<span class="st">"alpha"</span>])</span>
-<span id="cb30-324"><a href="#cb30-324" aria-hidden="true" tabindex="-1"></a>alpha_q95 <span class="op">=</span> az.iqr(idata_3a.posterior[<span class="st">"alpha"</span>], quantiles<span class="op">=</span>[<span class="fl">0.025</span>, <span class="fl">0.975</span>])</span>
-<span id="cb30-325"><a href="#cb30-325" aria-hidden="true" tabindex="-1"></a>beta_median <span class="op">=</span> az.median(idata_3a.posterior[<span class="st">"beta"</span>])</span>
-<span id="cb30-326"><a href="#cb30-326" aria-hidden="true" tabindex="-1"></a>beta_q50 <span class="op">=</span> az.iqr(idata_3a.posterior[<span class="st">"beta"</span>])</span>
-<span id="cb30-327"><a href="#cb30-327" aria-hidden="true" tabindex="-1"></a>beta_q95 <span class="op">=</span> az.iqr(idata_3a.posterior[<span class="st">"beta"</span>], quantiles<span class="op">=</span>[<span class="fl">0.025</span>, <span class="fl">0.975</span>])</span>
-<span id="cb30-328"><a href="#cb30-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-329"><a href="#cb30-329" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
-<span id="cb30-330"><a href="#cb30-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-267"><a href="#cb30-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-268"><a href="#cb30-268" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].errorbar(beta_median, beta_true, xerr<span class="op">=</span>beta_q50<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"k"</span>, lw<span class="op">=</span><span class="dv">2</span>, fmt<span class="op">=</span><span class="st">"."</span>)</span>
+<span id="cb30-269"><a href="#cb30-269" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].errorbar(beta_median, beta_true, xerr<span class="op">=</span>beta_q90<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"k"</span>, lw<span class="op">=</span><span class="fl">0.5</span>, fmt<span class="op">=</span><span class="st">"none"</span>)</span>
+<span id="cb30-270"><a href="#cb30-270" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].plot([<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>], [<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>], color<span class="op">=</span><span class="st">"0.7"</span>)</span>
+<span id="cb30-271"><a href="#cb30-271" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Posterior median, 50%, and 95</span><span class="sc">% i</span><span class="st">nterval"</span>,</span>
+<span id="cb30-272"><a href="#cb30-272" aria-hidden="true" tabindex="-1"></a>            ylabel<span class="op">=</span><span class="st">"True parameter value"</span>,</span>
+<span id="cb30-273"><a href="#cb30-273" aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">"Checking the $</span><span class="ch">\\</span><span class="st">beta_k$'s"</span>)<span class="op">;</span></span>
+<span id="cb30-274"><a href="#cb30-274" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-275"><a href="#cb30-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-276"><a href="#cb30-276" aria-hidden="true" tabindex="-1"></a><span class="fu">### Unbalanced data</span></span>
+<span id="cb30-277"><a href="#cb30-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-280"><a href="#cb30-280" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-281"><a href="#cb30-281" aria-hidden="true" tabindex="-1"></a>genre <span class="op">=</span> np.array([<span class="st">"romantic"</span>] <span class="op">*</span> (J <span class="op">//</span> <span class="dv">2</span>) <span class="op">+</span> [<span class="st">"crime"</span>] <span class="op">*</span> (J <span class="op">-</span> J <span class="op">//</span> <span class="dv">2</span>))</span>
+<span id="cb30-282"><a href="#cb30-282" aria-hidden="true" tabindex="-1"></a>prob_of_rated <span class="op">=</span> np.where(beta_true[rater <span class="op">-</span> <span class="dv">1</span>] <span class="op">&gt;</span> <span class="dv">0</span>,</span>
+<span id="cb30-283"><a href="#cb30-283" aria-hidden="true" tabindex="-1"></a>                         np.where(genre[movie <span class="op">-</span> <span class="dv">1</span>] <span class="op">==</span> <span class="st">"romantic"</span>, <span class="fl">0.2</span>, <span class="fl">0.7</span>),</span>
+<span id="cb30-284"><a href="#cb30-284" aria-hidden="true" tabindex="-1"></a>                         np.where(genre[movie <span class="op">-</span> <span class="dv">1</span>] <span class="op">==</span> <span class="st">"romantic"</span>, <span class="fl">0.7</span>, <span class="fl">0.2</span>))</span>
+<span id="cb30-285"><a href="#cb30-285" aria-hidden="true" tabindex="-1"></a>rated <span class="op">=</span> rng.random(N) <span class="op">&lt;</span> prob_of_rated</span>
+<span id="cb30-286"><a href="#cb30-286" aria-hidden="true" tabindex="-1"></a>data_3a <span class="op">=</span> {<span class="st">"N"</span>: rated.<span class="bu">sum</span>(), <span class="st">"J"</span>: J, <span class="st">"K"</span>: K,</span>
+<span id="cb30-287"><a href="#cb30-287" aria-hidden="true" tabindex="-1"></a>           <span class="st">"movie"</span>: movie[rated], <span class="st">"rater"</span>: rater[rated],</span>
+<span id="cb30-288"><a href="#cb30-288" aria-hidden="true" tabindex="-1"></a>           <span class="st">"y"</span>: y[rated]}</span>
+<span id="cb30-289"><a href="#cb30-289" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-290"><a href="#cb30-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-291"><a href="#cb30-291" aria-hidden="true" tabindex="-1"></a>Sample</span>
+<span id="cb30-292"><a href="#cb30-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-295"><a href="#cb30-295" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-296"><a href="#cb30-296" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_3a</span></span>
+<span id="cb30-297"><a href="#cb30-297" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb30-298"><a href="#cb30-298" aria-hidden="true" tabindex="-1"></a>fit_3a <span class="op">=</span> mod_3.sample(data<span class="op">=</span>data_3a, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb30-299"><a href="#cb30-299" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-300"><a href="#cb30-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-303"><a href="#cb30-303" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-304"><a href="#cb30-304" aria-hidden="true" tabindex="-1"></a>idata_3a <span class="op">=</span> az.from_cmdstanpy(fit_3a)</span>
+<span id="cb30-305"><a href="#cb30-305" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-306"><a href="#cb30-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-307"><a href="#cb30-307" aria-hidden="true" tabindex="-1"></a>Posterior summary</span>
+<span id="cb30-308"><a href="#cb30-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-311"><a href="#cb30-311" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-312"><a href="#cb30-312" aria-hidden="true" tabindex="-1"></a>az.summary(idata_3a, var_names<span class="op">=</span>[<span class="st">"mu"</span>, <span class="st">"sigma_a"</span>, <span class="st">"sigma_b"</span>, <span class="st">"sigma_y"</span>])</span>
+<span id="cb30-313"><a href="#cb30-313" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-314"><a href="#cb30-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-315"><a href="#cb30-315" aria-hidden="true" tabindex="-1"></a>Checking fits for model when difficult reviewers were more likely to rate certain genres</span>
+<span id="cb30-316"><a href="#cb30-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-319"><a href="#cb30-319" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-320"><a href="#cb30-320" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-movies_4</span></span>
+<span id="cb30-321"><a href="#cb30-321" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4</span></span>
+<span id="cb30-322"><a href="#cb30-322" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
+<span id="cb30-323"><a href="#cb30-323" aria-hidden="true" tabindex="-1"></a>alpha_median <span class="op">=</span> az.median(idata_3a.posterior[<span class="st">"alpha"</span>])</span>
+<span id="cb30-324"><a href="#cb30-324" aria-hidden="true" tabindex="-1"></a>alpha_q50 <span class="op">=</span> az.iqr(idata_3a.posterior[<span class="st">"alpha"</span>])</span>
+<span id="cb30-325"><a href="#cb30-325" aria-hidden="true" tabindex="-1"></a>alpha_q95 <span class="op">=</span> az.iqr(idata_3a.posterior[<span class="st">"alpha"</span>], quantiles<span class="op">=</span>[<span class="fl">0.025</span>, <span class="fl">0.975</span>])</span>
+<span id="cb30-326"><a href="#cb30-326" aria-hidden="true" tabindex="-1"></a>beta_median <span class="op">=</span> az.median(idata_3a.posterior[<span class="st">"beta"</span>])</span>
+<span id="cb30-327"><a href="#cb30-327" aria-hidden="true" tabindex="-1"></a>beta_q50 <span class="op">=</span> az.iqr(idata_3a.posterior[<span class="st">"beta"</span>])</span>
+<span id="cb30-328"><a href="#cb30-328" aria-hidden="true" tabindex="-1"></a>beta_q95 <span class="op">=</span> az.iqr(idata_3a.posterior[<span class="st">"beta"</span>], quantiles<span class="op">=</span>[<span class="fl">0.025</span>, <span class="fl">0.975</span>])</span>
+<span id="cb30-329"><a href="#cb30-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-330"><a href="#cb30-330" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">4</span>))</span>
 <span id="cb30-331"><a href="#cb30-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-332"><a href="#cb30-332" aria-hidden="true" tabindex="-1"></a>romantic_mask <span class="op">=</span> genre <span class="op">==</span> <span class="st">"romantic"</span></span>
-<span id="cb30-333"><a href="#cb30-333" aria-hidden="true" tabindex="-1"></a>crime_mask <span class="op">=</span> genre <span class="op">==</span> <span class="st">"crime"</span></span>
-<span id="cb30-334"><a href="#cb30-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-335"><a href="#cb30-335" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].errorbar(alpha_median[romantic_mask], alpha_true[romantic_mask], xerr<span class="op">=</span>alpha_q50[romantic_mask]<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C0"</span>, lw<span class="op">=</span><span class="dv">2</span>, fmt<span class="op">=</span><span class="st">"."</span>, label<span class="op">=</span><span class="st">"Romantic comedies"</span>)</span>
-<span id="cb30-336"><a href="#cb30-336" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].errorbar(alpha_median[crime_mask], alpha_true[crime_mask], xerr<span class="op">=</span>alpha_q50[crime_mask]<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C1"</span>, lw<span class="op">=</span><span class="dv">2</span>, fmt<span class="op">=</span><span class="st">"."</span>, label<span class="op">=</span><span class="st">"Crime movies"</span>)</span>
-<span id="cb30-337"><a href="#cb30-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-338"><a href="#cb30-338" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].errorbar(alpha_median[romantic_mask], alpha_true[romantic_mask], xerr<span class="op">=</span>alpha_q95[romantic_mask]<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C0"</span>, lw<span class="op">=</span><span class="fl">0.5</span>, fmt<span class="op">=</span><span class="st">"none"</span>)</span>
-<span id="cb30-339"><a href="#cb30-339" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].errorbar(alpha_median[crime_mask], alpha_true[crime_mask], xerr<span class="op">=</span>alpha_q95[crime_mask]<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C1"</span>, lw<span class="op">=</span><span class="fl">0.5</span>, fmt<span class="op">=</span><span class="st">"none"</span>)</span>
-<span id="cb30-340"><a href="#cb30-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-341"><a href="#cb30-341" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Posterior median, 50%, and 95</span><span class="sc">% i</span><span class="st">nterval"</span>,</span>
-<span id="cb30-342"><a href="#cb30-342" aria-hidden="true" tabindex="-1"></a>            ylabel<span class="op">=</span><span class="st">"True parameter value"</span>,</span>
-<span id="cb30-343"><a href="#cb30-343" aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">"Checking the $</span><span class="ch">\\</span><span class="st">alpha_j$'s"</span>)</span>
-<span id="cb30-344"><a href="#cb30-344" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].plot([<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>], [<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>], color<span class="op">=</span><span class="st">"0.7"</span>)</span>
-<span id="cb30-345"><a href="#cb30-345" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].legend(loc<span class="op">=</span><span class="st">"lower right"</span>, frameon<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb30-346"><a href="#cb30-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-347"><a href="#cb30-347" aria-hidden="true" tabindex="-1"></a>nice_mask <span class="op">=</span> beta_true <span class="op">&lt;</span> <span class="dv">0</span></span>
-<span id="cb30-348"><a href="#cb30-348" aria-hidden="true" tabindex="-1"></a>difficult_mask <span class="op">=</span> beta_true <span class="op">&gt;</span> <span class="dv">0</span></span>
-<span id="cb30-349"><a href="#cb30-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-350"><a href="#cb30-350" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].errorbar(beta_median[nice_mask], beta_true[nice_mask], xerr<span class="op">=</span>beta_q50[nice_mask]<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C0"</span>, lw<span class="op">=</span><span class="dv">2</span>, fmt<span class="op">=</span><span class="st">"."</span>, label<span class="op">=</span><span class="st">"Nice reviewers"</span>)</span>
-<span id="cb30-351"><a href="#cb30-351" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].errorbar(beta_median[difficult_mask], beta_true[difficult_mask], xerr<span class="op">=</span>beta_q50[difficult_mask]<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C1"</span>, lw<span class="op">=</span><span class="dv">2</span>, fmt<span class="op">=</span><span class="st">"."</span>, label<span class="op">=</span><span class="st">"Difficult reviewers"</span>)</span>
-<span id="cb30-352"><a href="#cb30-352" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-353"><a href="#cb30-353" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].errorbar(beta_median[nice_mask], beta_true[nice_mask], xerr<span class="op">=</span>beta_q95[nice_mask]<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C0"</span>, lw<span class="op">=</span><span class="fl">0.5</span>, fmt<span class="op">=</span><span class="st">"none"</span>)</span>
-<span id="cb30-354"><a href="#cb30-354" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].errorbar(beta_median[difficult_mask], beta_true[difficult_mask], xerr<span class="op">=</span>beta_q95[difficult_mask]<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C1"</span>, lw<span class="op">=</span><span class="fl">0.5</span>, fmt<span class="op">=</span><span class="st">"none"</span>)</span>
-<span id="cb30-355"><a href="#cb30-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-356"><a href="#cb30-356" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Posterior median, 50%, and 95</span><span class="sc">% i</span><span class="st">nterval"</span>,</span>
-<span id="cb30-357"><a href="#cb30-357" aria-hidden="true" tabindex="-1"></a>            ylabel<span class="op">=</span><span class="st">"True parameter value"</span>,</span>
-<span id="cb30-358"><a href="#cb30-358" aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">"Checking the $</span><span class="ch">\\</span><span class="st">beta_k$'s"</span>)</span>
-<span id="cb30-359"><a href="#cb30-359" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].plot([<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>], [<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>], color<span class="op">=</span><span class="st">"0.7"</span>)</span>
-<span id="cb30-360"><a href="#cb30-360" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].legend(loc<span class="op">=</span><span class="st">"lower right"</span>, frameon<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb30-361"><a href="#cb30-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-362"><a href="#cb30-362" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"Checking fits for model when difficult reviewers were more likely to rate certain genres"</span>)<span class="op">;</span></span>
-<span id="cb30-363"><a href="#cb30-363" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-364"><a href="#cb30-364" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-365"><a href="#cb30-365" aria-hidden="true" tabindex="-1"></a><span class="fu">## Comparison to naive data averaging</span></span>
-<span id="cb30-366"><a href="#cb30-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-369"><a href="#cb30-369" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-370"><a href="#cb30-370" aria-hidden="true" tabindex="-1"></a>ybar <span class="op">=</span> np.array([y[(movie <span class="op">==</span> j) <span class="op">&amp;</span> rated].mean() <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, J <span class="op">+</span> <span class="dv">1</span>)])</span>
-<span id="cb30-371"><a href="#cb30-371" aria-hidden="true" tabindex="-1"></a>a_true <span class="op">=</span> mu <span class="op">+</span> sigma_a <span class="op">*</span> alpha_true</span>
-<span id="cb30-372"><a href="#cb30-372" aria-hidden="true" tabindex="-1"></a>a_post_median <span class="op">=</span> az.median(idata_3a)[<span class="st">"a"</span>]</span>
-<span id="cb30-373"><a href="#cb30-373" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-374"><a href="#cb30-374" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-377"><a href="#cb30-377" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb30-378"><a href="#cb30-378" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-movies_5</span></span>
-<span id="cb30-379"><a href="#cb30-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-380"><a href="#cb30-380" aria-hidden="true" tabindex="-1"></a>_, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
-<span id="cb30-381"><a href="#cb30-381" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-382"><a href="#cb30-382" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].plot(ybar[romantic_mask], a_true[romantic_mask],</span>
-<span id="cb30-383"><a href="#cb30-383" aria-hidden="true" tabindex="-1"></a>                <span class="st">"C0o"</span>, label<span class="op">=</span><span class="st">"Romantic comedies"</span>)</span>
-<span id="cb30-384"><a href="#cb30-384" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].plot(ybar[crime_mask], a_true[crime_mask],</span>
-<span id="cb30-385"><a href="#cb30-385" aria-hidden="true" tabindex="-1"></a>                <span class="st">"C1o"</span>, label<span class="op">=</span><span class="st">"Crime movies"</span>)</span>
-<span id="cb30-386"><a href="#cb30-386" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Raw average rating for movie j"</span>,</span>
-<span id="cb30-387"><a href="#cb30-387" aria-hidden="true" tabindex="-1"></a>            ylabel<span class="op">=</span><span class="st">"True $a_j$"</span>,</span>
-<span id="cb30-388"><a href="#cb30-388" aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">"Problems with raw averaging"</span>)</span>
-<span id="cb30-389"><a href="#cb30-389" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].plot([<span class="dv">1</span>, <span class="fl">4.5</span>], [<span class="dv">1</span>, <span class="fl">4.5</span>], color<span class="op">=</span><span class="st">"gray"</span>)</span>
-<span id="cb30-390"><a href="#cb30-390" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-391"><a href="#cb30-391" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].legend(loc<span class="op">=</span><span class="st">"lower right"</span>, frameon<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb30-392"><a href="#cb30-392" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-393"><a href="#cb30-393" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].plot(a_post_median[romantic_mask], a_true[romantic_mask],</span>
-<span id="cb30-394"><a href="#cb30-394" aria-hidden="true" tabindex="-1"></a>                <span class="st">"C0o"</span>, label<span class="op">=</span><span class="st">"Romantic comedies"</span>)</span>
-<span id="cb30-395"><a href="#cb30-395" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].plot(a_post_median[crime_mask], a_true[crime_mask],</span>
-<span id="cb30-396"><a href="#cb30-396" aria-hidden="true" tabindex="-1"></a>                <span class="st">"C1o"</span>, label<span class="op">=</span><span class="st">"Crime movies"</span>)</span>
-<span id="cb30-397"><a href="#cb30-397" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Posterior median estimate for movie j"</span>,</span>
-<span id="cb30-398"><a href="#cb30-398" aria-hidden="true" tabindex="-1"></a>            ylabel<span class="op">=</span><span class="st">"True $a_j$"</span>,</span>
-<span id="cb30-399"><a href="#cb30-399" aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">"Model-based estimates do better"</span>)</span>
-<span id="cb30-400"><a href="#cb30-400" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].plot([<span class="dv">1</span>, <span class="fl">4.5</span>], [<span class="dv">1</span>, <span class="fl">4.5</span>], color<span class="op">=</span><span class="st">"gray"</span>)</span>
-<span id="cb30-401"><a href="#cb30-401" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-402"><a href="#cb30-402" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].legend(loc<span class="op">=</span><span class="st">"lower right"</span>, frameon<span class="op">=</span><span class="va">False</span>)<span class="op">;</span></span>
-<span id="cb30-403"><a href="#cb30-403" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-404"><a href="#cb30-404" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-405"><a href="#cb30-405" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">br</span><span class="ot"> </span><span class="dt">/&gt;</span></span>
-<span id="cb30-406"><a href="#cb30-406" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-407"><a href="#cb30-407" aria-hidden="true" tabindex="-1"></a><span class="fu">## References {.unnumbered}</span></span>
-<span id="cb30-408"><a href="#cb30-408" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-409"><a href="#cb30-409" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">"refs"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
-<span id="cb30-410"><a href="#cb30-410" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-411"><a href="#cb30-411" aria-hidden="true" tabindex="-1"></a><span class="fu">## Licenses {.unnumbered}</span></span>
-<span id="cb30-412"><a href="#cb30-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-413"><a href="#cb30-413" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Code <span class="dv">&amp;copy;</span> 2022--2025, Andrew Gelman, licensed under BSD-3.</span>
-<span id="cb30-414"><a href="#cb30-414" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Text <span class="dv">&amp;copy;</span> 2022--2025, Andrew Gelman, licensed under CC-BY-NC 4.0.</span>
+<span id="cb30-332"><a href="#cb30-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-333"><a href="#cb30-333" aria-hidden="true" tabindex="-1"></a>romantic_mask <span class="op">=</span> genre <span class="op">==</span> <span class="st">"romantic"</span></span>
+<span id="cb30-334"><a href="#cb30-334" aria-hidden="true" tabindex="-1"></a>crime_mask <span class="op">=</span> genre <span class="op">==</span> <span class="st">"crime"</span></span>
+<span id="cb30-335"><a href="#cb30-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-336"><a href="#cb30-336" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].errorbar(alpha_median[romantic_mask], alpha_true[romantic_mask], xerr<span class="op">=</span>alpha_q50[romantic_mask]<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C0"</span>, lw<span class="op">=</span><span class="dv">2</span>, fmt<span class="op">=</span><span class="st">"."</span>, label<span class="op">=</span><span class="st">"Romantic comedies"</span>)</span>
+<span id="cb30-337"><a href="#cb30-337" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].errorbar(alpha_median[crime_mask], alpha_true[crime_mask], xerr<span class="op">=</span>alpha_q50[crime_mask]<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C1"</span>, lw<span class="op">=</span><span class="dv">2</span>, fmt<span class="op">=</span><span class="st">"."</span>, label<span class="op">=</span><span class="st">"Crime movies"</span>)</span>
+<span id="cb30-338"><a href="#cb30-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-339"><a href="#cb30-339" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].errorbar(alpha_median[romantic_mask], alpha_true[romantic_mask], xerr<span class="op">=</span>alpha_q95[romantic_mask]<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C0"</span>, lw<span class="op">=</span><span class="fl">0.5</span>, fmt<span class="op">=</span><span class="st">"none"</span>)</span>
+<span id="cb30-340"><a href="#cb30-340" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].errorbar(alpha_median[crime_mask], alpha_true[crime_mask], xerr<span class="op">=</span>alpha_q95[crime_mask]<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C1"</span>, lw<span class="op">=</span><span class="fl">0.5</span>, fmt<span class="op">=</span><span class="st">"none"</span>)</span>
+<span id="cb30-341"><a href="#cb30-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-342"><a href="#cb30-342" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Posterior median, 50%, and 95</span><span class="sc">% i</span><span class="st">nterval"</span>,</span>
+<span id="cb30-343"><a href="#cb30-343" aria-hidden="true" tabindex="-1"></a>            ylabel<span class="op">=</span><span class="st">"True parameter value"</span>,</span>
+<span id="cb30-344"><a href="#cb30-344" aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">"Checking the $</span><span class="ch">\\</span><span class="st">alpha_j$'s"</span>)</span>
+<span id="cb30-345"><a href="#cb30-345" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].plot([<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>], [<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>], color<span class="op">=</span><span class="st">"0.7"</span>)</span>
+<span id="cb30-346"><a href="#cb30-346" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].legend(loc<span class="op">=</span><span class="st">"lower right"</span>, frameon<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb30-347"><a href="#cb30-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-348"><a href="#cb30-348" aria-hidden="true" tabindex="-1"></a>nice_mask <span class="op">=</span> beta_true <span class="op">&lt;</span> <span class="dv">0</span></span>
+<span id="cb30-349"><a href="#cb30-349" aria-hidden="true" tabindex="-1"></a>difficult_mask <span class="op">=</span> beta_true <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb30-350"><a href="#cb30-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-351"><a href="#cb30-351" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].errorbar(beta_median[nice_mask], beta_true[nice_mask], xerr<span class="op">=</span>beta_q50[nice_mask]<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C0"</span>, lw<span class="op">=</span><span class="dv">2</span>, fmt<span class="op">=</span><span class="st">"."</span>, label<span class="op">=</span><span class="st">"Nice reviewers"</span>)</span>
+<span id="cb30-352"><a href="#cb30-352" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].errorbar(beta_median[difficult_mask], beta_true[difficult_mask], xerr<span class="op">=</span>beta_q50[difficult_mask]<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C1"</span>, lw<span class="op">=</span><span class="dv">2</span>, fmt<span class="op">=</span><span class="st">"."</span>, label<span class="op">=</span><span class="st">"Difficult reviewers"</span>)</span>
+<span id="cb30-353"><a href="#cb30-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-354"><a href="#cb30-354" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].errorbar(beta_median[nice_mask], beta_true[nice_mask], xerr<span class="op">=</span>beta_q95[nice_mask]<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C0"</span>, lw<span class="op">=</span><span class="fl">0.5</span>, fmt<span class="op">=</span><span class="st">"none"</span>)</span>
+<span id="cb30-355"><a href="#cb30-355" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].errorbar(beta_median[difficult_mask], beta_true[difficult_mask], xerr<span class="op">=</span>beta_q95[difficult_mask]<span class="op">/</span><span class="dv">2</span>, color<span class="op">=</span><span class="st">"C1"</span>, lw<span class="op">=</span><span class="fl">0.5</span>, fmt<span class="op">=</span><span class="st">"none"</span>)</span>
+<span id="cb30-356"><a href="#cb30-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-357"><a href="#cb30-357" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Posterior median, 50%, and 95</span><span class="sc">% i</span><span class="st">nterval"</span>,</span>
+<span id="cb30-358"><a href="#cb30-358" aria-hidden="true" tabindex="-1"></a>            ylabel<span class="op">=</span><span class="st">"True parameter value"</span>,</span>
+<span id="cb30-359"><a href="#cb30-359" aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">"Checking the $</span><span class="ch">\\</span><span class="st">beta_k$'s"</span>)</span>
+<span id="cb30-360"><a href="#cb30-360" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].plot([<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>], [<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>], color<span class="op">=</span><span class="st">"0.7"</span>)</span>
+<span id="cb30-361"><a href="#cb30-361" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].legend(loc<span class="op">=</span><span class="st">"lower right"</span>, frameon<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb30-362"><a href="#cb30-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-363"><a href="#cb30-363" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"Checking fits for model when difficult reviewers were more likely to rate certain genres"</span>)<span class="op">;</span></span>
+<span id="cb30-364"><a href="#cb30-364" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-365"><a href="#cb30-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-366"><a href="#cb30-366" aria-hidden="true" tabindex="-1"></a><span class="fu">## Comparison to naive data averaging</span></span>
+<span id="cb30-367"><a href="#cb30-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-370"><a href="#cb30-370" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-371"><a href="#cb30-371" aria-hidden="true" tabindex="-1"></a>ybar <span class="op">=</span> np.array([y[(movie <span class="op">==</span> j) <span class="op">&amp;</span> rated].mean() <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>, J <span class="op">+</span> <span class="dv">1</span>)])</span>
+<span id="cb30-372"><a href="#cb30-372" aria-hidden="true" tabindex="-1"></a>a_true <span class="op">=</span> mu <span class="op">+</span> sigma_a <span class="op">*</span> alpha_true</span>
+<span id="cb30-373"><a href="#cb30-373" aria-hidden="true" tabindex="-1"></a>a_post_median <span class="op">=</span> az.median(idata_3a)[<span class="st">"a"</span>]</span>
+<span id="cb30-374"><a href="#cb30-374" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-375"><a href="#cb30-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-378"><a href="#cb30-378" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb30-379"><a href="#cb30-379" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-movies_5</span></span>
+<span id="cb30-380"><a href="#cb30-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-381"><a href="#cb30-381" aria-hidden="true" tabindex="-1"></a>_, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
+<span id="cb30-382"><a href="#cb30-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-383"><a href="#cb30-383" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].plot(ybar[romantic_mask], a_true[romantic_mask],</span>
+<span id="cb30-384"><a href="#cb30-384" aria-hidden="true" tabindex="-1"></a>                <span class="st">"C0o"</span>, label<span class="op">=</span><span class="st">"Romantic comedies"</span>)</span>
+<span id="cb30-385"><a href="#cb30-385" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].plot(ybar[crime_mask], a_true[crime_mask],</span>
+<span id="cb30-386"><a href="#cb30-386" aria-hidden="true" tabindex="-1"></a>                <span class="st">"C1o"</span>, label<span class="op">=</span><span class="st">"Crime movies"</span>)</span>
+<span id="cb30-387"><a href="#cb30-387" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Raw average rating for movie j"</span>,</span>
+<span id="cb30-388"><a href="#cb30-388" aria-hidden="true" tabindex="-1"></a>            ylabel<span class="op">=</span><span class="st">"True $a_j$"</span>,</span>
+<span id="cb30-389"><a href="#cb30-389" aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">"Problems with raw averaging"</span>)</span>
+<span id="cb30-390"><a href="#cb30-390" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].plot([<span class="dv">1</span>, <span class="fl">4.5</span>], [<span class="dv">1</span>, <span class="fl">4.5</span>], color<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb30-391"><a href="#cb30-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-392"><a href="#cb30-392" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].legend(loc<span class="op">=</span><span class="st">"lower right"</span>, frameon<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb30-393"><a href="#cb30-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-394"><a href="#cb30-394" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].plot(a_post_median[romantic_mask], a_true[romantic_mask],</span>
+<span id="cb30-395"><a href="#cb30-395" aria-hidden="true" tabindex="-1"></a>                <span class="st">"C0o"</span>, label<span class="op">=</span><span class="st">"Romantic comedies"</span>)</span>
+<span id="cb30-396"><a href="#cb30-396" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].plot(a_post_median[crime_mask], a_true[crime_mask],</span>
+<span id="cb30-397"><a href="#cb30-397" aria-hidden="true" tabindex="-1"></a>                <span class="st">"C1o"</span>, label<span class="op">=</span><span class="st">"Crime movies"</span>)</span>
+<span id="cb30-398"><a href="#cb30-398" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Posterior median estimate for movie j"</span>,</span>
+<span id="cb30-399"><a href="#cb30-399" aria-hidden="true" tabindex="-1"></a>            ylabel<span class="op">=</span><span class="st">"True $a_j$"</span>,</span>
+<span id="cb30-400"><a href="#cb30-400" aria-hidden="true" tabindex="-1"></a>            title<span class="op">=</span><span class="st">"Model-based estimates do better"</span>)</span>
+<span id="cb30-401"><a href="#cb30-401" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].plot([<span class="dv">1</span>, <span class="fl">4.5</span>], [<span class="dv">1</span>, <span class="fl">4.5</span>], color<span class="op">=</span><span class="st">"gray"</span>)</span>
+<span id="cb30-402"><a href="#cb30-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-403"><a href="#cb30-403" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].legend(loc<span class="op">=</span><span class="st">"lower right"</span>, frameon<span class="op">=</span><span class="va">False</span>)<span class="op">;</span></span>
+<span id="cb30-404"><a href="#cb30-404" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb30-405"><a href="#cb30-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-406"><a href="#cb30-406" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">br</span><span class="ot"> </span><span class="dt">/&gt;</span></span>
+<span id="cb30-407"><a href="#cb30-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-408"><a href="#cb30-408" aria-hidden="true" tabindex="-1"></a><span class="fu">## References {.unnumbered}</span></span>
+<span id="cb30-409"><a href="#cb30-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-410"><a href="#cb30-410" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">"refs"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb30-411"><a href="#cb30-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-412"><a href="#cb30-412" aria-hidden="true" tabindex="-1"></a><span class="fu">## Licenses {.unnumbered}</span></span>
+<span id="cb30-413"><a href="#cb30-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-414"><a href="#cb30-414" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Code <span class="dv">&amp;copy;</span> 2022--2025, Andrew Gelman, licensed under BSD-3.</span>
+<span id="cb30-415"><a href="#cb30-415" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Text <span class="dv">&amp;copy;</span> 2022--2025, Andrew Gelman, licensed under CC-BY-NC 4.0.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

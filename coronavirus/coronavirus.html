@@ -169,10 +169,8 @@ window.Quarto = {
 <link rel="stylesheet" href="../_style.css">
 <meta property="og:title" content="Sensitivity and specificity in coronavirus testing – Bayesian Workflow case studies in Python">
 <meta property="og:description" content="Python version of the case studies from the Bayesian Workflow book by Gelman, Vehtari, McElreath, et al.">
-<meta property="og:image" content="https://arviz-devs.github.io/bayesian-workflow/coronavirus/coronavirus_files/figure-html/fig-specificity_priorsense_1-output-1.png">
+<meta property="og:image" content="https://arviz-devs.github.io/bayesian-workflow/coronavirus/social_cards/coronavirus.png">
 <meta property="og:site_name" content="Bayesian Workflow case studies in Python">
-<meta property="og:image:height" content="1172">
-<meta property="og:image:width" content="2411">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -595,7 +593,7 @@ window.Quarto = {
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>idata_1[<span class="st">"log_prior"</span>] <span class="op">=</span> idata_1[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>].to_dataset()</span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> idata_1[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="1991e3ed" class="cell" data-execution_count="4">
+<div id="e039898f" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>az.summary(idata_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
@@ -636,7 +634,7 @@ window.Quarto = {
 <td>0.99</td>
 <td>1</td>
 <td>15249</td>
-<td>15636</td>
+<td>15647</td>
 <td>1.00</td>
 <td>2.7e-05</td>
 <td>1.8e-05</td>
@@ -672,7 +670,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Check prior-likelihood sensitivity using powerscaling</p>
-<div id="dc4d4e0c" class="cell" data-execution_count="5">
+<div id="76cd93b1" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>az.psense_summary(idata_1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>We detected potential issues. For more information on how to interpret the results, please check
@@ -763,7 +761,7 @@ Figure&nbsp;2
 </div>
 </div>
 <p>Use the shortest posterior interval, which makes more sense than a central interval because of the skewness of the posterior and the hard boundary at 0.</p>
-<div id="0d8a67ae" class="cell" data-execution_count="8">
+<div id="750982fa" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>az.plot_dist(idata_1, var_names<span class="op">=</span><span class="st">"p"</span>, ci_prob<span class="op">=</span><span class="fl">0.95</span>, ci_kind<span class="op">=</span><span class="st">"hdi"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -793,7 +791,7 @@ Figure&nbsp;2
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>idata_2[<span class="st">"log_prior"</span>] <span class="op">=</span> idata_2[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>].to_dataset()</span>
 <span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> idata_2[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="0f90b3b7" class="cell" data-execution_count="10">
+<div id="7c760539" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>az.summary(idata_2, ci_prob<span class="op">=</span><span class="fl">0.95</span>, ci_kind<span class="op">=</span><span class="st">"hdi"</span>, kind<span class="op">=</span><span class="st">"stats"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <div>
@@ -845,7 +843,7 @@ Figure&nbsp;2
 </div>
 </div>
 <p>Check prior-likelihood sensitivity using powerscaling</p>
-<div id="714b7ef6" class="cell" data-execution_count="11">
+<div id="1c493016" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>az.psense_summary(idata_2, var_names<span class="op">=</span>[<span class="st">"~p_sample"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>We detected potential issues. For more information on how to interpret the results, please check
@@ -979,7 +977,7 @@ Figure&nbsp;3
 <span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>idata_3a[<span class="st">"log_prior"</span>] <span class="op">=</span> idata_3a[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>].to_dataset()</span>
 <span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> idata_3a[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="4fa26390" class="cell" data-execution_count="15">
+<div id="0f19d428" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>var_names <span class="op">=</span> [<span class="st">"p"</span>, <span class="st">"spec"</span>, <span class="st">"sens"</span>, </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>             <span class="st">"mu_logit_spec"</span>, <span class="st">"mu_logit_sens"</span>, </span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>             <span class="st">"sigma_logit_spec"</span>, <span class="st">"sigma_logit_sens"</span>]</span>
@@ -1007,23 +1005,23 @@ Figure&nbsp;3
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">p</th>
-<td>0.033</td>
+<td>0.034</td>
 <td>0.089</td>
 <td>0.0021</td>
-<td>0.24</td>
+<td>0.25</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">spec[0]</th>
 <td>1</td>
-<td>0.0042</td>
+<td>0.0043</td>
 <td>0.99</td>
 <td>1</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">sens[0]</th>
-<td>0.72</td>
-<td>0.24</td>
-<td>0.047</td>
+<td>0.71</td>
+<td>0.25</td>
+<td>0.044</td>
 <td>0.98</td>
 </tr>
 <tr class="even">
@@ -1031,27 +1029,27 @@ Figure&nbsp;3
 <td>5.6</td>
 <td>0.59</td>
 <td>4.5</td>
-<td>6.8</td>
+<td>6.9</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">mu_logit_sens</th>
 <td>1.6</td>
-<td>0.64</td>
-<td>0.31</td>
+<td>0.65</td>
+<td>0.28</td>
 <td>3</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">sigma_logit_spec</th>
 <td>1.7</td>
-<td>0.47</td>
-<td>0.85</td>
+<td>0.48</td>
+<td>0.86</td>
 <td>2.7</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">sigma_logit_sens</th>
 <td>0.96</td>
-<td>0.52</td>
-<td>0.22</td>
+<td>0.51</td>
+<td>0.21</td>
 <td>2.2</td>
 </tr>
 </tbody>
@@ -1060,7 +1058,7 @@ Figure&nbsp;3
 </div>
 </div>
 </div>
-<div id="2d417326" class="cell" data-execution_count="16">
+<div id="ce3d09df" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>az.summary(idata_3a,</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>           var_names<span class="op">=</span>var_names,</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>           coords<span class="op">=</span>{<span class="st">"spec_dim_0"</span>: [<span class="dv">0</span>], <span class="st">"sens_dim_0"</span>: [<span class="dv">0</span>]},</span>
@@ -1084,23 +1082,23 @@ Figure&nbsp;3
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">p</th>
-<td>0.033</td>
+<td>0.034</td>
 <td>0.089</td>
 <td>0.0021</td>
-<td>0.24</td>
+<td>0.25</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">spec[0]</th>
 <td>1</td>
-<td>0.0042</td>
+<td>0.0043</td>
 <td>0.99</td>
 <td>1</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">sens[0]</th>
-<td>0.72</td>
-<td>0.24</td>
-<td>0.047</td>
+<td>0.71</td>
+<td>0.25</td>
+<td>0.044</td>
 <td>0.98</td>
 </tr>
 <tr class="even">
@@ -1108,27 +1106,27 @@ Figure&nbsp;3
 <td>5.6</td>
 <td>0.59</td>
 <td>4.5</td>
-<td>6.8</td>
+<td>6.9</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">mu_logit_sens</th>
 <td>1.6</td>
-<td>0.64</td>
-<td>0.31</td>
+<td>0.65</td>
+<td>0.28</td>
 <td>3</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">sigma_logit_spec</th>
 <td>1.7</td>
-<td>0.47</td>
-<td>0.85</td>
+<td>0.48</td>
+<td>0.86</td>
 <td>2.7</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">sigma_logit_sens</th>
 <td>0.96</td>
-<td>0.52</td>
-<td>0.22</td>
+<td>0.51</td>
+<td>0.21</td>
 <td>2.2</td>
 </tr>
 </tbody>
@@ -1138,7 +1136,7 @@ Figure&nbsp;3
 </div>
 </div>
 <p>Check prior-likelihood sensitivity using powerscaling</p>
-<div id="11f846ba" class="cell" data-execution_count="17">
+<div id="693dfec6" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>az.psense_summary(idata_3a, var_names<span class="op">=</span>[<span class="st">"p"</span>, <span class="st">"spec"</span>, <span class="st">"sens"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>We detected potential issues. For more information on how to interpret the results, please check
@@ -1161,62 +1159,62 @@ or read original paper https://doi.org/10.1007/s11222-023-10366-5</code></pre>
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">p</th>
-<td>0.106</td>
+<td>0.116</td>
 <td>0.011</td>
 <td>potential strong prior / weak likelihood</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">spec[0]</th>
-<td>0.017</td>
+<td>0.022</td>
 <td>0.019</td>
 <td>✓</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">spec[1]</th>
 <td>0.005</td>
-<td>0.001</td>
+<td>0.002</td>
 <td>✓</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">spec[2]</th>
-<td>0.021</td>
-<td>0.002</td>
+<td>0.022</td>
+<td>0.004</td>
 <td>✓</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">spec[3]</th>
-<td>0.021</td>
-<td>0.003</td>
-<td>✓</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">spec[4]</th>
-<td>0.022</td>
-<td>0.003</td>
-<td>✓</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">spec[5]</th>
 <td>0.022</td>
 <td>0.004</td>
 <td>✓</td>
 </tr>
 <tr class="even">
+<th data-quarto-table-cell-role="th">spec[4]</th>
+<td>0.022</td>
+<td>0.005</td>
+<td>✓</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">spec[5]</th>
+<td>0.021</td>
+<td>0.004</td>
+<td>✓</td>
+</tr>
+<tr class="even">
 <th data-quarto-table-cell-role="th">spec[6]</th>
-<td>0.020</td>
-<td>0.002</td>
+<td>0.023</td>
+<td>0.003</td>
 <td>✓</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">spec[7]</th>
 <td>0.022</td>
-<td>0.003</td>
+<td>0.005</td>
 <td>✓</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">spec[8]</th>
-<td>0.006</td>
-<td>0.003</td>
+<td>0.005</td>
+<td>0.002</td>
 <td>✓</td>
 </tr>
 <tr class="odd">
@@ -1228,19 +1226,19 @@ or read original paper https://doi.org/10.1007/s11222-023-10366-5</code></pre>
 <tr class="even">
 <th data-quarto-table-cell-role="th">spec[10]</th>
 <td>0.002</td>
-<td>0.002</td>
+<td>0.003</td>
 <td>✓</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">spec[11]</th>
-<td>0.001</td>
-<td>0.001</td>
+<td>0.002</td>
+<td>0.004</td>
 <td>✓</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">spec[12]</th>
-<td>0.004</td>
-<td>0.002</td>
+<td>0.001</td>
+<td>0.001</td>
 <td>✓</td>
 </tr>
 <tr class="odd">
@@ -1251,19 +1249,19 @@ or read original paper https://doi.org/10.1007/s11222-023-10366-5</code></pre>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">sens[0]</th>
-<td>0.059</td>
+<td>0.062</td>
 <td>0.002</td>
 <td>potential strong prior / weak likelihood</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">sens[1]</th>
-<td>0.012</td>
+<td>0.013</td>
 <td>0.002</td>
 <td>✓</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">sens[2]</th>
-<td>0.013</td>
+<td>0.014</td>
 <td>0.001</td>
 <td>✓</td>
 </tr>
@@ -1302,7 +1300,7 @@ Figure&nbsp;4
 <section id="hierarchical-model-with-stronger-priors" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="hierarchical-model-with-stronger-priors"><span class="header-section-number">4</span> Hierarchical model with stronger priors</h2>
 <p>Compute posterior using data from <span class="citation" data-cites="Bendavid-Mulaney-Sood-etal:2020b">Bendavid et al. (<a href="#ref-Bendavid-Mulaney-Sood-etal:2020b" role="doc-biblioref">2020b</a>)</span> 27 April 2020 and stronger priors</p>
-<div id="ddf6e821" class="cell" data-execution_count="19">
+<div id="50fa27bc" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>santaclara_data[<span class="st">"logit_spec_prior_scale"</span>] <span class="op">=</span> <span class="fl">0.3</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>santaclara_data[<span class="st">"logit_sens_prior_scale"</span>] <span class="op">=</span> <span class="fl">0.3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1326,7 +1324,7 @@ Figure&nbsp;4
 <span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>idata_3b[<span class="st">"log_prior"</span>] <span class="op">=</span> idata_3b[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>].to_dataset()</span>
 <span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> idata_3b[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="0386279b" class="cell" data-execution_count="21">
+<div id="ed0b613b" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>az.summary(idata_3b,</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>           var_names<span class="op">=</span>var_names,</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>           coords<span class="op">=</span>{<span class="st">"spec_dim_0"</span>: [<span class="dv">0</span>], <span class="st">"sens_dim_0"</span>: [<span class="dv">0</span>]},</span>
@@ -1351,9 +1349,9 @@ Figure&nbsp;4
 <tr class="odd">
 <th data-quarto-table-cell-role="th">p</th>
 <td>0.012</td>
-<td>0.0055</td>
-<td>0.0018</td>
-<td>0.023</td>
+<td>0.0054</td>
+<td>0.0019</td>
+<td>0.022</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">spec[0]</th>
@@ -1364,37 +1362,37 @@ Figure&nbsp;4
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">sens[0]</th>
-<td>0.8</td>
-<td>0.092</td>
-<td>0.57</td>
-<td>0.94</td>
+<td>0.81</td>
+<td>0.09</td>
+<td>0.58</td>
+<td>0.93</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">mu_logit_spec</th>
 <td>5.2</td>
 <td>0.34</td>
 <td>4.6</td>
-<td>5.9</td>
+<td>6</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">mu_logit_sens</th>
 <td>1.5</td>
-<td>0.34</td>
-<td>0.88</td>
+<td>0.33</td>
+<td>0.9</td>
 <td>2.2</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">sigma_logit_spec</th>
 <td>0.72</td>
 <td>0.22</td>
-<td>0.25</td>
-<td>1.2</td>
+<td>0.26</td>
+<td>1.1</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">sigma_logit_sens</th>
 <td>0.4</td>
 <td>0.19</td>
-<td>0.04</td>
+<td>0.041</td>
 <td>0.8</td>
 </tr>
 </tbody>
@@ -1500,13 +1498,13 @@ Figure&nbsp;4
 <span id="cb28-89"><a href="#cb28-89" aria-hidden="true" tabindex="-1"></a>  p_avg = sum(N_pop .* p_pop) / sum(N_pop);</span>
 <span id="cb28-90"><a href="#cb28-90" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>To fit the model, we need individual-level data. These data are not publicly available, so just to get the program running, we take the existing 50 positive tests and assign them at random to the 3330 people.</p>
-<div id="a283372b" class="cell" data-execution_count="23">
+<div id="36bace02" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(SEED)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">3330</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> rng.permutation(np.repeat([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">3330</span> <span class="op">-</span> <span class="dv">50</span>, <span class="dv">50</span>]))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Here are the counts of each sex, ethnicity, and age from <span class="citation" data-cites="Bendavid-Mulaney-Sood-etal:2020b">Bendavid et al. (<a href="#ref-Bendavid-Mulaney-Sood-etal:2020b" role="doc-biblioref">2020b</a>)</span>. We don’t have zip code distribution but we looked it up and there are 58 zip codes in Santa Clara County; for simplicity we assume all zip codes are equally likely. We then assign these traits to people at random. This is wrong–actually, these variable are correlated in various ways–but, again, now we have fake data we can use to fit the model.</p>
-<div id="557c56b4" class="cell" data-execution_count="24">
+<div id="cacb6905" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>male <span class="op">=</span> rng.permutation(np.repeat([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">2101</span>, <span class="dv">1229</span>]))</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>eth <span class="op">=</span> rng.permutation(np.repeat([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">2118</span>, <span class="dv">623</span>, <span class="dv">266</span>, <span class="dv">306</span> <span class="op">+</span> <span class="dv">17</span>]))</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> rng.permutation(np.repeat([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">71</span>, <span class="dv">550</span>, <span class="dv">2542</span>, <span class="dv">167</span>]))</span>
@@ -1514,11 +1512,11 @@ Figure&nbsp;4
 <span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>zip_codes <span class="op">=</span> rng.integers(<span class="dv">1</span>, N_zip <span class="op">+</span> <span class="dv">1</span>, size<span class="op">=</span><span class="dv">3330</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Setting up the zip code level predictor. In this case we will use a random number with mean 50 and standard deviation 20. These are arbitrary numbers that we chose just to be able to test the centering and scaling in the model. In real life we might use %Latino or average income in the zip code</p>
-<div id="46b3b6ad" class="cell" data-execution_count="25">
+<div id="92ed65c1" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x_zip <span class="op">=</span> rng.normal(<span class="dv">50</span>, <span class="dv">20</span>, size<span class="op">=</span>N_zip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Setting up the poststratification table. For simplicity we assume there are 1000 people in each cell in the county. Actually we’d want data from the Census.</p>
-<div id="306cc455" class="cell" data-execution_count="26">
+<div id="beff3d6b" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> <span class="dv">4</span> <span class="op">*</span> <span class="dv">4</span> <span class="op">*</span> N_zip</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>N_pop <span class="op">=</span> np.full(J, <span class="dv">1000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1553,7 +1551,7 @@ Figure&nbsp;4
 <span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>idata_4 <span class="op">=</span> az.from_cmdstanpy(fit_4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Show inferences for some model parameters. In addition to <code>p_avg</code>, the population prevalence, we also look at the inferences for the first three poststratification cells just to check that everything makes sense</p>
-<div id="c296ce66" class="cell" data-execution_count="28">
+<div id="ed3f3dfe" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>print_variables_mrp <span class="op">=</span> [</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"p_avg"</span>, <span class="st">"b"</span>, <span class="st">"a_age"</span>, <span class="st">"a_eth"</span>,</span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sigma_eth"</span>, <span class="st">"sigma_age"</span>, <span class="st">"sigma_zip"</span>,</span>
@@ -1581,156 +1579,156 @@ Figure&nbsp;4
 <tr class="odd">
 <th data-quarto-table-cell-role="th">p_avg</th>
 <td>0.014</td>
-<td>0.0078</td>
-<td>0.0011</td>
+<td>0.008</td>
+<td>0.0012</td>
 <td>0.031</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">b[0]</th>
-<td>-4.4</td>
+<td>-4.5</td>
 <td>1.2</td>
-<td>-7.4</td>
+<td>-7.5</td>
 <td>-2.8</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">b[1]</th>
-<td>-0.099</td>
+<td>-0.088</td>
 <td>0.38</td>
-<td>-0.85</td>
+<td>-0.84</td>
 <td>0.66</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">b[2]</th>
-<td>-0.0044</td>
-<td>0.013</td>
+<td>-0.0041</td>
+<td>0.014</td>
 <td>-0.03</td>
-<td>0.023</td>
+<td>0.025</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">a_age[0]</th>
-<td>-0.077</td>
+<td>-0.081</td>
 <td>0.51</td>
-<td>-1.2</td>
-<td>0.91</td>
+<td>-1.3</td>
+<td>0.87</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">a_age[1]</th>
-<td>-0.25</td>
-<td>0.49</td>
-<td>-1.5</td>
-<td>0.5</td>
+<td>-0.22</td>
+<td>0.48</td>
+<td>-1.4</td>
+<td>0.53</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">a_age[2]</th>
-<td>-0.29</td>
-<td>0.48</td>
-<td>-1.4</td>
+<td>-0.28</td>
 <td>0.47</td>
+<td>-1.4</td>
+<td>0.43</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">a_age[3]</th>
 <td>0.31</td>
-<td>0.5</td>
-<td>-0.58</td>
+<td>0.51</td>
+<td>-0.52</td>
 <td>1.5</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">a_eth[0]</th>
-<td>-0.096</td>
-<td>0.33</td>
-<td>-0.92</td>
-<td>0.49</td>
+<td>-0.098</td>
+<td>0.34</td>
+<td>-0.9</td>
+<td>0.5</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">a_eth[1]</th>
-<td>0.11</td>
-<td>0.34</td>
-<td>-0.5</td>
-<td>0.95</td>
+<td>0.095</td>
+<td>0.35</td>
+<td>-0.58</td>
+<td>0.87</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">a_eth[2]</th>
-<td>-0.08</td>
-<td>0.38</td>
-<td>-1</td>
-<td>0.57</td>
+<td>-0.083</td>
+<td>0.36</td>
+<td>-0.95</td>
+<td>0.56</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">a_eth[3]</th>
-<td>-0.073</td>
-<td>0.37</td>
-<td>-0.94</td>
-<td>0.6</td>
+<td>-0.081</td>
+<td>0.38</td>
+<td>-1</td>
+<td>0.56</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">sigma_eth</th>
 <td>0.32</td>
-<td>0.25</td>
-<td>0.015</td>
-<td>0.94</td>
+<td>0.26</td>
+<td>0.01</td>
+<td>0.97</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">sigma_age</th>
-<td>0.46</td>
+<td>0.45</td>
 <td>0.31</td>
-<td>0.02</td>
+<td>0.019</td>
 <td>1.2</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">sigma_zip</th>
 <td>0.44</td>
 <td>0.29</td>
-<td>0.024</td>
+<td>0.022</td>
 <td>1.1</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">mu_logit_spec</th>
 <td>5.2</td>
-<td>0.32</td>
+<td>0.33</td>
 <td>4.6</td>
 <td>5.9</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">sigma_logit_spec</th>
 <td>0.71</td>
-<td>0.22</td>
-<td>0.24</td>
+<td>0.23</td>
+<td>0.15</td>
 <td>1.1</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">mu_logit_sens</th>
 <td>1.5</td>
 <td>0.33</td>
-<td>0.9</td>
+<td>0.88</td>
 <td>2.2</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">sigma_logit_sens</th>
 <td>0.4</td>
-<td>0.2</td>
-<td>0.044</td>
-<td>0.82</td>
+<td>0.19</td>
+<td>0.05</td>
+<td>0.81</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">p_pop[0]</th>
-<td>0.012</td>
-<td>0.012</td>
-<td>0.00044</td>
-<td>0.044</td>
+<td>0.011</td>
+<td>0.011</td>
+<td>0.00046</td>
+<td>0.041</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">p_pop[1]</th>
-<td>0.011</td>
-<td>0.012</td>
-<td>0.00044</td>
-<td>0.04</td>
+<td>0.01</td>
+<td>0.01</td>
+<td>0.00047</td>
+<td>0.038</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">p_pop[2]</th>
+<td>0.014</td>
 <td>0.015</td>
-<td>0.015</td>
-<td>0.00055</td>
-<td>0.053</td>
+<td>0.00051</td>
+<td>0.054</td>
 </tr>
 </tbody>
 </table>
@@ -1738,7 +1736,7 @@ Figure&nbsp;4
 </div>
 </div>
 </div>
-<div id="1508c5f3" class="cell" data-execution_count="29">
+<div id="ec110415" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>az.plot_dist(idata_4, var_names<span class="op">=</span><span class="st">"p_avg"</span>, ci_prob<span class="op">=</span><span class="fl">0.95</span>, ci_kind<span class="op">=</span><span class="st">"hdi"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
@@ -1751,7 +1749,7 @@ Figure&nbsp;4
 </section>
 <section id="additional-prior-sensitivity-analysis" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="additional-prior-sensitivity-analysis"><span class="header-section-number">6</span> Additional prior sensitivity analysis</h2>
-<div id="c177f62d" class="cell" data-execution_count="30">
+<div id="24fae1c4" class="cell" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>pos_tests <span class="op">=</span> [<span class="dv">78</span>, <span class="dv">27</span>, <span class="dv">25</span>]</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>tests <span class="op">=</span> [<span class="dv">85</span>, <span class="dv">37</span>, <span class="dv">35</span>]</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>sens_df <span class="op">=</span> pd.DataFrame(</span>
@@ -1832,7 +1830,7 @@ Figure&nbsp;4
 <span id="cb38-54"><a href="#cb38-54" aria-hidden="true" tabindex="-1"></a>  n_unk ~ binomial(N_unk, pi * sens_unk + (<span class="dv">1</span> - pi) * (<span class="dv">1</span> - spec_unk));</span>
 <span id="cb38-55"><a href="#cb38-55" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Data</p>
-<div id="8cd3e245" class="cell" data-execution_count="32">
+<div id="d8291315" class="cell" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="bu">dict</span>(</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    K_pos<span class="op">=</span><span class="bu">len</span>(sens_df),</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    N_pos<span class="op">=</span>sens_df[<span class="st">"tests"</span>].tolist(),</span>
@@ -1846,7 +1844,7 @@ Figure&nbsp;4
 <span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Empty data frame to store posterior intervals with different priors</p>
-<div id="05af6cc7" class="cell" data-execution_count="33">
+<div id="8842dd9a" class="cell" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>ribbon_df <span class="op">=</span> pd.DataFrame(</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>[<span class="st">"sigma_sens"</span>, <span class="st">"sigma_spec"</span>, <span class="st">"prev05"</span>, <span class="st">"prev50"</span>, <span class="st">"prev95"</span>]</span>
 <span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2420,516 +2418,517 @@ Bendavid, Eran et al. 2020a. <span>“<span>COVID</span>-19 Antibody Seroprevale
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Sensitivity and specificity in coronavirus testing"</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Andrew Gelman and Aki Vehtari"</span></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2022-08-22</span></span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="an">date-format:</span><span class="co"> iso</span></span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-download: true</span></span>
-<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> ../casestudies.bib</span></span>
-<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>This notebook includes the code for the Bayesian Workflow book</span>
-<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>Chapter 19 *Building up to a hierarchical model: Coronavirus</span>
-<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>testing*.</span>
-<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
-<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a>In early April, 2020, @Bendavid-Mulaney-Sood-etal:2020a recruited</span>
-<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a>3330 residents of Santa Clara County, California and tested them</span>
-<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a>for SARS-CoV-2 antibodies. We re-analyze the data.</span>
-<span id="cb43-25"><a href="#cb43-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-28"><a href="#cb43-28" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-29"><a href="#cb43-29" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
-<span id="cb43-30"><a href="#cb43-30" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: true</span></span>
-<span id="cb43-31"><a href="#cb43-31" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: false</span></span>
-<span id="cb43-32"><a href="#cb43-32" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb43-33"><a href="#cb43-33" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb43-34"><a href="#cb43-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-35"><a href="#cb43-35" aria-hidden="true" tabindex="-1"></a>sys.path.insert(<span class="dv">0</span>, <span class="st">".."</span>)</span>
-<span id="cb43-36"><a href="#cb43-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-37"><a href="#cb43-37" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> arviz <span class="im">as</span> az</span>
-<span id="cb43-38"><a href="#cb43-38" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb43-39"><a href="#cb43-39" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb43-40"><a href="#cb43-40" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb43-41"><a href="#cb43-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-42"><a href="#cb43-42" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cmdstanpy <span class="im">import</span> CmdStanModel, disable_logging</span>
-<span id="cb43-43"><a href="#cb43-43" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> print_stan</span>
-<span id="cb43-44"><a href="#cb43-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-45"><a href="#cb43-45" aria-hidden="true" tabindex="-1"></a>disable_logging()</span>
-<span id="cb43-46"><a href="#cb43-46" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span>
-<span id="cb43-47"><a href="#cb43-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-48"><a href="#cb43-48" aria-hidden="true" tabindex="-1"></a>az.style.use(<span class="st">"arviz-variat"</span>)</span>
-<span id="cb43-49"><a href="#cb43-49" aria-hidden="true" tabindex="-1"></a>az.rcParams[<span class="st">"stats.ci_prob"</span>] <span class="op">=</span> <span class="fl">0.95</span></span>
-<span id="cb43-50"><a href="#cb43-50" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.dpi"</span>] <span class="op">=</span> <span class="dv">100</span></span>
-<span id="cb43-51"><a href="#cb43-51" aria-hidden="true" tabindex="-1"></a>SEED <span class="op">=</span> <span class="dv">1377</span></span>
-<span id="cb43-52"><a href="#cb43-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-53"><a href="#cb43-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-54"><a href="#cb43-54" aria-hidden="true" tabindex="-1"></a><span class="fu">## Simple model fit using pooled specificity and sensitivity</span></span>
-<span id="cb43-55"><a href="#cb43-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-58"><a href="#cb43-58" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-59"><a href="#cb43-59" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: asis</span></span>
-<span id="cb43-60"><a href="#cb43-60" aria-hidden="true" tabindex="-1"></a>sc_model <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"santa-clara.stan"</span>)</span>
-<span id="cb43-61"><a href="#cb43-61" aria-hidden="true" tabindex="-1"></a>print_stan(sc_model)</span>
-<span id="cb43-62"><a href="#cb43-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-63"><a href="#cb43-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-64"><a href="#cb43-64" aria-hidden="true" tabindex="-1"></a>Compute posterior with data from @Bendavid-Mulaney-Sood-etal:2020a, 11 April 2020</span>
-<span id="cb43-65"><a href="#cb43-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-68"><a href="#cb43-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-69"><a href="#cb43-69" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_1</span></span>
-<span id="cb43-70"><a href="#cb43-70" aria-hidden="true" tabindex="-1"></a>fit_1 <span class="op">=</span> sc_model.sample(</span>
-<span id="cb43-71"><a href="#cb43-71" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span><span class="bu">dict</span>(</span>
-<span id="cb43-72"><a href="#cb43-72" aria-hidden="true" tabindex="-1"></a>        y_sample<span class="op">=</span><span class="dv">50</span>,</span>
-<span id="cb43-73"><a href="#cb43-73" aria-hidden="true" tabindex="-1"></a>        n_sample<span class="op">=</span><span class="dv">3330</span>,</span>
-<span id="cb43-74"><a href="#cb43-74" aria-hidden="true" tabindex="-1"></a>        y_spec<span class="op">=</span><span class="dv">369</span> <span class="op">+</span> <span class="dv">30</span>,</span>
-<span id="cb43-75"><a href="#cb43-75" aria-hidden="true" tabindex="-1"></a>        n_spec<span class="op">=</span><span class="dv">371</span> <span class="op">+</span> <span class="dv">30</span>,</span>
-<span id="cb43-76"><a href="#cb43-76" aria-hidden="true" tabindex="-1"></a>        y_sens<span class="op">=</span><span class="dv">25</span> <span class="op">+</span> <span class="dv">78</span>,</span>
-<span id="cb43-77"><a href="#cb43-77" aria-hidden="true" tabindex="-1"></a>        n_sens<span class="op">=</span><span class="dv">37</span> <span class="op">+</span> <span class="dv">85</span>,</span>
-<span id="cb43-78"><a href="#cb43-78" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb43-79"><a href="#cb43-79" aria-hidden="true" tabindex="-1"></a>    iter_warmup<span class="op">=</span><span class="bu">int</span>(<span class="fl">1e4</span>),</span>
-<span id="cb43-80"><a href="#cb43-80" aria-hidden="true" tabindex="-1"></a>    iter_sampling<span class="op">=</span><span class="bu">int</span>(<span class="fl">1e4</span>),</span>
-<span id="cb43-81"><a href="#cb43-81" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span>SEED,</span>
-<span id="cb43-82"><a href="#cb43-82" aria-hidden="true" tabindex="-1"></a>    show_progress<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb43-83"><a href="#cb43-83" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb43-84"><a href="#cb43-84" aria-hidden="true" tabindex="-1"></a>idata_1 <span class="op">=</span> az.from_cmdstanpy(fit_1, log_likelihood<span class="op">=</span><span class="st">"log_lik"</span>)</span>
-<span id="cb43-85"><a href="#cb43-85" aria-hidden="true" tabindex="-1"></a>idata_1[<span class="st">"log_prior"</span>] <span class="op">=</span> idata_1[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>].to_dataset()</span>
-<span id="cb43-86"><a href="#cb43-86" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> idata_1[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>]</span>
-<span id="cb43-87"><a href="#cb43-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-88"><a href="#cb43-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-91"><a href="#cb43-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-92"><a href="#cb43-92" aria-hidden="true" tabindex="-1"></a>az.summary(idata_1)</span>
-<span id="cb43-93"><a href="#cb43-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-94"><a href="#cb43-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-95"><a href="#cb43-95" aria-hidden="true" tabindex="-1"></a>Check prior-likelihood sensitivity using powerscaling</span>
-<span id="cb43-96"><a href="#cb43-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-99"><a href="#cb43-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-100"><a href="#cb43-100" aria-hidden="true" tabindex="-1"></a>az.psense_summary(idata_1)</span>
-<span id="cb43-101"><a href="#cb43-101" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-102"><a href="#cb43-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-105"><a href="#cb43-105" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-106"><a href="#cb43-106" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-specificity_priorsense_1</span></span>
-<span id="cb43-107"><a href="#cb43-107" aria-hidden="true" tabindex="-1"></a>az.plot_psense_dist(idata_1,</span>
-<span id="cb43-108"><a href="#cb43-108" aria-hidden="true" tabindex="-1"></a>                    var_names<span class="op">=</span>[<span class="st">"~p_sample"</span>],</span>
-<span id="cb43-109"><a href="#cb43-109" aria-hidden="true" tabindex="-1"></a>                    alphas<span class="op">=</span>[<span class="fl">0.5</span>, <span class="dv">2</span>],</span>
-<span id="cb43-110"><a href="#cb43-110" aria-hidden="true" tabindex="-1"></a>                    )</span>
-<span id="cb43-111"><a href="#cb43-111" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-112"><a href="#cb43-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-113"><a href="#cb43-113" aria-hidden="true" tabindex="-1"></a>Inference for the population prevalence</span>
-<span id="cb43-114"><a href="#cb43-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-117"><a href="#cb43-117" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-118"><a href="#cb43-118" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-scatter</span></span>
-<span id="cb43-119"><a href="#cb43-119" aria-hidden="true" tabindex="-1"></a>az.plot_pair(idata_1,</span>
-<span id="cb43-120"><a href="#cb43-120" aria-hidden="true" tabindex="-1"></a>             var_names<span class="op">=</span>[<span class="st">"spec"</span>, <span class="st">"p"</span>],</span>
-<span id="cb43-121"><a href="#cb43-121" aria-hidden="true" tabindex="-1"></a>             visuals<span class="op">=</span>{<span class="st">"scatter"</span>: {<span class="st">"alpha"</span>: <span class="fl">0.01</span>,</span>
-<span id="cb43-122"><a href="#cb43-122" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"marker"</span>:<span class="st">"."</span>,}},</span>
-<span id="cb43-123"><a href="#cb43-123" aria-hidden="true" tabindex="-1"></a>             </span>
-<span id="cb43-124"><a href="#cb43-124" aria-hidden="true" tabindex="-1"></a>             )</span>
-<span id="cb43-125"><a href="#cb43-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-126"><a href="#cb43-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-127"><a href="#cb43-127" aria-hidden="true" tabindex="-1"></a>Use the shortest posterior interval, which makes more sense than a central interval because of the skewness of the posterior and the hard boundary at 0.</span>
-<span id="cb43-128"><a href="#cb43-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-131"><a href="#cb43-131" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-132"><a href="#cb43-132" aria-hidden="true" tabindex="-1"></a>az.plot_dist(idata_1, var_names<span class="op">=</span><span class="st">"p"</span>, ci_prob<span class="op">=</span><span class="fl">0.95</span>, ci_kind<span class="op">=</span><span class="st">"hdi"</span>)<span class="op">;</span></span>
-<span id="cb43-133"><a href="#cb43-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-134"><a href="#cb43-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-135"><a href="#cb43-135" aria-hidden="true" tabindex="-1"></a>Compute posterior with data from @Bendavid-Mulaney-Sood-etal:2020b, 27 April 2020</span>
-<span id="cb43-136"><a href="#cb43-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-139"><a href="#cb43-139" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-140"><a href="#cb43-140" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_2</span></span>
-<span id="cb43-141"><a href="#cb43-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-142"><a href="#cb43-142" aria-hidden="true" tabindex="-1"></a>fit_2 <span class="op">=</span> sc_model.sample(</span>
-<span id="cb43-143"><a href="#cb43-143" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span><span class="bu">dict</span>(</span>
-<span id="cb43-144"><a href="#cb43-144" aria-hidden="true" tabindex="-1"></a>        y_sample<span class="op">=</span><span class="dv">50</span>,</span>
-<span id="cb43-145"><a href="#cb43-145" aria-hidden="true" tabindex="-1"></a>        n_sample<span class="op">=</span><span class="dv">3330</span>,</span>
-<span id="cb43-146"><a href="#cb43-146" aria-hidden="true" tabindex="-1"></a>        y_spec<span class="op">=</span><span class="dv">3308</span>,</span>
-<span id="cb43-147"><a href="#cb43-147" aria-hidden="true" tabindex="-1"></a>        n_spec<span class="op">=</span><span class="dv">3324</span>,</span>
-<span id="cb43-148"><a href="#cb43-148" aria-hidden="true" tabindex="-1"></a>        y_sens<span class="op">=</span><span class="dv">130</span>,</span>
-<span id="cb43-149"><a href="#cb43-149" aria-hidden="true" tabindex="-1"></a>        n_sens<span class="op">=</span><span class="dv">157</span>,</span>
-<span id="cb43-150"><a href="#cb43-150" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb43-151"><a href="#cb43-151" aria-hidden="true" tabindex="-1"></a>    iter_warmup<span class="op">=</span><span class="bu">int</span>(<span class="fl">1e4</span>),</span>
-<span id="cb43-152"><a href="#cb43-152" aria-hidden="true" tabindex="-1"></a>    iter_sampling<span class="op">=</span><span class="bu">int</span>(<span class="fl">1e4</span>),</span>
-<span id="cb43-153"><a href="#cb43-153" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span>SEED,</span>
-<span id="cb43-154"><a href="#cb43-154" aria-hidden="true" tabindex="-1"></a>    show_progress<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb43-155"><a href="#cb43-155" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb43-156"><a href="#cb43-156" aria-hidden="true" tabindex="-1"></a>idata_2 <span class="op">=</span> az.from_cmdstanpy(fit_2, log_likelihood<span class="op">=</span><span class="st">"log_lik"</span>)</span>
-<span id="cb43-157"><a href="#cb43-157" aria-hidden="true" tabindex="-1"></a>idata_2[<span class="st">"log_prior"</span>] <span class="op">=</span> idata_2[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>].to_dataset()</span>
-<span id="cb43-158"><a href="#cb43-158" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> idata_2[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>]</span>
-<span id="cb43-159"><a href="#cb43-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-160"><a href="#cb43-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-163"><a href="#cb43-163" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-164"><a href="#cb43-164" aria-hidden="true" tabindex="-1"></a>az.summary(idata_2, ci_prob<span class="op">=</span><span class="fl">0.95</span>, ci_kind<span class="op">=</span><span class="st">"hdi"</span>, kind<span class="op">=</span><span class="st">"stats"</span>)</span>
-<span id="cb43-165"><a href="#cb43-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-166"><a href="#cb43-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-167"><a href="#cb43-167" aria-hidden="true" tabindex="-1"></a>Check prior-likelihood sensitivity using powerscaling</span>
-<span id="cb43-168"><a href="#cb43-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-171"><a href="#cb43-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-172"><a href="#cb43-172" aria-hidden="true" tabindex="-1"></a>az.psense_summary(idata_2, var_names<span class="op">=</span>[<span class="st">"~p_sample"</span>])</span>
-<span id="cb43-173"><a href="#cb43-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-174"><a href="#cb43-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-177"><a href="#cb43-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-178"><a href="#cb43-178" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-specificity_priorsense_x</span></span>
-<span id="cb43-179"><a href="#cb43-179" aria-hidden="true" tabindex="-1"></a>az.plot_psense_dist(idata_2, var_names<span class="op">=</span>[<span class="st">"~p_sample"</span>], alphas<span class="op">=</span>[<span class="fl">0.5</span>, <span class="dv">2</span>])</span>
-<span id="cb43-180"><a href="#cb43-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-181"><a href="#cb43-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-182"><a href="#cb43-182" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hierarchical model for sensitivity and specificity</span></span>
-<span id="cb43-183"><a href="#cb43-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-184"><a href="#cb43-184" aria-hidden="true" tabindex="-1"></a>Hierarchical model that allows sensitivity and specificity to vary across studies.</span>
-<span id="cb43-185"><a href="#cb43-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-188"><a href="#cb43-188" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-189"><a href="#cb43-189" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: asis</span></span>
-<span id="cb43-190"><a href="#cb43-190" aria-hidden="true" tabindex="-1"></a>sc_model_hierarchical <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"santa-clara-hierarchical.stan"</span>)</span>
-<span id="cb43-191"><a href="#cb43-191" aria-hidden="true" tabindex="-1"></a>print_stan(sc_model_hierarchical)</span>
-<span id="cb43-192"><a href="#cb43-192" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-193"><a href="#cb43-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-194"><a href="#cb43-194" aria-hidden="true" tabindex="-1"></a>Compute posterior using data from @Bendavid-Mulaney-Sood-etal:2020b 27 April 2020</span>
-<span id="cb43-195"><a href="#cb43-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-198"><a href="#cb43-198" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-199"><a href="#cb43-199" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_3a</span></span>
-<span id="cb43-200"><a href="#cb43-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-201"><a href="#cb43-201" aria-hidden="true" tabindex="-1"></a>santaclara_data <span class="op">=</span> <span class="bu">dict</span>(</span>
-<span id="cb43-202"><a href="#cb43-202" aria-hidden="true" tabindex="-1"></a>    y_sample<span class="op">=</span><span class="dv">50</span>,</span>
-<span id="cb43-203"><a href="#cb43-203" aria-hidden="true" tabindex="-1"></a>    n_sample<span class="op">=</span><span class="dv">3330</span>,</span>
-<span id="cb43-204"><a href="#cb43-204" aria-hidden="true" tabindex="-1"></a>    J_spec<span class="op">=</span><span class="dv">14</span>,</span>
-<span id="cb43-205"><a href="#cb43-205" aria-hidden="true" tabindex="-1"></a>    y_spec<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">368</span>, <span class="dv">30</span>, <span class="dv">70</span>, <span class="dv">1102</span>, <span class="dv">300</span>, <span class="dv">311</span>, <span class="dv">500</span>, <span class="dv">198</span>, <span class="dv">99</span>, <span class="dv">29</span>, <span class="dv">146</span>, <span class="dv">105</span>, <span class="dv">50</span>],</span>
-<span id="cb43-206"><a href="#cb43-206" aria-hidden="true" tabindex="-1"></a>    n_spec<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">371</span>, <span class="dv">30</span>, <span class="dv">70</span>, <span class="dv">1102</span>, <span class="dv">300</span>, <span class="dv">311</span>, <span class="dv">500</span>, <span class="dv">200</span>, <span class="dv">99</span>, <span class="dv">31</span>, <span class="dv">150</span>, <span class="dv">108</span>, <span class="dv">52</span>],</span>
-<span id="cb43-207"><a href="#cb43-207" aria-hidden="true" tabindex="-1"></a>    J_sens<span class="op">=</span><span class="dv">4</span>,</span>
-<span id="cb43-208"><a href="#cb43-208" aria-hidden="true" tabindex="-1"></a>    y_sens<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">78</span>, <span class="dv">27</span>, <span class="dv">25</span>],</span>
-<span id="cb43-209"><a href="#cb43-209" aria-hidden="true" tabindex="-1"></a>    n_sens<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">85</span>, <span class="dv">37</span>, <span class="dv">35</span>],</span>
-<span id="cb43-210"><a href="#cb43-210" aria-hidden="true" tabindex="-1"></a>    logit_spec_prior_scale<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb43-211"><a href="#cb43-211" aria-hidden="true" tabindex="-1"></a>    logit_sens_prior_scale<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb43-212"><a href="#cb43-212" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb43-213"><a href="#cb43-213" aria-hidden="true" tabindex="-1"></a>fit_3a <span class="op">=</span> sc_model_hierarchical.sample(</span>
-<span id="cb43-214"><a href="#cb43-214" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>santaclara_data,</span>
-<span id="cb43-215"><a href="#cb43-215" aria-hidden="true" tabindex="-1"></a>    iter_warmup<span class="op">=</span><span class="bu">int</span>(<span class="fl">1e4</span>),</span>
-<span id="cb43-216"><a href="#cb43-216" aria-hidden="true" tabindex="-1"></a>    iter_sampling<span class="op">=</span><span class="bu">int</span>(<span class="fl">1e4</span>),</span>
-<span id="cb43-217"><a href="#cb43-217" aria-hidden="true" tabindex="-1"></a>    adapt_delta<span class="op">=</span><span class="fl">0.99</span>,</span>
-<span id="cb43-218"><a href="#cb43-218" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span>SEED,</span>
-<span id="cb43-219"><a href="#cb43-219" aria-hidden="true" tabindex="-1"></a>    show_progress<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb43-220"><a href="#cb43-220" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb43-221"><a href="#cb43-221" aria-hidden="true" tabindex="-1"></a>idata_3a <span class="op">=</span> az.from_cmdstanpy(fit_3a, log_likelihood<span class="op">=</span><span class="st">"log_lik"</span>)</span>
-<span id="cb43-222"><a href="#cb43-222" aria-hidden="true" tabindex="-1"></a>idata_3a[<span class="st">"log_prior"</span>] <span class="op">=</span> idata_3a[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>].to_dataset()</span>
-<span id="cb43-223"><a href="#cb43-223" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> idata_3a[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>]</span>
-<span id="cb43-224"><a href="#cb43-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-225"><a href="#cb43-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-228"><a href="#cb43-228" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-229"><a href="#cb43-229" aria-hidden="true" tabindex="-1"></a>var_names <span class="op">=</span> [<span class="st">"p"</span>, <span class="st">"spec"</span>, <span class="st">"sens"</span>, </span>
-<span id="cb43-230"><a href="#cb43-230" aria-hidden="true" tabindex="-1"></a>             <span class="st">"mu_logit_spec"</span>, <span class="st">"mu_logit_sens"</span>, </span>
-<span id="cb43-231"><a href="#cb43-231" aria-hidden="true" tabindex="-1"></a>             <span class="st">"sigma_logit_spec"</span>, <span class="st">"sigma_logit_sens"</span>]</span>
-<span id="cb43-232"><a href="#cb43-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-233"><a href="#cb43-233" aria-hidden="true" tabindex="-1"></a>az.summary(idata_3a,</span>
-<span id="cb43-234"><a href="#cb43-234" aria-hidden="true" tabindex="-1"></a>           var_names<span class="op">=</span>var_names, </span>
-<span id="cb43-235"><a href="#cb43-235" aria-hidden="true" tabindex="-1"></a>           coords<span class="op">=</span>{<span class="st">"spec_dim_0"</span>: [<span class="dv">0</span>], <span class="st">"sens_dim_0"</span>: [<span class="dv">0</span>]},</span>
-<span id="cb43-236"><a href="#cb43-236" aria-hidden="true" tabindex="-1"></a>           ci_prob<span class="op">=</span><span class="fl">0.95</span>,</span>
-<span id="cb43-237"><a href="#cb43-237" aria-hidden="true" tabindex="-1"></a>           ci_kind<span class="op">=</span><span class="st">"hdi"</span>,</span>
-<span id="cb43-238"><a href="#cb43-238" aria-hidden="true" tabindex="-1"></a>           kind<span class="op">=</span><span class="st">"stats"</span>)</span>
-<span id="cb43-239"><a href="#cb43-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-240"><a href="#cb43-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-243"><a href="#cb43-243" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-244"><a href="#cb43-244" aria-hidden="true" tabindex="-1"></a>az.summary(idata_3a,</span>
-<span id="cb43-245"><a href="#cb43-245" aria-hidden="true" tabindex="-1"></a>           var_names<span class="op">=</span>var_names,</span>
-<span id="cb43-246"><a href="#cb43-246" aria-hidden="true" tabindex="-1"></a>           coords<span class="op">=</span>{<span class="st">"spec_dim_0"</span>: [<span class="dv">0</span>], <span class="st">"sens_dim_0"</span>: [<span class="dv">0</span>]},</span>
-<span id="cb43-247"><a href="#cb43-247" aria-hidden="true" tabindex="-1"></a>           ci_prob<span class="op">=</span><span class="fl">0.95</span>,</span>
-<span id="cb43-248"><a href="#cb43-248" aria-hidden="true" tabindex="-1"></a>           ci_kind<span class="op">=</span><span class="st">"hdi"</span>,</span>
-<span id="cb43-249"><a href="#cb43-249" aria-hidden="true" tabindex="-1"></a>           kind<span class="op">=</span><span class="st">"stats"</span>)</span>
-<span id="cb43-250"><a href="#cb43-250" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-251"><a href="#cb43-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> social_cards/coronavirus.png</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Andrew Gelman and Aki Vehtari"</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2022-08-22</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="an">date-format:</span><span class="co"> iso</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-download: true</span></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> ../casestudies.bib</span></span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>This notebook includes the code for the Bayesian Workflow book</span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>Chapter 19 *Building up to a hierarchical model: Coronavirus</span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>testing*.</span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a>In early April, 2020, @Bendavid-Mulaney-Sood-etal:2020a recruited</span>
+<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a>3330 residents of Santa Clara County, California and tested them</span>
+<span id="cb43-25"><a href="#cb43-25" aria-hidden="true" tabindex="-1"></a>for SARS-CoV-2 antibodies. We re-analyze the data.</span>
+<span id="cb43-26"><a href="#cb43-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-29"><a href="#cb43-29" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-30"><a href="#cb43-30" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb43-31"><a href="#cb43-31" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: true</span></span>
+<span id="cb43-32"><a href="#cb43-32" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: false</span></span>
+<span id="cb43-33"><a href="#cb43-33" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb43-34"><a href="#cb43-34" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb43-35"><a href="#cb43-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-36"><a href="#cb43-36" aria-hidden="true" tabindex="-1"></a>sys.path.insert(<span class="dv">0</span>, <span class="st">".."</span>)</span>
+<span id="cb43-37"><a href="#cb43-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-38"><a href="#cb43-38" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> arviz <span class="im">as</span> az</span>
+<span id="cb43-39"><a href="#cb43-39" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb43-40"><a href="#cb43-40" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb43-41"><a href="#cb43-41" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb43-42"><a href="#cb43-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-43"><a href="#cb43-43" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cmdstanpy <span class="im">import</span> CmdStanModel, disable_logging</span>
+<span id="cb43-44"><a href="#cb43-44" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> print_stan</span>
+<span id="cb43-45"><a href="#cb43-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-46"><a href="#cb43-46" aria-hidden="true" tabindex="-1"></a>disable_logging()</span>
+<span id="cb43-47"><a href="#cb43-47" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span>
+<span id="cb43-48"><a href="#cb43-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-49"><a href="#cb43-49" aria-hidden="true" tabindex="-1"></a>az.style.use(<span class="st">"arviz-variat"</span>)</span>
+<span id="cb43-50"><a href="#cb43-50" aria-hidden="true" tabindex="-1"></a>az.rcParams[<span class="st">"stats.ci_prob"</span>] <span class="op">=</span> <span class="fl">0.95</span></span>
+<span id="cb43-51"><a href="#cb43-51" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.dpi"</span>] <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb43-52"><a href="#cb43-52" aria-hidden="true" tabindex="-1"></a>SEED <span class="op">=</span> <span class="dv">1377</span></span>
+<span id="cb43-53"><a href="#cb43-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-54"><a href="#cb43-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-55"><a href="#cb43-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## Simple model fit using pooled specificity and sensitivity</span></span>
+<span id="cb43-56"><a href="#cb43-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-59"><a href="#cb43-59" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-60"><a href="#cb43-60" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: asis</span></span>
+<span id="cb43-61"><a href="#cb43-61" aria-hidden="true" tabindex="-1"></a>sc_model <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"santa-clara.stan"</span>)</span>
+<span id="cb43-62"><a href="#cb43-62" aria-hidden="true" tabindex="-1"></a>print_stan(sc_model)</span>
+<span id="cb43-63"><a href="#cb43-63" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-64"><a href="#cb43-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-65"><a href="#cb43-65" aria-hidden="true" tabindex="-1"></a>Compute posterior with data from @Bendavid-Mulaney-Sood-etal:2020a, 11 April 2020</span>
+<span id="cb43-66"><a href="#cb43-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-69"><a href="#cb43-69" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-70"><a href="#cb43-70" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_1</span></span>
+<span id="cb43-71"><a href="#cb43-71" aria-hidden="true" tabindex="-1"></a>fit_1 <span class="op">=</span> sc_model.sample(</span>
+<span id="cb43-72"><a href="#cb43-72" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span><span class="bu">dict</span>(</span>
+<span id="cb43-73"><a href="#cb43-73" aria-hidden="true" tabindex="-1"></a>        y_sample<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb43-74"><a href="#cb43-74" aria-hidden="true" tabindex="-1"></a>        n_sample<span class="op">=</span><span class="dv">3330</span>,</span>
+<span id="cb43-75"><a href="#cb43-75" aria-hidden="true" tabindex="-1"></a>        y_spec<span class="op">=</span><span class="dv">369</span> <span class="op">+</span> <span class="dv">30</span>,</span>
+<span id="cb43-76"><a href="#cb43-76" aria-hidden="true" tabindex="-1"></a>        n_spec<span class="op">=</span><span class="dv">371</span> <span class="op">+</span> <span class="dv">30</span>,</span>
+<span id="cb43-77"><a href="#cb43-77" aria-hidden="true" tabindex="-1"></a>        y_sens<span class="op">=</span><span class="dv">25</span> <span class="op">+</span> <span class="dv">78</span>,</span>
+<span id="cb43-78"><a href="#cb43-78" aria-hidden="true" tabindex="-1"></a>        n_sens<span class="op">=</span><span class="dv">37</span> <span class="op">+</span> <span class="dv">85</span>,</span>
+<span id="cb43-79"><a href="#cb43-79" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb43-80"><a href="#cb43-80" aria-hidden="true" tabindex="-1"></a>    iter_warmup<span class="op">=</span><span class="bu">int</span>(<span class="fl">1e4</span>),</span>
+<span id="cb43-81"><a href="#cb43-81" aria-hidden="true" tabindex="-1"></a>    iter_sampling<span class="op">=</span><span class="bu">int</span>(<span class="fl">1e4</span>),</span>
+<span id="cb43-82"><a href="#cb43-82" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span>SEED,</span>
+<span id="cb43-83"><a href="#cb43-83" aria-hidden="true" tabindex="-1"></a>    show_progress<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb43-84"><a href="#cb43-84" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-85"><a href="#cb43-85" aria-hidden="true" tabindex="-1"></a>idata_1 <span class="op">=</span> az.from_cmdstanpy(fit_1, log_likelihood<span class="op">=</span><span class="st">"log_lik"</span>)</span>
+<span id="cb43-86"><a href="#cb43-86" aria-hidden="true" tabindex="-1"></a>idata_1[<span class="st">"log_prior"</span>] <span class="op">=</span> idata_1[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>].to_dataset()</span>
+<span id="cb43-87"><a href="#cb43-87" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> idata_1[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>]</span>
+<span id="cb43-88"><a href="#cb43-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-89"><a href="#cb43-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-92"><a href="#cb43-92" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-93"><a href="#cb43-93" aria-hidden="true" tabindex="-1"></a>az.summary(idata_1)</span>
+<span id="cb43-94"><a href="#cb43-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-95"><a href="#cb43-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-96"><a href="#cb43-96" aria-hidden="true" tabindex="-1"></a>Check prior-likelihood sensitivity using powerscaling</span>
+<span id="cb43-97"><a href="#cb43-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-100"><a href="#cb43-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-101"><a href="#cb43-101" aria-hidden="true" tabindex="-1"></a>az.psense_summary(idata_1)</span>
+<span id="cb43-102"><a href="#cb43-102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-103"><a href="#cb43-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-106"><a href="#cb43-106" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-107"><a href="#cb43-107" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-specificity_priorsense_1</span></span>
+<span id="cb43-108"><a href="#cb43-108" aria-hidden="true" tabindex="-1"></a>az.plot_psense_dist(idata_1,</span>
+<span id="cb43-109"><a href="#cb43-109" aria-hidden="true" tabindex="-1"></a>                    var_names<span class="op">=</span>[<span class="st">"~p_sample"</span>],</span>
+<span id="cb43-110"><a href="#cb43-110" aria-hidden="true" tabindex="-1"></a>                    alphas<span class="op">=</span>[<span class="fl">0.5</span>, <span class="dv">2</span>],</span>
+<span id="cb43-111"><a href="#cb43-111" aria-hidden="true" tabindex="-1"></a>                    )</span>
+<span id="cb43-112"><a href="#cb43-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-113"><a href="#cb43-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-114"><a href="#cb43-114" aria-hidden="true" tabindex="-1"></a>Inference for the population prevalence</span>
+<span id="cb43-115"><a href="#cb43-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-118"><a href="#cb43-118" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-119"><a href="#cb43-119" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-scatter</span></span>
+<span id="cb43-120"><a href="#cb43-120" aria-hidden="true" tabindex="-1"></a>az.plot_pair(idata_1,</span>
+<span id="cb43-121"><a href="#cb43-121" aria-hidden="true" tabindex="-1"></a>             var_names<span class="op">=</span>[<span class="st">"spec"</span>, <span class="st">"p"</span>],</span>
+<span id="cb43-122"><a href="#cb43-122" aria-hidden="true" tabindex="-1"></a>             visuals<span class="op">=</span>{<span class="st">"scatter"</span>: {<span class="st">"alpha"</span>: <span class="fl">0.01</span>,</span>
+<span id="cb43-123"><a href="#cb43-123" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"marker"</span>:<span class="st">"."</span>,}},</span>
+<span id="cb43-124"><a href="#cb43-124" aria-hidden="true" tabindex="-1"></a>             </span>
+<span id="cb43-125"><a href="#cb43-125" aria-hidden="true" tabindex="-1"></a>             )</span>
+<span id="cb43-126"><a href="#cb43-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-127"><a href="#cb43-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-128"><a href="#cb43-128" aria-hidden="true" tabindex="-1"></a>Use the shortest posterior interval, which makes more sense than a central interval because of the skewness of the posterior and the hard boundary at 0.</span>
+<span id="cb43-129"><a href="#cb43-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-132"><a href="#cb43-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-133"><a href="#cb43-133" aria-hidden="true" tabindex="-1"></a>az.plot_dist(idata_1, var_names<span class="op">=</span><span class="st">"p"</span>, ci_prob<span class="op">=</span><span class="fl">0.95</span>, ci_kind<span class="op">=</span><span class="st">"hdi"</span>)<span class="op">;</span></span>
+<span id="cb43-134"><a href="#cb43-134" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-135"><a href="#cb43-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-136"><a href="#cb43-136" aria-hidden="true" tabindex="-1"></a>Compute posterior with data from @Bendavid-Mulaney-Sood-etal:2020b, 27 April 2020</span>
+<span id="cb43-137"><a href="#cb43-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-140"><a href="#cb43-140" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-141"><a href="#cb43-141" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_2</span></span>
+<span id="cb43-142"><a href="#cb43-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-143"><a href="#cb43-143" aria-hidden="true" tabindex="-1"></a>fit_2 <span class="op">=</span> sc_model.sample(</span>
+<span id="cb43-144"><a href="#cb43-144" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span><span class="bu">dict</span>(</span>
+<span id="cb43-145"><a href="#cb43-145" aria-hidden="true" tabindex="-1"></a>        y_sample<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb43-146"><a href="#cb43-146" aria-hidden="true" tabindex="-1"></a>        n_sample<span class="op">=</span><span class="dv">3330</span>,</span>
+<span id="cb43-147"><a href="#cb43-147" aria-hidden="true" tabindex="-1"></a>        y_spec<span class="op">=</span><span class="dv">3308</span>,</span>
+<span id="cb43-148"><a href="#cb43-148" aria-hidden="true" tabindex="-1"></a>        n_spec<span class="op">=</span><span class="dv">3324</span>,</span>
+<span id="cb43-149"><a href="#cb43-149" aria-hidden="true" tabindex="-1"></a>        y_sens<span class="op">=</span><span class="dv">130</span>,</span>
+<span id="cb43-150"><a href="#cb43-150" aria-hidden="true" tabindex="-1"></a>        n_sens<span class="op">=</span><span class="dv">157</span>,</span>
+<span id="cb43-151"><a href="#cb43-151" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb43-152"><a href="#cb43-152" aria-hidden="true" tabindex="-1"></a>    iter_warmup<span class="op">=</span><span class="bu">int</span>(<span class="fl">1e4</span>),</span>
+<span id="cb43-153"><a href="#cb43-153" aria-hidden="true" tabindex="-1"></a>    iter_sampling<span class="op">=</span><span class="bu">int</span>(<span class="fl">1e4</span>),</span>
+<span id="cb43-154"><a href="#cb43-154" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span>SEED,</span>
+<span id="cb43-155"><a href="#cb43-155" aria-hidden="true" tabindex="-1"></a>    show_progress<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb43-156"><a href="#cb43-156" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-157"><a href="#cb43-157" aria-hidden="true" tabindex="-1"></a>idata_2 <span class="op">=</span> az.from_cmdstanpy(fit_2, log_likelihood<span class="op">=</span><span class="st">"log_lik"</span>)</span>
+<span id="cb43-158"><a href="#cb43-158" aria-hidden="true" tabindex="-1"></a>idata_2[<span class="st">"log_prior"</span>] <span class="op">=</span> idata_2[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>].to_dataset()</span>
+<span id="cb43-159"><a href="#cb43-159" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> idata_2[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>]</span>
+<span id="cb43-160"><a href="#cb43-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-161"><a href="#cb43-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-164"><a href="#cb43-164" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-165"><a href="#cb43-165" aria-hidden="true" tabindex="-1"></a>az.summary(idata_2, ci_prob<span class="op">=</span><span class="fl">0.95</span>, ci_kind<span class="op">=</span><span class="st">"hdi"</span>, kind<span class="op">=</span><span class="st">"stats"</span>)</span>
+<span id="cb43-166"><a href="#cb43-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-167"><a href="#cb43-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-168"><a href="#cb43-168" aria-hidden="true" tabindex="-1"></a>Check prior-likelihood sensitivity using powerscaling</span>
+<span id="cb43-169"><a href="#cb43-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-172"><a href="#cb43-172" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-173"><a href="#cb43-173" aria-hidden="true" tabindex="-1"></a>az.psense_summary(idata_2, var_names<span class="op">=</span>[<span class="st">"~p_sample"</span>])</span>
+<span id="cb43-174"><a href="#cb43-174" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-175"><a href="#cb43-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-178"><a href="#cb43-178" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-179"><a href="#cb43-179" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-specificity_priorsense_x</span></span>
+<span id="cb43-180"><a href="#cb43-180" aria-hidden="true" tabindex="-1"></a>az.plot_psense_dist(idata_2, var_names<span class="op">=</span>[<span class="st">"~p_sample"</span>], alphas<span class="op">=</span>[<span class="fl">0.5</span>, <span class="dv">2</span>])</span>
+<span id="cb43-181"><a href="#cb43-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-182"><a href="#cb43-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-183"><a href="#cb43-183" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hierarchical model for sensitivity and specificity</span></span>
+<span id="cb43-184"><a href="#cb43-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-185"><a href="#cb43-185" aria-hidden="true" tabindex="-1"></a>Hierarchical model that allows sensitivity and specificity to vary across studies.</span>
+<span id="cb43-186"><a href="#cb43-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-189"><a href="#cb43-189" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-190"><a href="#cb43-190" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: asis</span></span>
+<span id="cb43-191"><a href="#cb43-191" aria-hidden="true" tabindex="-1"></a>sc_model_hierarchical <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"santa-clara-hierarchical.stan"</span>)</span>
+<span id="cb43-192"><a href="#cb43-192" aria-hidden="true" tabindex="-1"></a>print_stan(sc_model_hierarchical)</span>
+<span id="cb43-193"><a href="#cb43-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-194"><a href="#cb43-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-195"><a href="#cb43-195" aria-hidden="true" tabindex="-1"></a>Compute posterior using data from @Bendavid-Mulaney-Sood-etal:2020b 27 April 2020</span>
+<span id="cb43-196"><a href="#cb43-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-199"><a href="#cb43-199" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-200"><a href="#cb43-200" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_3a</span></span>
+<span id="cb43-201"><a href="#cb43-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-202"><a href="#cb43-202" aria-hidden="true" tabindex="-1"></a>santaclara_data <span class="op">=</span> <span class="bu">dict</span>(</span>
+<span id="cb43-203"><a href="#cb43-203" aria-hidden="true" tabindex="-1"></a>    y_sample<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb43-204"><a href="#cb43-204" aria-hidden="true" tabindex="-1"></a>    n_sample<span class="op">=</span><span class="dv">3330</span>,</span>
+<span id="cb43-205"><a href="#cb43-205" aria-hidden="true" tabindex="-1"></a>    J_spec<span class="op">=</span><span class="dv">14</span>,</span>
+<span id="cb43-206"><a href="#cb43-206" aria-hidden="true" tabindex="-1"></a>    y_spec<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">368</span>, <span class="dv">30</span>, <span class="dv">70</span>, <span class="dv">1102</span>, <span class="dv">300</span>, <span class="dv">311</span>, <span class="dv">500</span>, <span class="dv">198</span>, <span class="dv">99</span>, <span class="dv">29</span>, <span class="dv">146</span>, <span class="dv">105</span>, <span class="dv">50</span>],</span>
+<span id="cb43-207"><a href="#cb43-207" aria-hidden="true" tabindex="-1"></a>    n_spec<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">371</span>, <span class="dv">30</span>, <span class="dv">70</span>, <span class="dv">1102</span>, <span class="dv">300</span>, <span class="dv">311</span>, <span class="dv">500</span>, <span class="dv">200</span>, <span class="dv">99</span>, <span class="dv">31</span>, <span class="dv">150</span>, <span class="dv">108</span>, <span class="dv">52</span>],</span>
+<span id="cb43-208"><a href="#cb43-208" aria-hidden="true" tabindex="-1"></a>    J_sens<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb43-209"><a href="#cb43-209" aria-hidden="true" tabindex="-1"></a>    y_sens<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">78</span>, <span class="dv">27</span>, <span class="dv">25</span>],</span>
+<span id="cb43-210"><a href="#cb43-210" aria-hidden="true" tabindex="-1"></a>    n_sens<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">85</span>, <span class="dv">37</span>, <span class="dv">35</span>],</span>
+<span id="cb43-211"><a href="#cb43-211" aria-hidden="true" tabindex="-1"></a>    logit_spec_prior_scale<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb43-212"><a href="#cb43-212" aria-hidden="true" tabindex="-1"></a>    logit_sens_prior_scale<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb43-213"><a href="#cb43-213" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-214"><a href="#cb43-214" aria-hidden="true" tabindex="-1"></a>fit_3a <span class="op">=</span> sc_model_hierarchical.sample(</span>
+<span id="cb43-215"><a href="#cb43-215" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>santaclara_data,</span>
+<span id="cb43-216"><a href="#cb43-216" aria-hidden="true" tabindex="-1"></a>    iter_warmup<span class="op">=</span><span class="bu">int</span>(<span class="fl">1e4</span>),</span>
+<span id="cb43-217"><a href="#cb43-217" aria-hidden="true" tabindex="-1"></a>    iter_sampling<span class="op">=</span><span class="bu">int</span>(<span class="fl">1e4</span>),</span>
+<span id="cb43-218"><a href="#cb43-218" aria-hidden="true" tabindex="-1"></a>    adapt_delta<span class="op">=</span><span class="fl">0.99</span>,</span>
+<span id="cb43-219"><a href="#cb43-219" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span>SEED,</span>
+<span id="cb43-220"><a href="#cb43-220" aria-hidden="true" tabindex="-1"></a>    show_progress<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb43-221"><a href="#cb43-221" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-222"><a href="#cb43-222" aria-hidden="true" tabindex="-1"></a>idata_3a <span class="op">=</span> az.from_cmdstanpy(fit_3a, log_likelihood<span class="op">=</span><span class="st">"log_lik"</span>)</span>
+<span id="cb43-223"><a href="#cb43-223" aria-hidden="true" tabindex="-1"></a>idata_3a[<span class="st">"log_prior"</span>] <span class="op">=</span> idata_3a[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>].to_dataset()</span>
+<span id="cb43-224"><a href="#cb43-224" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> idata_3a[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>]</span>
+<span id="cb43-225"><a href="#cb43-225" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-226"><a href="#cb43-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-229"><a href="#cb43-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-230"><a href="#cb43-230" aria-hidden="true" tabindex="-1"></a>var_names <span class="op">=</span> [<span class="st">"p"</span>, <span class="st">"spec"</span>, <span class="st">"sens"</span>, </span>
+<span id="cb43-231"><a href="#cb43-231" aria-hidden="true" tabindex="-1"></a>             <span class="st">"mu_logit_spec"</span>, <span class="st">"mu_logit_sens"</span>, </span>
+<span id="cb43-232"><a href="#cb43-232" aria-hidden="true" tabindex="-1"></a>             <span class="st">"sigma_logit_spec"</span>, <span class="st">"sigma_logit_sens"</span>]</span>
+<span id="cb43-233"><a href="#cb43-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-234"><a href="#cb43-234" aria-hidden="true" tabindex="-1"></a>az.summary(idata_3a,</span>
+<span id="cb43-235"><a href="#cb43-235" aria-hidden="true" tabindex="-1"></a>           var_names<span class="op">=</span>var_names, </span>
+<span id="cb43-236"><a href="#cb43-236" aria-hidden="true" tabindex="-1"></a>           coords<span class="op">=</span>{<span class="st">"spec_dim_0"</span>: [<span class="dv">0</span>], <span class="st">"sens_dim_0"</span>: [<span class="dv">0</span>]},</span>
+<span id="cb43-237"><a href="#cb43-237" aria-hidden="true" tabindex="-1"></a>           ci_prob<span class="op">=</span><span class="fl">0.95</span>,</span>
+<span id="cb43-238"><a href="#cb43-238" aria-hidden="true" tabindex="-1"></a>           ci_kind<span class="op">=</span><span class="st">"hdi"</span>,</span>
+<span id="cb43-239"><a href="#cb43-239" aria-hidden="true" tabindex="-1"></a>           kind<span class="op">=</span><span class="st">"stats"</span>)</span>
+<span id="cb43-240"><a href="#cb43-240" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-241"><a href="#cb43-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-244"><a href="#cb43-244" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-245"><a href="#cb43-245" aria-hidden="true" tabindex="-1"></a>az.summary(idata_3a,</span>
+<span id="cb43-246"><a href="#cb43-246" aria-hidden="true" tabindex="-1"></a>           var_names<span class="op">=</span>var_names,</span>
+<span id="cb43-247"><a href="#cb43-247" aria-hidden="true" tabindex="-1"></a>           coords<span class="op">=</span>{<span class="st">"spec_dim_0"</span>: [<span class="dv">0</span>], <span class="st">"sens_dim_0"</span>: [<span class="dv">0</span>]},</span>
+<span id="cb43-248"><a href="#cb43-248" aria-hidden="true" tabindex="-1"></a>           ci_prob<span class="op">=</span><span class="fl">0.95</span>,</span>
+<span id="cb43-249"><a href="#cb43-249" aria-hidden="true" tabindex="-1"></a>           ci_kind<span class="op">=</span><span class="st">"hdi"</span>,</span>
+<span id="cb43-250"><a href="#cb43-250" aria-hidden="true" tabindex="-1"></a>           kind<span class="op">=</span><span class="st">"stats"</span>)</span>
+<span id="cb43-251"><a href="#cb43-251" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb43-252"><a href="#cb43-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-253"><a href="#cb43-253" aria-hidden="true" tabindex="-1"></a>Check prior-likelihood sensitivity using powerscaling</span>
-<span id="cb43-254"><a href="#cb43-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-257"><a href="#cb43-257" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-258"><a href="#cb43-258" aria-hidden="true" tabindex="-1"></a>az.psense_summary(idata_3a, var_names<span class="op">=</span>[<span class="st">"p"</span>, <span class="st">"spec"</span>, <span class="st">"sens"</span>])</span>
-<span id="cb43-259"><a href="#cb43-259" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-260"><a href="#cb43-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-263"><a href="#cb43-263" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-264"><a href="#cb43-264" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-specificity_priorsense_2</span></span>
-<span id="cb43-265"><a href="#cb43-265" aria-hidden="true" tabindex="-1"></a>az.plot_psense_dist(</span>
-<span id="cb43-266"><a href="#cb43-266" aria-hidden="true" tabindex="-1"></a>    idata_3a,</span>
-<span id="cb43-267"><a href="#cb43-267" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span>[<span class="st">"p"</span>, <span class="st">"spec"</span>, <span class="st">"sens"</span>],</span>
-<span id="cb43-268"><a href="#cb43-268" aria-hidden="true" tabindex="-1"></a>    coords<span class="op">=</span>{<span class="st">"spec_dim_0"</span>: [<span class="dv">0</span>], <span class="st">"sens_dim_0"</span>: [<span class="dv">0</span>]},</span>
-<span id="cb43-269"><a href="#cb43-269" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb43-270"><a href="#cb43-270" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-271"><a href="#cb43-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-272"><a href="#cb43-272" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hierarchical model with stronger priors</span></span>
-<span id="cb43-273"><a href="#cb43-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-274"><a href="#cb43-274" aria-hidden="true" tabindex="-1"></a>Compute posterior using data from @Bendavid-Mulaney-Sood-etal:2020b</span>
-<span id="cb43-275"><a href="#cb43-275" aria-hidden="true" tabindex="-1"></a>27 April 2020 and stronger priors</span>
-<span id="cb43-276"><a href="#cb43-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-279"><a href="#cb43-279" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-280"><a href="#cb43-280" aria-hidden="true" tabindex="-1"></a>santaclara_data[<span class="st">"logit_spec_prior_scale"</span>] <span class="op">=</span> <span class="fl">0.3</span></span>
-<span id="cb43-281"><a href="#cb43-281" aria-hidden="true" tabindex="-1"></a>santaclara_data[<span class="st">"logit_sens_prior_scale"</span>] <span class="op">=</span> <span class="fl">0.3</span></span>
-<span id="cb43-282"><a href="#cb43-282" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-283"><a href="#cb43-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-284"><a href="#cb43-284" aria-hidden="true" tabindex="-1"></a>MCMC gets sometimes stuck on minor mode, so we initialize with Pathfinder</span>
-<span id="cb43-285"><a href="#cb43-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-288"><a href="#cb43-288" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-289"><a href="#cb43-289" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_3b</span></span>
-<span id="cb43-290"><a href="#cb43-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-291"><a href="#cb43-291" aria-hidden="true" tabindex="-1"></a>pth_3b <span class="op">=</span> sc_model_hierarchical.pathfinder(</span>
-<span id="cb43-292"><a href="#cb43-292" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>santaclara_data,</span>
-<span id="cb43-293"><a href="#cb43-293" aria-hidden="true" tabindex="-1"></a>    max_lbfgs_iters<span class="op">=</span><span class="dv">100</span>,</span>
-<span id="cb43-294"><a href="#cb43-294" aria-hidden="true" tabindex="-1"></a>    num_paths<span class="op">=</span><span class="dv">10</span>,</span>
-<span id="cb43-295"><a href="#cb43-295" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb43-296"><a href="#cb43-296" aria-hidden="true" tabindex="-1"></a>fit_3b <span class="op">=</span> sc_model_hierarchical.sample(</span>
-<span id="cb43-297"><a href="#cb43-297" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>santaclara_data,</span>
-<span id="cb43-298"><a href="#cb43-298" aria-hidden="true" tabindex="-1"></a>    iter_warmup<span class="op">=</span><span class="bu">int</span>(<span class="fl">1e4</span>),</span>
-<span id="cb43-299"><a href="#cb43-299" aria-hidden="true" tabindex="-1"></a>    iter_sampling<span class="op">=</span><span class="bu">int</span>(<span class="fl">1e4</span>),</span>
-<span id="cb43-300"><a href="#cb43-300" aria-hidden="true" tabindex="-1"></a>    adapt_delta<span class="op">=</span><span class="fl">0.99</span>,</span>
-<span id="cb43-301"><a href="#cb43-301" aria-hidden="true" tabindex="-1"></a>    inits<span class="op">=</span>pth_3b.create_inits(),</span>
-<span id="cb43-302"><a href="#cb43-302" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span>SEED,</span>
-<span id="cb43-303"><a href="#cb43-303" aria-hidden="true" tabindex="-1"></a>    show_progress<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb43-304"><a href="#cb43-304" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb43-305"><a href="#cb43-305" aria-hidden="true" tabindex="-1"></a>idata_3b <span class="op">=</span> az.from_cmdstanpy(fit_3b, log_likelihood<span class="op">=</span><span class="st">"log_lik"</span>)</span>
-<span id="cb43-306"><a href="#cb43-306" aria-hidden="true" tabindex="-1"></a>idata_3b[<span class="st">"log_prior"</span>] <span class="op">=</span> idata_3b[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>].to_dataset()</span>
-<span id="cb43-307"><a href="#cb43-307" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> idata_3b[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>]</span>
-<span id="cb43-308"><a href="#cb43-308" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-309"><a href="#cb43-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-312"><a href="#cb43-312" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-313"><a href="#cb43-313" aria-hidden="true" tabindex="-1"></a>az.summary(idata_3b,</span>
-<span id="cb43-314"><a href="#cb43-314" aria-hidden="true" tabindex="-1"></a>           var_names<span class="op">=</span>var_names,</span>
-<span id="cb43-315"><a href="#cb43-315" aria-hidden="true" tabindex="-1"></a>           coords<span class="op">=</span>{<span class="st">"spec_dim_0"</span>: [<span class="dv">0</span>], <span class="st">"sens_dim_0"</span>: [<span class="dv">0</span>]},</span>
-<span id="cb43-316"><a href="#cb43-316" aria-hidden="true" tabindex="-1"></a>           ci_prob<span class="op">=</span><span class="fl">0.95</span>,</span>
-<span id="cb43-317"><a href="#cb43-317" aria-hidden="true" tabindex="-1"></a>           ci_kind<span class="op">=</span><span class="st">"hdi"</span>,</span>
-<span id="cb43-318"><a href="#cb43-318" aria-hidden="true" tabindex="-1"></a>           kind<span class="op">=</span><span class="st">"stats"</span>)</span>
-<span id="cb43-319"><a href="#cb43-319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-320"><a href="#cb43-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-253"><a href="#cb43-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-254"><a href="#cb43-254" aria-hidden="true" tabindex="-1"></a>Check prior-likelihood sensitivity using powerscaling</span>
+<span id="cb43-255"><a href="#cb43-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-258"><a href="#cb43-258" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-259"><a href="#cb43-259" aria-hidden="true" tabindex="-1"></a>az.psense_summary(idata_3a, var_names<span class="op">=</span>[<span class="st">"p"</span>, <span class="st">"spec"</span>, <span class="st">"sens"</span>])</span>
+<span id="cb43-260"><a href="#cb43-260" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-261"><a href="#cb43-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-264"><a href="#cb43-264" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-265"><a href="#cb43-265" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-specificity_priorsense_2</span></span>
+<span id="cb43-266"><a href="#cb43-266" aria-hidden="true" tabindex="-1"></a>az.plot_psense_dist(</span>
+<span id="cb43-267"><a href="#cb43-267" aria-hidden="true" tabindex="-1"></a>    idata_3a,</span>
+<span id="cb43-268"><a href="#cb43-268" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span>[<span class="st">"p"</span>, <span class="st">"spec"</span>, <span class="st">"sens"</span>],</span>
+<span id="cb43-269"><a href="#cb43-269" aria-hidden="true" tabindex="-1"></a>    coords<span class="op">=</span>{<span class="st">"spec_dim_0"</span>: [<span class="dv">0</span>], <span class="st">"sens_dim_0"</span>: [<span class="dv">0</span>]},</span>
+<span id="cb43-270"><a href="#cb43-270" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-271"><a href="#cb43-271" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-272"><a href="#cb43-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-273"><a href="#cb43-273" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hierarchical model with stronger priors</span></span>
+<span id="cb43-274"><a href="#cb43-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-275"><a href="#cb43-275" aria-hidden="true" tabindex="-1"></a>Compute posterior using data from @Bendavid-Mulaney-Sood-etal:2020b</span>
+<span id="cb43-276"><a href="#cb43-276" aria-hidden="true" tabindex="-1"></a>27 April 2020 and stronger priors</span>
+<span id="cb43-277"><a href="#cb43-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-280"><a href="#cb43-280" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-281"><a href="#cb43-281" aria-hidden="true" tabindex="-1"></a>santaclara_data[<span class="st">"logit_spec_prior_scale"</span>] <span class="op">=</span> <span class="fl">0.3</span></span>
+<span id="cb43-282"><a href="#cb43-282" aria-hidden="true" tabindex="-1"></a>santaclara_data[<span class="st">"logit_sens_prior_scale"</span>] <span class="op">=</span> <span class="fl">0.3</span></span>
+<span id="cb43-283"><a href="#cb43-283" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-284"><a href="#cb43-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-285"><a href="#cb43-285" aria-hidden="true" tabindex="-1"></a>MCMC gets sometimes stuck on minor mode, so we initialize with Pathfinder</span>
+<span id="cb43-286"><a href="#cb43-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-289"><a href="#cb43-289" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-290"><a href="#cb43-290" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_3b</span></span>
+<span id="cb43-291"><a href="#cb43-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-292"><a href="#cb43-292" aria-hidden="true" tabindex="-1"></a>pth_3b <span class="op">=</span> sc_model_hierarchical.pathfinder(</span>
+<span id="cb43-293"><a href="#cb43-293" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>santaclara_data,</span>
+<span id="cb43-294"><a href="#cb43-294" aria-hidden="true" tabindex="-1"></a>    max_lbfgs_iters<span class="op">=</span><span class="dv">100</span>,</span>
+<span id="cb43-295"><a href="#cb43-295" aria-hidden="true" tabindex="-1"></a>    num_paths<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb43-296"><a href="#cb43-296" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-297"><a href="#cb43-297" aria-hidden="true" tabindex="-1"></a>fit_3b <span class="op">=</span> sc_model_hierarchical.sample(</span>
+<span id="cb43-298"><a href="#cb43-298" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>santaclara_data,</span>
+<span id="cb43-299"><a href="#cb43-299" aria-hidden="true" tabindex="-1"></a>    iter_warmup<span class="op">=</span><span class="bu">int</span>(<span class="fl">1e4</span>),</span>
+<span id="cb43-300"><a href="#cb43-300" aria-hidden="true" tabindex="-1"></a>    iter_sampling<span class="op">=</span><span class="bu">int</span>(<span class="fl">1e4</span>),</span>
+<span id="cb43-301"><a href="#cb43-301" aria-hidden="true" tabindex="-1"></a>    adapt_delta<span class="op">=</span><span class="fl">0.99</span>,</span>
+<span id="cb43-302"><a href="#cb43-302" aria-hidden="true" tabindex="-1"></a>    inits<span class="op">=</span>pth_3b.create_inits(),</span>
+<span id="cb43-303"><a href="#cb43-303" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span>SEED,</span>
+<span id="cb43-304"><a href="#cb43-304" aria-hidden="true" tabindex="-1"></a>    show_progress<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb43-305"><a href="#cb43-305" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-306"><a href="#cb43-306" aria-hidden="true" tabindex="-1"></a>idata_3b <span class="op">=</span> az.from_cmdstanpy(fit_3b, log_likelihood<span class="op">=</span><span class="st">"log_lik"</span>)</span>
+<span id="cb43-307"><a href="#cb43-307" aria-hidden="true" tabindex="-1"></a>idata_3b[<span class="st">"log_prior"</span>] <span class="op">=</span> idata_3b[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>].to_dataset()</span>
+<span id="cb43-308"><a href="#cb43-308" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> idata_3b[<span class="st">"posterior"</span>][<span class="st">"lprior"</span>]</span>
+<span id="cb43-309"><a href="#cb43-309" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-310"><a href="#cb43-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-313"><a href="#cb43-313" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-314"><a href="#cb43-314" aria-hidden="true" tabindex="-1"></a>az.summary(idata_3b,</span>
+<span id="cb43-315"><a href="#cb43-315" aria-hidden="true" tabindex="-1"></a>           var_names<span class="op">=</span>var_names,</span>
+<span id="cb43-316"><a href="#cb43-316" aria-hidden="true" tabindex="-1"></a>           coords<span class="op">=</span>{<span class="st">"spec_dim_0"</span>: [<span class="dv">0</span>], <span class="st">"sens_dim_0"</span>: [<span class="dv">0</span>]},</span>
+<span id="cb43-317"><a href="#cb43-317" aria-hidden="true" tabindex="-1"></a>           ci_prob<span class="op">=</span><span class="fl">0.95</span>,</span>
+<span id="cb43-318"><a href="#cb43-318" aria-hidden="true" tabindex="-1"></a>           ci_kind<span class="op">=</span><span class="st">"hdi"</span>,</span>
+<span id="cb43-319"><a href="#cb43-319" aria-hidden="true" tabindex="-1"></a>           kind<span class="op">=</span><span class="st">"stats"</span>)</span>
+<span id="cb43-320"><a href="#cb43-320" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb43-321"><a href="#cb43-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-322"><a href="#cb43-322" aria-hidden="true" tabindex="-1"></a><span class="fu">## MRP model</span></span>
-<span id="cb43-323"><a href="#cb43-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-324"><a href="#cb43-324" aria-hidden="true" tabindex="-1"></a>MRP model allowing prevalence to vary by sex, ethnicity, age</span>
-<span id="cb43-325"><a href="#cb43-325" aria-hidden="true" tabindex="-1"></a>category, and zip code.  Model is set up to use the ethnicity, age,</span>
-<span id="cb43-326"><a href="#cb43-326" aria-hidden="true" tabindex="-1"></a>and zip categories of @Bendavid-Mulaney-Sood-etal:2020b</span>
-<span id="cb43-327"><a href="#cb43-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-330"><a href="#cb43-330" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-331"><a href="#cb43-331" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: asis</span></span>
-<span id="cb43-332"><a href="#cb43-332" aria-hidden="true" tabindex="-1"></a>sc_model_hierarchical_mrp <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"santa-clara-hierarchical-mrp.stan"</span>)</span>
-<span id="cb43-333"><a href="#cb43-333" aria-hidden="true" tabindex="-1"></a>print_stan(sc_model_hierarchical_mrp)</span>
-<span id="cb43-334"><a href="#cb43-334" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-335"><a href="#cb43-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-336"><a href="#cb43-336" aria-hidden="true" tabindex="-1"></a>To fit the model, we need individual-level data.</span>
-<span id="cb43-337"><a href="#cb43-337" aria-hidden="true" tabindex="-1"></a>These data are not publicly available, so just to get the program running,</span>
-<span id="cb43-338"><a href="#cb43-338" aria-hidden="true" tabindex="-1"></a>we take the existing 50 positive tests and assign them at random to the 3330 people.</span>
-<span id="cb43-339"><a href="#cb43-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-342"><a href="#cb43-342" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-343"><a href="#cb43-343" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(SEED)</span>
-<span id="cb43-344"><a href="#cb43-344" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">3330</span></span>
-<span id="cb43-345"><a href="#cb43-345" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> rng.permutation(np.repeat([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">3330</span> <span class="op">-</span> <span class="dv">50</span>, <span class="dv">50</span>]))</span>
-<span id="cb43-346"><a href="#cb43-346" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-347"><a href="#cb43-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-348"><a href="#cb43-348" aria-hidden="true" tabindex="-1"></a>Here are the counts of each sex, ethnicity, and age from @Bendavid-Mulaney-Sood-etal:2020b.</span>
-<span id="cb43-349"><a href="#cb43-349" aria-hidden="true" tabindex="-1"></a>We don't have zip code distribution but we looked it up and there are 58 zip codes</span>
-<span id="cb43-350"><a href="#cb43-350" aria-hidden="true" tabindex="-1"></a>in Santa Clara County; for simplicity we assume all zip codes are equally likely.</span>
-<span id="cb43-351"><a href="#cb43-351" aria-hidden="true" tabindex="-1"></a>We then assign these traits to people at random.</span>
-<span id="cb43-352"><a href="#cb43-352" aria-hidden="true" tabindex="-1"></a>This is wrong--actually, these variable are correlated in various ways--but, again,</span>
-<span id="cb43-353"><a href="#cb43-353" aria-hidden="true" tabindex="-1"></a>now we have fake data we can use to fit the model.</span>
-<span id="cb43-354"><a href="#cb43-354" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-357"><a href="#cb43-357" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-358"><a href="#cb43-358" aria-hidden="true" tabindex="-1"></a>male <span class="op">=</span> rng.permutation(np.repeat([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">2101</span>, <span class="dv">1229</span>]))</span>
-<span id="cb43-359"><a href="#cb43-359" aria-hidden="true" tabindex="-1"></a>eth <span class="op">=</span> rng.permutation(np.repeat([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">2118</span>, <span class="dv">623</span>, <span class="dv">266</span>, <span class="dv">306</span> <span class="op">+</span> <span class="dv">17</span>]))</span>
-<span id="cb43-360"><a href="#cb43-360" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> rng.permutation(np.repeat([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">71</span>, <span class="dv">550</span>, <span class="dv">2542</span>, <span class="dv">167</span>]))</span>
-<span id="cb43-361"><a href="#cb43-361" aria-hidden="true" tabindex="-1"></a>N_zip <span class="op">=</span> <span class="dv">58</span></span>
-<span id="cb43-362"><a href="#cb43-362" aria-hidden="true" tabindex="-1"></a>zip_codes <span class="op">=</span> rng.integers(<span class="dv">1</span>, N_zip <span class="op">+</span> <span class="dv">1</span>, size<span class="op">=</span><span class="dv">3330</span>)</span>
-<span id="cb43-363"><a href="#cb43-363" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-364"><a href="#cb43-364" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-365"><a href="#cb43-365" aria-hidden="true" tabindex="-1"></a>Setting up the zip code level predictor.</span>
-<span id="cb43-366"><a href="#cb43-366" aria-hidden="true" tabindex="-1"></a>In this case we will use a random number with mean 50 and standard deviation 20.</span>
-<span id="cb43-367"><a href="#cb43-367" aria-hidden="true" tabindex="-1"></a>These are arbitrary numbers that we chose just to be able to test the centering</span>
-<span id="cb43-368"><a href="#cb43-368" aria-hidden="true" tabindex="-1"></a>and scaling in the model.</span>
-<span id="cb43-369"><a href="#cb43-369" aria-hidden="true" tabindex="-1"></a>In real life we might use %Latino or average income in the zip code</span>
-<span id="cb43-370"><a href="#cb43-370" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-373"><a href="#cb43-373" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-374"><a href="#cb43-374" aria-hidden="true" tabindex="-1"></a>x_zip <span class="op">=</span> rng.normal(<span class="dv">50</span>, <span class="dv">20</span>, size<span class="op">=</span>N_zip)</span>
-<span id="cb43-375"><a href="#cb43-375" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-376"><a href="#cb43-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-377"><a href="#cb43-377" aria-hidden="true" tabindex="-1"></a>Setting up the poststratification table.</span>
-<span id="cb43-378"><a href="#cb43-378" aria-hidden="true" tabindex="-1"></a>For simplicity we assume there are 1000 people in each cell in the county.</span>
-<span id="cb43-379"><a href="#cb43-379" aria-hidden="true" tabindex="-1"></a>Actually we'd want data from the Census.</span>
-<span id="cb43-380"><a href="#cb43-380" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-383"><a href="#cb43-383" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-384"><a href="#cb43-384" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> <span class="dv">4</span> <span class="op">*</span> <span class="dv">4</span> <span class="op">*</span> N_zip</span>
-<span id="cb43-385"><a href="#cb43-385" aria-hidden="true" tabindex="-1"></a>N_pop <span class="op">=</span> np.full(J, <span class="dv">1000</span>)</span>
-<span id="cb43-386"><a href="#cb43-386" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-387"><a href="#cb43-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-388"><a href="#cb43-388" aria-hidden="true" tabindex="-1"></a>Put together the data and fit the model</span>
-<span id="cb43-389"><a href="#cb43-389" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-392"><a href="#cb43-392" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-393"><a href="#cb43-393" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_4</span></span>
-<span id="cb43-394"><a href="#cb43-394" aria-hidden="true" tabindex="-1"></a>santaclara_mrp_data <span class="op">=</span> <span class="bu">dict</span>(</span>
-<span id="cb43-395"><a href="#cb43-395" aria-hidden="true" tabindex="-1"></a>    N<span class="op">=</span>N,</span>
-<span id="cb43-396"><a href="#cb43-396" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>y.tolist(),</span>
-<span id="cb43-397"><a href="#cb43-397" aria-hidden="true" tabindex="-1"></a>    male<span class="op">=</span>male.tolist(),</span>
-<span id="cb43-398"><a href="#cb43-398" aria-hidden="true" tabindex="-1"></a>    eth<span class="op">=</span>eth.tolist(),</span>
-<span id="cb43-399"><a href="#cb43-399" aria-hidden="true" tabindex="-1"></a>    age<span class="op">=</span>age.tolist(),</span>
-<span id="cb43-400"><a href="#cb43-400" aria-hidden="true" tabindex="-1"></a>    <span class="bu">zip</span><span class="op">=</span>zip_codes.tolist(),</span>
-<span id="cb43-401"><a href="#cb43-401" aria-hidden="true" tabindex="-1"></a>    N_zip<span class="op">=</span>N_zip,</span>
-<span id="cb43-402"><a href="#cb43-402" aria-hidden="true" tabindex="-1"></a>    x_zip<span class="op">=</span>x_zip.tolist(),</span>
-<span id="cb43-403"><a href="#cb43-403" aria-hidden="true" tabindex="-1"></a>    J_spec<span class="op">=</span><span class="dv">14</span>,</span>
-<span id="cb43-404"><a href="#cb43-404" aria-hidden="true" tabindex="-1"></a>    y_spec<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">368</span>, <span class="dv">30</span>, <span class="dv">70</span>, <span class="dv">1102</span>, <span class="dv">300</span>, <span class="dv">311</span>, <span class="dv">500</span>, <span class="dv">198</span>, <span class="dv">99</span>, <span class="dv">29</span>, <span class="dv">146</span>, <span class="dv">105</span>, <span class="dv">50</span>],</span>
-<span id="cb43-405"><a href="#cb43-405" aria-hidden="true" tabindex="-1"></a>    n_spec<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">371</span>, <span class="dv">30</span>, <span class="dv">70</span>, <span class="dv">1102</span>, <span class="dv">300</span>, <span class="dv">311</span>, <span class="dv">500</span>, <span class="dv">200</span>, <span class="dv">99</span>, <span class="dv">31</span>, <span class="dv">150</span>, <span class="dv">108</span>, <span class="dv">52</span>],</span>
-<span id="cb43-406"><a href="#cb43-406" aria-hidden="true" tabindex="-1"></a>    J_sens<span class="op">=</span><span class="dv">4</span>,</span>
-<span id="cb43-407"><a href="#cb43-407" aria-hidden="true" tabindex="-1"></a>    y_sens<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">78</span>, <span class="dv">27</span>, <span class="dv">25</span>],</span>
-<span id="cb43-408"><a href="#cb43-408" aria-hidden="true" tabindex="-1"></a>    n_sens<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">85</span>, <span class="dv">37</span>, <span class="dv">35</span>],</span>
-<span id="cb43-409"><a href="#cb43-409" aria-hidden="true" tabindex="-1"></a>    logit_spec_prior_scale<span class="op">=</span><span class="fl">0.3</span>,</span>
-<span id="cb43-410"><a href="#cb43-410" aria-hidden="true" tabindex="-1"></a>    logit_sens_prior_scale<span class="op">=</span><span class="fl">0.3</span>,</span>
-<span id="cb43-411"><a href="#cb43-411" aria-hidden="true" tabindex="-1"></a>    coef_prior_scale<span class="op">=</span><span class="fl">0.5</span>,</span>
-<span id="cb43-412"><a href="#cb43-412" aria-hidden="true" tabindex="-1"></a>    J<span class="op">=</span>J,</span>
-<span id="cb43-413"><a href="#cb43-413" aria-hidden="true" tabindex="-1"></a>    N_pop<span class="op">=</span>N_pop.tolist(),</span>
-<span id="cb43-414"><a href="#cb43-414" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb43-415"><a href="#cb43-415" aria-hidden="true" tabindex="-1"></a>fit_4 <span class="op">=</span> sc_model_hierarchical_mrp.sample(</span>
-<span id="cb43-416"><a href="#cb43-416" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>santaclara_mrp_data,</span>
-<span id="cb43-417"><a href="#cb43-417" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span>SEED,</span>
-<span id="cb43-418"><a href="#cb43-418" aria-hidden="true" tabindex="-1"></a>    show_progress<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb43-419"><a href="#cb43-419" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb43-420"><a href="#cb43-420" aria-hidden="true" tabindex="-1"></a>idata_4 <span class="op">=</span> az.from_cmdstanpy(fit_4)</span>
-<span id="cb43-421"><a href="#cb43-421" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-422"><a href="#cb43-422" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-423"><a href="#cb43-423" aria-hidden="true" tabindex="-1"></a>Show inferences for some model parameters. In addition to <span class="in">`p_avg`</span>, the population</span>
-<span id="cb43-424"><a href="#cb43-424" aria-hidden="true" tabindex="-1"></a>prevalence, we also look at the inferences for the first three</span>
-<span id="cb43-425"><a href="#cb43-425" aria-hidden="true" tabindex="-1"></a>poststratification cells just to check that everything makes sense</span>
-<span id="cb43-426"><a href="#cb43-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-429"><a href="#cb43-429" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-430"><a href="#cb43-430" aria-hidden="true" tabindex="-1"></a>print_variables_mrp <span class="op">=</span> [</span>
-<span id="cb43-431"><a href="#cb43-431" aria-hidden="true" tabindex="-1"></a>    <span class="st">"p_avg"</span>, <span class="st">"b"</span>, <span class="st">"a_age"</span>, <span class="st">"a_eth"</span>,</span>
-<span id="cb43-432"><a href="#cb43-432" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sigma_eth"</span>, <span class="st">"sigma_age"</span>, <span class="st">"sigma_zip"</span>,</span>
-<span id="cb43-433"><a href="#cb43-433" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mu_logit_spec"</span>, <span class="st">"sigma_logit_spec"</span>,</span>
-<span id="cb43-434"><a href="#cb43-434" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mu_logit_sens"</span>, <span class="st">"sigma_logit_sens"</span>,</span>
-<span id="cb43-435"><a href="#cb43-435" aria-hidden="true" tabindex="-1"></a>    <span class="st">"p_pop"</span>,</span>
-<span id="cb43-436"><a href="#cb43-436" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb43-437"><a href="#cb43-437" aria-hidden="true" tabindex="-1"></a>az.summary(idata_4, var_names<span class="op">=</span>print_variables_mrp,</span>
-<span id="cb43-438"><a href="#cb43-438" aria-hidden="true" tabindex="-1"></a>coords<span class="op">=</span>{<span class="st">"p_pop_dim_0"</span>: [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>]}, kind<span class="op">=</span><span class="st">"stats"</span>)</span>
-<span id="cb43-439"><a href="#cb43-439" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-440"><a href="#cb43-440" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-443"><a href="#cb43-443" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-444"><a href="#cb43-444" aria-hidden="true" tabindex="-1"></a>az.plot_dist(idata_4, var_names<span class="op">=</span><span class="st">"p_avg"</span>, ci_prob<span class="op">=</span><span class="fl">0.95</span>, ci_kind<span class="op">=</span><span class="st">"hdi"</span>)<span class="op">;</span></span>
-<span id="cb43-445"><a href="#cb43-445" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-446"><a href="#cb43-446" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-447"><a href="#cb43-447" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additional prior sensitivity analysis</span></span>
-<span id="cb43-448"><a href="#cb43-448" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-451"><a href="#cb43-451" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-452"><a href="#cb43-452" aria-hidden="true" tabindex="-1"></a>pos_tests <span class="op">=</span> [<span class="dv">78</span>, <span class="dv">27</span>, <span class="dv">25</span>]</span>
-<span id="cb43-453"><a href="#cb43-453" aria-hidden="true" tabindex="-1"></a>tests <span class="op">=</span> [<span class="dv">85</span>, <span class="dv">37</span>, <span class="dv">35</span>]</span>
-<span id="cb43-454"><a href="#cb43-454" aria-hidden="true" tabindex="-1"></a>sens_df <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb43-455"><a href="#cb43-455" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"pos_tests"</span>: pos_tests, <span class="st">"tests"</span>: tests,</span>
-<span id="cb43-456"><a href="#cb43-456" aria-hidden="true" tabindex="-1"></a>     <span class="st">"sample_sens"</span>: [p <span class="op">/</span> t <span class="cf">for</span> p, t <span class="kw">in</span> <span class="bu">zip</span>(pos_tests, tests)]}</span>
-<span id="cb43-457"><a href="#cb43-457" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb43-458"><a href="#cb43-458" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-459"><a href="#cb43-459" aria-hidden="true" tabindex="-1"></a>neg_tests <span class="op">=</span> [<span class="dv">368</span>, <span class="dv">30</span>, <span class="dv">70</span>, <span class="dv">1102</span>, <span class="dv">300</span>, <span class="dv">311</span>, <span class="dv">500</span>, <span class="dv">198</span>, <span class="dv">99</span>, <span class="dv">29</span>, <span class="dv">146</span>, <span class="dv">105</span>, <span class="dv">50</span>]</span>
-<span id="cb43-460"><a href="#cb43-460" aria-hidden="true" tabindex="-1"></a>tests <span class="op">=</span> [<span class="dv">371</span>, <span class="dv">30</span>, <span class="dv">70</span>, <span class="dv">1102</span>, <span class="dv">300</span>, <span class="dv">311</span>, <span class="dv">500</span>, <span class="dv">200</span>, <span class="dv">99</span>, <span class="dv">31</span>, <span class="dv">150</span>, <span class="dv">108</span>, <span class="dv">52</span>]</span>
-<span id="cb43-461"><a href="#cb43-461" aria-hidden="true" tabindex="-1"></a>spec_df <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb43-462"><a href="#cb43-462" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"neg_tests"</span>: neg_tests, <span class="st">"tests"</span>: tests,</span>
-<span id="cb43-463"><a href="#cb43-463" aria-hidden="true" tabindex="-1"></a>     <span class="st">"sample_spec"</span>: [n <span class="op">/</span> t <span class="cf">for</span> n, t <span class="kw">in</span> <span class="bu">zip</span>(neg_tests, tests)]}</span>
-<span id="cb43-464"><a href="#cb43-464" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb43-465"><a href="#cb43-465" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-466"><a href="#cb43-466" aria-hidden="true" tabindex="-1"></a>pos_tests <span class="op">=</span> [<span class="dv">50</span>]</span>
-<span id="cb43-467"><a href="#cb43-467" aria-hidden="true" tabindex="-1"></a>tests <span class="op">=</span> [<span class="dv">3330</span>]</span>
-<span id="cb43-468"><a href="#cb43-468" aria-hidden="true" tabindex="-1"></a>unk_df <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb43-469"><a href="#cb43-469" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"pos_tests"</span>: pos_tests, <span class="st">"tests"</span>: tests,</span>
-<span id="cb43-470"><a href="#cb43-470" aria-hidden="true" tabindex="-1"></a>     <span class="st">"sample_prev"</span>: [p <span class="op">/</span> t <span class="cf">for</span> p, t <span class="kw">in</span> <span class="bu">zip</span>(pos_tests, tests)]}</span>
-<span id="cb43-471"><a href="#cb43-471" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb43-472"><a href="#cb43-472" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-473"><a href="#cb43-473" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-474"><a href="#cb43-474" aria-hidden="true" tabindex="-1"></a>Stan model for prior sensitivity analysis</span>
-<span id="cb43-475"><a href="#cb43-475" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-478"><a href="#cb43-478" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-479"><a href="#cb43-479" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: asis</span></span>
-<span id="cb43-480"><a href="#cb43-480" aria-hidden="true" tabindex="-1"></a>sens_model <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"prior-sensitivity.stan"</span>)</span>
-<span id="cb43-481"><a href="#cb43-481" aria-hidden="true" tabindex="-1"></a>print_stan(sens_model)</span>
-<span id="cb43-482"><a href="#cb43-482" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-483"><a href="#cb43-483" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-484"><a href="#cb43-484" aria-hidden="true" tabindex="-1"></a>Data</span>
-<span id="cb43-485"><a href="#cb43-485" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-488"><a href="#cb43-488" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-489"><a href="#cb43-489" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="bu">dict</span>(</span>
-<span id="cb43-490"><a href="#cb43-490" aria-hidden="true" tabindex="-1"></a>    K_pos<span class="op">=</span><span class="bu">len</span>(sens_df),</span>
-<span id="cb43-491"><a href="#cb43-491" aria-hidden="true" tabindex="-1"></a>    N_pos<span class="op">=</span>sens_df[<span class="st">"tests"</span>].tolist(),</span>
-<span id="cb43-492"><a href="#cb43-492" aria-hidden="true" tabindex="-1"></a>    n_pos<span class="op">=</span>sens_df[<span class="st">"pos_tests"</span>].tolist(),</span>
-<span id="cb43-493"><a href="#cb43-493" aria-hidden="true" tabindex="-1"></a>    K_neg<span class="op">=</span><span class="bu">len</span>(spec_df),</span>
-<span id="cb43-494"><a href="#cb43-494" aria-hidden="true" tabindex="-1"></a>    N_neg<span class="op">=</span>spec_df[<span class="st">"tests"</span>].tolist(),</span>
-<span id="cb43-495"><a href="#cb43-495" aria-hidden="true" tabindex="-1"></a>    n_neg<span class="op">=</span>spec_df[<span class="st">"neg_tests"</span>].tolist(),</span>
-<span id="cb43-496"><a href="#cb43-496" aria-hidden="true" tabindex="-1"></a>    K_unk<span class="op">=</span><span class="bu">len</span>(unk_df),</span>
-<span id="cb43-497"><a href="#cb43-497" aria-hidden="true" tabindex="-1"></a>    N_unk<span class="op">=</span>unk_df[<span class="st">"tests"</span>].tolist(),</span>
-<span id="cb43-498"><a href="#cb43-498" aria-hidden="true" tabindex="-1"></a>    n_unk<span class="op">=</span>unk_df[<span class="st">"pos_tests"</span>].tolist(),</span>
-<span id="cb43-499"><a href="#cb43-499" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb43-500"><a href="#cb43-500" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-501"><a href="#cb43-501" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-502"><a href="#cb43-502" aria-hidden="true" tabindex="-1"></a>Empty data frame to store posterior intervals with different priors</span>
-<span id="cb43-503"><a href="#cb43-503" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-506"><a href="#cb43-506" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-507"><a href="#cb43-507" aria-hidden="true" tabindex="-1"></a>ribbon_df <span class="op">=</span> pd.DataFrame(</span>
-<span id="cb43-508"><a href="#cb43-508" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>[<span class="st">"sigma_sens"</span>, <span class="st">"sigma_spec"</span>, <span class="st">"prev05"</span>, <span class="st">"prev50"</span>, <span class="st">"prev95"</span>]</span>
-<span id="cb43-509"><a href="#cb43-509" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb43-510"><a href="#cb43-510" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-511"><a href="#cb43-511" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-512"><a href="#cb43-512" aria-hidden="true" tabindex="-1"></a>Loop over different prior parameter values</span>
-<span id="cb43-513"><a href="#cb43-513" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-516"><a href="#cb43-516" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-517"><a href="#cb43-517" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: loop-over-prior-values</span></span>
-<span id="cb43-518"><a href="#cb43-518" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: true</span></span>
-<span id="cb43-519"><a href="#cb43-519" aria-hidden="true" tabindex="-1"></a>sigma_senss <span class="op">=</span> [<span class="fl">0.01</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>]</span>
-<span id="cb43-520"><a href="#cb43-520" aria-hidden="true" tabindex="-1"></a>sigma_specss <span class="op">=</span> [<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>, <span class="fl">0.5</span>, <span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>, <span class="fl">1.0</span>]</span>
-<span id="cb43-521"><a href="#cb43-521" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sigma_sens <span class="kw">in</span> sigma_senss:</span>
-<span id="cb43-522"><a href="#cb43-522" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> sigma_spec <span class="kw">in</span> sigma_specss:</span>
-<span id="cb43-523"><a href="#cb43-523" aria-hidden="true" tabindex="-1"></a>        data2 <span class="op">=</span> {<span class="op">**</span>data,</span>
-<span id="cb43-524"><a href="#cb43-524" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"sigma_sigma_logit_sens"</span>: sigma_sens,</span>
-<span id="cb43-525"><a href="#cb43-525" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"sigma_sigma_logit_spec"</span>: sigma_spec}</span>
-<span id="cb43-526"><a href="#cb43-526" aria-hidden="true" tabindex="-1"></a>        fit <span class="op">=</span> sens_model.sample(</span>
-<span id="cb43-527"><a href="#cb43-527" aria-hidden="true" tabindex="-1"></a>            data<span class="op">=</span>data2,</span>
-<span id="cb43-528"><a href="#cb43-528" aria-hidden="true" tabindex="-1"></a>            iter_warmup<span class="op">=</span><span class="bu">int</span>(<span class="fl">5e4</span>),</span>
-<span id="cb43-529"><a href="#cb43-529" aria-hidden="true" tabindex="-1"></a>            iter_sampling<span class="op">=</span><span class="bu">int</span>(<span class="fl">5e4</span>),</span>
-<span id="cb43-530"><a href="#cb43-530" aria-hidden="true" tabindex="-1"></a>            seed<span class="op">=</span><span class="dv">1234</span>,</span>
-<span id="cb43-531"><a href="#cb43-531" aria-hidden="true" tabindex="-1"></a>            adapt_delta<span class="op">=</span><span class="fl">0.95</span>,</span>
-<span id="cb43-532"><a href="#cb43-532" aria-hidden="true" tabindex="-1"></a>            show_progress<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb43-533"><a href="#cb43-533" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb43-534"><a href="#cb43-534" aria-hidden="true" tabindex="-1"></a>        pis <span class="op">=</span> fit.stan_variable(<span class="st">"pi"</span>)</span>
-<span id="cb43-535"><a href="#cb43-535" aria-hidden="true" tabindex="-1"></a>        ribbon_df <span class="op">=</span> pd.concat(</span>
-<span id="cb43-536"><a href="#cb43-536" aria-hidden="true" tabindex="-1"></a>            [ribbon_df,</span>
-<span id="cb43-537"><a href="#cb43-537" aria-hidden="true" tabindex="-1"></a>             pd.DataFrame({</span>
-<span id="cb43-538"><a href="#cb43-538" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"sigma_sens"</span>: [<span class="ss">f"sensitivity hyperprior = </span><span class="sc">{</span>sigma_sens<span class="sc">}</span><span class="ss">"</span>],</span>
-<span id="cb43-539"><a href="#cb43-539" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"sigma_spec"</span>: [sigma_spec],</span>
-<span id="cb43-540"><a href="#cb43-540" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"prev05"</span>: [np.quantile(pis, <span class="fl">0.05</span>)],</span>
-<span id="cb43-541"><a href="#cb43-541" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"prev50"</span>: [np.quantile(pis, <span class="fl">0.5</span>)],</span>
-<span id="cb43-542"><a href="#cb43-542" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"prev95"</span>: [np.quantile(pis, <span class="fl">0.95</span>)],</span>
-<span id="cb43-543"><a href="#cb43-543" aria-hidden="true" tabindex="-1"></a>             })],</span>
-<span id="cb43-544"><a href="#cb43-544" aria-hidden="true" tabindex="-1"></a>            ignore_index<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb43-545"><a href="#cb43-545" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb43-546"><a href="#cb43-546" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-547"><a href="#cb43-547" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-550"><a href="#cb43-550" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb43-551"><a href="#cb43-551" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-prior-sensitivity-2</span></span>
-<span id="cb43-552"><a href="#cb43-552" aria-hidden="true" tabindex="-1"></a>sens_levels <span class="op">=</span> [<span class="ss">f"sensitivity hyperprior = </span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> s <span class="kw">in</span> sigma_senss]</span>
-<span id="cb43-553"><a href="#cb43-553" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="bu">len</span>(sens_levels), figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.5</span>),</span>
-<span id="cb43-554"><a href="#cb43-554" aria-hidden="true" tabindex="-1"></a>                         sharey<span class="op">=</span><span class="va">True</span>, sharex<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb43-555"><a href="#cb43-555" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, level <span class="kw">in</span> <span class="bu">zip</span>(axes, sens_levels):</span>
-<span id="cb43-556"><a href="#cb43-556" aria-hidden="true" tabindex="-1"></a>    sub <span class="op">=</span> ribbon_df[ribbon_df[<span class="st">"sigma_sens"</span>] <span class="op">==</span> level].sort_values(<span class="st">"sigma_spec"</span>)</span>
-<span id="cb43-557"><a href="#cb43-557" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> sub[<span class="st">"sigma_spec"</span>].to_numpy(dtype<span class="op">=</span><span class="bu">float</span>)</span>
-<span id="cb43-558"><a href="#cb43-558" aria-hidden="true" tabindex="-1"></a>    y05 <span class="op">=</span> sub[<span class="st">"prev05"</span>].to_numpy(dtype<span class="op">=</span><span class="bu">float</span>)</span>
-<span id="cb43-559"><a href="#cb43-559" aria-hidden="true" tabindex="-1"></a>    y50 <span class="op">=</span> sub[<span class="st">"prev50"</span>].to_numpy(dtype<span class="op">=</span><span class="bu">float</span>)</span>
-<span id="cb43-560"><a href="#cb43-560" aria-hidden="true" tabindex="-1"></a>    y95 <span class="op">=</span> sub[<span class="st">"prev95"</span>].to_numpy(dtype<span class="op">=</span><span class="bu">float</span>)</span>
-<span id="cb43-561"><a href="#cb43-561" aria-hidden="true" tabindex="-1"></a>    ax.fill_between(x, y05, y95, color<span class="op">=</span><span class="st">"0.95"</span>)</span>
-<span id="cb43-562"><a href="#cb43-562" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, y50, color<span class="op">=</span><span class="st">"black"</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
-<span id="cb43-563"><a href="#cb43-563" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, y05, color<span class="op">=</span><span class="st">"0.5"</span>, linewidth<span class="op">=</span><span class="fl">0.25</span>)</span>
-<span id="cb43-564"><a href="#cb43-564" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, y95, color<span class="op">=</span><span class="st">"0.5"</span>, linewidth<span class="op">=</span><span class="fl">0.25</span>)</span>
-<span id="cb43-565"><a href="#cb43-565" aria-hidden="true" tabindex="-1"></a>    ax.<span class="bu">set</span>(yscale<span class="op">=</span><span class="st">"log"</span>, </span>
-<span id="cb43-566"><a href="#cb43-566" aria-hidden="true" tabindex="-1"></a>           ylim<span class="op">=</span>(<span class="fl">0.0009</span>, <span class="fl">1.1</span>),</span>
-<span id="cb43-567"><a href="#cb43-567" aria-hidden="true" tabindex="-1"></a>           yticks<span class="op">=</span>[<span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="dv">1</span>],</span>
-<span id="cb43-568"><a href="#cb43-568" aria-hidden="true" tabindex="-1"></a>           xlim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb43-569"><a href="#cb43-569" aria-hidden="true" tabindex="-1"></a>           xticks<span class="op">=</span>[<span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>, <span class="fl">0.9</span>])</span>
-<span id="cb43-570"><a href="#cb43-570" aria-hidden="true" tabindex="-1"></a>    ax.set_title(level, fontsize<span class="op">=</span><span class="dv">7</span>)</span>
-<span id="cb43-571"><a href="#cb43-571" aria-hidden="true" tabindex="-1"></a>fig.text(<span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.03</span>, <span class="st">"specificity hyperprior"</span>, ha<span class="op">=</span><span class="st">"center"</span>)</span>
-<span id="cb43-572"><a href="#cb43-572" aria-hidden="true" tabindex="-1"></a>fig.text(<span class="op">-</span><span class="fl">0.02</span>, <span class="fl">0.5</span>, <span class="st">"prevalence"</span>, va<span class="op">=</span><span class="st">"center"</span>, rotation<span class="op">=</span><span class="dv">90</span>)<span class="op">;</span></span>
-<span id="cb43-573"><a href="#cb43-573" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb43-574"><a href="#cb43-574" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-575"><a href="#cb43-575" aria-hidden="true" tabindex="-1"></a><span class="fu">## References {.unnumbered}</span></span>
-<span id="cb43-576"><a href="#cb43-576" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-577"><a href="#cb43-577" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">"refs"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
-<span id="cb43-578"><a href="#cb43-578" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-579"><a href="#cb43-579" aria-hidden="true" tabindex="-1"></a><span class="fu">## Licenses {.unnumbered}</span></span>
-<span id="cb43-580"><a href="#cb43-580" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-581"><a href="#cb43-581" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Code <span class="dv">&amp;copy;</span> 2022--2025, Andrew Gelman and Aki Vehtari, licensed under BSD-3.</span>
-<span id="cb43-582"><a href="#cb43-582" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Text <span class="dv">&amp;copy;</span> 2022--2025, Andrew Gelman and Aki Vehtari, licensed under CC-BY-NC 4.0.</span>
+<span id="cb43-322"><a href="#cb43-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-323"><a href="#cb43-323" aria-hidden="true" tabindex="-1"></a><span class="fu">## MRP model</span></span>
+<span id="cb43-324"><a href="#cb43-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-325"><a href="#cb43-325" aria-hidden="true" tabindex="-1"></a>MRP model allowing prevalence to vary by sex, ethnicity, age</span>
+<span id="cb43-326"><a href="#cb43-326" aria-hidden="true" tabindex="-1"></a>category, and zip code.  Model is set up to use the ethnicity, age,</span>
+<span id="cb43-327"><a href="#cb43-327" aria-hidden="true" tabindex="-1"></a>and zip categories of @Bendavid-Mulaney-Sood-etal:2020b</span>
+<span id="cb43-328"><a href="#cb43-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-331"><a href="#cb43-331" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-332"><a href="#cb43-332" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: asis</span></span>
+<span id="cb43-333"><a href="#cb43-333" aria-hidden="true" tabindex="-1"></a>sc_model_hierarchical_mrp <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"santa-clara-hierarchical-mrp.stan"</span>)</span>
+<span id="cb43-334"><a href="#cb43-334" aria-hidden="true" tabindex="-1"></a>print_stan(sc_model_hierarchical_mrp)</span>
+<span id="cb43-335"><a href="#cb43-335" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-336"><a href="#cb43-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-337"><a href="#cb43-337" aria-hidden="true" tabindex="-1"></a>To fit the model, we need individual-level data.</span>
+<span id="cb43-338"><a href="#cb43-338" aria-hidden="true" tabindex="-1"></a>These data are not publicly available, so just to get the program running,</span>
+<span id="cb43-339"><a href="#cb43-339" aria-hidden="true" tabindex="-1"></a>we take the existing 50 positive tests and assign them at random to the 3330 people.</span>
+<span id="cb43-340"><a href="#cb43-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-343"><a href="#cb43-343" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-344"><a href="#cb43-344" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(SEED)</span>
+<span id="cb43-345"><a href="#cb43-345" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">3330</span></span>
+<span id="cb43-346"><a href="#cb43-346" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> rng.permutation(np.repeat([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">3330</span> <span class="op">-</span> <span class="dv">50</span>, <span class="dv">50</span>]))</span>
+<span id="cb43-347"><a href="#cb43-347" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-348"><a href="#cb43-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-349"><a href="#cb43-349" aria-hidden="true" tabindex="-1"></a>Here are the counts of each sex, ethnicity, and age from @Bendavid-Mulaney-Sood-etal:2020b.</span>
+<span id="cb43-350"><a href="#cb43-350" aria-hidden="true" tabindex="-1"></a>We don't have zip code distribution but we looked it up and there are 58 zip codes</span>
+<span id="cb43-351"><a href="#cb43-351" aria-hidden="true" tabindex="-1"></a>in Santa Clara County; for simplicity we assume all zip codes are equally likely.</span>
+<span id="cb43-352"><a href="#cb43-352" aria-hidden="true" tabindex="-1"></a>We then assign these traits to people at random.</span>
+<span id="cb43-353"><a href="#cb43-353" aria-hidden="true" tabindex="-1"></a>This is wrong--actually, these variable are correlated in various ways--but, again,</span>
+<span id="cb43-354"><a href="#cb43-354" aria-hidden="true" tabindex="-1"></a>now we have fake data we can use to fit the model.</span>
+<span id="cb43-355"><a href="#cb43-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-358"><a href="#cb43-358" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-359"><a href="#cb43-359" aria-hidden="true" tabindex="-1"></a>male <span class="op">=</span> rng.permutation(np.repeat([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">2101</span>, <span class="dv">1229</span>]))</span>
+<span id="cb43-360"><a href="#cb43-360" aria-hidden="true" tabindex="-1"></a>eth <span class="op">=</span> rng.permutation(np.repeat([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">2118</span>, <span class="dv">623</span>, <span class="dv">266</span>, <span class="dv">306</span> <span class="op">+</span> <span class="dv">17</span>]))</span>
+<span id="cb43-361"><a href="#cb43-361" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> rng.permutation(np.repeat([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>], [<span class="dv">71</span>, <span class="dv">550</span>, <span class="dv">2542</span>, <span class="dv">167</span>]))</span>
+<span id="cb43-362"><a href="#cb43-362" aria-hidden="true" tabindex="-1"></a>N_zip <span class="op">=</span> <span class="dv">58</span></span>
+<span id="cb43-363"><a href="#cb43-363" aria-hidden="true" tabindex="-1"></a>zip_codes <span class="op">=</span> rng.integers(<span class="dv">1</span>, N_zip <span class="op">+</span> <span class="dv">1</span>, size<span class="op">=</span><span class="dv">3330</span>)</span>
+<span id="cb43-364"><a href="#cb43-364" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-365"><a href="#cb43-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-366"><a href="#cb43-366" aria-hidden="true" tabindex="-1"></a>Setting up the zip code level predictor.</span>
+<span id="cb43-367"><a href="#cb43-367" aria-hidden="true" tabindex="-1"></a>In this case we will use a random number with mean 50 and standard deviation 20.</span>
+<span id="cb43-368"><a href="#cb43-368" aria-hidden="true" tabindex="-1"></a>These are arbitrary numbers that we chose just to be able to test the centering</span>
+<span id="cb43-369"><a href="#cb43-369" aria-hidden="true" tabindex="-1"></a>and scaling in the model.</span>
+<span id="cb43-370"><a href="#cb43-370" aria-hidden="true" tabindex="-1"></a>In real life we might use %Latino or average income in the zip code</span>
+<span id="cb43-371"><a href="#cb43-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-374"><a href="#cb43-374" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-375"><a href="#cb43-375" aria-hidden="true" tabindex="-1"></a>x_zip <span class="op">=</span> rng.normal(<span class="dv">50</span>, <span class="dv">20</span>, size<span class="op">=</span>N_zip)</span>
+<span id="cb43-376"><a href="#cb43-376" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-377"><a href="#cb43-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-378"><a href="#cb43-378" aria-hidden="true" tabindex="-1"></a>Setting up the poststratification table.</span>
+<span id="cb43-379"><a href="#cb43-379" aria-hidden="true" tabindex="-1"></a>For simplicity we assume there are 1000 people in each cell in the county.</span>
+<span id="cb43-380"><a href="#cb43-380" aria-hidden="true" tabindex="-1"></a>Actually we'd want data from the Census.</span>
+<span id="cb43-381"><a href="#cb43-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-384"><a href="#cb43-384" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-385"><a href="#cb43-385" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> <span class="dv">4</span> <span class="op">*</span> <span class="dv">4</span> <span class="op">*</span> N_zip</span>
+<span id="cb43-386"><a href="#cb43-386" aria-hidden="true" tabindex="-1"></a>N_pop <span class="op">=</span> np.full(J, <span class="dv">1000</span>)</span>
+<span id="cb43-387"><a href="#cb43-387" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-388"><a href="#cb43-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-389"><a href="#cb43-389" aria-hidden="true" tabindex="-1"></a>Put together the data and fit the model</span>
+<span id="cb43-390"><a href="#cb43-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-393"><a href="#cb43-393" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-394"><a href="#cb43-394" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit_4</span></span>
+<span id="cb43-395"><a href="#cb43-395" aria-hidden="true" tabindex="-1"></a>santaclara_mrp_data <span class="op">=</span> <span class="bu">dict</span>(</span>
+<span id="cb43-396"><a href="#cb43-396" aria-hidden="true" tabindex="-1"></a>    N<span class="op">=</span>N,</span>
+<span id="cb43-397"><a href="#cb43-397" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>y.tolist(),</span>
+<span id="cb43-398"><a href="#cb43-398" aria-hidden="true" tabindex="-1"></a>    male<span class="op">=</span>male.tolist(),</span>
+<span id="cb43-399"><a href="#cb43-399" aria-hidden="true" tabindex="-1"></a>    eth<span class="op">=</span>eth.tolist(),</span>
+<span id="cb43-400"><a href="#cb43-400" aria-hidden="true" tabindex="-1"></a>    age<span class="op">=</span>age.tolist(),</span>
+<span id="cb43-401"><a href="#cb43-401" aria-hidden="true" tabindex="-1"></a>    <span class="bu">zip</span><span class="op">=</span>zip_codes.tolist(),</span>
+<span id="cb43-402"><a href="#cb43-402" aria-hidden="true" tabindex="-1"></a>    N_zip<span class="op">=</span>N_zip,</span>
+<span id="cb43-403"><a href="#cb43-403" aria-hidden="true" tabindex="-1"></a>    x_zip<span class="op">=</span>x_zip.tolist(),</span>
+<span id="cb43-404"><a href="#cb43-404" aria-hidden="true" tabindex="-1"></a>    J_spec<span class="op">=</span><span class="dv">14</span>,</span>
+<span id="cb43-405"><a href="#cb43-405" aria-hidden="true" tabindex="-1"></a>    y_spec<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">368</span>, <span class="dv">30</span>, <span class="dv">70</span>, <span class="dv">1102</span>, <span class="dv">300</span>, <span class="dv">311</span>, <span class="dv">500</span>, <span class="dv">198</span>, <span class="dv">99</span>, <span class="dv">29</span>, <span class="dv">146</span>, <span class="dv">105</span>, <span class="dv">50</span>],</span>
+<span id="cb43-406"><a href="#cb43-406" aria-hidden="true" tabindex="-1"></a>    n_spec<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">371</span>, <span class="dv">30</span>, <span class="dv">70</span>, <span class="dv">1102</span>, <span class="dv">300</span>, <span class="dv">311</span>, <span class="dv">500</span>, <span class="dv">200</span>, <span class="dv">99</span>, <span class="dv">31</span>, <span class="dv">150</span>, <span class="dv">108</span>, <span class="dv">52</span>],</span>
+<span id="cb43-407"><a href="#cb43-407" aria-hidden="true" tabindex="-1"></a>    J_sens<span class="op">=</span><span class="dv">4</span>,</span>
+<span id="cb43-408"><a href="#cb43-408" aria-hidden="true" tabindex="-1"></a>    y_sens<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">78</span>, <span class="dv">27</span>, <span class="dv">25</span>],</span>
+<span id="cb43-409"><a href="#cb43-409" aria-hidden="true" tabindex="-1"></a>    n_sens<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">85</span>, <span class="dv">37</span>, <span class="dv">35</span>],</span>
+<span id="cb43-410"><a href="#cb43-410" aria-hidden="true" tabindex="-1"></a>    logit_spec_prior_scale<span class="op">=</span><span class="fl">0.3</span>,</span>
+<span id="cb43-411"><a href="#cb43-411" aria-hidden="true" tabindex="-1"></a>    logit_sens_prior_scale<span class="op">=</span><span class="fl">0.3</span>,</span>
+<span id="cb43-412"><a href="#cb43-412" aria-hidden="true" tabindex="-1"></a>    coef_prior_scale<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb43-413"><a href="#cb43-413" aria-hidden="true" tabindex="-1"></a>    J<span class="op">=</span>J,</span>
+<span id="cb43-414"><a href="#cb43-414" aria-hidden="true" tabindex="-1"></a>    N_pop<span class="op">=</span>N_pop.tolist(),</span>
+<span id="cb43-415"><a href="#cb43-415" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-416"><a href="#cb43-416" aria-hidden="true" tabindex="-1"></a>fit_4 <span class="op">=</span> sc_model_hierarchical_mrp.sample(</span>
+<span id="cb43-417"><a href="#cb43-417" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>santaclara_mrp_data,</span>
+<span id="cb43-418"><a href="#cb43-418" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span>SEED,</span>
+<span id="cb43-419"><a href="#cb43-419" aria-hidden="true" tabindex="-1"></a>    show_progress<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb43-420"><a href="#cb43-420" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-421"><a href="#cb43-421" aria-hidden="true" tabindex="-1"></a>idata_4 <span class="op">=</span> az.from_cmdstanpy(fit_4)</span>
+<span id="cb43-422"><a href="#cb43-422" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-423"><a href="#cb43-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-424"><a href="#cb43-424" aria-hidden="true" tabindex="-1"></a>Show inferences for some model parameters. In addition to <span class="in">`p_avg`</span>, the population</span>
+<span id="cb43-425"><a href="#cb43-425" aria-hidden="true" tabindex="-1"></a>prevalence, we also look at the inferences for the first three</span>
+<span id="cb43-426"><a href="#cb43-426" aria-hidden="true" tabindex="-1"></a>poststratification cells just to check that everything makes sense</span>
+<span id="cb43-427"><a href="#cb43-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-430"><a href="#cb43-430" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-431"><a href="#cb43-431" aria-hidden="true" tabindex="-1"></a>print_variables_mrp <span class="op">=</span> [</span>
+<span id="cb43-432"><a href="#cb43-432" aria-hidden="true" tabindex="-1"></a>    <span class="st">"p_avg"</span>, <span class="st">"b"</span>, <span class="st">"a_age"</span>, <span class="st">"a_eth"</span>,</span>
+<span id="cb43-433"><a href="#cb43-433" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sigma_eth"</span>, <span class="st">"sigma_age"</span>, <span class="st">"sigma_zip"</span>,</span>
+<span id="cb43-434"><a href="#cb43-434" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mu_logit_spec"</span>, <span class="st">"sigma_logit_spec"</span>,</span>
+<span id="cb43-435"><a href="#cb43-435" aria-hidden="true" tabindex="-1"></a>    <span class="st">"mu_logit_sens"</span>, <span class="st">"sigma_logit_sens"</span>,</span>
+<span id="cb43-436"><a href="#cb43-436" aria-hidden="true" tabindex="-1"></a>    <span class="st">"p_pop"</span>,</span>
+<span id="cb43-437"><a href="#cb43-437" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb43-438"><a href="#cb43-438" aria-hidden="true" tabindex="-1"></a>az.summary(idata_4, var_names<span class="op">=</span>print_variables_mrp,</span>
+<span id="cb43-439"><a href="#cb43-439" aria-hidden="true" tabindex="-1"></a>coords<span class="op">=</span>{<span class="st">"p_pop_dim_0"</span>: [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>]}, kind<span class="op">=</span><span class="st">"stats"</span>)</span>
+<span id="cb43-440"><a href="#cb43-440" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-441"><a href="#cb43-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-444"><a href="#cb43-444" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-445"><a href="#cb43-445" aria-hidden="true" tabindex="-1"></a>az.plot_dist(idata_4, var_names<span class="op">=</span><span class="st">"p_avg"</span>, ci_prob<span class="op">=</span><span class="fl">0.95</span>, ci_kind<span class="op">=</span><span class="st">"hdi"</span>)<span class="op">;</span></span>
+<span id="cb43-446"><a href="#cb43-446" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-447"><a href="#cb43-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-448"><a href="#cb43-448" aria-hidden="true" tabindex="-1"></a><span class="fu">## Additional prior sensitivity analysis</span></span>
+<span id="cb43-449"><a href="#cb43-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-452"><a href="#cb43-452" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-453"><a href="#cb43-453" aria-hidden="true" tabindex="-1"></a>pos_tests <span class="op">=</span> [<span class="dv">78</span>, <span class="dv">27</span>, <span class="dv">25</span>]</span>
+<span id="cb43-454"><a href="#cb43-454" aria-hidden="true" tabindex="-1"></a>tests <span class="op">=</span> [<span class="dv">85</span>, <span class="dv">37</span>, <span class="dv">35</span>]</span>
+<span id="cb43-455"><a href="#cb43-455" aria-hidden="true" tabindex="-1"></a>sens_df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb43-456"><a href="#cb43-456" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"pos_tests"</span>: pos_tests, <span class="st">"tests"</span>: tests,</span>
+<span id="cb43-457"><a href="#cb43-457" aria-hidden="true" tabindex="-1"></a>     <span class="st">"sample_sens"</span>: [p <span class="op">/</span> t <span class="cf">for</span> p, t <span class="kw">in</span> <span class="bu">zip</span>(pos_tests, tests)]}</span>
+<span id="cb43-458"><a href="#cb43-458" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-459"><a href="#cb43-459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-460"><a href="#cb43-460" aria-hidden="true" tabindex="-1"></a>neg_tests <span class="op">=</span> [<span class="dv">368</span>, <span class="dv">30</span>, <span class="dv">70</span>, <span class="dv">1102</span>, <span class="dv">300</span>, <span class="dv">311</span>, <span class="dv">500</span>, <span class="dv">198</span>, <span class="dv">99</span>, <span class="dv">29</span>, <span class="dv">146</span>, <span class="dv">105</span>, <span class="dv">50</span>]</span>
+<span id="cb43-461"><a href="#cb43-461" aria-hidden="true" tabindex="-1"></a>tests <span class="op">=</span> [<span class="dv">371</span>, <span class="dv">30</span>, <span class="dv">70</span>, <span class="dv">1102</span>, <span class="dv">300</span>, <span class="dv">311</span>, <span class="dv">500</span>, <span class="dv">200</span>, <span class="dv">99</span>, <span class="dv">31</span>, <span class="dv">150</span>, <span class="dv">108</span>, <span class="dv">52</span>]</span>
+<span id="cb43-462"><a href="#cb43-462" aria-hidden="true" tabindex="-1"></a>spec_df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb43-463"><a href="#cb43-463" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"neg_tests"</span>: neg_tests, <span class="st">"tests"</span>: tests,</span>
+<span id="cb43-464"><a href="#cb43-464" aria-hidden="true" tabindex="-1"></a>     <span class="st">"sample_spec"</span>: [n <span class="op">/</span> t <span class="cf">for</span> n, t <span class="kw">in</span> <span class="bu">zip</span>(neg_tests, tests)]}</span>
+<span id="cb43-465"><a href="#cb43-465" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-466"><a href="#cb43-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-467"><a href="#cb43-467" aria-hidden="true" tabindex="-1"></a>pos_tests <span class="op">=</span> [<span class="dv">50</span>]</span>
+<span id="cb43-468"><a href="#cb43-468" aria-hidden="true" tabindex="-1"></a>tests <span class="op">=</span> [<span class="dv">3330</span>]</span>
+<span id="cb43-469"><a href="#cb43-469" aria-hidden="true" tabindex="-1"></a>unk_df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb43-470"><a href="#cb43-470" aria-hidden="true" tabindex="-1"></a>    {<span class="st">"pos_tests"</span>: pos_tests, <span class="st">"tests"</span>: tests,</span>
+<span id="cb43-471"><a href="#cb43-471" aria-hidden="true" tabindex="-1"></a>     <span class="st">"sample_prev"</span>: [p <span class="op">/</span> t <span class="cf">for</span> p, t <span class="kw">in</span> <span class="bu">zip</span>(pos_tests, tests)]}</span>
+<span id="cb43-472"><a href="#cb43-472" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-473"><a href="#cb43-473" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-474"><a href="#cb43-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-475"><a href="#cb43-475" aria-hidden="true" tabindex="-1"></a>Stan model for prior sensitivity analysis</span>
+<span id="cb43-476"><a href="#cb43-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-479"><a href="#cb43-479" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-480"><a href="#cb43-480" aria-hidden="true" tabindex="-1"></a><span class="co">#| output: asis</span></span>
+<span id="cb43-481"><a href="#cb43-481" aria-hidden="true" tabindex="-1"></a>sens_model <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"prior-sensitivity.stan"</span>)</span>
+<span id="cb43-482"><a href="#cb43-482" aria-hidden="true" tabindex="-1"></a>print_stan(sens_model)</span>
+<span id="cb43-483"><a href="#cb43-483" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-484"><a href="#cb43-484" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-485"><a href="#cb43-485" aria-hidden="true" tabindex="-1"></a>Data</span>
+<span id="cb43-486"><a href="#cb43-486" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-489"><a href="#cb43-489" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-490"><a href="#cb43-490" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> <span class="bu">dict</span>(</span>
+<span id="cb43-491"><a href="#cb43-491" aria-hidden="true" tabindex="-1"></a>    K_pos<span class="op">=</span><span class="bu">len</span>(sens_df),</span>
+<span id="cb43-492"><a href="#cb43-492" aria-hidden="true" tabindex="-1"></a>    N_pos<span class="op">=</span>sens_df[<span class="st">"tests"</span>].tolist(),</span>
+<span id="cb43-493"><a href="#cb43-493" aria-hidden="true" tabindex="-1"></a>    n_pos<span class="op">=</span>sens_df[<span class="st">"pos_tests"</span>].tolist(),</span>
+<span id="cb43-494"><a href="#cb43-494" aria-hidden="true" tabindex="-1"></a>    K_neg<span class="op">=</span><span class="bu">len</span>(spec_df),</span>
+<span id="cb43-495"><a href="#cb43-495" aria-hidden="true" tabindex="-1"></a>    N_neg<span class="op">=</span>spec_df[<span class="st">"tests"</span>].tolist(),</span>
+<span id="cb43-496"><a href="#cb43-496" aria-hidden="true" tabindex="-1"></a>    n_neg<span class="op">=</span>spec_df[<span class="st">"neg_tests"</span>].tolist(),</span>
+<span id="cb43-497"><a href="#cb43-497" aria-hidden="true" tabindex="-1"></a>    K_unk<span class="op">=</span><span class="bu">len</span>(unk_df),</span>
+<span id="cb43-498"><a href="#cb43-498" aria-hidden="true" tabindex="-1"></a>    N_unk<span class="op">=</span>unk_df[<span class="st">"tests"</span>].tolist(),</span>
+<span id="cb43-499"><a href="#cb43-499" aria-hidden="true" tabindex="-1"></a>    n_unk<span class="op">=</span>unk_df[<span class="st">"pos_tests"</span>].tolist(),</span>
+<span id="cb43-500"><a href="#cb43-500" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-501"><a href="#cb43-501" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-502"><a href="#cb43-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-503"><a href="#cb43-503" aria-hidden="true" tabindex="-1"></a>Empty data frame to store posterior intervals with different priors</span>
+<span id="cb43-504"><a href="#cb43-504" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-507"><a href="#cb43-507" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-508"><a href="#cb43-508" aria-hidden="true" tabindex="-1"></a>ribbon_df <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb43-509"><a href="#cb43-509" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>[<span class="st">"sigma_sens"</span>, <span class="st">"sigma_spec"</span>, <span class="st">"prev05"</span>, <span class="st">"prev50"</span>, <span class="st">"prev95"</span>]</span>
+<span id="cb43-510"><a href="#cb43-510" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-511"><a href="#cb43-511" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-512"><a href="#cb43-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-513"><a href="#cb43-513" aria-hidden="true" tabindex="-1"></a>Loop over different prior parameter values</span>
+<span id="cb43-514"><a href="#cb43-514" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-517"><a href="#cb43-517" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-518"><a href="#cb43-518" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: loop-over-prior-values</span></span>
+<span id="cb43-519"><a href="#cb43-519" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: true</span></span>
+<span id="cb43-520"><a href="#cb43-520" aria-hidden="true" tabindex="-1"></a>sigma_senss <span class="op">=</span> [<span class="fl">0.01</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="dv">1</span>]</span>
+<span id="cb43-521"><a href="#cb43-521" aria-hidden="true" tabindex="-1"></a>sigma_specss <span class="op">=</span> [<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>, <span class="fl">0.5</span>, <span class="fl">0.6</span>, <span class="fl">0.7</span>, <span class="fl">0.8</span>, <span class="fl">0.9</span>, <span class="fl">1.0</span>]</span>
+<span id="cb43-522"><a href="#cb43-522" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sigma_sens <span class="kw">in</span> sigma_senss:</span>
+<span id="cb43-523"><a href="#cb43-523" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> sigma_spec <span class="kw">in</span> sigma_specss:</span>
+<span id="cb43-524"><a href="#cb43-524" aria-hidden="true" tabindex="-1"></a>        data2 <span class="op">=</span> {<span class="op">**</span>data,</span>
+<span id="cb43-525"><a href="#cb43-525" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"sigma_sigma_logit_sens"</span>: sigma_sens,</span>
+<span id="cb43-526"><a href="#cb43-526" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"sigma_sigma_logit_spec"</span>: sigma_spec}</span>
+<span id="cb43-527"><a href="#cb43-527" aria-hidden="true" tabindex="-1"></a>        fit <span class="op">=</span> sens_model.sample(</span>
+<span id="cb43-528"><a href="#cb43-528" aria-hidden="true" tabindex="-1"></a>            data<span class="op">=</span>data2,</span>
+<span id="cb43-529"><a href="#cb43-529" aria-hidden="true" tabindex="-1"></a>            iter_warmup<span class="op">=</span><span class="bu">int</span>(<span class="fl">5e4</span>),</span>
+<span id="cb43-530"><a href="#cb43-530" aria-hidden="true" tabindex="-1"></a>            iter_sampling<span class="op">=</span><span class="bu">int</span>(<span class="fl">5e4</span>),</span>
+<span id="cb43-531"><a href="#cb43-531" aria-hidden="true" tabindex="-1"></a>            seed<span class="op">=</span><span class="dv">1234</span>,</span>
+<span id="cb43-532"><a href="#cb43-532" aria-hidden="true" tabindex="-1"></a>            adapt_delta<span class="op">=</span><span class="fl">0.95</span>,</span>
+<span id="cb43-533"><a href="#cb43-533" aria-hidden="true" tabindex="-1"></a>            show_progress<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb43-534"><a href="#cb43-534" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb43-535"><a href="#cb43-535" aria-hidden="true" tabindex="-1"></a>        pis <span class="op">=</span> fit.stan_variable(<span class="st">"pi"</span>)</span>
+<span id="cb43-536"><a href="#cb43-536" aria-hidden="true" tabindex="-1"></a>        ribbon_df <span class="op">=</span> pd.concat(</span>
+<span id="cb43-537"><a href="#cb43-537" aria-hidden="true" tabindex="-1"></a>            [ribbon_df,</span>
+<span id="cb43-538"><a href="#cb43-538" aria-hidden="true" tabindex="-1"></a>             pd.DataFrame({</span>
+<span id="cb43-539"><a href="#cb43-539" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"sigma_sens"</span>: [<span class="ss">f"sensitivity hyperprior = </span><span class="sc">{</span>sigma_sens<span class="sc">}</span><span class="ss">"</span>],</span>
+<span id="cb43-540"><a href="#cb43-540" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"sigma_spec"</span>: [sigma_spec],</span>
+<span id="cb43-541"><a href="#cb43-541" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"prev05"</span>: [np.quantile(pis, <span class="fl">0.05</span>)],</span>
+<span id="cb43-542"><a href="#cb43-542" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"prev50"</span>: [np.quantile(pis, <span class="fl">0.5</span>)],</span>
+<span id="cb43-543"><a href="#cb43-543" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"prev95"</span>: [np.quantile(pis, <span class="fl">0.95</span>)],</span>
+<span id="cb43-544"><a href="#cb43-544" aria-hidden="true" tabindex="-1"></a>             })],</span>
+<span id="cb43-545"><a href="#cb43-545" aria-hidden="true" tabindex="-1"></a>            ignore_index<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb43-546"><a href="#cb43-546" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb43-547"><a href="#cb43-547" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-548"><a href="#cb43-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-551"><a href="#cb43-551" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb43-552"><a href="#cb43-552" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-prior-sensitivity-2</span></span>
+<span id="cb43-553"><a href="#cb43-553" aria-hidden="true" tabindex="-1"></a>sens_levels <span class="op">=</span> [<span class="ss">f"sensitivity hyperprior = </span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> s <span class="kw">in</span> sigma_senss]</span>
+<span id="cb43-554"><a href="#cb43-554" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="bu">len</span>(sens_levels), figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="fl">2.5</span>),</span>
+<span id="cb43-555"><a href="#cb43-555" aria-hidden="true" tabindex="-1"></a>                         sharey<span class="op">=</span><span class="va">True</span>, sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb43-556"><a href="#cb43-556" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, level <span class="kw">in</span> <span class="bu">zip</span>(axes, sens_levels):</span>
+<span id="cb43-557"><a href="#cb43-557" aria-hidden="true" tabindex="-1"></a>    sub <span class="op">=</span> ribbon_df[ribbon_df[<span class="st">"sigma_sens"</span>] <span class="op">==</span> level].sort_values(<span class="st">"sigma_spec"</span>)</span>
+<span id="cb43-558"><a href="#cb43-558" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> sub[<span class="st">"sigma_spec"</span>].to_numpy(dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb43-559"><a href="#cb43-559" aria-hidden="true" tabindex="-1"></a>    y05 <span class="op">=</span> sub[<span class="st">"prev05"</span>].to_numpy(dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb43-560"><a href="#cb43-560" aria-hidden="true" tabindex="-1"></a>    y50 <span class="op">=</span> sub[<span class="st">"prev50"</span>].to_numpy(dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb43-561"><a href="#cb43-561" aria-hidden="true" tabindex="-1"></a>    y95 <span class="op">=</span> sub[<span class="st">"prev95"</span>].to_numpy(dtype<span class="op">=</span><span class="bu">float</span>)</span>
+<span id="cb43-562"><a href="#cb43-562" aria-hidden="true" tabindex="-1"></a>    ax.fill_between(x, y05, y95, color<span class="op">=</span><span class="st">"0.95"</span>)</span>
+<span id="cb43-563"><a href="#cb43-563" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, y50, color<span class="op">=</span><span class="st">"black"</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb43-564"><a href="#cb43-564" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, y05, color<span class="op">=</span><span class="st">"0.5"</span>, linewidth<span class="op">=</span><span class="fl">0.25</span>)</span>
+<span id="cb43-565"><a href="#cb43-565" aria-hidden="true" tabindex="-1"></a>    ax.plot(x, y95, color<span class="op">=</span><span class="st">"0.5"</span>, linewidth<span class="op">=</span><span class="fl">0.25</span>)</span>
+<span id="cb43-566"><a href="#cb43-566" aria-hidden="true" tabindex="-1"></a>    ax.<span class="bu">set</span>(yscale<span class="op">=</span><span class="st">"log"</span>, </span>
+<span id="cb43-567"><a href="#cb43-567" aria-hidden="true" tabindex="-1"></a>           ylim<span class="op">=</span>(<span class="fl">0.0009</span>, <span class="fl">1.1</span>),</span>
+<span id="cb43-568"><a href="#cb43-568" aria-hidden="true" tabindex="-1"></a>           yticks<span class="op">=</span>[<span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="dv">1</span>],</span>
+<span id="cb43-569"><a href="#cb43-569" aria-hidden="true" tabindex="-1"></a>           xlim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb43-570"><a href="#cb43-570" aria-hidden="true" tabindex="-1"></a>           xticks<span class="op">=</span>[<span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>, <span class="fl">0.9</span>])</span>
+<span id="cb43-571"><a href="#cb43-571" aria-hidden="true" tabindex="-1"></a>    ax.set_title(level, fontsize<span class="op">=</span><span class="dv">7</span>)</span>
+<span id="cb43-572"><a href="#cb43-572" aria-hidden="true" tabindex="-1"></a>fig.text(<span class="fl">0.5</span>, <span class="op">-</span><span class="fl">0.03</span>, <span class="st">"specificity hyperprior"</span>, ha<span class="op">=</span><span class="st">"center"</span>)</span>
+<span id="cb43-573"><a href="#cb43-573" aria-hidden="true" tabindex="-1"></a>fig.text(<span class="op">-</span><span class="fl">0.02</span>, <span class="fl">0.5</span>, <span class="st">"prevalence"</span>, va<span class="op">=</span><span class="st">"center"</span>, rotation<span class="op">=</span><span class="dv">90</span>)<span class="op">;</span></span>
+<span id="cb43-574"><a href="#cb43-574" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb43-575"><a href="#cb43-575" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-576"><a href="#cb43-576" aria-hidden="true" tabindex="-1"></a><span class="fu">## References {.unnumbered}</span></span>
+<span id="cb43-577"><a href="#cb43-577" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-578"><a href="#cb43-578" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">"refs"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb43-579"><a href="#cb43-579" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-580"><a href="#cb43-580" aria-hidden="true" tabindex="-1"></a><span class="fu">## Licenses {.unnumbered}</span></span>
+<span id="cb43-581"><a href="#cb43-581" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-582"><a href="#cb43-582" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Code <span class="dv">&amp;copy;</span> 2022--2025, Andrew Gelman and Aki Vehtari, licensed under BSD-3.</span>
+<span id="cb43-583"><a href="#cb43-583" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Text <span class="dv">&amp;copy;</span> 2022--2025, Andrew Gelman and Aki Vehtari, licensed under CC-BY-NC 4.0.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
