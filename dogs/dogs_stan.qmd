@@ -222,9 +222,9 @@ for row, (idata, label) in enumerate(zip(models, labels), start=1):
 ```{python}
 #| label: fig-dogs_inference
 
-_, axes = plt.subplots(2, 5, figsize=(10, 4))
+fig, axes = plt.subplots(2, 5, figsize=(10, 4), sharex=True, sharey=True)
 
-posterior = az.extract(dt_5, var_names=["a", "b"], num_samples=10, random_seed=rng)
+posterior = az.extract(dt_5, var_names=["a", "b"], num_samples=10, random_seed=SEED)
 
 
 for ax, sample_i in zip(axes.flatten(), posterior.sample):
@@ -237,14 +237,11 @@ for ax, sample_i in zip(axes.flatten(), posterior.sample):
             aspect="equal",
             xticks=[0.6, 0.8, 1.0],
             yticks=[0.6, 0.8, 1.0])
-    if k == 1:
-        ax.set_xlabel("a")
-    else:
-        ax.set_xticklabels([])
-    if i == 0:
-        ax.set_ylabel("b")
-    else:
-        ax.set_yticklabels([])
+
+for ax in axes[:,0]:
+    ax.set_ylabel("b")
+for ax in axes[1,:]:
+    ax.set_xlabel("a")
 fig.suptitle("10 posterior simulations of the parameters of the 30 dogs")
 ```
 
@@ -259,9 +256,11 @@ ax.scatter(ab_median["a"], ab_median["b"])
 ax.set(xlim=(0.55, 1),
        ylim=(0.55, 1),
        aspect="equal",
+       xticks=[0.6, 0.8, 1.0],
+       yticks=[0.6, 0.8, 1.0],
        xlabel=r"$\hat{a}$",
        ylabel=r"$\hat{b}$")
-ax.set_title("Posterior medians from fitted model")
+ax.set_title("Posterior medians from fitted model", fontsize=11);
 ```
 
 ```{python}
@@ -312,18 +311,20 @@ ax.plot([0.55, 1], [0.55, 1], color="lightgray")
 ax.scatter(a, b)
 ax.set(xlim=(0.55, 1),
        ylim=(0.55, 1),
+       xticks=[0.6, 0.8, 1.0],
+       yticks=[0.6, 0.8, 1.0],
        aspect="equal",
        xlabel="a",
        ylabel="b")
-ax.set_title("Simulated parameters")
+ax.set_title("Simulated parameters");
 ```
 
 ```{python}
 #| label: fig-dogs_data
 
-_, ax = plt.subplots(figsize=(3, 4))
+_, ax = plt.subplots(figsize=(5, 4))
 plot_dogs(ax, new_dogs)
-ax.set_title("Simulated data")
+ax.set_title("Simulated data");
 ```
 
 ```{python}
@@ -337,11 +338,13 @@ b_post = posterior["b"]
 _, ax = plt.subplots(figsize=(4, 4))
 ax.set(xlim=(0.55, 1),
        ylim=(0.55, 1),
+       xticks=[0.6, 0.8, 1.0],
+       yticks=[0.6, 0.8, 1.0],
        aspect="equal",
        xlabel="Posterior inference",
        ylabel="True parameter value")
 
-ax.set_title("Calibration check of posterior intervals")
+ax.set_title("Calibration check of posterior intervals", fontsize=11)
 ax.plot([0.55, 1], [0.55, 1], color="lightgray")
 
 
@@ -420,9 +423,9 @@ az.summary(new_dt_5, var_names=["mu_logit_ab", "sigma_logit_ab", "Omega_logit_ab
 ```{python}
 #| label: fig-dogs_data_50
 
-_, ax = plt.subplots(figsize=(6, 4))
+_, ax = plt.subplots(figsize=(5, 4))
 plot_dogs(ax, new_dogs)
-ax.set_title("Simulated data:  50 trials")
+ax.set_title("Simulated data:  50 trials");
 ```
 
 ```{python}
@@ -436,11 +439,13 @@ b_post = posterior["b"]
 _, ax = plt.subplots(figsize=(4, 4))
 ax.set(xlim=(0.55, 1),
        ylim=(0.55, 1),
+       xticks=[0.6, 0.8, 1.0],
+       yticks=[0.6, 0.8, 1.0],
        aspect="equal",
        xlabel="Posterior inference",
        ylabel="True parameter value")
 
-ax.set_title("Calibration check of posterior intervals")
+ax.set_title("Calibration check of posterior intervals", fontsize=11)
 ax.plot([0.55, 1], [0.55, 1], color="lightgray")
 
 

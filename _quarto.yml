@@ -15,7 +15,7 @@ project:
     - coronavirus/coronavirus.qmd
     # - timeseries/timeseries.qmd
     # - dogs/dogs.qmd
-    # - dogs/dogs_stan.qmd
+    - dogs/dogs_stan.qmd
     # - cat_adoptions/cat_adoptions.qmd
     # - world_cup/world_cup.qmd
     # - roaches/roaches.qmd
@@ -68,8 +68,8 @@ website:
       # #   href: timeseries/timeseries.html
       # # - text: "Ch 21: Posterior predictive checking: Stochastic learning in dogs -- brms"
       # #   href: dogs/dogs.html
-      # - text: "Ch 21: Posterior predictive checking: Stochastic learning in dogs -- Stan"
-      #   href: dogs/dogs_stan.html
+      - text: "Ch 21: Posterior predictive checking: Stochastic learning in dogs -- Stan"
+        href: dogs/dogs_stan.html
       # - text: "Ch 22: Incremental development and testing: Black cat adoptions"
       #   href: cat_adoptions/cat_adoptions.html
       # # - text: "Ch 23: Debugging a model: World Cup football"
