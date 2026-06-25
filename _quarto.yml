@@ -34,8 +34,9 @@ execute:
 
 website:
   title: "Bayesian Workflow case studies in Python"
+  description: "Python version of the case studies from the Bayesian Workflow book by Gelman, Vehtari, McElreath, et al."
   image: social-card.png
-  
+  open-graph: true
   navbar:
     right:
       - icon: github
