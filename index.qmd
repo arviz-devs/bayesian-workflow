@@ -1,5 +1,5 @@
 ---
-title: "Bayesian Workflow book: Website"
+title: "Bayesian Workflow book: Case studies in Python"
 date: 2026-01-05
 date-modified: today
 date-format: iso
@@ -10,14 +10,14 @@ format:
 
 ## Information
 
-These are the case studies from the **Bayesian Workflow** book by [Andrew
+These are the Python version of the case studies from the **Bayesian Workflow** book by [Andrew
 Gelman](http://www.stat.columbia.edu/~gelman/), [Aki
 Vehtari](https://users.aalto.fi/ave/), [Richard
 McElreath](https://xcelab.net/rm/) with Daniel Simpson, Charles
 C. Margossian, Yuling Yao, Lauren Kennedy, Jonah Gabry, Paul-Christian
 Bürkner, Martin Modrák, Vianey Leos Barajas.
 
-These cases studies has been ported to Python and use the following main libraries:
+These cases studies use the following Python libraries for Bayesian modeling and workflow:
 
 - PPLs
   - [CmdStanPy](https://mc-stan.org/cmdstanpy/)

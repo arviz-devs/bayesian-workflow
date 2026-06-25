@@ -1,6 +1,8 @@
 project:
   type: website
   output-dir: _book
+  resources:
+    - social-card.png
   render:
     - index.qmd
     - bioassay/bioassay.qmd
@@ -31,7 +33,8 @@ execute:
   freeze: auto
 
 website:
-  title: "Bayesian Workflow case studies"
+  title: "Bayesian Workflow case studies in Python"
+  image: social-card.png
   
   navbar:
     right:
