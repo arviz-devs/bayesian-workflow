@@ -1,0 +1,1 @@
+Sitemap: https://arviz-devs.github.io/bayesian-workflow/sitemap.xml
