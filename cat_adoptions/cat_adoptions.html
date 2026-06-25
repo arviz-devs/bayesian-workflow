@@ -609,7 +609,7 @@ memory usage: 3.6 MB</code></pre>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> dat[<span class="st">"adopted"</span>][j] <span class="op">==</span> <span class="dv">1</span>:</span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        ax.scatter(dat[<span class="st">"days"</span>][j], i, s<span class="op">=</span><span class="dv">30</span>, color<span class="op">=</span>cat_color, zorder<span class="op">=</span><span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-cats-data" class="quarto-float quarto-figure quarto-figure-center anchored" width="440" height="368">
+<div id="fig-cats-data" class="quarto-float quarto-figure quarto-figure-center anchored" height="368" width="440">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-cats-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="cat_adoptions_files/figure-html/fig-cats-data-output-1.png" id="fig-cats-data" width="440" height="368" class="figure-img">
@@ -646,7 +646,7 @@ Figure&nbsp;1
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>ax.legend(handles<span class="op">=</span>legend_elements, loc<span class="op">=</span><span class="st">"upper right"</span>)</span>
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Days observed"</span>, ylabel<span class="op">=</span><span class="st">"Cat"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-cats-data2" class="quarto-float quarto-figure quarto-figure-center anchored" width="440" height="260">
+<div id="fig-cats-data2" class="quarto-float quarto-figure quarto-figure-center anchored" height="260" width="440">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-cats-data2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="cat_adoptions_files/figure-html/fig-cats-data2-output-1.png" id="fig-cats-data2" width="440" height="260" class="figure-img">
@@ -686,7 +686,7 @@ Figure&nbsp;2
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plot_km(synth_df, ax<span class="op">=</span>ax)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="dv">50</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-cats-km-curves" class="quarto-float quarto-figure quarto-figure-center anchored" width="440" height="368">
+<div id="fig-cats-km-curves" class="quarto-float quarto-figure quarto-figure-center anchored" height="368" width="440">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-cats-km-curves-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="cat_adoptions_files/figure-html/fig-cats-km-curves-output-1.png" id="fig-cats-km-curves" width="440" height="368" class="figure-img">
@@ -706,7 +706,7 @@ Figure&nbsp;3
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ax.margins(x<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-gg-cats-km-curves" class="quarto-float quarto-figure quarto-figure-center anchored" width="440" height="260">
+<div id="fig-gg-cats-km-curves" class="quarto-float quarto-figure quarto-figure-center anchored" height="260" width="440">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-gg-cats-km-curves-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="cat_adoptions_files/figure-html/fig-gg-cats-km-curves-output-1.png" id="fig-gg-cats-km-curves" width="440" height="260" class="figure-img">
@@ -765,7 +765,7 @@ Figure&nbsp;4
 <span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> kmf.plot_survival_function(ax<span class="op">=</span>ax, color<span class="op">=</span>col, linewidth<span class="op">=</span><span class="dv">2</span>, ci_show<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>        ax.get_legend().remove()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-prior-predictive-1" class="quarto-float quarto-figure quarto-figure-center anchored" width="440" height="368">
+<div id="fig-prior-predictive-1" class="quarto-float quarto-figure quarto-figure-center anchored" height="368" width="440">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-prior-predictive-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="cat_adoptions_files/figure-html/fig-prior-predictive-1-output-1.png" id="fig-prior-predictive-1" width="440" height="368" class="figure-img">
@@ -844,7 +844,7 @@ Figure&nbsp;5
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(idata_1s, <span class="op">**</span>args_dist)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, p_sim, <span class="op">**</span>args_lines)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-post1-sim" class="quarto-float quarto-figure quarto-figure-center anchored" width="440" height="201">
+<div id="fig-post1-sim" class="quarto-float quarto-figure quarto-figure-center anchored" height="201" width="440">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-post1-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="cat_adoptions_files/figure-html/fig-post1-sim-output-1.png" id="fig-post1-sim" width="440" height="201" class="figure-img">
@@ -935,7 +935,7 @@ Figure&nbsp;6
 <span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> kmf.plot_survival_function(ax<span class="op">=</span>ax, color<span class="op">=</span>col, alpha<span class="op">=</span><span class="fl">0.5</span>, linewidth<span class="op">=</span><span class="dv">2</span>, ci_show<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        ax.get_legend().remove()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-post1-km" class="quarto-float quarto-figure quarto-figure-center anchored" width="446" height="368">
+<div id="fig-post1-km" class="quarto-float quarto-figure quarto-figure-center anchored" height="368" width="446">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-post1-km-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="cat_adoptions_files/figure-html/fig-post1-km-output-1.png" id="fig-post1-km" width="446" height="368" class="figure-img">
@@ -1047,7 +1047,7 @@ Figure&nbsp;7
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(idata_2s, <span class="op">**</span>args_dist)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, (<span class="fl">0.01</span>, <span class="fl">0.02</span>), <span class="op">**</span>args_lines)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-post2-sim" class="quarto-float quarto-figure quarto-figure-center anchored" width="440" height="201">
+<div id="fig-post2-sim" class="quarto-float quarto-figure quarto-figure-center anchored" height="201" width="440">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-post2-sim-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="cat_adoptions_files/figure-html/fig-post2-sim-output-1.png" id="fig-post2-sim" width="440" height="201" class="figure-img">
@@ -1120,7 +1120,7 @@ Figure&nbsp;8
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(idata_1s_cens, <span class="op">**</span>args_dist)</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, (<span class="fl">0.01</span>, <span class="fl">0.02</span>), <span class="op">**</span>args_lines)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-post1-sim2" class="quarto-float quarto-figure quarto-figure-center anchored" width="440" height="201">
+<div id="fig-post1-sim2" class="quarto-float quarto-figure quarto-figure-center anchored" height="201" width="440">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-post1-sim2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="cat_adoptions_files/figure-html/fig-post1-sim2-output-1.png" id="fig-post1-sim2" width="440" height="201" class="figure-img">
@@ -1174,7 +1174,7 @@ Figure&nbsp;9
 <span id="cb33-31"><a href="#cb33-31" aria-hidden="true" tabindex="-1"></a>        ci_show<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a>        ax.get_legend().remove()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-post1-post2-km" class="quarto-float quarto-figure quarto-figure-center anchored" width="446" height="368">
+<div id="fig-post1-post2-km" class="quarto-float quarto-figure quarto-figure-center anchored" height="368" width="446">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-post1-post2-km-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="cat_adoptions_files/figure-html/fig-post1-post2-km-output-1.png" id="fig-post1-post2-km" width="446" height="368" class="figure-img">
@@ -1467,7 +1467,7 @@ Figure&nbsp;10
 <span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>                                ci_show<span class="op">=</span><span class="va">False</span>, label<span class="op">=</span><span class="ss">f"Color </span><span class="sc">{</span>c<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlim<span class="op">=</span>(<span class="dv">0</span>, <span class="dv">90</span>), xlabel<span class="op">=</span><span class="st">"Days"</span>, ylabel<span class="op">=</span><span class="st">"Proportion un-adopted"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-km-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="440" height="368">
+<div id="fig-km-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="368" width="440">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-km-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="cat_adoptions_files/figure-html/fig-km-2-output-1.png" id="fig-km-2" width="440" height="368" class="figure-img">
