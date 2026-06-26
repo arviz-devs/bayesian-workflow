@@ -63,3 +63,8 @@ pages:
     dir: roaches
     page: roaches
     figure: fig-ppc_pit-nb-output-1.png
+
+  golf:
+    dir: golf
+    page: golf
+    figure: fig-golf-fit-2-new-output-1.png
