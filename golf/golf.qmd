@@ -989,7 +989,7 @@ only half from the prior standard deviations, hinting that
 likelihood would be weakly informative on these.
 
 ```{python}
-az.summary(az.from_cmdstanpy(fit_8), var_names=["distance_tolerance", "overshot"])
+az.summary(dt_8, var_names=["distance_tolerance", "overshot"])
 ```
 
 However, when we examine the bivariate posterior we see strong
@@ -1068,6 +1068,153 @@ performance, but adding `overshot` parameter does not improve the
 fit. However the model which has both `distance_tolerance` and
 `overshot` has posterior that is more informative on what can be
 learned about this aspect of the model.
+
+
+##  Binomial with simplified error term
+
+Now we fit a new set of models where the error term epsilon is a
+constant rather than a vector.  Now epsilon is simply the
+probability of completely blowing your shot.
+
+```{python}
+#| label: golf_angle_distance_binomial_with_constant_errors.stan
+#| results: hide
+model_9 = CmdStanModel(stan_file=str("golf_angle_distance_binomial_with_constant_errors.stan"))
+fit_9 = model_9.sample(data=golf_new_data, seed=SEED, show_progress=False)
+```
+
+Here is the result:
+
+```{python}
+dt_9 = az.from_cmdstanpy(fit_9)
+az.summary(dt_9, var_names=["sigma_angle", "sigma_distance", "epsilon"])
+```
+
+```{python}
+#| label: golf_angle_distance_binomial_with_constant_errors_2.stan
+#| results: hide
+model_10 = CmdStanModel(stan_file=str("golf_angle_distance_binomial_with_constant_errors_2.stan"))
+pth_10 = model_10.pathfinder(
+    data=golf_new_data,
+    num_paths=40,
+    max_lbfgs_iters=100,
+    inits=cmdstan_inits(fit_9, chains=1)[0],
+)
+fit_10 = model_10.sample(
+    data=golf_new_data,
+    seed=SEED,
+    show_progress=False,
+    inits=cmdstan_inits(pth_10),
+)
+```
+
+Here is the result:
+
+```{python}
+dt_10 = az.from_cmdstanpy(fit_10)
+az.summary(dt_10, var_names=["sigma_angle", "sigma_distance", "epsilon"])
+```
+
+```{python}
+#| label: golf_angle_distance_binomial_with_constant_errors_3.stan
+#| results: hide
+model_11 = CmdStanModel(stan_file=str("golf_angle_distance_binomial_with_constant_errors_3.stan"))
+pth_11 = model_11.pathfinder(
+    data=golf_new_data,
+    num_paths=40,
+    max_lbfgs_iters=100,
+    inits=cmdstan_inits(fit_10, chains=1)[0],
+)
+fit_11 = model_11.sample(
+    data=golf_new_data,
+    seed=SEED,
+    show_progress=False,
+    inits=cmdstan_inits(pth_11),
+)
+```
+
+Here is the result:
+
+```{python}
+dt_11 = az.from_cmdstanpy(fit_11)
+az.summary(dt_11, var_names=["sigma_angle", "sigma_distance", "distance_tolerance", "overshot", "epsilon"])
+```
+
+We graph the new data and the fitted model 11:
+
+```{python}
+#| label: fig-golf-fit-11
+
+hats = az.mean(dt_11, round_to="None")
+sigma_angle_hat = hats["sigma_angle"].item()
+sigma_distance_hat = hats["sigma_distance"].item()
+distance_tolerance_11 = hats["distance_tolerance"].item()
+overshot_11 = hats["overshot"].item()
+ax = plot_common(title="Checking model fit", plot_observations=False)
+ax.set_xlim(0, 1.1 * golf_new["x"].max())
+x_grid = np.arange(R - r, 1.1 * golf_new["x"].max(), 0.01)
+p_angle_grid = 2 * pz.Normal(0, 1).cdf(np.arcsin((R - r) / x_grid) / sigma_angle_hat) - 1
+p_distance_grid = pz.Normal(0, 1).cdf((distance_tolerance_11 - overshot_11) / ((x_grid + overshot_11) * sigma_distance_hat)) - \
+    pz.Normal(0, 1).cdf(-overshot_11 / ((x_grid + overshot_11) * sigma_distance_hat))
+p_grid = p_angle_grid * p_distance_grid
+ax.plot(np.concatenate([[0, R - r], x_grid]),
+        np.concatenate([[1, 1], p_grid]), color="C8")
+ax.scatter(golf_new["x"], golf_new["y"] / golf_new["n"], color="C8", zorder=3)
+```
+
+```{python}
+#| label: fig-golf-res-11
+
+posterior_mean_residual_11 = az.mean(dt_11.posterior["residual"], round_to="None")
+_, ax = plt.subplots()
+ax.set_xlim(0, 1.1 * golf_new["x"].max())
+ax.set_xlabel("Distance from hole (feet)")
+ax.set_ylabel("y/n - fitted E(y/n)")
+ax.set_title("Residuals from fitted model")
+ax.axhline(0, color="gray", linestyle="--")
+ax.plot(golf_new["x"], posterior_mean_residual_11)
+```
+
+Finally we compare the expected predictive performances
+
+```{python}
+#| results: hide
+gq_ll_c = CmdStanModel(stan_file=str("golf_log_lik_constant_errors.stan"))
+loo_11 = compute_loo(fit_11, gq_ll_c, golf_new_data)
+```
+
+We compare the predictive performance of the varying errors and
+constant error models.
+
+```{python}
+df_compare = az.compare(
+    {
+        "Model 8 with varying error terms": loo_8,
+        "Model 11 with constant error term": loo_11,
+    }
+)
+df_compare
+```
+
+The constant error term is clearly worse with respect to expected
+log predictive probability, but that difference is small enough
+that it is difficult to see when plotting the prediction on top of
+the data.
+
+If we examine the predictive performance difference at different
+distances, we see that the constant error model tends to be worse
+specifically at short distances.
+
+```{python}
+pointwise_elpd_diff = loo_8.elpd_i - loo_11.elpd_i
+_, ax = plt.subplots()
+ax.scatter(golf_new["x"], pointwise_elpd_diff)
+ax.set(xlim=(0, 1.1 * golf_new["x"].max()),
+       xlabel="Distance from hole (feet)",
+       ylabel="pointwise elpd_loo difference",
+       title="Predictive performance difference Model 8 vs Model 11")
+ax.axhline(0, color="gray", linestyle="--")
+```
 
 <br />
 
