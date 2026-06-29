@@ -449,6 +449,12 @@ window.Quarto = {
  <span class="menu-text">Ch 25: Model building and expansion: Golf putting</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../variable_selection/variable_selection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ch 28: Models for regression coefficients and variable selection: Student grades</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -496,7 +502,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2026-06-26</p>
+      <p class="date-modified">2026-06-29</p>
     </div>
   </div>
     
@@ -604,7 +610,7 @@ y_i = ae^{-bx_i} + \epsilon_i, \text{ for } i=1,\dots,N,
 </figure>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-true-and-simulated-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="611">
+<div id="fig-true-and-simulated-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="411">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-true-and-simulated-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="declining_exponentials_files/figure-html/fig-true-and-simulated-output-2.png" id="fig-true-and-simulated-2" data-ref-parent="fig-true-and-simulated" width="611" height="411" class="figure-img">
@@ -825,7 +831,7 @@ Figure&nbsp;1
 </figure>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-10-data-points-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="611">
+<div id="fig-10-data-points-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="411">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-10-data-points-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="declining_exponentials_files/figure-html/fig-10-data-points-output-2.png" id="fig-10-data-points-2" data-ref-parent="fig-10-data-points" width="611" height="411" class="figure-img">
@@ -1051,7 +1057,7 @@ y_i = ae^{-bx_i} \cdot \epsilon_i, \text{ for } i=1,\dots,N\\
 </figure>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-positive-true-and-simulated-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="611">
+<div id="fig-positive-true-and-simulated-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="411">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-positive-true-and-simulated-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="declining_exponentials_files/figure-html/fig-positive-true-and-simulated-output-2.png" id="fig-positive-true-and-simulated-2" data-ref-parent="fig-positive-true-and-simulated" width="611" height="411" class="figure-img">
@@ -1207,7 +1213,7 @@ y_i = (a_1e^{-b_1x_i} + a_2e^{-b_2x_i}) \cdot \epsilon_i, \text{ for } i=1,\dots
 </figure>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-sumexp-true-and-simulated-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="611">
+<div id="fig-sumexp-true-and-simulated-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="411">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sumexp-true-and-simulated-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="declining_exponentials_files/figure-html/fig-sumexp-true-and-simulated-output-2.png" id="fig-sumexp-true-and-simulated-2" data-ref-parent="fig-sumexp-true-and-simulated" width="611" height="411" class="figure-img">
@@ -1451,7 +1457,7 @@ Figure&nbsp;4
 </figure>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-sumexp-true-model-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="611">
+<div id="fig-sumexp-true-model-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="411">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sumexp-true-model-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="declining_exponentials_files/figure-html/fig-sumexp-true-model-output-2.png" id="fig-sumexp-true-model-2" data-ref-parent="fig-sumexp-true-model" width="611" height="411" class="figure-img">
@@ -1486,7 +1492,7 @@ Figure&nbsp;5
 <span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">6.9</span>, <span class="fl">0.5</span>, <span class="st">"y = 1.0*exp(-0.1x) + 0.8*exp(-0.2x)"</span>, ha<span class="op">=</span><span class="st">"right"</span>, color<span class="op">=</span><span class="st">"C0"</span>, fontdict<span class="op">=</span>{<span class="st">"weight"</span>: <span class="st">"bold"</span>})<span class="op">;</span></span>
 <span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">6.1</span>, <span class="fl">1.4</span>, <span class="st">"y = 1.8*exp(-0.135x)"</span>, ha<span class="op">=</span><span class="st">"right"</span>, color<span class="op">=</span><span class="st">"C1"</span>, fontdict<span class="op">=</span>{<span class="st">"weight"</span>: <span class="st">"bold"</span>})<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-sumexp-true-and-one-component" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="611">
+<div id="fig-sumexp-true-and-one-component" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="411">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sumexp-true-and-one-component-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="declining_exponentials_files/figure-html/fig-sumexp-true-and-one-component-output-1.png" id="fig-sumexp-true-and-one-component" width="611" height="411" class="figure-img">

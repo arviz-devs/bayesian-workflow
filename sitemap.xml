@@ -1,39 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/golf/golf.html</loc>
-    <lastmod>2026-06-26T06:20:23.054Z</lastmod>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/variable_selection/variable_selection.html</loc>
+    <lastmod>2026-06-29T17:17:49.041Z</lastmod>
   </url>
   <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/cat_adoptions/cat_adoptions.html</loc>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/roaches/roaches.html</loc>
+    <lastmod>2026-06-25T14:54:23.388Z</lastmod>
+  </url>
+  <url>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/dogs/dogs_stan.html</loc>
     <lastmod>2026-06-25T14:54:23.391Z</lastmod>
   </url>
   <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/coronavirus/coronavirus.html</loc>
-    <lastmod>2026-06-25T14:54:23.389Z</lastmod>
-  </url>
-  <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/declining_exponentials/declining_exponentials.html</loc>
-    <lastmod>2026-06-25T14:54:23.389Z</lastmod>
-  </url>
-  <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/digits/digits.html</loc>
-    <lastmod>2026-06-25T14:54:23.391Z</lastmod>
-  </url>
-  <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/multiple_choice/multiple_choice.html</loc>
-    <lastmod>2026-06-25T14:54:23.391Z</lastmod>
-  </url>
-  <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/index.html</loc>
-    <lastmod>2026-06-25T12:47:47.085Z</lastmod>
-  </url>
-  <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/bioassay/bioassay.html</loc>
-    <lastmod>2026-06-25T14:54:23.394Z</lastmod>
-  </url>
-  <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/loo_comparison/loo_comparison.html</loc>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/movies/movies.html</loc>
     <lastmod>2026-06-25T14:54:23.389Z</lastmod>
   </url>
   <url>
@@ -41,15 +21,39 @@
     <lastmod>2026-06-25T14:54:23.389Z</lastmod>
   </url>
   <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/movies/movies.html</loc>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/loo_comparison/loo_comparison.html</loc>
     <lastmod>2026-06-25T14:54:23.389Z</lastmod>
   </url>
   <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/dogs/dogs_stan.html</loc>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/bioassay/bioassay.html</loc>
+    <lastmod>2026-06-25T14:54:23.394Z</lastmod>
+  </url>
+  <url>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/index.html</loc>
+    <lastmod>2026-06-25T12:47:47.085Z</lastmod>
+  </url>
+  <url>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/multiple_choice/multiple_choice.html</loc>
     <lastmod>2026-06-25T14:54:23.391Z</lastmod>
   </url>
   <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/roaches/roaches.html</loc>
-    <lastmod>2026-06-25T14:54:23.388Z</lastmod>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/digits/digits.html</loc>
+    <lastmod>2026-06-25T14:54:23.391Z</lastmod>
+  </url>
+  <url>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/declining_exponentials/declining_exponentials.html</loc>
+    <lastmod>2026-06-25T14:54:23.389Z</lastmod>
+  </url>
+  <url>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/coronavirus/coronavirus.html</loc>
+    <lastmod>2026-06-25T14:54:23.389Z</lastmod>
+  </url>
+  <url>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/cat_adoptions/cat_adoptions.html</loc>
+    <lastmod>2026-06-25T14:54:23.391Z</lastmod>
+  </url>
+  <url>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/golf/golf.html</loc>
+    <lastmod>2026-06-26T06:20:23.054Z</lastmod>
   </url>
 </urlset>
