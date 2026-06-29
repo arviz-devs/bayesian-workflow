@@ -1,5 +1,6 @@
 ---
 title: "Student grades and variable selection"
+image: ../social_cards/variable_selection.png
 author: "Aki Vehtari"
 date: 2023-12-14
 date-modified: today
@@ -81,6 +82,8 @@ az.rcParams["stats.ci_prob"] = 0.95
 plt.rcParams["figure.dpi"] = 100
 
 SEED = 7412
+
+bambi_kwargs = dict(random_seed=SEED, idata_kwargs={"log_likelihood": True})
 ```
 
 ## Data
@@ -174,12 +177,13 @@ studentstd_Gpor
 ## Default priors on coefficients
 
 Before variable selection, we want to build a good model with all covariates. We first illustrate that very wide priors may be bad when we have many predictors. By default Bambi uses very weakly informative priors on regression coefficients. We also ask Bambi to compute the log-likelihood as we will need it to compute LOO-$R^2$ later. We also use `predict` to compute the posterior distribution of `mu`, we need this to compute Bayesian-$R^2$ later.
+
 ```{python}
 #| label: fitm_u
 
 fitm_u = bmb.Model("Gmat ~ " + " + ".join(predictors), studentstd_Gmat)
-fitm_u_idata = fitm_u.fit(random_seed=SEED, idata_kwargs={"log_likelihood": True})
-fitm_u.predict(fitm_u_idata, inplace=True)
+fitm_u_idata = fitm_u.fit(**bambi_kwargs)
+fitm_u.predict(fitm_u_idata, inplace=True, kind="response", random_seed=SEED)
 ```
 
 If we compare bayesian-$R^2$ and LOO-$R^2$, we see that the bayesian-$R^2$ is much higher, which means that the posterior estimate for the residual variance is strongly underestimated and the model has overfitted the data.
@@ -290,14 +294,15 @@ formula = "Gmat ~ " + " + ".join(predictors)
 mod_n1 = bmb.Model(
     formula,
     data=studentstd_Gmat,
-    priors={"common": bmb.Prior("Normal", mu=0, sigma=2.5)},
+    priors={"common": bmb.Prior("Normal", mu=0, sigma=2.5),
+            "Intercept": bmb.Prior("Normal", mu=0, sigma=1),
+    }
+
 )
 
-mod_n1_res = mod_n1.fit(
-    draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True}
-)
-mod_n1.predict(mod_n1_res, kind="response", random_seed=42)
-mod_n1p_res = mod_n1.prior_predictive(draws=4000, random_seed=42)
+mod_n1_res = mod_n1.fit(draws=4000, tune=1000, **bambi_kwargs)
+mod_n1.predict(mod_n1_res, kind="response", random_seed=SEED)
+mod_n1p_res = mod_n1.prior_predictive(draws=4000, random_seed=SEED)
 
 
 # Sample from truncated prior
@@ -313,13 +318,14 @@ mod_n1pt = bmb.Model(
     data=studentstd_Gmat,
     priors={
         "common": bmb.Prior("Normal", mu=0, sigma=2.5),
+        "Intercept": bmb.Prior("Normal", mu=0, sigma=1),
         "sigma": bmb.Prior(
             "TruncatedStudentT", nu=3, mu=0, sigma=3, lower=5, dist=TruncatedStudentT
         ),
     },
 )
 mod_n1pt.build()
-mod_n1pt_res = mod_n1pt.prior_predictive(draws=4000, random_seed=42)
+mod_n1pt_res = mod_n1pt.prior_predictive(draws=4000, random_seed=SEED)
 ```
 
 ```{python}
@@ -328,18 +334,17 @@ mod_n1pt_res = mod_n1pt.prior_predictive(draws=4000, random_seed=42)
 
 # normal(0, sqrt(0.3/26)*sd(y))
 scale_b = np.sqrt(0.3 / 26) * studentstd_Gmat["Gmat"].std()
-# Sample from posterior with normal(0, 2.5) prior
 mod_n2 = bmb.Model(
     formula,
     data=studentstd_Gmat,
-    priors={"common": bmb.Prior("Normal", mu=0, sigma=scale_b)},
+    priors={"common": bmb.Prior("Normal", mu=0, sigma=scale_b),
+            "Intercept": bmb.Prior("Normal", mu=0, sigma=1),
+            },
 )
 
-mod_n2_res = mod_n2.fit(
-    draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True}
-)
-mod_n2.predict(mod_n2_res, kind="response", random_seed=42)
-mod_n2p_res = mod_n2.prior_predictive(draws=4000, random_seed=42)
+mod_n2_res = mod_n2.fit(draws=4000, tune=1000, **bambi_kwargs)
+mod_n2.predict(mod_n2_res, kind="response", random_seed=SEED)
+mod_n2p_res = mod_n2.prior_predictive(draws=4000, random_seed=SEED)
 ```
 
 ```{python}
@@ -359,9 +364,9 @@ def horseshoe_regularized(
     name,
     scale_global,
     scale_slab,
-    nu_global=4,  # nu_global in Stan
-    nu_local=1,  # nu_local in Stan
-    slab_df=4,  # slab_df in Stan
+    nu_global=1,
+    nu_local=1,
+    slab_df=1,
     shape=None,
     dims=None,
 ):
@@ -398,32 +403,77 @@ mod_hs = bmb.Model(
             scale_slab=scale_slab,
             dist=horseshoe_regularized,
         ),
+        "Intercept": bmb.Prior("Normal", mu=0, sigma=1),
     },
 )
-mod_hs_res = mod_hs.fit(
-    draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True}
-)
-mod_hs.predict(mod_hs_res, kind="response", random_seed=42)
-mod_hsp_res = mod_hs.prior_predictive(draws=4000, random_seed=42)
+mod_hs_res = mod_hs.fit(draws=4000, tune=1000, **bambi_kwargs)
+mod_hs.predict(mod_hs_res, kind="response", random_seed=SEED)
+mod_hsp_res = mod_hs.prior_predictive(draws=4000, random_seed=SEED)
 ```
 
 ```{python}
 #| label: fitm
+# Beta(mean_R2 * prec_R2, (1-mean_R2) * prec_R2) hyperparameters for the R^2 prior.
+# We adjust the prior about how much variance the model explains.
+# in terms of it mean `mean_R2` and it precission `prec_R2`
+mean_R2 = 1/3
+prec_R2 = 3
+cons_D2 = 0.5  # Dirichlet concentration; smaller -> more sparsity-inducing
 
-# R2D2 - using a scaled approach
-# Since Bambi doesn't have R2D2, we will use a placeholder
+def make_r2d2(p_total, mean_R2, prec_R2, cons_D2, group_name="common"):
+    """
+    Returns a dist-callable for bmb.Prior(dist=...).
+
+    Bambi calls this once PER PREDICTOR COLUMN so the shared R2D2 terms (R2, tau2 and phi) 
+    are built only on the first call for a given PyMC model and every call after that we
+    just index into the shared `phi` for its own coefficient. 
+    `sigma` is available because Bambi builds auxiliary parameters before `common` terms.
+    We use a cache keyed by the PyMC model id to store the shared terms so that we can use this 
+    function in multiple models.
+    """
+    cache = {}
+
+    def r2d2(name, dims=None, shape=None):
+        model = pm.modelcontext(None)
+        key = id(model)
+
+        if key not in cache:
+            sigma = model["sigma"]
+            coord_name = f"{group_name}_coef"
+            if coord_name not in model.coords:
+                model.add_coords({coord_name: np.arange(p_total)})
+            R2 = pm.Beta(
+                f"{group_name}_R2", alpha=mean_R2 * prec_R2, beta=(1 - mean_R2) * prec_R2
+            )
+            tau2 = pm.Deterministic(f"{group_name}_tau2", sigma**2 * R2 / (1 - R2))
+            phi = pm.Dirichlet(
+                f"{group_name}_phi", a=cons_D2 * np.ones(p_total), dims=coord_name
+            )
+            cache[key] = {"tau2": tau2, "phi": phi, "idx": 0}
+
+        state = cache[key]
+        j = state["idx"]
+        state["idx"] += 1
+
+        z = pm.Normal(f"{name}_z", 0.0, 1.0)
+        beta = pm.Deterministic(name, z * pm.math.sqrt(state["phi"][j] * state["tau2"]))
+        return beta
+
+    return r2d2
+
+r2d2_fn = make_r2d2(p, mean_R2, prec_R2, cons_D2)
+
 mod_r2d2 = bmb.Model(
     formula,
     data=studentstd_Gmat,
     priors={
-        "common": bmb.Prior("Normal", mu=0, sigma=0.5)  # Narrow normal as placeholder
+        "common": bmb.Prior("r2d2", dist=r2d2_fn),
+        "Intercept": bmb.Prior("Normal", mu=0, sigma=1),
     },
 )
-mod_r2d2_res = mod_r2d2.fit(
-    draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True}
-)
-mod_r2d2.predict(mod_r2d2_res, kind="response", random_seed=42)
-mod_r2d2p_res = mod_r2d2.prior_predictive(draws=4000, random_seed=42)
+mod_r2d2_res = mod_r2d2.fit(draws=4000, tune=1000, **bambi_kwargs)
+mod_r2d2.predict(mod_r2d2_res, kind="response", random_seed=SEED)
+mod_r2d2p_res = mod_r2d2.prior_predictive(draws=4000, random_seed=SEED)
 ```
 
 ``
@@ -601,7 +651,6 @@ to infer the predictor relevance from the marginal posteriors.
 
 ```{python}
 #| label: fig-fitm-mcmc_scatter-Fedu-Medu
-
 az.plot_pair(mod_r2d2_res, var_names=["Fedu", "Medu"])
 ```
 
@@ -639,15 +688,17 @@ We use projection predictive variable selection implemented in `kulprit` to find
 
 ### Math exam score
 
-We start with doing fast PSIS-LOO-CV only for the full data search path.
+Currently Kulprit does not support models with paramters that depend on other parameters, so we use the model with scaled normal prior for the projection predictive variable selection. But the model with R2D2 prior is used as the reference model (that's why we compute the ELPD from it, and we pass the InferenceData from that model's fit).
 
 ```{python}
-ppi = kpt.ProjectionPredictive(mod_r2d2, mod_r2d2_res)
+# The predictions (in the InferenceData) and the ELPD come from the reference model (R2D2 prior)
+# and we use `mod_n2` to specify the covariates to be used in the search.
+ref_idata = az.loo(mod_r2d2_res, pointwise=True)
+ppi = kpt.ProjectionPredictive(mod_n2, mod_r2d2_res, ref_elpd=ref_idata)
 ppi.project(early_stop=10)
 ```
 
-The following plot shows the relevance order of the predictors and estimated predictive performance given those variables. As the search can overfit and we didn’t cross-validate the search, the performance estimates can go above the reference model performance. However, this plot helps as to see that 10 or fewer predictors would be sufficient.
-
+The following plot shows the relevance order of the predictors and estimated predictive performance given those variables. To speed up the search we stop the search after 10 predictors have been added. In practice, if we don't have a strong prior belief about the number of relevant predictors, we could continue the search until all predictors have been added.
 
 ```{python}
 cmp_df = ppi.compare(min_model_size=1)
@@ -657,13 +708,14 @@ kpt.plot_compare(cmp_df);
 `kulprit` can also provide suggestion for the sufficient model size.
 
 ```{python}
-ppi.select()
+selected_1 = ppi.select()
+selected_1
 ```
 
 Check the projected posterior for the selected model. The marginals of the projected posterior are all clearly away from 0.
 
 ```{python}
-pc = kpt.plot_forest(ppi, submodels=[4])
+pc = kpt.plot_forest(ppi, submodels=[selected_1.size])
 pc.coords = {"column": "forest"}
 az.add_lines(pc, 0)
 ```
@@ -672,22 +724,22 @@ az.add_lines(pc, 0)
 
 We repeat the same, but predicting grade for Portuguese instead of mathematics
 
-Fit a model with R2D2 prior with mean 1/3 and precision 3.
-
 ```{python}
 formula = "Gpor ~ " + " + ".join(predictors)
+r2d2_fn = make_r2d2(p, mean_R2, prec_R2, cons_D2)
+
 mod_r2d2_por = bmb.Model(
     formula,
     data=student_Gpor,
     dropna=True,
     priors={
-        "common": bmb.Prior("Normal", mu=0, sigma=0.5)  # Narrow normal as placeholder
+        "common": bmb.Prior("r2d2", dist=r2d2_fn),
+        "Intercept": bmb.Prior("Normal", mu=0, sigma=1),
     },
 )
-mod_r2d2_por_res = mod_r2d2_por.fit(
-    draws=4000, tune=1000, random_seed=42, idata_kwargs={"log_likelihood": True}
-)
-mod_r2d2_por.predict(mod_r2d2_por_res, kind="response", random_seed=42)
+
+mod_r2d2_por_res = mod_r2d2_por.fit(draws=4000, tune=1000, **bambi_kwargs)
+mod_r2d2_por.predict(mod_r2d2_por_res, kind="response", random_seed=SEED)
 ```
 
 Compare bayesian-$R^2$ and LOO-$R^2$. We see that Portuguese grade is easier to predict given the predictors (but there is still a lot of unexplained variance).
@@ -715,12 +767,23 @@ az.add_lines(pc, 0)
 We use projection predictive variable selection.
 
 ```{python}
-ppi_por = kpt.ProjectionPredictive(mod_r2d2_por, mod_r2d2_por_res)
+formula = "Gpor ~ " + " + ".join(predictors)
+
+mod_por = bmb.Model(
+    formula,
+    data=student_Gpor,
+    dropna=True,
+)
+
+mod_por.build()
+
+ref_idata = az.loo(mod_r2d2_por_res, pointwise=True)
+ppi_por = kpt.ProjectionPredictive(mod_por, mod_r2d2_por_res, ref_elpd=ref_idata)
 ppi_por.project(early_stop=10)
 ```
 
 
-The following plot shows the relevance order of the predictors and estimated predictive performance given those variables. As there is some overfitting in the search and we didn’t cross-validate the search, the performance estimates scan go above the reference model performance. However, this plot helps as to see that 10 or fewer predictors would be sufficient.
+The following plot shows the relevance order of the predictors and estimated predictive performance given those variables.
 
 ```{python}
 cmp_df_por = ppi_por.compare(min_model_size=1)
@@ -730,13 +793,14 @@ kpt.plot_compare(cmp_df_por);
 `kulprit` can also provide suggestion for the sufficient model size.
 
 ```{python}
-ppi_por.select()
+selected_2 = ppi_por.select()
+selected_2
 ```
 
 Check the projected posterior for the selected model.
 
 ```{python}
-pc_por = kpt.plot_forest(ppi_por, submodels=[8])
+pc_por = kpt.plot_forest(ppi_por, submodels=[selected_2.size])
 pc_por.coords = {"column": "forest"}
 az.add_lines(pc_por, 0)
 ```
@@ -744,7 +808,7 @@ az.add_lines(pc_por, 0)
 
 ### Using the selected model
 
-For further predictions we can use the projected draws. Due to how different packages work, sometimes it can be easier to rerun MCMC conditionally on the selected variables. This gives a slightly different result, but when the reference model has been good the difference tends to be small, and the main benefit form using `kulprit` is still that the selection process itself has not caused overfitting and selection of spurious covariates.
+For further predictions we can use the projected draws. Due to how different packages work, sometimes it can be easier to rerun MCMC conditionally on the selected variables. This gives a slightly different result, but when the reference model has been good the difference tends to be small, and the main benefit form using `kulprit` is still that the selection process itself has not caused overfitting and selection of spurious covariates. 
 
 ## References {.unnumbered}
 

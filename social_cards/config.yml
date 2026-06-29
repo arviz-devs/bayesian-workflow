@@ -63,3 +63,8 @@ pages:
     dir: roaches
     page: roaches
     figure: fig-ppc_pit-nb-output-1.png
+
+  variable_selection:
+    dir: variable_selection
+    page: variable_selection
+    figure: cell-32-output-1.png

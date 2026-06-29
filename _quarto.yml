@@ -25,7 +25,7 @@ project:
     - golf/golf.qmd
     # - sharks/sharks.qmd
     # - birthdays/birthdays.qmd
-    # - variable_selection/variable_selection.qmd
+    - variable_selection/variable_selection.qmd
     # - park_rule/park_rule.qmd
     # - planetary_motion/planetary_motion.qmd
     # - sbc/sbc.qmd
@@ -88,8 +88,8 @@ website:
       # #   href: sharks/sharks.html
       # # - text: "Ch 27: Model building: Time-series decomposition for birthdays"
       # #   href: birthdays/birthdays.html
-      # - text: "Ch 28: Models for regression coefficients and variable selection: Student grades"
-      #   href: variable_selection/variable_selection.html
+      - text: "Ch 28: Models for regression coefficients and variable selection: Student grades"
+        href: variable_selection/variable_selection.html
       # # - text: "Ch 29: Sampling problems with latent variables: No vehicles in the park"
       # #   href: park_rule/park_rule.html
       # # - text: "Ch 30: Challenge of multimodality: Differential equation for planetary motion"
