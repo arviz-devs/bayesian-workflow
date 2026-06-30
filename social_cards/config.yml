@@ -49,6 +49,11 @@ pages:
     page: coronavirus
     figure: fig-specificity_priorsense_1-output-1.png
 
+  timeseries:
+    dir: timeseries
+    page: timeseries
+    figure: fig-series_1-output-1.png
+
   dogs_stan:
     dir: dogs
     page: dogs_stan
