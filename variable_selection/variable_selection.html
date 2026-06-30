@@ -441,6 +441,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../nabiximols/nabiximols.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ch 18: Predictive model checking and comparison: Clinical trial</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../coronavirus/coronavirus.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ch 19: Building up to a hierarchical model: Coronavirus testing</span></a>
   </div>
@@ -714,7 +720,7 @@ Portuguese students: 657
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>ax2.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Median Portuguese exam score"</span>, yticks<span class="op">=</span>[])</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>ax2.spines[[<span class="st">"top"</span>, <span class="st">"right"</span>]].set_visible(<span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-data-histograms" class="quarto-float quarto-figure quarto-figure-center anchored" width="1011" height="311">
+<div id="fig-data-histograms" class="quarto-float quarto-figure quarto-figure-center anchored" height="311" width="1011">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-histograms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="variable_selection_files/figure-html/fig-data-histograms-output-1.png" id="fig-data-histograms" width="1011" height="311" class="figure-img">
@@ -1090,7 +1096,7 @@ NUTS: [sigma, Intercept, school, sex, age, address, famsize, Pstatus, Medu, Fedu
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>pc.coords <span class="op">=</span> {<span class="st">"column"</span>: <span class="st">"ridge"</span>}</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-fitmu-mcmc_areas" class="quarto-float quarto-figure quarto-figure-center anchored" width="1211" height="1108">
+<div id="fig-fitmu-mcmc_areas" class="quarto-float quarto-figure quarto-figure-center anchored" height="1108" width="1211">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fitmu-mcmc_areas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="variable_selection_files/figure-html/fig-fitmu-mcmc_areas-output-1.png" id="fig-fitmu-mcmc_areas" width="1211" height="1108" class="figure-img">
@@ -1563,7 +1569,7 @@ Sampling: [Dalc_z, Fedu_z, Gmat, Intercept, Medu_z, Pstatus_z, Walc_z, absences_
 <span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>pc.coords <span class="op">=</span> {<span class="st">"column"</span>: <span class="st">"ridge"</span>}</span>
 <span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-fitm-mcmc_areas" class="quarto-float quarto-figure quarto-figure-center anchored" width="1211" height="1108">
+<div id="fig-fitm-mcmc_areas" class="quarto-float quarto-figure quarto-figure-center anchored" height="1108" width="1211">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fitm-mcmc_areas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="variable_selection_files/figure-html/fig-fitm-mcmc_areas-output-1.png" id="fig-fitm-mcmc_areas" width="1211" height="1108" class="figure-img">
@@ -1579,7 +1585,7 @@ Figure&nbsp;3
 <div id="cell-fig-fitm-mcmc_scatter-Fedu-Medu" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>az.plot_pair(mod_r2d2_res, var_names<span class="op">=</span>[<span class="st">"Fedu"</span>, <span class="st">"Medu"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-fitm-mcmc_scatter-fedu-medu" class="quarto-float quarto-figure quarto-figure-center anchored" width="1211" height="430">
+<div id="fig-fitm-mcmc_scatter-fedu-medu" class="quarto-float quarto-figure quarto-figure-center anchored" height="430" width="1211">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fitm-mcmc_scatter-fedu-medu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="variable_selection_files/figure-html/fig-fitm-mcmc_scatter-fedu-medu-output-1.png" id="fig-fitm-mcmc_scatter-fedu-medu" width="1211" height="430" class="figure-img">
@@ -1598,7 +1604,7 @@ Figure&nbsp;4
 <div id="cell-fig-fitm-ppc-hist" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_dist(mod_r2d2_res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-fitm-ppc-hist" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-fitm-ppc-hist" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fitm-ppc-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="variable_selection_files/figure-html/fig-fitm-ppc-hist-output-1.png" id="fig-fitm-ppc-hist" width="611" height="279" class="figure-img">
@@ -1614,7 +1620,7 @@ Figure&nbsp;5
 <div id="cell-fig-fitm-ppc-loo" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(mod_r2d2_res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-fitm-ppc-loo" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-fitm-ppc-loo" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fitm-ppc-loo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="variable_selection_files/figure-html/fig-fitm-ppc-loo-output-1.png" id="fig-fitm-ppc-loo" width="611" height="279" class="figure-img">
