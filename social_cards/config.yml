@@ -44,6 +44,11 @@ pages:
     page: movies
     figure: fig-movies_5-output-1.png
 
+  nabiximols:
+    dir: nabiximols
+    page: nabiximols
+    figure: fig-calibration-28-betabinomial-output-1.png
+
   coronavirus:
     dir: coronavirus
     page: coronavirus

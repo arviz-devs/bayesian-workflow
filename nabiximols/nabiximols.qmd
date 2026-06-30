@@ -1,5 +1,6 @@
 ---
 title: "Nabiximols treatment efficiency"
+image: ../social_cards/nabiximols.png
 author: "Aki Vehtari"
 date: 2024-02-23
 date-modified: today
@@ -129,7 +130,7 @@ for i, group in enumerate(['placebo', 'nabiximols']):
         if i == 0:
              ax.set_title(f'week {week}')
 
-fig.supxlabel('cu')
+fig.supxlabel('cu');
 ```
 
 ## Initial models
@@ -583,15 +584,16 @@ Calibration check with reliability diagram for $0$ vs others
 
 ```{python}
 th = 0
-# NOTE: We are not using LOO here, compare to the original case study
 pp_binary = (idata_betabinomial.posterior_predictive["cu"] > th).astype(float)
 y_binary = (idata_betabinomial.observed_data["cu"] > th).astype(float)
 
-idata_binary = az.from_dict({
-    "posterior_predictive": {"cu": pp_binary},
-    "observed_data": {"cu": y_binary}
-})
-az.plot_ppc_pava(idata_binary, var_names="cu")
+# We need the log_likelihood and posterior groups for plot_loo_pava to work
+# So we create a copy and then update with the binary data
+idata_binary = idata_betabinomial.copy(deep=True)
+idata_binary["posterior_predictive"]["cu"] = pp_binary
+idata_binary["observed_data"]["cu"] = y_binary
+
+az.plot_loo_pava(idata_binary)
 ```
 
 Calibration check with reliability diagram for $28$ vs others
@@ -599,15 +601,14 @@ Calibration check with reliability diagram for $28$ vs others
 ```{python}
 #| label: fig-calibration-28-betabinomial
 th = 27
-# NOTE: We are not using LOO here, compare to the original case study
 pp_binary = (idata_betabinomial.posterior_predictive["cu"] > th).astype(float)
 y_binary = (idata_betabinomial.observed_data["cu"] > th).astype(float)
 
-idata_binary = az.from_dict({
-    "posterior_predictive": {"cu": pp_binary},
-    "observed_data": {"cu": y_binary}
-})
-az.plot_ppc_pava(idata_binary, var_names="cu")
+idata_binary = idata_betabinomial.copy(deep=True)
+idata_binary["posterior_predictive"]["cu"] = pp_binary
+idata_binary["observed_data"]["cu"] = y_binary
+
+az.plot_loo_pava(idata_binary)
 ```
 
 Although the red line did not completely stay within blue envelope,
@@ -623,7 +624,7 @@ prior-likelihood sensitivity analysis using powerscaling approach.
 #az.psense_summary(idata_betabinomial)
 ```
 
-# Alternative priors
+## Alternative priors
 
 However, I decided to try slightly wider priors, especially as the
 data seem to be quite informative
@@ -745,30 +746,28 @@ $28$ vs others look better than for the previous model.
 ```{python}
 #| label: fig-calibration-0-betabinomial2
 th = 0
-# NOTE: We are not using LOO here, compare to the original case study
-pp_binary = (idata_betabinomial2b.posterior_predictive["cu"] > th).astype(float)
-y_binary = (idata_betabinomial2b.observed_data["cu"] > th).astype(float)
+pp_binary2b = (idata_betabinomial2b.posterior_predictive["cu"] > th).astype(float)
+y_binary2b = (idata_betabinomial2b.observed_data["cu"] > th).astype(float)
 
-idata_binary = az.from_dict({
-    "posterior_predictive": {"cu": pp_binary},
-    "observed_data": {"cu": y_binary}
-})
-az.plot_ppc_pava(idata_binary, var_names="cu")
+idata_binary2b = idata_betabinomial2b.copy(deep=True)
+idata_binary2b["posterior_predictive"]["cu"] = pp_binary2b
+idata_binary2b["observed_data"]["cu"] = y_binary2b
+
+az.plot_loo_pava(idata_binary2b)
 
 ```
 
 ```{python}
 #| label: fig-calibration-28-betabinomial2
 th = 27
-# NOTE: We are not using LOO here, compare to the original case study
-pp_binary = (idata_betabinomial2b.posterior_predictive["cu"] > th).astype(float)
-y_binary = (idata_betabinomial2b.observed_data["cu"] > th).astype(float)
+pp_binary2b = (idata_betabinomial2b.posterior_predictive["cu"] > th).astype(float)
+y_binary2b = (idata_betabinomial2b.observed_data["cu"] > th).astype(float)
 
-idata_binary = az.from_dict({
-    "posterior_predictive": {"cu": pp_binary},
-    "observed_data": {"cu": y_binary}
-})
-az.plot_ppc_pava(idata_binary, var_names="cu")
+idata_binary2b = idata_betabinomial2b.copy(deep=True)
+idata_binary2b["posterior_predictive"]["cu"] = pp_binary2b
+idata_binary2b["observed_data"]["cu"] = y_binary2b
+
+az.plot_loo_pava(idata_binary2b)
 ```
 
 ## Treatment effect
@@ -975,11 +974,12 @@ Prior-likelihood sensitivity analysis using powerscaling approach for the treatm
 # We need to compute log_prior and then use psense_summary 
 ```
 
+The treatment effect posteriors are not sensitive to prior and are informed by the likelihood.
+
 ## Sensitivity to model choice
 
 Finally we check how much there is difference in the conclusions,
-if we had used the continuous normal model. We build normal model which matches
-the beta-binomial model structure.
+if we had used the continuous normal model. We build normal model which matches the beta-binomial model structure.
 
 ```{python}
 #| label: mod_normal2b
