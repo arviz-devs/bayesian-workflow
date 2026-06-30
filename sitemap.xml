@@ -13,7 +13,31 @@
     <lastmod>2026-06-25T14:54:23.391Z</lastmod>
   </url>
   <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/movies/movies.html</loc>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/coronavirus/coronavirus.html</loc>
+    <lastmod>2026-06-25T14:54:23.389Z</lastmod>
+  </url>
+  <url>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/declining_exponentials/declining_exponentials.html</loc>
+    <lastmod>2026-06-25T14:54:23.389Z</lastmod>
+  </url>
+  <url>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/digits/digits.html</loc>
+    <lastmod>2026-06-25T14:54:23.391Z</lastmod>
+  </url>
+  <url>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/multiple_choice/multiple_choice.html</loc>
+    <lastmod>2026-06-25T14:54:23.391Z</lastmod>
+  </url>
+  <url>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/index.html</loc>
+    <lastmod>2026-06-25T12:47:47.085Z</lastmod>
+  </url>
+  <url>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/bioassay/bioassay.html</loc>
+    <lastmod>2026-06-25T14:54:23.394Z</lastmod>
+  </url>
+  <url>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/loo_comparison/loo_comparison.html</loc>
     <lastmod>2026-06-25T14:54:23.389Z</lastmod>
   </url>
   <url>
@@ -21,32 +45,12 @@
     <lastmod>2026-06-25T14:54:23.389Z</lastmod>
   </url>
   <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/loo_comparison/loo_comparison.html</loc>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/movies/movies.html</loc>
     <lastmod>2026-06-25T14:54:23.389Z</lastmod>
   </url>
   <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/bioassay/bioassay.html</loc>
-    <lastmod>2026-06-25T14:54:23.394Z</lastmod>
-  </url>
-  <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/index.html</loc>
-    <lastmod>2026-06-25T12:47:47.085Z</lastmod>
-  </url>
-  <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/multiple_choice/multiple_choice.html</loc>
-    <lastmod>2026-06-25T14:54:23.391Z</lastmod>
-  </url>
-  <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/digits/digits.html</loc>
-    <lastmod>2026-06-25T14:54:23.391Z</lastmod>
-  </url>
-  <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/declining_exponentials/declining_exponentials.html</loc>
-    <lastmod>2026-06-25T14:54:23.389Z</lastmod>
-  </url>
-  <url>
-    <loc>https://arviz-devs.github.io/bayesian-workflow/coronavirus/coronavirus.html</loc>
-    <lastmod>2026-06-25T14:54:23.389Z</lastmod>
+    <loc>https://arviz-devs.github.io/bayesian-workflow/timeseries/timeseries.html</loc>
+    <lastmod>2026-06-30T06:29:32.356Z</lastmod>
   </url>
   <url>
     <loc>https://arviz-devs.github.io/bayesian-workflow/cat_adoptions/cat_adoptions.html</loc>
