@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://arviz-devs.github.io/bayesian-workflow/variable_selection/variable_selection.html</loc>
-    <lastmod>2026-06-29T17:17:49.041Z</lastmod>
+    <lastmod>2026-07-01T08:15:35.937Z</lastmod>
   </url>
   <url>
     <loc>https://arviz-devs.github.io/bayesian-workflow/roaches/roaches.html</loc>
@@ -50,7 +50,7 @@
   </url>
   <url>
     <loc>https://arviz-devs.github.io/bayesian-workflow/nabiximols/nabiximols.html</loc>
-    <lastmod>2026-07-01T07:51:22.809Z</lastmod>
+    <lastmod>2026-07-01T08:07:20.500Z</lastmod>
   </url>
   <url>
     <loc>https://arviz-devs.github.io/bayesian-workflow/timeseries/timeseries.html</loc>

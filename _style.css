@@ -30,3 +30,9 @@ div.sourceCode:has(> pre > code.sourceCode.stan) {
   box-shadow: none !important;
   padding: 0 !important;
 }
+
+.cell-output img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
