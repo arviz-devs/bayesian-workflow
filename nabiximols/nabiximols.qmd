@@ -39,9 +39,6 @@ how easy that discretization can be in a special case of counts.
 #| include: true
 #| cache: false
 from copy import deepcopy
-import warnings
-import sys
-sys.path.insert(0, '..')
 
 import arviz as az
 import bambi as bmb
@@ -547,7 +544,6 @@ posterior replicates.
 
 ```{python}
 #| label: fig-ppc_rootogram-betabinomial
-
 az.plot_ppc_rootogram(idata_betabinomial, yscale="linear");
 ```
 
@@ -620,14 +616,15 @@ The priors provided by Mills seems a bit narrow, so I do
 prior-likelihood sensitivity analysis using powerscaling approach.
 
 ```{python}
-#mod_betabinomial.compute_log_prior(idata_betabinomial, inplace=True)
-#az.psense_summary(idata_betabinomial)
+mod_betabinomial.compute_log_prior(idata_betabinomial)
+az.psense_summary(idata_betabinomial, var_names=["~mu", "~1|id"])
 ```
+
+There are prior-data conflicts for all global parameters. It is possible that the priors had been chosen based on substantial prior information and then the posterior should be influenced by the prior, too, and the conflict is not necessarily a problem.
 
 ## Alternative priors
 
-However, I decided to try slightly wider priors, especially as the
-data seem to be quite informative
+However, I decided to try  wider priors, especially as the data seem to be quite informative
 
 ```{python}
 #| label: mod_betabinomial2
@@ -637,19 +634,23 @@ mod_betabinomial2 = bmb.Model(
     cu_df,
     family="beta_binomial",
     priors={
-        "Intercept": bmb.Prior("Normal", mu=0, sigma=3),
-        "group": bmb.Prior("Normal", mu=0, sigma=3),
-        "week": bmb.Prior("Normal", mu=0, sigma=3),
-        "group:week": bmb.Prior("Normal", mu=0, sigma=3),
-        "1|id": bmb.Prior("Normal", mu=0, sigma=bmb.Prior("HalfCauchy", beta=2)),
+        "Intercept": bmb.Prior("Normal", mu=0, sigma=5),
+        "kappa": bmb.Prior("HalfCauchy", beta=2),
     }
 )
 mod_betabinomial2.set_alias({"p(cu, set)":"cu"})
-idata_betabinomial2 = mod_betabinomial2.fit(idata_kwargs={"log_likelihood": True}, random_seed=SEED)
+idata_betabinomial2 = mod_betabinomial2.fit(idata_kwargs={"log_likelihood": True}, random_seed=SEED, chains=1)
 ```
 
-We can also do LOO comparison, which indicates that the wider
-priors provide a tiny bit better predictive performance.
+There are no prior data conflicts.
+
+```{python}
+mod_betabinomial2.compute_log_prior(idata_betabinomial2)
+az.psense_summary(idata_betabinomial2, var_names=["~mu", "~1|id"])
+```
+
+
+We can also do LOO comparison, which indicates that the wider priors provide a better predictive performance.
 
 ```{python}
 az.compare({
@@ -970,8 +971,24 @@ Examining the prior and likelihood sensitivity of parameter posteriors is quick 
 Prior-likelihood sensitivity analysis using powerscaling approach for the treatment effect posteriors at weeks 4, 8, and 12
 
 ```{python}
-# TODO
-# We need to compute log_prior and then use psense_summary 
+# Compute log_prior for the model
+mod_betabinomial2b.compute_log_prior(idata_betabinomial2b)
+
+# Build a DataTree with the treatment effect posteriors and the model's
+# log_likelihood and log_prior groups, so psense_summary can compute the
+# prior/likelihood sensitivity of the treatment effects at weeks 4, 8, and 12.
+idata_trt = xr.DataTree.from_dict({
+    "posterior": xr.Dataset({
+        "week4": dicto_diff["week4"],
+        "week8": dicto_diff["week8"],
+        "week12": dicto_diff["week12"],
+    }),
+    "log_likelihood": idata_betabinomial2b.log_likelihood.to_dataset(),
+    "log_prior": idata_betabinomial2b.log_prior.to_dataset(),
+})
+
+az.plot_psense_dist(idata_trt)
+az.psense_summary(idata_trt)
 ```
 
 The treatment effect posteriors are not sensitive to prior and are informed by the likelihood.
