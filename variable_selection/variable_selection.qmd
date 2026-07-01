@@ -61,12 +61,6 @@ model comparison to identify the most relevant predictors.
 ```{python}
 #| label: setup
 #| include: true
-
-import warnings
-import sys
-
-sys.path.insert(0, "..")
-
 import arviz as az
 import bambi as bmb
 import kulprit as kpt
@@ -74,8 +68,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import pymc as pm
-
-warnings.filterwarnings("ignore", category=FutureWarning)
 
 az.style.use("arviz-variat")
 az.rcParams["stats.ci_prob"] = 0.95
@@ -136,9 +128,9 @@ npor = len(student_Gpor)
 
 
 print(f"Math students: {nmat}")
-print(student_Gmat.head(10))
+display(student_Gmat.head(10))
 print(f"\nPortuguese students: {npor}")
-print(student_Gpor.head(10))
+display(student_Gpor.head(10))
 ```
 
 The following plot shows the distributions of median math and Portuguese exam scores for each student.
@@ -184,6 +176,7 @@ Before variable selection, we want to build a good model with all covariates. We
 fitm_u = bmb.Model("Gmat ~ " + " + ".join(predictors), studentstd_Gmat)
 fitm_u_idata = fitm_u.fit(**bambi_kwargs)
 fitm_u.predict(fitm_u_idata, inplace=True, kind="response", random_seed=SEED)
+fitm_u
 ```
 
 If we compare bayesian-$R^2$ and LOO-$R^2$, we see that the bayesian-$R^2$ is much higher, which means that the posterior estimate for the residual variance is strongly underestimated and the model has overfitted the data.
@@ -277,7 +270,7 @@ different priors for coefficients:
    coefficients. The R2D2 prior is predictively consistent, so that
    the prior on $R^2$ stays constant as the number of predictors
    increases. We assign the R2D2 prior with mean 1/3 and precision
-   3, which corresponds to the $\Beta(1,2)$ distribution on $R^2$
+   3, which corresponds to the $\text{Beta}(1,2)$ distribution on $R^2$
    implying that higher $R^2$ values are less likely. We set the
    concentration parameter to 1/2, which implies we assume some of
    the coefficients can be big and some small. R2D2 prior implementation
