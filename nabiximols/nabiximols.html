@@ -542,7 +542,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2026-07-01</p>
+      <p class="date-modified">2026-07-02</p>
     </div>
   </div>
     
@@ -587,7 +587,7 @@ window.Quarto = {
 <p>Participants received 12-week treatment involving weekly clinical reviews, structured counseling, and flexible medication doses—up to 32 sprays daily (tetrahydrocannabinol, 86.4 mg, and cannabidiol, 80 mg), dispensed weekly.</p>
 </blockquote>
 <p>The number of cannabis used days (<code>cu</code>) was for previous <span class="math inline">\(28\)</span> days (<code>set</code>) asked after 0, 4, 8, and 12 weeks (<code>week</code> as a factor).</p>
-<div id="420c4baf" class="cell" data-execution_count="2">
+<div id="a2d808d1" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>id_data <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">11</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">13</span>, <span class="dv">14</span>, <span class="dv">15</span>, <span class="dv">16</span>, <span class="dv">16</span>, <span class="dv">17</span>, <span class="dv">18</span>, <span class="dv">18</span>, <span class="dv">18</span>, <span class="dv">18</span>, <span class="dv">19</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">21</span>, <span class="dv">21</span>, <span class="dv">21</span>, <span class="dv">21</span>, <span class="dv">22</span>, <span class="dv">22</span>, <span class="dv">23</span>, <span class="dv">23</span>, <span class="dv">23</span>, <span class="dv">24</span>, <span class="dv">24</span>, <span class="dv">24</span>, <span class="dv">24</span>, <span class="dv">25</span>, <span class="dv">25</span>, <span class="dv">25</span>, <span class="dv">25</span>, <span class="dv">26</span>, <span class="dv">27</span>, <span class="dv">27</span>, <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">29</span>, <span class="dv">30</span>, <span class="dv">30</span>, <span class="dv">30</span>, <span class="dv">30</span>, <span class="dv">31</span>, <span class="dv">31</span>, <span class="dv">32</span>, <span class="dv">32</span>, <span class="dv">32</span>, <span class="dv">32</span>, <span class="dv">33</span>, <span class="dv">33</span>, <span class="dv">33</span>, <span class="dv">34</span>, <span class="dv">34</span>, <span class="dv">34</span>, <span class="dv">35</span>, <span class="dv">35</span>, <span class="dv">36</span>, <span class="dv">36</span>, <span class="dv">37</span>, <span class="dv">37</span>, <span class="dv">37</span>, <span class="dv">37</span>, <span class="dv">38</span>, <span class="dv">39</span>, <span class="dv">39</span>, <span class="dv">39</span>, <span class="dv">39</span>, <span class="dv">40</span>, <span class="dv">40</span>, <span class="dv">40</span>, <span class="dv">41</span>, <span class="dv">42</span>, <span class="dv">42</span>, <span class="dv">42</span>, <span class="dv">42</span>, <span class="dv">43</span>, <span class="dv">43</span>, <span class="dv">43</span>, <span class="dv">43</span>, <span class="dv">44</span>, <span class="dv">44</span>, <span class="dv">45</span>, <span class="dv">45</span>, <span class="dv">46</span>, <span class="dv">46</span>, <span class="dv">46</span>, <span class="dv">46</span>, <span class="dv">47</span>, <span class="dv">47</span>, <span class="dv">47</span>, <span class="dv">47</span>, <span class="dv">48</span>, <span class="dv">48</span>, <span class="dv">49</span>, <span class="dv">49</span>, <span class="dv">49</span>, <span class="dv">50</span>, <span class="dv">50</span>, <span class="dv">50</span>, <span class="dv">50</span>, <span class="dv">51</span>, <span class="dv">51</span>, <span class="dv">51</span>, <span class="dv">52</span>, <span class="dv">52</span>, <span class="dv">52</span>, <span class="dv">52</span>, <span class="dv">53</span>, <span class="dv">53</span>, <span class="dv">53</span>, <span class="dv">53</span>, <span class="dv">54</span>, <span class="dv">54</span>, <span class="dv">55</span>, <span class="dv">55</span>, <span class="dv">55</span>, <span class="dv">55</span>, <span class="dv">56</span>, <span class="dv">57</span>, <span class="dv">57</span>, <span class="dv">57</span>, <span class="dv">57</span>, <span class="dv">58</span>, <span class="dv">58</span>, <span class="dv">58</span>, <span class="dv">58</span>, <span class="dv">59</span>, <span class="dv">59</span>, <span class="dv">59</span>, <span class="dv">59</span>, <span class="dv">60</span>, <span class="dv">60</span>, <span class="dv">60</span>, <span class="dv">60</span>, <span class="dv">61</span>, <span class="dv">61</span>, <span class="dv">61</span>, <span class="dv">62</span>, <span class="dv">63</span>, <span class="dv">63</span>, <span class="dv">64</span>, <span class="dv">64</span>, <span class="dv">64</span>, <span class="dv">65</span>, <span class="dv">65</span>, <span class="dv">65</span>, <span class="dv">65</span>, <span class="dv">66</span>, <span class="dv">66</span>, <span class="dv">66</span>, <span class="dv">66</span>, <span class="dv">67</span>, <span class="dv">67</span>, <span class="dv">67</span>, <span class="dv">67</span>, <span class="dv">68</span>, <span class="dv">68</span>, <span class="dv">68</span>, <span class="dv">69</span>, <span class="dv">69</span>, <span class="dv">69</span>, <span class="dv">69</span>, <span class="dv">70</span>, <span class="dv">70</span>, <span class="dv">70</span>, <span class="dv">70</span>, <span class="dv">71</span>, <span class="dv">71</span>, <span class="dv">71</span>, <span class="dv">71</span>, <span class="dv">72</span>, <span class="dv">73</span>, <span class="dv">73</span>, <span class="dv">73</span>, <span class="dv">73</span>, <span class="dv">74</span>, <span class="dv">74</span>, <span class="dv">74</span>, <span class="dv">75</span>, <span class="dv">76</span>, <span class="dv">76</span>, <span class="dv">76</span>, <span class="dv">76</span>, <span class="dv">77</span>, <span class="dv">77</span>, <span class="dv">77</span>, <span class="dv">77</span>, <span class="dv">78</span>, <span class="dv">78</span>, <span class="dv">78</span>, <span class="dv">79</span>, <span class="dv">79</span>, <span class="dv">79</span>, <span class="dv">79</span>, <span class="dv">80</span>, <span class="dv">80</span>, <span class="dv">80</span>, <span class="dv">80</span>, <span class="dv">81</span>, <span class="dv">81</span>, <span class="dv">81</span>, <span class="dv">81</span>, <span class="dv">82</span>, <span class="dv">82</span>, <span class="dv">83</span>, <span class="dv">83</span>, <span class="dv">84</span>, <span class="dv">84</span>, <span class="dv">84</span>, <span class="dv">85</span>, <span class="dv">85</span>, <span class="dv">85</span>, <span class="dv">86</span>, <span class="dv">86</span>, <span class="dv">86</span>, <span class="dv">86</span>, <span class="dv">87</span>, <span class="dv">87</span>, <span class="dv">87</span>, <span class="dv">87</span>, <span class="dv">88</span>, <span class="dv">88</span>, <span class="dv">88</span>, <span class="dv">88</span>, <span class="dv">89</span>, <span class="dv">89</span>, <span class="dv">89</span>, <span class="dv">89</span>, <span class="dv">90</span>, <span class="dv">90</span>, <span class="dv">90</span>, <span class="dv">90</span>, <span class="dv">91</span>, <span class="dv">91</span>, <span class="dv">91</span>, <span class="dv">91</span>, <span class="dv">92</span>, <span class="dv">92</span>, <span class="dv">92</span>, <span class="dv">92</span>, <span class="dv">93</span>, <span class="dv">93</span>, <span class="dv">93</span>, <span class="dv">93</span>, <span class="dv">94</span>, <span class="dv">94</span>, <span class="dv">94</span>, <span class="dv">94</span>, <span class="dv">95</span>, <span class="dv">95</span>, <span class="dv">95</span>, <span class="dv">95</span>, <span class="dv">96</span>, <span class="dv">96</span>, <span class="dv">96</span>, <span class="dv">96</span>, <span class="dv">97</span>, <span class="dv">97</span>, <span class="dv">97</span>, <span class="dv">98</span>, <span class="dv">98</span>, <span class="dv">98</span>, <span class="dv">98</span>, <span class="dv">99</span>, <span class="dv">99</span>, <span class="dv">99</span>, <span class="dv">99</span>, <span class="dv">100</span>, <span class="dv">101</span>, <span class="dv">101</span>, <span class="dv">101</span>, <span class="dv">102</span>, <span class="dv">102</span>, <span class="dv">102</span>, <span class="dv">102</span>, <span class="dv">103</span>, <span class="dv">103</span>, <span class="dv">103</span>, <span class="dv">103</span>, <span class="dv">104</span>, <span class="dv">104</span>, <span class="dv">105</span>, <span class="dv">105</span>, <span class="dv">105</span>, <span class="dv">105</span>, <span class="dv">106</span>, <span class="dv">106</span>, <span class="dv">106</span>, <span class="dv">106</span>, <span class="dv">107</span>, <span class="dv">107</span>, <span class="dv">107</span>, <span class="dv">107</span>, <span class="dv">108</span>, <span class="dv">108</span>, <span class="dv">108</span>, <span class="dv">108</span>, <span class="dv">109</span>, <span class="dv">109</span>, <span class="dv">109</span>, <span class="dv">109</span>, <span class="dv">110</span>, <span class="dv">110</span>, <span class="dv">111</span>, <span class="dv">111</span>, <span class="dv">112</span>, <span class="dv">112</span>, <span class="dv">112</span>, <span class="dv">112</span>, <span class="dv">113</span>, <span class="dv">113</span>, <span class="dv">113</span>, <span class="dv">113</span>, <span class="dv">114</span>, <span class="dv">115</span>, <span class="dv">115</span>, <span class="dv">115</span>, <span class="dv">115</span>, <span class="dv">116</span>, <span class="dv">116</span>, <span class="dv">116</span>, <span class="dv">116</span>, <span class="dv">117</span>, <span class="dv">117</span>, <span class="dv">117</span>, <span class="dv">117</span>, <span class="dv">118</span>, <span class="dv">118</span>, <span class="dv">119</span>, <span class="dv">119</span>, <span class="dv">119</span>, <span class="dv">119</span>, <span class="dv">120</span>, <span class="dv">120</span>, <span class="dv">120</span>, <span class="dv">120</span>, <span class="dv">121</span>, <span class="dv">121</span>, <span class="dv">121</span>, <span class="dv">122</span>, <span class="dv">123</span>, <span class="dv">123</span>, <span class="dv">123</span>, <span class="dv">123</span>, <span class="dv">124</span>, <span class="dv">124</span>, <span class="dv">124</span>, <span class="dv">125</span>, <span class="dv">125</span>, <span class="dv">125</span>, <span class="dv">125</span>, <span class="dv">126</span>, <span class="dv">126</span>, <span class="dv">126</span>, <span class="dv">126</span>, <span class="dv">127</span>, <span class="dv">127</span>, <span class="dv">128</span>]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>group_data <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>]</span>
@@ -633,7 +633,7 @@ window.Quarto = {
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>fig.supxlabel(<span class="st">'cu'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-data" class="quarto-float quarto-figure quarto-figure-center anchored" width="911" height="611">
+<div id="fig-data" class="quarto-float quarto-figure quarto-figure-center anchored" height="611" width="911">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-data-output-1.png" id="fig-data" width="911" height="611" class="figure-img">
@@ -680,7 +680,7 @@ for Jupyter support
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/pymc/sampling/mcmc.py:1163: FutureWarning: Passing `log_likelihood` via `idata_kwargs` is deprecated and will be removed in future versions. Call `pm.compute_log_likelihood(idata)` instead.
   return _sample_return(
-Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 6 seconds.</code></pre>
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 8 seconds.</code></pre>
 </div>
 </div>
 <p>The second provided model is binomial model with the number of trials being <span class="math inline">\(28\)</span> for each outcome (<code>cu</code>).</p>
@@ -718,13 +718,13 @@ for Jupyter support
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/pymc/sampling/mcmc.py:1163: FutureWarning: Passing `log_likelihood` via `idata_kwargs` is deprecated and will be removed in future versions. Call `pm.compute_log_likelihood(idata)` instead.
   return _sample_return(
-Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 11 seconds.
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 15 seconds.
 The rhat statistic is larger than 1.01 for some parameters. This indicates problems during sampling. See https://arxiv.org/abs/1903.08008 for details
 The effective sample size per chain is smaller than 100 for some parameters.  A higher number is needed for reliable rhat and ess computation. See https://arxiv.org/abs/1903.08008 for details</code></pre>
 </div>
 </div>
 <p>Mills compared the models using PSIS-LOO and asked is this valid:</p>
-<div id="491a2259" class="cell" data-execution_count="6">
+<div id="8b5de995" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>az.compare({<span class="st">"normal"</span>: idata_normal, <span class="st">"binomial"</span>: idata_binomial})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/arviz_stats/loo/helper_loo.py:1146: UserWarning: Estimated shape parameter of Pareto distribution is greater than 0.70 for one or more samples. You should consider using a more robust model, this is because importance sampling is less likely to work well if the marginal posterior and LOO posterior are very different. This is more likely to happen with a non-robust model and highly influential observations.
@@ -790,7 +790,7 @@ The effective sample size per chain is smaller than 100 for some parameters.  A 
 <h2 data-number="4" class="anchored" data-anchor-id="comparison-of-discrete-and-continuous-models"><span class="header-section-number">4</span> Comparison of discrete and continuous models</h2>
 <p>At this point I ignore the fact that there many high Pareto-<span class="math inline">\(k\)</span> values indicating unreliable PSIS-LOO estimates, and first discuss comparison of predictive probabilities and predictive probability densities.</p>
 <p>I pick the <code>id=2</code> and compute the posterior predictive probability of each possible outcome <span class="math inline">\((0,1,2,\ldots,28)\)</span>. At this point we don’t need to consider LOO-CV issues, and can focus on comparison of posterior predictive probabilities. The following plot shows the area of each bar is equal to the probability of corresponding count outcome and these probabilities sum to 1. The grey bar illustrates the posterior predictive probability of <code>cu=12</code>.</p>
-<div id="0fc0ec57" class="cell" data-execution_count="7">
+<div id="b2577b4b" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cu_values <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">29</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>row <span class="op">=</span> cu_df.iloc[<span class="dv">1</span>].drop(<span class="st">"cu"</span>) </span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -827,7 +827,7 @@ The effective sample size per chain is smaller than 100 for some parameters.  A 
 </div>
 </div>
 <p>In case of normal model, the observation model is continuous, and we can compute posterior predictive densities. The following plot shows the predictive density and grey line at <code>cu=12</code> with end of line corresponding to density at <code>cu=12</code>.</p>
-<div id="85ac058b" class="cell" data-execution_count="8">
+<div id="994bc034" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cu_values <span class="op">=</span> np.arange(<span class="op">-</span><span class="dv">15</span>, <span class="dv">40</span>, <span class="fl">0.5</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>row <span class="op">=</span> cu_df.iloc[<span class="dv">1</span>].drop(<span class="st">"cu"</span>) </span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -860,7 +860,7 @@ The effective sample size per chain is smaller than 100 for some parameters.  A 
 </div>
 <p>We can’t compare probabilities and densities directly, but we can discretize the density to get probabilities. As the outcomes are integers <span class="math inline">\((0,1,2,\ldots,28)\)</span>, we can compute probabilities for intervals <span class="math inline">\(((-0.5, 0.5), (0.5,1.5),
 (1.5,2.5),\ldots,(27.5,28.5))\)</span>. The following plot shows the vertical lines for the edges of these intervals.</p>
-<div id="74d5cd31" class="cell" data-execution_count="9">
+<div id="0f512315" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute densities at interval edges</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>cu_edges <span class="op">=</span> np.arange(<span class="op">-</span><span class="fl">0.5</span>, <span class="fl">29.5</span>, <span class="dv">1</span>)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>row <span class="op">=</span> cu_df.iloc[<span class="dv">1</span>].drop(<span class="st">"cu"</span>) </span>
@@ -894,7 +894,7 @@ The effective sample size per chain is smaller than 100 for some parameters.  A 
 </div>
 </div>
 <p>We can then integrate the density over the interval. For example, integrate predictive density from <span class="math inline">\(11.5\)</span> to <span class="math inline">\(12.5\)</span> to get a probability that <span class="math inline">\(11.5 &lt; cu &lt; 12.5\)</span> (it doesn’t matter here if the interval ends are open or closed). To simplify the computation, we approximate the density as piecewise constant function shown in the next plot.</p>
-<div id="87355231" class="cell" data-execution_count="10">
+<div id="48ffcc09" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute densities at interval centers</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>cu_centers <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="dv">29</span>, <span class="dv">1</span>)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>row <span class="op">=</span> cu_df.iloc[<span class="dv">1</span>].drop(<span class="st">"cu"</span>) </span>
@@ -933,7 +933,7 @@ The effective sample size per chain is smaller than 100 for some parameters.  A 
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ax.plot(cu_df_predi[<span class="st">"cu"</span>], p3, color<span class="op">=</span><span class="st">"C0"</span>)</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ax.fill_between([<span class="fl">11.5</span>, <span class="fl">12.5</span>], <span class="dv">0</span>, p3[<span class="dv">12</span>], color<span class="op">=</span><span class="st">"lightgray"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-discretized-normal" class="quarto-float quarto-figure quarto-figure-center anchored" width="711" height="411">
+<div id="fig-discretized-normal" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="711">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-discretized-normal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-discretized-normal-output-1.png" id="fig-discretized-normal" width="711" height="411" class="figure-img">
@@ -947,7 +947,7 @@ Figure&nbsp;2
 </div>
 <p>Thus, in this case, the LOO-ELPD comparison is valid.</p>
 <p>The normal model predictions are not constrained between <span class="math inline">\(0\)</span> and <span class="math inline">\(28\)</span> (or <span class="math inline">\(-0.5\)</span> and <span class="math inline">\(28.5\)</span>), and thus the probabilities for <code>cu</code> <span class="math inline">\(\in (0,1,2,\ldots,28)\)</span> do not necessarily sum to 1.</p>
-<div id="0b7463c6" class="cell" data-execution_count="12">
+<div id="8951172e" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Sum of probabilities: </span><span class="sc">{</span>p3<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Sum of probabilities: 0.956</code></pre>
@@ -955,7 +955,7 @@ Figure&nbsp;2
 </div>
 <p>We could switch to truncated normal, but for this data, it would not work well, and as we have better options, I skip illustration of that.</p>
 <p>Before continuing with better models, I illustrate the case where the integration interval is not 1, and the comparison would require more work. It is common with continuous targets to normalize the target to have zero mean and unit standard deviation.</p>
-<div id="fd7a380a" class="cell" data-execution_count="13">
+<div id="3e12068e" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>cu_df[<span class="st">'cu_scaled'</span>] <span class="op">=</span> (cu_df[<span class="st">'cu'</span>] <span class="op">-</span> cu_df[<span class="st">'cu'</span>].mean()) <span class="op">/</span> cu_df[<span class="st">'cu'</span>].std()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Fit the normal model with scaled target.</p>
@@ -989,11 +989,11 @@ for Jupyter support
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/pymc/sampling/mcmc.py:1163: FutureWarning: Passing `log_likelihood` via `idata_kwargs` is deprecated and will be removed in future versions. Call `pm.compute_log_likelihood(idata)` instead.
   return _sample_return(
-Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 15 seconds.</code></pre>
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 8 seconds.</code></pre>
 </div>
 </div>
 <p>Now the densities for the scaled target are much higher, and the scaled model seems to be much better.</p>
-<div id="11e6d723" class="cell" data-execution_count="15">
+<div id="0f2bd544" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>az.compare({<span class="st">"normal"</span>: idata_normal, <span class="st">"normal_scaled"</span>: idata_normal_scaled})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/arviz_stats/loo/helper_loo.py:1146: UserWarning: Estimated shape parameter of Pareto distribution is greater than 0.70 for one or more samples. You should consider using a more robust model, this is because importance sampling is less likely to work well if the marginal posterior and LOO posterior are very different. This is more likely to happen with a non-robust model and highly influential observations.
@@ -1055,7 +1055,7 @@ Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws 
 </div>
 </div>
 <p>However to make a fair comparison, we need to take into account the scaling we used. To get the probabilities for integer counts, the densities need to be multiplied by the discretization binwidth. Correspondingly in log scale we add <span class="math inline">\(\log(\text{std})\)</span> to each log-density, and the total adjustment is</p>
-<div id="28fca510" class="cell" data-execution_count="16">
+<div id="2c7c7403" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>adjustment <span class="op">=</span> <span class="bu">len</span>(cu_df) <span class="op">*</span> np.log(cu_df[<span class="st">'cu'</span>].std())</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Adjustment: </span><span class="sc">{</span>adjustment<span class="sc">:.1f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1076,7 +1076,7 @@ Consider using plot_ppc variants specific for discrete data, such as plot_ppc_pa
   warn_if_discrete(observed_dist, predictive_dist, kind)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_hist-binomial" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_hist-binomial" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_hist-binomial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_hist-binomial-output-2.png" id="fig-ppc_hist-binomial" width="611" height="279" class="figure-img">
@@ -1092,7 +1092,7 @@ Figure&nbsp;3
 <div id="cell-fig-ppc_rootogram-binomial" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_rootogram(idata_binomial, yscale<span class="op">=</span><span class="st">"linear"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_rootogram-binomial" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_rootogram-binomial" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_rootogram-binomial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_rootogram-binomial-output-1.png" id="fig-ppc_rootogram-binomial" width="611" height="279" class="figure-img">
@@ -1109,7 +1109,7 @@ Figure&nbsp;4
 <div id="cell-fig-ppc_pit_ecdf-binomial" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_binomial)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_pit_ecdf-binomial" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_pit_ecdf-binomial" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_pit_ecdf-binomial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_pit_ecdf-binomial-output-1.png" id="fig-ppc_pit_ecdf-binomial" width="611" height="279" class="figure-img">
@@ -1126,7 +1126,7 @@ Figure&nbsp;5
 <div id="cell-fig-ppc_hist-normal" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_dist(idata_normal, kind<span class="op">=</span><span class="st">"hist"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_hist-normal" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_hist-normal" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_hist-normal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_hist-normal-output-1.png" id="fig-ppc_hist-normal" width="611" height="279" class="figure-img">
@@ -1142,7 +1142,7 @@ Figure&nbsp;6
 <div id="cell-fig-ppc_pit_ecdf-normal" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_normal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_pit_ecdf-normal" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_pit_ecdf-normal" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_pit_ecdf-normal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_pit_ecdf-normal-output-1.png" id="fig-ppc_pit_ecdf-normal" width="611" height="279" class="figure-img">
@@ -1155,7 +1155,7 @@ Figure&nbsp;7
 </div>
 </div>
 <p>We can also examine PIT values computed by comparing all posterior predictive draws with observations marginally, which in this case show the miscalibration very clearly.</p>
-<div id="172b11f0" class="cell" data-execution_count="22">
+<div id="dd3ee6c5" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> marginal_pit(x, y):</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Compute marginal PIT values with randomization for discrete y."""</span></span>
 <span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    x_flat <span class="op">=</span> xr.DataArray(x.values.flatten(), dims<span class="op">=</span>[<span class="st">"pool"</span>])</span>
@@ -1222,12 +1222,12 @@ for Jupyter support
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/pymc/sampling/mcmc.py:1163: FutureWarning: Passing `log_likelihood` via `idata_kwargs` is deprecated and will be removed in future versions. Call `pm.compute_log_likelihood(idata)` instead.
   return _sample_return(
-Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 17 seconds.
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 16 seconds.
 /home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/pytensor/link/numba/dispatch/basic.py:214: UserWarning: Numba will use object mode to run beta_binomial_rv{"(),(),()-&gt;()"}'s perform method. Set `pytensor.config.compiler_verbose = True` to see more details.
   warnings.warn(</code></pre>
 </div>
 </div>
-<div id="3a5bdeec" class="cell" data-execution_count="24">
+<div id="c3d646b1" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>az.compare({</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"normal"</span>: idata_normal,</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"binomial"</span>: idata_binomial,</span>
@@ -1312,7 +1312,7 @@ Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws 
 <section id="improved-loo-computation" class="level2" data-number="7">
 <h2 data-number="7" class="anchored" data-anchor-id="improved-loo-computation"><span class="header-section-number">7</span> Improved LOO computation</h2>
 <p>Since in case of high Pareto-<span class="math inline">\(k\)</span> warnings, the estimate is usually optimistic, it is sufficient if we use moment matching for beta-binomial model.</p>
-<div id="1802d738" class="cell" data-execution_count="25">
+<div id="08c632f6" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#loo_betabinomial = az.loo(idata_betabinomial, pointwise=True)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -1327,7 +1327,7 @@ Consider using plot_ppc variants specific for discrete data, such as plot_ppc_pa
   warn_if_discrete(observed_dist, predictive_dist, kind)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_hist-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_hist-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_hist-betabinomial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_hist-betabinomial-output-2.png" id="fig-ppc_hist-betabinomial" width="611" height="279" class="figure-img">
@@ -1343,7 +1343,7 @@ Figure&nbsp;8
 <div id="cell-fig-ppc_rootogram-betabinomial" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_rootogram(idata_betabinomial, yscale<span class="op">=</span><span class="st">"linear"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_rootogram-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_rootogram-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_rootogram-betabinomial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_rootogram-betabinomial-output-1.png" id="fig-ppc_rootogram-betabinomial" width="611" height="279" class="figure-img">
@@ -1360,7 +1360,7 @@ Figure&nbsp;9
 <div id="cell-fig-loo_pit_ecdf-betabinomial" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_betabinomial)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-loo_pit_ecdf-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-loo_pit_ecdf-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-loo_pit_ecdf-betabinomial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-loo_pit_ecdf-betabinomial-output-1.png" id="fig-loo_pit_ecdf-betabinomial" width="611" height="279" class="figure-img">
@@ -1376,7 +1376,7 @@ Figure&nbsp;10
 <div id="cell-fig-pit_ecdf-betabinomial" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_pit(idata_betabinomial)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-pit_ecdf-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-pit_ecdf-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pit_ecdf-betabinomial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-pit_ecdf-betabinomial-output-1.png" id="fig-pit_ecdf-betabinomial" width="611" height="279" class="figure-img">
@@ -1390,7 +1390,7 @@ Figure&nbsp;11
 </div>
 <p>The data included many counts of <span class="math inline">\(0\)</span> and <span class="math inline">\(28\)</span>, and we can further check whether we might need to include zero-inflation or <span class="math inline">\(28\)</span>-inflation model component. As illustrated in Roaches case study, PIT’s may sometimes be weak to detect zero-inflation, but reliability diagram can focus there in more detail.</p>
 <p>Calibration check with reliability diagram for <span class="math inline">\(0\)</span> vs others</p>
-<div id="f177f533" class="cell" data-execution_count="30">
+<div id="0c204e30" class="cell" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>th <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>pp_binary <span class="op">=</span> (idata_betabinomial.posterior_predictive[<span class="st">"cu"</span>] <span class="op">&gt;</span> th).astype(<span class="bu">float</span>)</span>
 <span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>y_binary <span class="op">=</span> (idata_betabinomial.observed_data[<span class="st">"cu"</span>] <span class="op">&gt;</span> th).astype(<span class="bu">float</span>)</span>
@@ -1430,7 +1430,7 @@ Figure&nbsp;11
   warnings.warn(</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-calibration-28-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-calibration-28-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-calibration-28-betabinomial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-calibration-28-betabinomial-output-2.png" id="fig-calibration-28-betabinomial" width="611" height="279" class="figure-img">
@@ -1447,7 +1447,7 @@ Figure&nbsp;12
 <section id="prior-sensitivity-analysis" class="level2" data-number="9">
 <h2 data-number="9" class="anchored" data-anchor-id="prior-sensitivity-analysis"><span class="header-section-number">9</span> Prior sensitivity analysis</h2>
 <p>The priors provided by Mills seems a bit narrow, so I do prior-likelihood sensitivity analysis using powerscaling approach.</p>
-<div id="324fb21e" class="cell" data-execution_count="32">
+<div id="497a21e8" class="cell" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>mod_betabinomial.compute_log_prior(idata_betabinomial)</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>az.psense_summary(idata_betabinomial, var_names<span class="op">=</span>[<span class="st">"~mu"</span>, <span class="st">"~1|id"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
@@ -1575,12 +1575,12 @@ RuntimeWarning: invalid value encountered in subtract
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/pymc/sampling/mcmc.py:1163: FutureWarning: Passing `log_likelihood` via `idata_kwargs` is deprecated and will be removed in future versions. Call `pm.compute_log_likelihood(idata)` instead.
   return _sample_return(
-Sampling 1 chain for 1_000 tune and 1_000 draw iterations (1_000 + 1_000 draws total) took 5 seconds.
+Sampling 1 chain for 1_000 tune and 1_000 draw iterations (1_000 + 1_000 draws total) took 6 seconds.
 Only one chain was sampled, this makes it impossible to run some convergence checks</code></pre>
 </div>
 </div>
 <p>There are no prior data conflicts.</p>
-<div id="55df4a44" class="cell" data-execution_count="34">
+<div id="c7d5679a" class="cell" data-execution_count="34">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>mod_betabinomial2.compute_log_prior(idata_betabinomial2)</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>az.psense_summary(idata_betabinomial2, var_names<span class="op">=</span>[<span class="st">"~mu"</span>, <span class="st">"~1|id"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
@@ -1670,7 +1670,7 @@ Only one chain was sampled, this makes it impossible to run some convergence che
 </div>
 </div>
 <p>We can also do LOO comparison, which indicates that the wider priors provide a better predictive performance.</p>
-<div id="f4a7fa22" class="cell" data-execution_count="35">
+<div id="be100eee" class="cell" data-execution_count="35">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>az.compare({</span>
 <span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"betabinomial"</span>: idata_betabinomial,</span>
 <span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"betabinomial2"</span>: idata_betabinomial2</span>
@@ -1786,13 +1786,13 @@ for Jupyter support
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/pymc/sampling/mcmc.py:1163: FutureWarning: Passing `log_likelihood` via `idata_kwargs` is deprecated and will be removed in future versions. Call `pm.compute_log_likelihood(idata)` instead.
   return _sample_return(
-Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 21 seconds.
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 14 seconds.
 /home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/pytensor/link/numba/dispatch/basic.py:214: UserWarning: Numba will use object mode to run beta_binomial_rv{"(),(),()-&gt;()"}'s perform method. Set `pytensor.config.compiler_verbose = True` to see more details.
   warnings.warn(</code></pre>
 </div>
 </div>
 <p>To compare the new model against the previous ones, we exclude the pointwise elpds for week 0 from <code>idata_betabinomial2</code>.</p>
-<div id="ac62e369" class="cell" data-execution_count="37">
+<div id="f84a3cb8" class="cell" data-execution_count="37">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>loo2 <span class="op">=</span> az.loo(idata_betabinomial2, pointwise<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>loo2b <span class="op">=</span> az.loo(idata_betabinomial2b, pointwise<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1840,7 +1840,7 @@ Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws 
 </div>
 </div>
 <p>By comparing the posterior for <code>kappa</code>, we see that the overdispersion of the beta-binomial in the new model is smaller (smaller <code>kappa</code> means bigger overdispersion).</p>
-<div id="e9fdd2bd" class="cell" data-execution_count="38">
+<div id="4ae4e744" class="cell" data-execution_count="38">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>bb2_kappa <span class="op">=</span> az.summary(idata_betabinomial2, var_names<span class="op">=</span>[<span class="st">"kappa"</span>])</span>
 <span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>bb2b_kappa <span class="op">=</span> az.summary(idata_betabinomial2b, var_names<span class="op">=</span>[<span class="st">"kappa"</span>])</span>
 <span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>pd.concat([bb2_kappa, bb2b_kappa], keys<span class="op">=</span>[<span class="st">"betabinomial2"</span>, <span class="st">"betabinomial2b"</span>], names<span class="op">=</span>[<span class="st">"model"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1917,7 +1917,7 @@ Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws 
 <div id="cell-fig-rootogram_bars-betabinomial2b" class="cell" data-execution_count="39">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_rootogram(idata_betabinomial2b, yscale<span class="op">=</span><span class="st">"linear"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-rootogram_bars-betabinomial2b" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-rootogram_bars-betabinomial2b" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-rootogram_bars-betabinomial2b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-rootogram_bars-betabinomial2b-output-1.png" id="fig-rootogram_bars-betabinomial2b" width="611" height="279" class="figure-img">
@@ -1933,7 +1933,7 @@ Figure&nbsp;13
 <div id="cell-fig-ppc_pit_ecdf-betabinomial2b" class="cell" data-execution_count="40">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_betabinomial2b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_pit_ecdf-betabinomial2b" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_pit_ecdf-betabinomial2b" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_pit_ecdf-betabinomial2b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_pit_ecdf-betabinomial2b-output-1.png" id="fig-ppc_pit_ecdf-betabinomial2b" width="611" height="279" class="figure-img">
@@ -1961,7 +1961,7 @@ Figure&nbsp;14
   warnings.warn(</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-calibration-0-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-calibration-0-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-calibration-0-betabinomial2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-calibration-0-betabinomial2-output-2.png" id="fig-calibration-0-betabinomial2" width="611" height="279" class="figure-img">
@@ -1988,7 +1988,7 @@ Figure&nbsp;15
   warnings.warn(</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-calibration-28-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-calibration-28-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-calibration-28-betabinomial2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-calibration-28-betabinomial2-output-2.png" id="fig-calibration-28-betabinomial2" width="611" height="279" class="figure-img">
@@ -2045,7 +2045,7 @@ Figure&nbsp;16
   warnings.warn(</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-posterior_prediction-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" width="911" height="611">
+<div id="fig-posterior_prediction-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" height="611" width="911">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-posterior_prediction-betabinomial2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-posterior_prediction-betabinomial2-output-2.png" id="fig-posterior_prediction-betabinomial2" width="911" height="611" class="figure-img">
@@ -2076,7 +2076,7 @@ Figure&nbsp;17
 <span id="cb74-15"><a href="#cb74-15" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, <span class="dv">0</span>)</span>
 <span id="cb74-16"><a href="#cb74-16" aria-hidden="true" tabindex="-1"></a>pc.add_title(<span class="st">"Difference in cu given placebo vs Nabiximols"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-posterior_prediction-diff-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" width="626" height="586">
+<div id="fig-posterior_prediction-diff-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" height="586" width="626">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-posterior_prediction-diff-betabinomial2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-posterior_prediction-diff-betabinomial2-output-1.png" id="fig-posterior_prediction-diff-betabinomial2" width="626" height="586" class="figure-img">
@@ -2112,7 +2112,7 @@ Figure&nbsp;18
 <span id="cb75-13"><a href="#cb75-13" aria-hidden="true" tabindex="-1"></a>    figure_kwargs<span class="op">=</span>{<span class="st">"figsize"</span>: (<span class="dv">9</span>, <span class="dv">4</span>)},</span>
 <span id="cb75-14"><a href="#cb75-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-kde-kde-hist-comparison-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" width="911" height="411">
+<div id="fig-kde-kde-hist-comparison-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="911">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-kde-kde-hist-comparison-betabinomial2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-kde-kde-hist-comparison-betabinomial2-output-1.png" id="fig-kde-kde-hist-comparison-betabinomial2" width="911" height="411" class="figure-img">
@@ -2161,7 +2161,7 @@ Figure&nbsp;19
 <span id="cb76-33"><a href="#cb76-33" aria-hidden="true" tabindex="-1"></a>    figure_kwargs<span class="op">=</span>{<span class="st">"sharex"</span>: <span class="va">True</span>, <span class="st">"figsize"</span>: (<span class="dv">9</span>, <span class="dv">6</span>)},</span>
 <span id="cb76-34"><a href="#cb76-34" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-epred-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" width="911" height="611">
+<div id="fig-epred-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" height="611" width="911">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-epred-betabinomial2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-epred-betabinomial2-output-1.png" id="fig-epred-betabinomial2" width="911" height="611" class="figure-img">
@@ -2192,7 +2192,7 @@ Figure&nbsp;20
 <span id="cb77-15"><a href="#cb77-15" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, <span class="dv">0</span>)</span>
 <span id="cb77-16"><a href="#cb77-16" aria-hidden="true" tabindex="-1"></a>pc.add_title(<span class="st">"Difference in expected cu given placebo vs Nabiximols"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-epred-diff-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" width="759" height="586">
+<div id="fig-epred-diff-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" height="586" width="759">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-epred-diff-betabinomial2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-epred-diff-betabinomial2-output-1.png" id="fig-epred-diff-betabinomial2" width="759" height="586" class="figure-img">
@@ -2205,7 +2205,7 @@ Figure&nbsp;21
 </div>
 </div>
 <p>For new individuals the posterior predictive distribution indicates 99% possibility of smaller expected <code>cu</code> with Nabiximols than with placebo.</p>
-<div id="b345553f" class="cell" data-execution_count="48">
+<div id="c44a2e58" class="cell" data-execution_count="48">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Probability that difference is negative (Nabiximols better)</span></span>
 <span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>prob_better <span class="op">=</span> (dicto_diff[<span class="st">"week12"</span>] <span class="op">&lt;</span> <span class="dv">0</span>).mean()</span>
 <span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Probability Nabiximols reduces cu in week 12: </span><span class="sc">{</span>prob_better<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2218,7 +2218,7 @@ Figure&nbsp;21
 <h2 data-number="14" class="anchored" data-anchor-id="prior-and-likelihood-sensitivity-of-treatment-effect-posteriors"><span class="header-section-number">14</span> Prior and likelihood sensitivity of treatment effect posteriors</h2>
 <p>Examining the prior and likelihood sensitivity of parameter posteriors is quick and easy, but eventually we want to examine prior and likelihood sensitivity of our main quantity of interest, which in this case is the treatment effect in different weeks. Making this analysis requires a bit more code as we need to compute the treatment effect posteriors and combine that information with log prior density and log likelihood for the corresponding posterior draws.</p>
 <p>Prior-likelihood sensitivity analysis using powerscaling approach for the treatment effect posteriors at weeks 4, 8, and 12</p>
-<div id="3bb776f5" class="cell" data-execution_count="49">
+<div id="92daf023" class="cell" data-execution_count="49">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute log_prior for the model</span></span>
 <span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>mod_betabinomial2b.compute_log_prior(idata_betabinomial2b)</span>
 <span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -2319,7 +2319,7 @@ for Jupyter support
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/pymc/sampling/mcmc.py:1163: FutureWarning: Passing `log_likelihood` via `idata_kwargs` is deprecated and will be removed in future versions. Call `pm.compute_log_likelihood(idata)` instead.
   return _sample_return(
-Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 8 seconds.
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 7 seconds.
 The rhat statistic is larger than 1.01 for some parameters. This indicates problems during sampling. See https://arxiv.org/abs/1903.08008 for details</code></pre>
 </div>
 </div>
@@ -2327,7 +2327,7 @@ The rhat statistic is larger than 1.01 for some parameters. This indicates probl
 <div id="cell-fig-ppc_loo_pit_ecdf-normal2b" class="cell" data-execution_count="51">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_normal2b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_loo_pit_ecdf-normal2b" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_loo_pit_ecdf-normal2b" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_loo_pit_ecdf-normal2b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_loo_pit_ecdf-normal2b-output-1.png" id="fig-ppc_loo_pit_ecdf-normal2b" width="611" height="279" class="figure-img">
@@ -2346,7 +2346,7 @@ Figure&nbsp;22
 <span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>pit_dt <span class="op">=</span> xr.DataTree(xr.Dataset({<span class="st">"cu"</span>: pit_vals}), name<span class="op">=</span><span class="st">"fd"</span>)</span>
 <span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>az.plot_ecdf_pit(pit_dt, group<span class="op">=</span><span class="st">"fd"</span>, sample_dims<span class="op">=</span>[<span class="st">"__obs__"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_pit_ecdf-normal2b" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_pit_ecdf-normal2b" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_pit_ecdf-normal2b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_pit_ecdf-normal2b-output-1.png" id="fig-ppc_pit_ecdf-normal2b" width="611" height="279" class="figure-img">
@@ -2359,7 +2359,7 @@ Figure&nbsp;23
 </div>
 </div>
 <p>The beta-binomial model beats the normal model big time.</p>
-<div id="ad65c727" class="cell" data-execution_count="53">
+<div id="37a73b0b" class="cell" data-execution_count="53">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>az.compare({<span class="st">"normal2b"</span>: idata_normal2b, <span class="st">"betabinomial2b"</span>: idata_betabinomial2b})[[<span class="st">"elpd_diff"</span>, <span class="st">"dse"</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/arviz_stats/loo/helper_loo.py:1146: UserWarning: Estimated shape parameter of Pareto distribution is greater than 0.70 for one or more samples. You should consider using a more robust model, this is because importance sampling is less likely to work well if the marginal posterior and LOO posterior are very different. This is more likely to happen with a non-robust model and highly influential observations.
@@ -2429,7 +2429,7 @@ for Jupyter support
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 7 seconds.</code></pre>
+<pre><code>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 5 seconds.</code></pre>
 </div>
 </div>
 <div id="mod_betabinomial2c" class="cell" data-cache="true" data-execution_count="55">
@@ -2515,7 +2515,7 @@ for Jupyter support
 <span id="cb94-47"><a href="#cb94-47" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, <span class="dv">0</span>)</span>
 <span id="cb94-48"><a href="#cb94-48" aria-hidden="true" tabindex="-1"></a>pc.add_title(<span class="st">"Difference in cu given placebo vs Nabiximols"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-epred-diff-4models" class="quarto-float quarto-figure quarto-figure-center anchored" width="626" height="745">
+<div id="fig-epred-diff-4models" class="quarto-float quarto-figure quarto-figure-center anchored" height="745" width="626">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-epred-diff-4models-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-epred-diff-4models-output-1.png" id="fig-epred-diff-4models" width="626" height="745" class="figure-img">
@@ -2534,7 +2534,7 @@ Figure&nbsp;24
 <h2 data-number="16" class="anchored" data-anchor-id="predictive-performance-comparison"><span class="header-section-number">16</span> Predictive performance comparison</h2>
 <p>Above, posterior predictive checking, LOO predictive checking, and LOO-ELPD comparisons were important for model checking and comparison, and only after we trusted that there is no significant discrepancy between the model predictions and the data, we did look at the treatment effect. We used LOO model comparison to assess the the more elaborate models did provide better predictions, but we did not use it above for assessing the predictive performance of using the treatment effect in the model.</p>
 <p>Let’s now build the mode without treatment group variable and check whether there is significant difference in predictive performance.</p>
-<div id="974b51be" class="cell" data-execution_count="57">
+<div id="bc9bbf68" class="cell" data-execution_count="57">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb95"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>mod_betabinomial3b <span class="op">=</span> bmb.Model(</span>
 <span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"p(cu, set) ~ week + cu_baseline + (1|id)"</span>,</span>
 <span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>    cu_df_b,</span>
@@ -2579,11 +2579,11 @@ The effective sample size per chain is smaller than 100 for some parameters.  A 
   warnings.warn(</code></pre>
 </div>
 </div>
-<div id="2b3b1f46" class="cell" data-execution_count="58">
+<div id="b5a717ba" class="cell" data-execution_count="58">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb99"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="co"># moment matching for betabinomial3b</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We compare the models with and without group variable:</p>
-<div id="4031837d" class="cell" data-execution_count="59">
+<div id="a74e09dc" class="cell" data-execution_count="59">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co">#loo_compare(fit_betabinomial2b, fit_betabinomial3b)</span></span>
 <span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>az.compare({</span>
 <span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"betabinomial2b"</span>: idata_betabinomial2b,</span>
@@ -2631,7 +2631,7 @@ The effective sample size per chain is smaller than 100 for some parameters.  A 
 <li>The aleatoric uncertainty (modelled by the beta-binomial) for a new 4-week period is big, that is the predictive distribution is very wide and due to the constrained range has also thick tails (actually U shape), which makes the log score not to be sensitive in tails.</li>
 </ol>
 <p>As the predictive distribution is wide with thick tails, we can also focus on comparing absolute error of using means of the predictive distributions as point estimates. This approach has the benefit that we can improve accuracy of the finite MCMC sample by dropping the sampling from the varying intercept population distribution and from the beta-binomial distribution (using posterior_epred(, re_formula=NA). E_loo is used to go from posterior predictive draws to the mean of leave-one-out predictive distribution.</p>
-<div id="0f51e7d8" class="cell" data-execution_count="60">
+<div id="b9f013fb" class="cell" data-execution_count="60">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>eloo2, _ <span class="op">=</span> az.loo_expectations(idata_betabinomial2b, kind<span class="op">=</span><span class="st">"mean"</span>)</span>
 <span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>eloo3, _ <span class="op">=</span> az.loo_expectations(idata_betabinomial3b, kind<span class="op">=</span><span class="st">"mean"</span>)</span>
 <span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -2646,11 +2646,11 @@ The effective sample size per chain is smaller than 100 for some parameters.  A 
 </div>
 </div>
 <p>Probability that the leave-one-out predictive absolute error is smaller with model 2b (with group variable) than with model 3b (without group variable) using normal approximation.</p>
-<div id="b9b19bdb" class="cell" data-execution_count="61">
+<div id="4aa5048f" class="cell" data-execution_count="61">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co"> This results it Wrong</span></span>
 <span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>pz.Normal(np.mean(ae2 <span class="op">-</span> ae3), np.std(ae2 <span class="op">-</span> ae3) <span class="op">/</span> <span class="dv">257</span><span class="op">**</span><span class="fl">0.5</span>).cdf(<span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="61">
-<pre><code>array(0.15355847)</code></pre>
+<pre><code>array(0.04893655)</code></pre>
 </div>
 </div>
 <p>By dropping out the aleatoric part from the LOO-CV predictions we do see clear difference in the predictive performance if the treatment group variable is dropped, but still the randomness in the actual observations makes the probability of the difference to be further away from 1 than when we focused in the expected counterfactual predictions above.</p>

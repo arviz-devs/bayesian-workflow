@@ -536,7 +536,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2026-07-01</p>
+      <p class="date-modified">2026-07-02</p>
     </div>
   </div>
     
@@ -552,7 +552,7 @@ window.Quarto = {
 <h2 data-number="1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1</span> Introduction</h2>
 <p>This case study demonstrates using simple examples the most common failure modes in Markov chain Monte Carlo based Bayesian inference, how to recognize these using the diagnostics, and how to fix the problems.</p>
 <p><strong>Load packages</strong></p>
-<div id="701ee461" class="cell" data-execution_count="1">
+<div id="a936692a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -576,6 +576,10 @@ window.Quarto = {
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>SEED <span class="op">=</span> <span class="dv">48927</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>np.random.seed(SEED)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm</code></pre>
+</div>
 </div>
 </section>
 <section id="improper-posterior" class="level2" data-number="2">
@@ -585,62 +589,39 @@ window.Quarto = {
 <section id="data" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="data"><span class="header-section-number">2.1</span> Data</h3>
 <p>Univariate continous predictor <span class="math inline">\(x\)</span>, binary target <span class="math inline">\(y\)</span>, and the two classes are completely separable, which leads to unbounded likelihood.</p>
-<div id="c817faf5" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(SEED <span class="op">+</span> <span class="dv">4</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># x = np.sort(rng.normal(size=(N, M)), axis=0)</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array(</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    [</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        [<span class="op">-</span><span class="fl">1.61675183</span>],</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        [<span class="op">-</span><span class="fl">0.94052670</span>],</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        [<span class="op">-</span><span class="fl">0.66244057</span>],</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        [<span class="op">-</span><span class="fl">0.60232373</span>],</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        [<span class="op">-</span><span class="fl">0.57819996</span>],</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        [<span class="op">-</span><span class="fl">0.30952063</span>],</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        [<span class="op">-</span><span class="fl">0.23880912</span>],</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        [<span class="op">-</span><span class="fl">0.19792298</span>],</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        [<span class="fl">0.04290007</span>],</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        [<span class="fl">1.10171923</span>],</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.repeat([<span class="dv">0</span>, <span class="dv">1</span>], N <span class="op">/</span> <span class="dv">2</span>)</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>data_logit <span class="op">=</span> {<span class="st">"M"</span>: M, <span class="st">"N"</span>: N, <span class="st">"x"</span>: x, <span class="st">"y"</span>: y}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="869f2510" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(SEED <span class="op">+</span> <span class="dv">4</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># x = np.sort(rng.normal(size=(N, M)), axis=0)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array(</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    [</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        [<span class="op">-</span><span class="fl">1.61675183</span>],</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        [<span class="op">-</span><span class="fl">0.94052670</span>],</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        [<span class="op">-</span><span class="fl">0.66244057</span>],</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        [<span class="op">-</span><span class="fl">0.60232373</span>],</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        [<span class="op">-</span><span class="fl">0.57819996</span>],</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        [<span class="op">-</span><span class="fl">0.30952063</span>],</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        [<span class="op">-</span><span class="fl">0.23880912</span>],</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        [<span class="op">-</span><span class="fl">0.19792298</span>],</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        [<span class="fl">0.04290007</span>],</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        [<span class="fl">1.10171923</span>],</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.repeat([<span class="dv">0</span>, <span class="dv">1</span>], N <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>data_logit <span class="op">=</span> {<span class="st">"M"</span>: M, <span class="st">"N"</span>: N, <span class="st">"x"</span>: x, <span class="st">"y"</span>: y}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"x"</span>: x.flatten(), <span class="st">"y"</span>: y})</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">3</span>))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>ax.scatter(df[<span class="st">"x"</span>], df[<span class="st">"y"</span>])</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(yticks<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>], xlabel<span class="op">=</span><span class="st">"x"</span>, ylabel<span class="op">=</span><span class="st">"y"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div id="fig-separable_data" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
+<div id="cell-fig-separable_data" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">"x"</span>: x.flatten(), <span class="st">"y"</span>: y})</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">3</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>ax.scatter(df[<span class="st">"x"</span>], df[<span class="st">"y"</span>])</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(yticks<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>], xlabel<span class="op">=</span><span class="st">"x"</span>, ylabel<span class="op">=</span><span class="st">"y"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="fig-separable_data" class="quarto-float quarto-figure quarto-figure-center anchored" height="311" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-separable_data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div id="fig-separable_data-1" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-separable_data-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<pre><code>[[&lt;matplotlib.axis.YTick at 0x7844a6a42510&gt;,
-  &lt;matplotlib.axis.YTick at 0x7844a6a48550&gt;],
- Text(0.5, 0, 'x'),
- Text(0, 0.5, 'y')]</code></pre>
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-separable_data-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(a)
-</figcaption>
-</figure>
-</div>
-<div class="cell-output cell-output-display">
-<div id="fig-separable_data-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="311" width="611">
-<figure class="quarto-float quarto-subfloat-fig figure">
-<div aria-describedby="fig-separable_data-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="problems_files/figure-html/fig-separable_data-output-2.png" id="fig-separable_data-2" data-ref-parent="fig-separable_data" width="611" height="311" class="figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-separable_data-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-(b)
-</figcaption>
-</figure>
-</div>
-</div>
+<img src="problems_files/figure-html/fig-separable_data-output-1.png" id="fig-separable_data" width="611" height="311" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-separable_data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1
@@ -648,11 +629,12 @@ Figure&nbsp;1
 </figure>
 </div>
 </div>
+</div>
 </section>
 <section id="model" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="model"><span class="header-section-number">2.2</span> Model</h3>
 <p>We use the following Stan logistic regression model, where we have “forgot” to include prior for the coefficient <code>beta</code>.</p>
-<div id="8dbd3dc2" class="cell" data-execution_count="4">
+<div id="9ebe17f4" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mod_logit <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="bu">str</span>(<span class="st">"logit_glm.stan"</span>))</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>print_stan(mod_logit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -681,7 +663,7 @@ Figure&nbsp;1
 <section id="convergence-diagnostics" class="level3" data-number="2.3">
 <h3 data-number="2.3" class="anchored" data-anchor-id="convergence-diagnostics"><span class="header-section-number">2.3</span> Convergence diagnostics</h3>
 <p>When running Stan, we get warnings. We can also explicitly check the inference diagnostics:</p>
-<div id="59d76e9a" class="cell" data-execution_count="6">
+<div id="a5553771" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>az.diagnose(dt_logit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Divergences
@@ -710,7 +692,7 @@ You should consider regularizing your model with additional prior information or
 </div>
 </div>
 <p>We can also check <span class="math inline">\(\widehat{R}\)</span> and effective sample size (ESS) diagnostics<span class="citation" data-cites="Vehtari-Gelman-Simpson-etal:2021">(<a href="#ref-Vehtari-Gelman-Simpson-etal:2021" role="doc-biblioref">Vehtari et al. 2021</a>)</span></p>
-<div id="1d03870d" class="cell" data-execution_count="7">
+<div id="8a9dc62a" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>az.summary(dt_logit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div>
@@ -794,7 +776,7 @@ Figure&nbsp;2
 <section id="a-fixed-model-with-proper-priors" class="level3" data-number="2.4">
 <h3 data-number="2.4" class="anchored" data-anchor-id="a-fixed-model-with-proper-priors"><span class="header-section-number">2.4</span> A fixed model with proper priors</h3>
 <p>We add proper weak priors and rerun inference.</p>
-<div id="e5e4643b" class="cell" data-execution_count="9">
+<div id="e2b5b044" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mod_logit2 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"logit_glm2.stan"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>print_stan(mod_logit2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -824,7 +806,7 @@ Figure&nbsp;2
 <section id="convergence-diagnostics-1" class="level4" data-number="2.4.1">
 <h4 data-number="2.4.1" class="anchored" data-anchor-id="convergence-diagnostics-1"><span class="header-section-number">2.4.1</span> Convergence diagnostics</h4>
 <p>There were no convergence warnings. We can also explicitly check the inference diagnostics:</p>
-<div id="7d57c786" class="cell" data-execution_count="11">
+<div id="c9030aa8" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>az.diagnose(dt_logit2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Divergences
@@ -846,7 +828,7 @@ Processing complete, no problems detected.</code></pre>
 </div>
 </div>
 <p>We check <span class="math inline">\(\widehat{R}\)</span> and ESS values, which in this case all look good.</p>
-<div id="bf75a727" class="cell" data-execution_count="12">
+<div id="e29d88f9" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>az.summary(dt_logit2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <div>
@@ -927,7 +909,7 @@ Figure&nbsp;3
 <p>When writing and editing models, a common mistake is to declare a parameter, but not use it in the model. If the parameter is not used at all, it doesn’t have proper prior and the likelihood doesn’t provide information about that parameter, and thus the posterior along that parameter is improper. We use the previous logistic regression model with proper priors on <code>alpha</code> and <code>beta</code>, but include extra parameter declaration <code>real gamma</code>.</p>
 <section id="model-1" class="level3" data-number="3.1">
 <h3 data-number="3.1" class="anchored" data-anchor-id="model-1"><span class="header-section-number">3.1</span> Model</h3>
-<div id="84ee759c" class="cell" data-execution_count="14">
+<div id="7a4be4aa" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mod_logit3 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"logit_glm3.stan"</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>print_stan(mod_logit3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -958,7 +940,7 @@ Figure&nbsp;3
 <section id="convergence-diagnostics-2" class="level4" data-number="3.1.1">
 <h4 data-number="3.1.1" class="anchored" data-anchor-id="convergence-diagnostics-2"><span class="header-section-number">3.1.1</span> Convergence diagnostics</h4>
 <p>There is sampler warning. We can also explicitly call inference diagnostics:</p>
-<div id="7e49983e" class="cell" data-execution_count="16">
+<div id="a4d6fa3d" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>az.diagnose(dt_logit3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Divergences
@@ -984,7 +966,7 @@ You should consider regularizing your model with additional prior information or
 </div>
 </div>
 <p>Instead of increasing <code>max_treedepth</code>, we check the other convergence diagnostics.</p>
-<div id="8017b413" class="cell" data-execution_count="17">
+<div id="af0f0253" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>az.summary(dt_logit3)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <div>
@@ -1097,7 +1079,7 @@ Figure&nbsp;5
 <p>Sometimes the models have two or more parameters that have similar or exactly the same role. We illustrate this by adding an extra column to the previous data matrix. Sometimes the data matrix is augmented with a column of 1’s to present the intercept effect. In this case that is redundant as our model has the explicit intercept term <code>alpha</code>, and this redundancy will lead to problems.</p>
 <section id="data-1" class="level3" data-number="4.1">
 <h3 data-number="4.1" class="anchored" data-anchor-id="data-1"><span class="header-section-number">4.1</span> Data</h3>
-<div id="d110569f" class="cell" data-execution_count="20">
+<div id="5fba60ac" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">1000</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.column_stack([np.ones(N), np.sort(np.random.randn(N))])</span>
@@ -1108,7 +1090,7 @@ Figure&nbsp;5
 <section id="model-2" class="level3" data-number="4.2">
 <h3 data-number="4.2" class="anchored" data-anchor-id="model-2"><span class="header-section-number">4.2</span> Model</h3>
 <p>We use the previous logistic regression model with proper priors (and no extra <code>gamma</code>).</p>
-<div id="3f1278e3" class="cell" data-execution_count="21">
+<div id="8b860e1e" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>print_stan(mod_logit2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">// logistic regression</span></span>
@@ -1139,7 +1121,7 @@ Figure&nbsp;5
 </section>
 <section id="convergence-diagnostics-3" class="level3" data-number="4.3">
 <h3 data-number="4.3" class="anchored" data-anchor-id="convergence-diagnostics-3"><span class="header-section-number">4.3</span> Convergence diagnostics</h3>
-<div id="b84216d1" class="cell" data-execution_count="23">
+<div id="50af48fa" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>az.diagnose(dt_logit4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Divergences
@@ -1160,7 +1142,7 @@ Processing complete, no problems detected.</code></pre>
 <pre><code>False</code></pre>
 </div>
 </div>
-<div id="e2541f47" class="cell" data-execution_count="24">
+<div id="6b786782" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>az.summary(dt_logit4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
 <div>
@@ -1184,39 +1166,39 @@ Processing complete, no problems detected.</code></pre>
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">alpha</th>
-<td>1.7</td>
-<td>7.1</td>
-<td>-9.6</td>
-<td>13</td>
-<td>1041</td>
-<td>1194</td>
-<td>1.00</td>
-<td>0.22</td>
+<td>1.9</td>
+<td>7.2</td>
+<td>-9.2</td>
+<td>14</td>
+<td>938</td>
+<td>963</td>
+<td>1.01</td>
+<td>0.24</td>
 <td>0.16</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">beta[0]</th>
-<td>1.7</td>
-<td>7.1</td>
+<td>1.8</td>
+<td>7.2</td>
 <td>-10</td>
 <td>13</td>
-<td>1043</td>
-<td>1191</td>
-<td>1.00</td>
-<td>0.22</td>
-<td>0.16</td>
+<td>938</td>
+<td>974</td>
+<td>1.01</td>
+<td>0.24</td>
+<td>0.17</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">beta[1]</th>
-<td>-0.11</td>
-<td>0.171</td>
-<td>-0.38</td>
+<td>-0.19</td>
+<td>0.215</td>
+<td>-0.53</td>
 <td>0.16</td>
-<td>1410</td>
-<td>1279</td>
-<td>1.01</td>
-<td>0.0047</td>
-<td>0.0034</td>
+<td>1226</td>
+<td>1489</td>
+<td>1.00</td>
+<td>0.0061</td>
+<td>0.0043</td>
 </tr>
 </tbody>
 </table>
@@ -1247,7 +1229,7 @@ Figure&nbsp;6
 </div>
 </div>
 <p>We can compute the correlation.</p>
-<div id="839b9bb1" class="cell" data-execution_count="26">
+<div id="8626612f" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>posterior_samples <span class="op">=</span> az.extract(dt_logit4)</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>alpha_samples <span class="op">=</span> posterior_samples[<span class="st">"alpha"</span>].values</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>beta_samples <span class="op">=</span> posterior_samples[<span class="st">"beta"</span>].values</span>
@@ -1270,7 +1252,7 @@ Figure&nbsp;6
 <section id="data-2" class="level3" data-number="5.1">
 <h3 data-number="5.1" class="anchored" data-anchor-id="data-2"><span class="header-section-number">5.1</span> Data</h3>
 <p>The data are Kilpisjärvi summer month temperatures 1952-2013 measured by Finnish Meteorological Institute.</p>
-<div id="5f94cd32" class="cell" data-execution_count="27">
+<div id="a1d303cc" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>data_kilpis <span class="op">=</span> pd.read_csv(<span class="st">"data/kilpisjarvi-summer-temp.csv"</span>, sep<span class="op">=</span><span class="st">";"</span>)</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="bu">len</span>(data_kilpis)</span>
@@ -1299,7 +1281,7 @@ Figure&nbsp;7
 <section id="model-3" class="level3" data-number="5.2">
 <h3 data-number="5.2" class="anchored" data-anchor-id="model-3"><span class="header-section-number">5.2</span> Model</h3>
 <p>We use the following Stan linear regression model</p>
-<div id="fa6fc860" class="cell" data-execution_count="29">
+<div id="d4a86eb3" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>mod_lin <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"linear_glm_kilpis.stan"</span>)</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>print_stan(mod_lin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -1330,7 +1312,7 @@ Figure&nbsp;7
 <section id="convergence-diagnostics-4" class="level4" data-number="5.2.1">
 <h4 data-number="5.2.1" class="anchored" data-anchor-id="convergence-diagnostics-4"><span class="header-section-number">5.2.1</span> Convergence diagnostics</h4>
 <p>Stan gives a warning: There were X transitions after warmup that exceeded the maximum treedepth. As in the previous example, there are no other warnings.</p>
-<div id="faa19853" class="cell" data-execution_count="31">
+<div id="d437c012" class="cell" data-execution_count="31">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>az.diagnose(dt_lin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Divergences
@@ -1351,7 +1333,7 @@ Processing complete, no problems detected.</code></pre>
 <pre><code>False</code></pre>
 </div>
 </div>
-<div id="c157b415" class="cell" data-execution_count="32">
+<div id="d63a7894" class="cell" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>az.summary(dt_lin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="32">
 <div>
@@ -1442,7 +1424,7 @@ Figure&nbsp;8
 </section>
 <section id="centered-data" class="level3" data-number="5.3">
 <h3 data-number="5.3" class="anchored" data-anchor-id="centered-data"><span class="header-section-number">5.3</span> Centered data</h3>
-<div id="ea9e2910" class="cell" data-execution_count="34">
+<div id="a1fc0de7" class="cell" data-execution_count="34">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>x_centered <span class="op">=</span> data_kilpis[<span class="st">"year"</span>].values <span class="op">-</span> <span class="fl">1982.5</span></span>
 <span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>data_lin <span class="op">=</span> {<span class="st">"M"</span>: M, <span class="st">"N"</span>: N, <span class="st">"x"</span>: np.atleast_2d(x_centered).T, <span class="st">"y"</span>: y}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1454,7 +1436,7 @@ Figure&nbsp;8
 <section id="convergence-diagnostics-5" class="level3" data-number="5.4">
 <h3 data-number="5.4" class="anchored" data-anchor-id="convergence-diagnostics-5"><span class="header-section-number">5.4</span> Convergence diagnostics</h3>
 <p>We check the diagnostics</p>
-<div id="5941bab0" class="cell" data-execution_count="36">
+<div id="37083c4a" class="cell" data-execution_count="36">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>az.diagnose(dt_lin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Divergences
@@ -1475,7 +1457,7 @@ Processing complete, no problems detected.</code></pre>
 <pre><code>False</code></pre>
 </div>
 </div>
-<div id="c5111ad7" class="cell" data-execution_count="37">
+<div id="c7619417" class="cell" data-execution_count="37">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>az.summary(dt_lin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="37">
 <div>
@@ -1570,7 +1552,7 @@ Figure&nbsp;9
 <section id="data-3" class="level3" data-number="6.1">
 <h3 data-number="6.1" class="anchored" data-anchor-id="data-3"><span class="header-section-number">6.1</span> Data</h3>
 <p>Bimodally distributed data</p>
-<div id="1f7006d4" class="cell" data-execution_count="39">
+<div id="bcb57170" class="cell" data-execution_count="39">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">20</span></span>
 <span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.concatenate([np.random.normal(<span class="op">-</span><span class="dv">5</span>, <span class="dv">1</span>, N <span class="op">//</span> <span class="dv">2</span>), np.random.normal(<span class="dv">5</span>, <span class="dv">1</span>, N <span class="op">//</span> <span class="dv">2</span>)])</span>
 <span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>data_tt <span class="op">=</span> {<span class="st">"N"</span>: N, <span class="st">"y"</span>: y}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1579,7 +1561,7 @@ Figure&nbsp;9
 <section id="model-4" class="level3" data-number="6.2">
 <h3 data-number="6.2" class="anchored" data-anchor-id="model-4"><span class="header-section-number">6.2</span> Model</h3>
 <p>Unimodal Student’s <span class="math inline">\(t\)</span> model:</p>
-<div id="6a3324c3" class="cell" data-execution_count="40">
+<div id="938926a7" class="cell" data-execution_count="40">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>mod_tt <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"student.stan"</span>)</span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>print_stan(mod_tt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -1605,7 +1587,7 @@ Figure&nbsp;9
 <section id="convergence-diagnostics-6" class="level4" data-number="6.2.1">
 <h4 data-number="6.2.1" class="anchored" data-anchor-id="convergence-diagnostics-6"><span class="header-section-number">6.2.1</span> Convergence diagnostics</h4>
 <p>We check the diagnostics</p>
-<div id="95522b32" class="cell" data-execution_count="42">
+<div id="1b560472" class="cell" data-execution_count="42">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>az.diagnose(dt_tt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Divergences
@@ -1630,7 +1612,7 @@ You should consider regularizing your model with additional prior information or
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="bae51141" class="cell" data-execution_count="43">
+<div id="d3bb3616" class="cell" data-execution_count="43">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>az.summary(dt_tt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="43">
 <div>
@@ -1655,14 +1637,14 @@ You should consider regularizing your model with additional prior information or
 <tr class="odd">
 <th data-quarto-table-cell-role="th">mu</th>
 <td>-0</td>
-<td>4.3</td>
-<td>-5</td>
-<td>4.7</td>
+<td>3.9</td>
+<td>-4.6</td>
+<td>4.1</td>
 <td>6</td>
-<td>38</td>
-<td>1.74</td>
-<td>2.1</td>
-<td>0.22</td>
+<td>40</td>
+<td>1.73</td>
+<td>1.9</td>
+<td>0.23</td>
 </tr>
 </tbody>
 </table>
@@ -1701,7 +1683,7 @@ Figure&nbsp;10
 <section id="easy-bimodal-posterior" class="level2" data-number="7">
 <h2 data-number="7" class="anchored" data-anchor-id="easy-bimodal-posterior"><span class="header-section-number">7</span> Easy bimodal posterior</h2>
 <p>If the modes in the bimodal distribution are not strongly separated, MCMC can jump from one mode to another and there are no convergence issues.</p>
-<div id="d7f7a920" class="cell" data-execution_count="45">
+<div id="1616cd57" class="cell" data-execution_count="45">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">20</span></span>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.concatenate([rng.normal(<span class="op">-</span><span class="dv">3</span>, <span class="dv">1</span>, N <span class="op">//</span> <span class="dv">2</span>), rng.normal(<span class="dv">3</span>, <span class="dv">1</span>, N <span class="op">//</span> <span class="dv">2</span>)])</span>
 <span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>data_tt <span class="op">=</span> {<span class="st">"N"</span>: N, <span class="st">"y"</span>: y}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1713,7 +1695,7 @@ Figure&nbsp;10
 <section id="convergence-diagnostics-7" class="level3" data-number="7.1">
 <h3 data-number="7.1" class="anchored" data-anchor-id="convergence-diagnostics-7"><span class="header-section-number">7.1</span> Convergence diagnostics</h3>
 <p>We check the diagnostics</p>
-<div id="29f19da1" class="cell" data-execution_count="47">
+<div id="c5bc52a0" class="cell" data-execution_count="47">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>az.diagnose(dt_tt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Divergences
@@ -1734,7 +1716,7 @@ Processing complete, no problems detected.</code></pre>
 <pre><code>False</code></pre>
 </div>
 </div>
-<div id="15597d1d" class="cell" data-execution_count="48">
+<div id="f4491179" class="cell" data-execution_count="48">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>az.summary(dt_tt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="48">
 <div>
@@ -1831,7 +1813,7 @@ Figure&nbsp;13
 <p>We intentionally generate the data so that there are initialization problems, but the same problem is common with real data when the scale of the predictors is large or small compared to the unit scale. The following figure shows the simulated data.</p>
 <section id="data-4" class="level3" data-number="8.1">
 <h3 data-number="8.1" class="anchored" data-anchor-id="data-4"><span class="header-section-number">8.1</span> Data</h3>
-<div id="c082b3f2" class="cell" data-execution_count="52">
+<div id="0ef45d9f" class="cell" data-execution_count="52">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(SEED <span class="op">+</span> <span class="dv">6</span>)</span>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">20</span></span>
@@ -1860,7 +1842,7 @@ Figure&nbsp;14
 <section id="model-5" class="level3" data-number="8.2">
 <h3 data-number="8.2" class="anchored" data-anchor-id="model-5"><span class="header-section-number">8.2</span> Model</h3>
 <p>We use a Poisson regression model with proper priors. The <code>poisson_log_glm</code> corresponds to a distribution in which the log intensity of the Poisson distribution is modeled with <code>alpha + beta * x</code> but is implemented with better computational efficiency.</p>
-<div id="10a88521" class="cell" data-execution_count="54">
+<div id="6fad9240" class="cell" data-execution_count="54">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>mod_pois <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"pois_glm.stan"</span>)</span>
 <span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>print_stan(mod_pois)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -1893,7 +1875,7 @@ Figure&nbsp;14
 <section id="convergence-diagnostics-8" class="level3" data-number="8.3">
 <h3 data-number="8.3" class="anchored" data-anchor-id="convergence-diagnostics-8"><span class="header-section-number">8.3</span> Convergence diagnostics</h3>
 <p>We check the diagnostics:</p>
-<div id="c283d6c7" class="cell" data-execution_count="56">
+<div id="02fa6ee8" class="cell" data-execution_count="56">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>az.diagnose(dt_pois)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Divergences
@@ -1920,7 +1902,7 @@ You should consider regularizing your model with additional prior information or
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="bd4c9156" class="cell" data-execution_count="57">
+<div id="24455429" class="cell" data-execution_count="57">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>dt_pois <span class="op">=</span> az.from_cmdstanpy(fit_pois)</span>
 <span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>az.summary(dt_pois)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="57">
@@ -1999,7 +1981,7 @@ Figure&nbsp;15
 <section id="scaled-data" class="level3" data-number="8.4">
 <h3 data-number="8.4" class="anchored" data-anchor-id="scaled-data"><span class="header-section-number">8.4</span> Scaled data</h3>
 <p>Sometimes an easy option is to change the initialization range. For example, in this case the sampling succeeds if the initial values are drawn from the range <span class="math inline">\((-0.001, 0.001)\)</span>. Alternatively we can scale <code>x</code> to have scale close to unit scale. After this scaling, the computation is fast and all convergence diagnostics look good.</p>
-<div id="71b840ed" class="cell" data-execution_count="59">
+<div id="ba994bca" class="cell" data-execution_count="59">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb86"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a>data_pois <span class="op">=</span> {<span class="st">'M'</span>: M, <span class="st">'N'</span>: N, <span class="st">'x'</span>: x <span class="op">/</span> <span class="fl">1e3</span>, <span class="st">'y'</span>: y}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div id="cell-fig-poisson_data2" class="cell" data-execution_count="60">
@@ -2027,7 +2009,7 @@ Figure&nbsp;16
 <section id="convergence-diagnostics-9" class="level3" data-number="8.5">
 <h3 data-number="8.5" class="anchored" data-anchor-id="convergence-diagnostics-9"><span class="header-section-number">8.5</span> Convergence diagnostics</h3>
 <p>We check the diagnostics:</p>
-<div id="6b9dbda3" class="cell" data-execution_count="62">
+<div id="97e23cc6" class="cell" data-execution_count="62">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>az.diagnose(dt_pois)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Divergences
@@ -2048,7 +2030,7 @@ Processing complete, no problems detected.</code></pre>
 <pre><code>False</code></pre>
 </div>
 </div>
-<div id="ef2dedc1" class="cell" data-execution_count="63">
+<div id="6d211205" class="cell" data-execution_count="63">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb92"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>az.summary(dt_pois)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="63">
 <div>
@@ -2142,7 +2124,7 @@ Processing complete, no problems detected.</code></pre>
 <section id="convergence-diagnostics-10" class="level3" data-number="9.2">
 <h3 data-number="9.2" class="anchored" data-anchor-id="convergence-diagnostics-10"><span class="header-section-number">9.2</span> Convergence diagnostics</h3>
 <p>We check diagnostics</p>
-<div id="746deca6" class="cell" data-execution_count="66">
+<div id="e740a491" class="cell" data-execution_count="66">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>az.diagnose(dt_logit_glm4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Divergences
@@ -2170,7 +2152,7 @@ You should consider regularizing your model with additional prior information or
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="4523093e" class="cell" data-execution_count="67">
+<div id="4f461849" class="cell" data-execution_count="67">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb99"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a>az.summary(dt_logit_glm4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="67">
 <div>
@@ -2261,7 +2243,7 @@ Figure&nbsp;18
 </div>
 </div>
 <p>More iterations confirm a reasonable mixing.</p>
-<div id="d2b3515a" class="cell" data-execution_count="70">
+<div id="c1c1e589" class="cell" data-execution_count="70">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>fit_logit_glm4 <span class="op">=</span> mod_logit_glm4.sample(</span>
 <span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>data_logit, </span>
 <span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>    seed<span class="op">=</span>SEED, </span>
@@ -2269,7 +2251,7 @@ Figure&nbsp;18
 <span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a>    iter_sampling<span class="op">=</span><span class="dv">4000</span></span>
 <span id="cb102-6"><a href="#cb102-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="07f31bf0" class="cell" data-execution_count="71">
+<div id="cf8f4b90" class="cell" data-execution_count="71">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb103"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>idata_logit_glm4 <span class="op">=</span> az.from_cmdstanpy(fit_logit_glm4)</span>
 <span id="cb103-2"><a href="#cb103-2" aria-hidden="true" tabindex="-1"></a>az.summary(idata_logit_glm4)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="71">
@@ -2345,7 +2327,7 @@ Figure&nbsp;19
 <section id="data-5" class="level3" data-number="10.1">
 <h3 data-number="10.1" class="anchored" data-anchor-id="data-5"><span class="header-section-number">10.1</span> Data</h3>
 <p>We simulated x and y independently from normal(0,1) and normal(0,0.1) respectively. As <span class="math inline">\(N=8\)</span> is small, there will be a lot of uncertainty about the parameters including the scale sigma.</p>
-<div id="dbff90be" class="cell" data-execution_count="73">
+<div id="f76491c4" class="cell" data-execution_count="73">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb105"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb105-2"><a href="#cb105-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">8</span></span>
 <span id="cb105-3"><a href="#cb105-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(SEED)</span>
@@ -2357,7 +2339,7 @@ Figure&nbsp;19
 <section id="model-7" class="level3" data-number="10.2">
 <h3 data-number="10.2" class="anchored" data-anchor-id="model-7"><span class="header-section-number">10.2</span> Model</h3>
 <p>We use linear regression model with proper priors.</p>
-<div id="457421ad" class="cell" data-execution_count="74">
+<div id="02a00547" class="cell" data-execution_count="74">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb106"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>mod_lin <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"linear_glm.stan"</span>)</span>
 <span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>print_stan(mod_lin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -2393,7 +2375,7 @@ Figure&nbsp;19
 <section id="convergence-diagnostics-11" class="level3" data-number="10.3">
 <h3 data-number="10.3" class="anchored" data-anchor-id="convergence-diagnostics-11"><span class="header-section-number">10.3</span> Convergence diagnostics</h3>
 <p>We check diagnostics</p>
-<div id="fa108ef5" class="cell" data-execution_count="76">
+<div id="43e3995d" class="cell" data-execution_count="76">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb109"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb109-1"><a href="#cb109-1" aria-hidden="true" tabindex="-1"></a>az.diagnose(idata_lin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Divergences
@@ -2415,7 +2397,7 @@ R-hat values satisfactory for all parameters.</code></pre>
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="915bcf3e" class="cell" data-execution_count="77">
+<div id="11be9064" class="cell" data-execution_count="77">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a>az.summary(idata_lin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="77">
 <div>
@@ -2485,7 +2467,7 @@ R-hat values satisfactory for all parameters.</code></pre>
 <p>Stan compiler pedantic check can recognize that a normal distribution is given parameter sigma as a scale parameter, but sigma was not constrained to be strictly positive. The pedantic check is also warning about the very wide priors.</p>
 <p>After fixing the model with proper parameter constraint, MCMC runs without warnings and the sampling efficiency is better. In this specific case, the bias is negligible when running MCMC with the model code without the constraint, but it is difficult to diagnose without running the fixed model.</p>
 <p>Fixed model includes <code>&lt;lower=0&gt;</code> constraint for sigma.</p>
-<div id="8dffa370" class="cell" data-execution_count="78">
+<div id="7bccbf75" class="cell" data-execution_count="78">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb113"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb113-1"><a href="#cb113-1" aria-hidden="true" tabindex="-1"></a>mod_lin2 <span class="op">=</span> CmdStanModel(stan_file<span class="op">=</span><span class="st">"linear_glm2.stan"</span>)</span>
 <span id="cb113-2"><a href="#cb113-2" aria-hidden="true" tabindex="-1"></a>print_stan(mod_lin2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
@@ -2514,7 +2496,7 @@ R-hat values satisfactory for all parameters.</code></pre>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb115"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a>fit_lin2 <span class="op">=</span> mod_lin2.sample(data<span class="op">=</span>data_lin, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>We check diagnostics</p>
-<div id="fdb28468" class="cell" data-execution_count="80">
+<div id="6a4c5c52" class="cell" data-execution_count="80">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb116"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a>idata_lin2 <span class="op">=</span> az.from_cmdstanpy(fit_lin2)</span>
 <span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a>az.summary(idata_lin2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="80">
@@ -3181,7 +3163,7 @@ Vehtari, Aki, Andrew Gelman, Daniel Simpson, Bob Carpenter, and Paul-Christian B
 <span id="cb117-101"><a href="#cb117-101" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">3</span>))</span>
 <span id="cb117-102"><a href="#cb117-102" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb117-103"><a href="#cb117-103" aria-hidden="true" tabindex="-1"></a>ax.scatter(df[<span class="st">"x"</span>], df[<span class="st">"y"</span>])</span>
-<span id="cb117-104"><a href="#cb117-104" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(yticks<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>], xlabel<span class="op">=</span><span class="st">"x"</span>, ylabel<span class="op">=</span><span class="st">"y"</span>)</span>
+<span id="cb117-104"><a href="#cb117-104" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(yticks<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>], xlabel<span class="op">=</span><span class="st">"x"</span>, ylabel<span class="op">=</span><span class="st">"y"</span>)<span class="op">;</span></span>
 <span id="cb117-105"><a href="#cb117-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb117-106"><a href="#cb117-106" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb117-107"><a href="#cb117-107" aria-hidden="true" tabindex="-1"></a><span class="fu">### Model</span></span>

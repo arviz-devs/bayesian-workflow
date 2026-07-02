@@ -533,7 +533,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2026-07-01</p>
+      <p class="date-modified">2026-07-02</p>
     </div>
   </div>
     
@@ -575,7 +575,7 @@ window.Quarto = {
 <section id="data" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="data"><span class="header-section-number">3</span> Data</h2>
 <p>Get the data from Regression and Other Stories repository</p>
-<div id="c351082c" class="cell" data-execution_count="2">
+<div id="24756a61" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>student <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/avehtari/ROS-Examples/master/Student/data/student-merged-all.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># List the predictors to be used</span></span>
@@ -587,7 +587,7 @@ window.Quarto = {
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The data includes 3 grades for both mathematics and Portuguese. To reduce the variability in the outcome we use median grades based on those three exams for each topic. We select only students with non-zero grades.</p>
-<div id="195383b8" class="cell" data-execution_count="3">
+<div id="e8d8b04e" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>grades <span class="op">=</span> [<span class="st">"G1mat"</span>, <span class="st">"G2mat"</span>, <span class="st">"G3mat"</span>, <span class="st">"G1por"</span>, <span class="st">"G2por"</span>, <span class="st">"G3por"</span>]</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace 0 with NaN for grade columns</span></span>
@@ -1196,7 +1196,7 @@ Portuguese students: 657</code></pre>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>ax2.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Median Portuguese exam score"</span>, yticks<span class="op">=</span>[])</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>ax2.spines[[<span class="st">"top"</span>, <span class="st">"right"</span>]].set_visible(<span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-data-histograms" class="quarto-float quarto-figure quarto-figure-center anchored" height="311" width="1011">
+<div id="fig-data-histograms" class="quarto-float quarto-figure quarto-figure-center anchored" width="1011" height="311">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-histograms-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="variable_selection_files/figure-html/fig-data-histograms-output-1.png" id="fig-data-histograms" width="1011" height="311" class="figure-img">
@@ -1209,7 +1209,7 @@ Figure&nbsp;1
 </div>
 </div>
 <p>We standardize all to have standard deviation 1, to make the comparison of relevances easier and also to make the definition of priors easier.</p>
-<div id="3fdde390" class="cell" data-execution_count="5">
+<div id="62c7ad4a" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Standardize predictors for math</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>studentstd_Gmat <span class="op">=</span> student_Gmat.copy()</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>studentstd_Gmat[predictors] <span class="op">=</span> (student_Gmat[predictors] <span class="op">-</span> student_Gmat[predictors].mean()) <span class="op">/</span> student_Gmat[predictors].std()</span>
@@ -1547,7 +1547,7 @@ for Jupyter support
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/pymc/sampling/mcmc.py:1163: FutureWarning: Passing `log_likelihood` via `idata_kwargs` is deprecated and will be removed in future versions. Call `pm.compute_log_likelihood(idata)` instead.
   return _sample_return(
-Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 5 seconds.</code></pre>
+Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 6 seconds.</code></pre>
 </div>
 <div id="fitm_u-3" class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>       Formula: Gmat ~ school + sex + age + address + famsize + Pstatus + Medu + Fedu + traveltime + studytime + failures + schoolsup + famsup + paid + activities + nursery + higher + internet + romantic + famrel + freetime + goout + Dalc + Walc + health + absences
@@ -1593,13 +1593,13 @@ Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws 
 </div>
 </div>
 <p>If we compare bayesian-<span class="math inline">\(R^2\)</span> and LOO-<span class="math inline">\(R^2\)</span>, we see that the bayesian-<span class="math inline">\(R^2\)</span> is much higher, which means that the posterior estimate for the residual variance is strongly underestimated and the model has overfitted the data.</p>
-<div id="cb6a5a90" class="cell" data-execution_count="7">
+<div id="2a42ec9d" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>az.bayesian_r2(fitm_u_idata, pred_mean<span class="op">=</span><span class="st">"mu"</span>, scale<span class="op">=</span><span class="st">"sigma"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>bayesian_R2(mean=0.3, eti_lb=0.24, eti_ub=0.37)</code></pre>
 </div>
 </div>
-<div id="9749b6a8" class="cell" data-execution_count="8">
+<div id="e5706f00" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>az.loo_r2(fitm_u_idata, var_name<span class="op">=</span><span class="st">"Gmat"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>loo_R2(mean=0.19, eti_lb=0.1, eti_ub=0.26)</code></pre>
@@ -1615,7 +1615,7 @@ Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws 
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>pc.coords <span class="op">=</span> {<span class="st">"column"</span>: <span class="st">"ridge"</span>}</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-fitmu-mcmc_areas" class="quarto-float quarto-figure quarto-figure-center anchored" height="1108" width="1211">
+<div id="fig-fitmu-mcmc_areas" class="quarto-float quarto-figure quarto-figure-center anchored" width="1211" height="1108">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fitmu-mcmc_areas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="variable_selection_files/figure-html/fig-fitmu-mcmc_areas-output-1.png" id="fig-fitmu-mcmc_areas" width="1211" height="1108" class="figure-img">
@@ -1699,7 +1699,7 @@ for Jupyter support
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/pymc/sampling/mcmc.py:1163: FutureWarning: Passing `log_likelihood` via `idata_kwargs` is deprecated and will be removed in future versions. Call `pm.compute_log_likelihood(idata)` instead.
   return _sample_return(
-Sampling 4 chains for 1_000 tune and 4_000 draw iterations (4_000 + 16_000 draws total) took 8 seconds.
+Sampling 4 chains for 1_000 tune and 4_000 draw iterations (4_000 + 16_000 draws total) took 9 seconds.
 Sampling: [Dalc, Fedu, Gmat, Intercept, Medu, Pstatus, Walc, absences, activities, address, age, failures, famrel, famsize, famsup, freetime, goout, health, higher, internet, nursery, paid, romantic, school, schoolsup, sex, sigma, studytime, traveltime]
 Sampling: [Dalc, Fedu, Gmat, Intercept, Medu, Pstatus, Walc, absences, activities, address, age, failures, famrel, famsize, famsup, freetime, goout, health, higher, internet, nursery, paid, romantic, school, schoolsup, sex, sigma, studytime, traveltime]</code></pre>
 </div>
@@ -1735,7 +1735,7 @@ for Jupyter support
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/pymc/sampling/mcmc.py:1163: FutureWarning: Passing `log_likelihood` via `idata_kwargs` is deprecated and will be removed in future versions. Call `pm.compute_log_likelihood(idata)` instead.
   return _sample_return(
-Sampling 4 chains for 1_000 tune and 4_000 draw iterations (4_000 + 16_000 draws total) took 8 seconds.
+Sampling 4 chains for 1_000 tune and 4_000 draw iterations (4_000 + 16_000 draws total) took 9 seconds.
 Sampling: [Dalc, Fedu, Gmat, Intercept, Medu, Pstatus, Walc, absences, activities, address, age, failures, famrel, famsize, famsup, freetime, goout, health, higher, internet, nursery, paid, romantic, school, schoolsup, sex, sigma, studytime, traveltime]</code></pre>
 </div>
 </div>
@@ -1816,7 +1816,7 @@ for Jupyter support
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/pymc/sampling/mcmc.py:1163: FutureWarning: Passing `log_likelihood` via `idata_kwargs` is deprecated and will be removed in future versions. Call `pm.compute_log_likelihood(idata)` instead.
   return _sample_return(
-Sampling 4 chains for 1_000 tune and 4_000 draw iterations (4_000 + 16_000 draws total) took 66 seconds.
+Sampling 4 chains for 1_000 tune and 4_000 draw iterations (4_000 + 16_000 draws total) took 72 seconds.
 There were 456 divergences after tuning. Increase `target_accept` or reparameterize.
 Sampling: [Dalc_caux, Dalc_lam, Dalc_tau, Dalc_z, Fedu_caux, Fedu_lam, Fedu_tau, Fedu_z, Gmat, Intercept, Medu_caux, Medu_lam, Medu_tau, Medu_z, Pstatus_caux, Pstatus_lam, Pstatus_tau, Pstatus_z, Walc_caux, Walc_lam, Walc_tau, Walc_z, absences_caux, absences_lam, absences_tau, absences_z, activities_caux, activities_lam, activities_tau, activities_z, address_caux, address_lam, address_tau, address_z, age_caux, age_lam, age_tau, age_z, failures_caux, failures_lam, failures_tau, failures_z, famrel_caux, famrel_lam, famrel_tau, famrel_z, famsize_caux, famsize_lam, famsize_tau, famsize_z, famsup_caux, famsup_lam, famsup_tau, famsup_z, freetime_caux, freetime_lam, freetime_tau, freetime_z, goout_caux, goout_lam, goout_tau, goout_z, health_caux, health_lam, health_tau, health_z, higher_caux, higher_lam, higher_tau, higher_z, internet_caux, internet_lam, internet_tau, internet_z, nursery_caux, nursery_lam, nursery_tau, nursery_z, paid_caux, paid_lam, paid_tau, paid_z, romantic_caux, romantic_lam, romantic_tau, romantic_z, school_caux, school_lam, school_tau, school_z, schoolsup_caux, schoolsup_lam, schoolsup_tau, schoolsup_z, sex_caux, sex_lam, sex_tau, sex_z, sigma, studytime_caux, studytime_lam, studytime_tau, studytime_z, traveltime_caux, traveltime_lam, traveltime_tau, traveltime_z]</code></pre>
 </div>
@@ -1900,13 +1900,13 @@ for Jupyter support
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/pymc/sampling/mcmc.py:1163: FutureWarning: Passing `log_likelihood` via `idata_kwargs` is deprecated and will be removed in future versions. Call `pm.compute_log_likelihood(idata)` instead.
   return _sample_return(
-Sampling 4 chains for 1_000 tune and 4_000 draw iterations (4_000 + 16_000 draws total) took 42 seconds.
+Sampling 4 chains for 1_000 tune and 4_000 draw iterations (4_000 + 16_000 draws total) took 51 seconds.
 There were 2 divergences after tuning. Increase `target_accept` or reparameterize.
 Sampling: [Dalc_z, Fedu_z, Gmat, Intercept, Medu_z, Pstatus_z, Walc_z, absences_z, activities_z, address_z, age_z, common_R2, common_phi, failures_z, famrel_z, famsize_z, famsup_z, freetime_z, goout_z, health_z, higher_z, internet_z, nursery_z, paid_z, romantic_z, school_z, schoolsup_z, sex_z, sigma, studytime_z, traveltime_z]</code></pre>
 </div>
 </div>
 <p>``</p>
-<div id="9a7ef555" class="cell" data-execution_count="14">
+<div id="fb07d3ce" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"wide normal"</span>: mod_n1p_res,</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"scaled normal"</span>: mod_n2p_res,</span>
@@ -1947,7 +1947,7 @@ Sampling: [Dalc_z, Fedu_z, Gmat, Intercept, Medu_z, Pstatus_z, Walc_z, absences_
 </div>
 </div>
 </div>
-<div id="2acdcfe7" class="cell" data-execution_count="15">
+<div id="a87e8165" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use the truncated studet t prior for the wide normal (just a trick to get more prior predictive samples for the wide normal in the interesting region)</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"wide normal"</span>: mod_n1pt_res,</span>
@@ -1994,7 +1994,7 @@ Sampling: [Dalc_z, Fedu_z, Gmat, Intercept, Medu_z, Pstatus_z, Walc_z, absences_
 </div>
 </div>
 </div>
-<div id="d25a6248" class="cell" data-execution_count="16">
+<div id="93c235cf" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"wide normal"</span>: mod_n1_res,</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"scaled normal"</span>: mod_n2_res,</span>
@@ -2034,7 +2034,7 @@ Sampling: [Dalc_z, Fedu_z, Gmat, Intercept, Medu_z, Pstatus_z, Walc_z, absences_
 </div>
 </div>
 </div>
-<div id="1ef6f20f" class="cell" data-execution_count="17">
+<div id="584c8bc7" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"wide normal"</span>: mod_n1_res,</span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"scaled normal"</span>: mod_n2_res,</span>
@@ -2088,7 +2088,7 @@ Sampling: [Dalc_z, Fedu_z, Gmat, Intercept, Medu_z, Pstatus_z, Walc_z, absences_
 <span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>pc.coords <span class="op">=</span> {<span class="st">"column"</span>: <span class="st">"ridge"</span>}</span>
 <span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-fitm-mcmc_areas" class="quarto-float quarto-figure quarto-figure-center anchored" height="1108" width="1211">
+<div id="fig-fitm-mcmc_areas" class="quarto-float quarto-figure quarto-figure-center anchored" width="1211" height="1108">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fitm-mcmc_areas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="variable_selection_files/figure-html/fig-fitm-mcmc_areas-output-1.png" id="fig-fitm-mcmc_areas" width="1211" height="1108" class="figure-img">
@@ -2104,7 +2104,7 @@ Figure&nbsp;3
 <div id="cell-fig-fitm-mcmc_scatter-Fedu-Medu" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>az.plot_pair(mod_r2d2_res, var_names<span class="op">=</span>[<span class="st">"Fedu"</span>, <span class="st">"Medu"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-fitm-mcmc_scatter-fedu-medu" class="quarto-float quarto-figure quarto-figure-center anchored" height="430" width="1211">
+<div id="fig-fitm-mcmc_scatter-fedu-medu" class="quarto-float quarto-figure quarto-figure-center anchored" width="1211" height="430">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fitm-mcmc_scatter-fedu-medu-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="variable_selection_files/figure-html/fig-fitm-mcmc_scatter-fedu-medu-output-1.png" id="fig-fitm-mcmc_scatter-fedu-medu" width="1211" height="430" class="figure-img">
@@ -2123,7 +2123,7 @@ Figure&nbsp;4
 <div id="cell-fig-fitm-ppc-hist" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_dist(mod_r2d2_res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-fitm-ppc-hist" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
+<div id="fig-fitm-ppc-hist" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fitm-ppc-hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="variable_selection_files/figure-html/fig-fitm-ppc-hist-output-1.png" id="fig-fitm-ppc-hist" width="611" height="279" class="figure-img">
@@ -2139,7 +2139,7 @@ Figure&nbsp;5
 <div id="cell-fig-fitm-ppc-loo" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(mod_r2d2_res)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-fitm-ppc-loo" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
+<div id="fig-fitm-ppc-loo" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fitm-ppc-loo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="variable_selection_files/figure-html/fig-fitm-ppc-loo-output-1.png" id="fig-fitm-ppc-loo" width="611" height="279" class="figure-img">
@@ -2159,7 +2159,7 @@ Figure&nbsp;6
 <section id="math-exam-score" class="level3" data-number="8.1">
 <h3 data-number="8.1" class="anchored" data-anchor-id="math-exam-score"><span class="header-section-number">8.1</span> Math exam score</h3>
 <p>Currently Kulprit does not support models with paramters that depend on other parameters, so we use the model with scaled normal prior for the projection predictive variable selection. But the model with R2D2 prior is used as the reference model (that’s why we compute the ELPD from it, and we pass the InferenceData from that model’s fit).</p>
-<div id="cf728350" class="cell" data-execution_count="22">
+<div id="984b3210" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The predictions (in the InferenceData) and the ELPD come from the reference model (R2D2 prior)</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and we use `mod_n2` to specify the covariates to be used in the search.</span></span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>ref_idata <span class="op">=</span> az.loo(mod_r2d2_res, pointwise<span class="op">=</span><span class="va">True</span>)</span>
@@ -2167,7 +2167,7 @@ Figure&nbsp;6
 <span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>ppi.project(early_stop<span class="op">=</span><span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The following plot shows the relevance order of the predictors and estimated predictive performance given those variables. To speed up the search we stop the search after 10 predictors have been added. In practice, if we don’t have a strong prior belief about the number of relevant predictors, we could continue the search until all predictors have been added.</p>
-<div id="b3671f60" class="cell" data-execution_count="23">
+<div id="7748e2e2" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>cmp_df <span class="op">=</span> ppi.compare(min_model_size<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>kpt.plot_compare(cmp_df)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -2179,7 +2179,7 @@ Figure&nbsp;6
 </div>
 </div>
 <p><code>kulprit</code> can also provide suggestion for the sufficient model size.</p>
-<div id="7e63420c" class="cell" data-execution_count="24">
+<div id="a4ec33f4" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>selected_1 <span class="op">=</span> ppi.select()</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>selected_1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="24">
@@ -2187,7 +2187,7 @@ Figure&nbsp;6
 </div>
 </div>
 <p>Check the projected posterior for the selected model. The marginals of the projected posterior are all clearly away from 0.</p>
-<div id="bf041595" class="cell" data-execution_count="25">
+<div id="762d0d56" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> kpt.plot_forest(ppi, submodels<span class="op">=</span>[selected_1.size])</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>pc.coords <span class="op">=</span> {<span class="st">"column"</span>: <span class="st">"forest"</span>}</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -2203,7 +2203,7 @@ Figure&nbsp;6
 <section id="portuguese-exam-scores" class="level3" data-number="8.2">
 <h3 data-number="8.2" class="anchored" data-anchor-id="portuguese-exam-scores"><span class="header-section-number">8.2</span> Portuguese exam scores</h3>
 <p>We repeat the same, but predicting grade for Portuguese instead of mathematics</p>
-<div id="76ea7883" class="cell" data-execution_count="26">
+<div id="f5ad87a3" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>formula <span class="op">=</span> <span class="st">"Gpor ~ "</span> <span class="op">+</span> <span class="st">" + "</span>.join(predictors)</span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>r2d2_fn <span class="op">=</span> make_r2d2(p, mean_R2, prec_R2, cons_D2)</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -2237,25 +2237,25 @@ for Jupyter support
 <div class="cell-output cell-output-stderr">
 <pre><code>/home/osvaldo/anaconda3/envs/bwb/lib/python3.14/site-packages/pymc/sampling/mcmc.py:1163: FutureWarning: Passing `log_likelihood` via `idata_kwargs` is deprecated and will be removed in future versions. Call `pm.compute_log_likelihood(idata)` instead.
   return _sample_return(
-Sampling 4 chains for 1_000 tune and 4_000 draw iterations (4_000 + 16_000 draws total) took 59 seconds.
+Sampling 4 chains for 1_000 tune and 4_000 draw iterations (4_000 + 16_000 draws total) took 62 seconds.
 There were 77 divergences after tuning. Increase `target_accept` or reparameterize.</code></pre>
 </div>
 </div>
 <p>Compare bayesian-<span class="math inline">\(R^2\)</span> and LOO-<span class="math inline">\(R^2\)</span>. We see that Portuguese grade is easier to predict given the predictors (but there is still a lot of unexplained variance).</p>
-<div id="1f3d0e78" class="cell" data-execution_count="27">
+<div id="5015e918" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>az.bayesian_r2(mod_r2d2_por_res, pred_mean<span class="op">=</span><span class="st">"mu"</span>, scale<span class="op">=</span><span class="st">"sigma"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="27">
 <pre><code>bayesian_R2(mean=0.32, eti_lb=0.24, eti_ub=0.39)</code></pre>
 </div>
 </div>
-<div id="51594c81" class="cell" data-execution_count="28">
+<div id="87445b76" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>az.loo_r2(mod_r2d2_por_res, var_name<span class="op">=</span><span class="st">"Gpor"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
 <pre><code>loo_R2(mean=0.28, eti_lb=0.21, eti_ub=0.34)</code></pre>
 </div>
 </div>
 <p>Plot marginal posteriors of coefficients</p>
-<div id="e207c05a" class="cell" data-execution_count="29">
+<div id="c7dc67d4" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_ridge(</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>    mod_r2d2_por_res,</span>
 <span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span>predictors,</span>
@@ -2273,7 +2273,7 @@ There were 77 divergences after tuning. Increase `target_accept` or reparameteri
 </div>
 </div>
 <p>We use projection predictive variable selection.</p>
-<div id="c294cc70" class="cell" data-execution_count="30">
+<div id="804e9a5b" class="cell" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>formula <span class="op">=</span> <span class="st">"Gpor ~ "</span> <span class="op">+</span> <span class="st">" + "</span>.join(predictors)</span>
 <span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>mod_por <span class="op">=</span> bmb.Model(</span>
@@ -2292,7 +2292,7 @@ There were 77 divergences after tuning. Increase `target_accept` or reparameteri
 </div>
 </div>
 <p>The following plot shows the relevance order of the predictors and estimated predictive performance given those variables.</p>
-<div id="0305c0c8" class="cell" data-execution_count="31">
+<div id="6f3b50ba" class="cell" data-execution_count="31">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>cmp_df_por <span class="op">=</span> ppi_por.compare(min_model_size<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>kpt.plot_compare(cmp_df_por)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -2304,7 +2304,7 @@ There were 77 divergences after tuning. Increase `target_accept` or reparameteri
 </div>
 </div>
 <p><code>kulprit</code> can also provide suggestion for the sufficient model size.</p>
-<div id="ba16d800" class="cell" data-execution_count="32">
+<div id="0f6ccebe" class="cell" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>selected_2 <span class="op">=</span> ppi_por.select()</span>
 <span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>selected_2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="32">
@@ -2312,7 +2312,7 @@ There were 77 divergences after tuning. Increase `target_accept` or reparameteri
 </div>
 </div>
 <p>Check the projected posterior for the selected model.</p>
-<div id="44b7b431" class="cell" data-execution_count="33">
+<div id="eda06eaa" class="cell" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>pc_por <span class="op">=</span> kpt.plot_forest(ppi_por, submodels<span class="op">=</span>[selected_2.size])</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>pc_por.coords <span class="op">=</span> {<span class="st">"column"</span>: <span class="st">"forest"</span>}</span>
 <span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc_por, <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
