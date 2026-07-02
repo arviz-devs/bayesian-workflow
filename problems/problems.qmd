@@ -95,7 +95,7 @@ df = pd.DataFrame({"x": x.flatten(), "y": y})
 _, ax = plt.subplots(figsize=(6, 3))
 
 ax.scatter(df["x"], df["y"])
-ax.set(yticks=[0, 1], xlabel="x", ylabel="y")
+ax.set(yticks=[0, 1], xlabel="x", ylabel="y");
 ```
 
 ### Model
