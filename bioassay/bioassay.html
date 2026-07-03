@@ -453,6 +453,18 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../timeseries/timeseries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ch 20: Using a fitted model for decision analysis: Mixture model for time series competition</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../dogs/dogs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ch 21: Posterior predictive checking: Stochastic learning in dogs – brms</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../dogs/dogs_stan.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ch 21: Posterior predictive checking: Stochastic learning in dogs – Stan</span></a>
   </div>
@@ -533,7 +545,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2026-07-02</p>
+      <p class="date-modified">2026-07-03</p>
     </div>
   </div>
     
@@ -651,7 +663,7 @@ window.Quarto = {
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Dose log(g/ml)"</span>, ylabel<span class="op">=</span><span class="st">"# of deaths"</span>)</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>ax.spines[[<span class="st">"top"</span>, <span class="st">"right"</span>]].set_visible(<span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-bioassay-data-plot" class="quarto-float quarto-figure quarto-figure-center anchored" height="308" width="533">
+<div id="fig-bioassay-data-plot" class="quarto-float quarto-figure quarto-figure-center anchored" width="533" height="308">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bioassay-data-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="bioassay_files/figure-html/fig-bioassay-data-plot-output-1.png" id="fig-bioassay-data-plot" width="533" height="308" class="figure-img">
@@ -876,7 +888,7 @@ Figure&nbsp;1
 <span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="dv">2</span>,</span>
 <span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-bioassay-posterior-plot" class="quarto-float quarto-figure quarto-figure-center anchored" height="233" width="608">
+<div id="fig-bioassay-posterior-plot" class="quarto-float quarto-figure quarto-figure-center anchored" width="608" height="233">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bioassay-posterior-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="bioassay_files/figure-html/fig-bioassay-posterior-plot-output-1.png" id="fig-bioassay-posterior-plot" width="608" height="233" class="figure-img">
@@ -965,7 +977,7 @@ Figure&nbsp;2
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-bioassay-ld50-kde" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
+<div id="fig-bioassay-ld50-kde" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bioassay-ld50-kde-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="bioassay_files/figure-html/fig-bioassay-ld50-kde-output-1.png" id="fig-bioassay-ld50-kde" width="458" height="209" class="figure-img">
@@ -1162,7 +1174,7 @@ for Jupyter support
 <span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-bioassay-ld50-quantile-dots-bambi" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
+<div id="fig-bioassay-ld50-quantile-dots-bambi" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bioassay-ld50-quantile-dots-bambi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="bioassay_files/figure-html/fig-bioassay-ld50-quantile-dots-bambi-output-1.png" id="fig-bioassay-ld50-quantile-dots-bambi" width="458" height="209" class="figure-img">
@@ -1183,7 +1195,7 @@ Figure&nbsp;4
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-bioassay-ld50-kde-bambi" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
+<div id="fig-bioassay-ld50-kde-bambi" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bioassay-ld50-kde-bambi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="bioassay_files/figure-html/fig-bioassay-ld50-kde-bambi-output-1.png" id="fig-bioassay-ld50-kde-bambi" width="458" height="209" class="figure-img">

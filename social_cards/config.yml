@@ -59,6 +59,11 @@ pages:
     page: timeseries
     figure: fig-series_1-output-1.png
 
+  dogs:
+    dir: dogs
+    page: dogs
+    figure: fig-ppc_shocks-0h-output-1.png
+
   dogs_stan:
     dir: dogs
     page: dogs_stan
