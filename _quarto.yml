@@ -17,7 +17,7 @@ project:
     - nabiximols/nabiximols.qmd
     - coronavirus/coronavirus.qmd
     - timeseries/timeseries.qmd
-    # - dogs/dogs.qmd
+    - dogs/dogs.qmd
     - dogs/dogs_stan.qmd
     - cat_adoptions/cat_adoptions.qmd
     # - world_cup/world_cup.qmd
@@ -70,10 +70,10 @@ website:
         href: nabiximols/nabiximols.qmd
       - text: "Ch 19: Building up to a hierarchical model: Coronavirus testing"
         href: coronavirus/coronavirus.qmd
-      # - text: "Ch 20: Using a fitted model for decision analysis: Mixture model for time series competition"
-      #   href: timeseries/timeseries.html
-      # # - text: "Ch 21: Posterior predictive checking: Stochastic learning in dogs -- brms"
-      # #   href: dogs/dogs.html
+      - text: "Ch 20: Using a fitted model for decision analysis: Mixture model for time series competition"
+        href: timeseries/timeseries.qmd
+      - text: "Ch 21: Posterior predictive checking: Stochastic learning in dogs -- brms"
+        href: dogs/dogs.html
       - text: "Ch 21: Posterior predictive checking: Stochastic learning in dogs -- Stan"
         href: dogs/dogs_stan.qmd
       - text: "Ch 22: Incremental development and testing: Black cat adoptions"
