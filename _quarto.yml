@@ -72,7 +72,7 @@ website:
         href: coronavirus/coronavirus.qmd
       - text: "Ch 20: Using a fitted model for decision analysis: Mixture model for time series competition"
         href: timeseries/timeseries.qmd
-      - text: "Ch 21: Posterior predictive checking: Stochastic learning in dogs -- brms"
+      - text: "Ch 21: Posterior predictive checking: Stochastic learning in dogs -- Bambi"
         href: dogs/dogs.html
       - text: "Ch 21: Posterior predictive checking: Stochastic learning in dogs -- Stan"
         href: dogs/dogs_stan.qmd
