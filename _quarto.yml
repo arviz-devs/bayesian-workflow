@@ -13,7 +13,7 @@ project:
     - problems/problems.qmd
     - declining_exponentials/declining_exponentials.qmd
     - movies/movies.qmd
-    # - sleep_study/sleep_study.qmd
+    - sleep_study/sleep_study.qmd
     - nabiximols/nabiximols.qmd
     - coronavirus/coronavirus.qmd
     - timeseries/timeseries.qmd
@@ -64,8 +64,8 @@ website:
         href: declining_exponentials/declining_exponentials.qmd
       - text: "Ch 16: Coding a series of models: Simulated data of movie ratings"
         href: movies/movies.qmd
-      # # - text: "Ch 17: Prior specification for regression models: Reanalysis of a sleep study"
-      # #   href: sleep_study/sleep_study.html
+      - text: "Ch 17: Prior specification for regression models: Reanalysis of a sleep study"
+        href: sleep_study/sleep_study.qmd
       - text: "Ch 18: Predictive model checking and comparison: Clinical trial"
         href: nabiximols/nabiximols.qmd
       - text: "Ch 19: Building up to a hierarchical model: Coronavirus testing"

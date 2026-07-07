@@ -1,0 +1,457 @@
+---
+title: "Sleep study: Prior specification and model checking"
+image: ../social_cards/sleep_study.png
+author: "Paul Bürkner and Aki Vehtari"
+date: 2025-10-22
+date-modified: today
+date-format: iso
+format:
+  html:
+    number-sections: true
+    code-copy: true
+    code-download: true
+    code-tools: true
+bibliography: ../casestudies.bib
+---
+
+This notebook includes the code for the Bayesian Workflow book
+Chapter 17 *Prior specification for regression models: Reanalysis
+of sleep study*.
+
+## Introduction
+
+Prior distributions are at the heart of Bayesian statistics and are
+mentioned as one of its defining features in almost all
+introductions. Yet, in practice, specifying priors remains a highly
+challenging and complex topic that tends to cause a lot of
+confusion for people having to deal with it. In this case study, we
+clarify some of this confusion by explaining the different purposes
+of priors and things that should be considered when specifying
+them.
+
+**Load packages**
+
+```{python}
+#| label: setup
+#| include: true
+#| cache: false
+import arviz as az
+import bambi as bmb
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import preliz as pz
+import seaborn as sns
+import scipy.stats as stats
+import xarray as xr
+
+from cmdstanpy import CmdStanModel, disable_logging
+
+disable_logging()
+
+az.style.use("arviz-variat")
+# We need to explicitly tell seaborn to use the style defined by 
+# matplotlib rcParams, otherwise it will override them.
+import seaborn.objects as so
+so.Plot.config.theme.update(plt.rcParams)
+az.rcParams["stats.ci_prob"] = 0.95
+plt.rcParams["figure.dpi"] = 75
+SEED = 652312
+```
+
+## The sleep study data
+
+We analyze the `sleepstudy` data set
+[@Belenky-Wesensten-Thorne-etal:2003] that is shipped with the R
+package `lme4` [@Bates-Maechler-Bolker-etal:2015]. The dataset
+covers 18 people undergoing sleep deprivation (less than 3 hours of
+sleep per night) for 7 consecutive nights, with their average
+reaction times in milliseconds in a simple experiment.
+
+Reasons for choosing the `sleepstudy` data set:
+
+- Few variables all of which are easy to understand
+- easy yet important multilevel structure 
+- sensible to express with both linear and generalized linear models
+- non-trivial error distributions
+- independent priors are sensible(ish) due to the small number of parameters
+- well known to a lot of R users
+
+Days 0-1 were adaptation and training (T1/T2), day 2 was baseline (B);
+sleep deprivation started after day 2. We drop days 0-1, and make the
+baseline to be new 0.
+
+```{python}
+#| label: load-data
+sleepstudy = bmb.load_data("sleepstudy")
+sleepstudy = sleepstudy[sleepstudy["Days"] >= 2].copy()
+sleepstudy["Days"] = sleepstudy["Days"] - 2.
+sleepstudy["Subject"] = sleepstudy["Subject"].astype("category")
+sleepstudy.head()
+```
+
+Plot the data.
+
+```{python}
+#| label: fig-sleepstudy-data
+#| code-fold: true
+subjects = sleepstudy["Subject"].unique()
+n_subjects = len(subjects)
+ncols = 6
+nrows = int(np.ceil(n_subjects / ncols))
+
+fig, axes = plt.subplots(nrows, ncols, sharex=True, sharey=True, figsize=(10, 6))
+axes = axes.ravel()
+for ax, subject in zip(axes, subjects):
+    idx = sleepstudy["Subject"] == subject
+    ax.plot(sleepstudy.loc[idx, "Days"], sleepstudy.loc[idx, "Reaction"], "o", alpha=0.7)
+    ax.set_title(f"Subject: {subject}", fontdict={"fontsize": 12})
+
+for ax in axes[n_subjects:]:
+    ax.axis("off")
+
+fig.text(0.5, 0, "Days", ha="center")
+fig.text(0, 0.5, "Reaction time (ms)", va="center", rotation="vertical");
+```
+
+we create a convenience function to plot the posterior conditional effects of the models.
+
+```{python}
+def plot_predictions(model, idata, model_name):
+    _plot = bmb.interpret.plot_predictions(model, idata, "Days", use_hdi=False)
+
+    plot = (
+        _plot
+        .add(so.Dot(color="k", marker="."), data=sleepstudy, x="Days", y="Reaction")
+        .label(
+            y="Reaction time (ms)", 
+            title=model_name
+        )
+    )
+    plot.show()
+```
+
+## Simple linear model
+
+Prior base.
+
+```{python}
+prior_lin_base = {
+    "Intercept": bmb.Prior("Normal", mu=200, sigma=100),
+    "Days": bmb.Prior("Normal", mu=0, sigma=20),
+    "sigma": bmb.Prior("Exponential", lam=0.02),
+}
+```
+
+Model base and sample from the posterior.
+
+```{python}
+#| label: fit-lin-base
+#| results: hide
+#| cache: true
+mod_lin_base = bmb.Model(
+    "Reaction ~ Days",
+    sleepstudy,
+    priors=prior_lin_base,
+)
+idata_lin_base = mod_lin_base.fit(random_seed=SEED)
+#mod_lin_base.compute_log_likelihood(idata_lin_base)
+mod_lin_base.predict(idata_lin_base, kind="response", inplace=True, random_seed=SEED)
+```
+
+Posterior summary.
+
+```{python}
+az.summary(idata_lin_base, var_names="~mu", kind="stats")
+```
+
+Posterior conditional effects.
+
+```{python}
+#| label: fig-sleepstudy-conditional-effects-lin-base
+plot_predictions(mod_lin_base, idata_lin_base, "Simple linear model")
+```
+
+## Simple linear model (centered predictors)
+
+Points to discuss:
+
+- priors on original or centered intercept?
+- dependency of the prior on marginal moments of the data?
+- different qualitative options for priors on b and sigma
+
+Prior 1.
+
+```{python}
+prior1 = {
+    "Intercept": bmb.Prior("Normal", mu=250, sigma=100),
+    "Days": bmb.Prior("Normal", mu=0, sigma=20),
+    "sigma": bmb.Prior("Exponential", lam=0.02),
+}
+```
+
+Sample from prior 1 (prior predictive checking).
+
+```{python}
+#| label: fit1-prior
+mod1_prior = bmb.Model(
+    "Reaction ~ Days",
+    sleepstudy,
+    priors=prior1,
+)
+mod1_prior.build()
+idata1_prior = mod1_prior.prior_predictive(draws=100, random_seed=SEED)
+```
+
+Prior predictive checking.
+
+```{python}
+#| label: fig-sleepstudy-pp-check-fit1-prior
+pc = az.plot_ppc_dist(idata1_prior, group="prior_predictive",
+                      kind="ecdf",  
+
+)
+```
+
+Model 1: sample from the posterior.
+
+```{python}
+#| label: fit1
+#| results: hide
+#| cache: true
+mod1 = bmb.Model(
+    "Reaction ~ Days",
+    sleepstudy,
+    priors=prior1,
+)
+idata1 = mod1.fit(random_seed=SEED)
+mod1.predict(idata1, kind="response", random_seed=SEED)
+```
+
+Posterior summary.
+
+```{python}
+az.summary(idata1, var_names="~mu")
+```
+
+Posterior conditional effects.
+
+```{python}
+#| label: fig-sleepstudy-conditional-effects-fit1
+plot_predictions(mod1, idata1, "Simple linear model")
+```
+
+Posterior predictive checking.
+
+```{python}
+#| label: fig-sleepstudy-pp-check-fit1
+pc = az.plot_ppc_dist(idata1)
+```
+
+Prior sensitivity analysis.
+
+```{python}
+mod1.compute_log_likelihood(idata1)
+mod1.compute_log_prior(idata1)
+```
+
+```{python}
+#| label: fig-sleepstudy-priorsense-fit1
+az.plot_psense_dist(idata1, var_names="~mu",
+                    visuals={"dist":False}
+)
+```
+
+## Simple linear model (informative priors)
+
+Points to discuss:
+
+- Priors will be influencing the posterior if chosen to be informative enough
+- For models that are simple relative to the amount of data, prior distributions
+  are unlikely to affect the posterior strongly, unless prior are very informative
+
+Prior 2.
+
+```{python}
+prior2 = {
+    "Intercept": bmb.Prior("Normal", mu=250, sigma=100),
+    "Days": bmb.Prior("Normal", mu=0, sigma=1),
+    "sigma": bmb.Prior("Exponential", lam=0.02),
+}
+```
+
+Model 2: sample from the posterior.
+
+```{python}
+#| label: fit2
+#| results: hide
+#| cache: true
+mod2 = bmb.Model(
+    "Reaction ~ Days",
+    sleepstudy,
+    priors=prior2,
+)
+idata2 = mod2.fit(random_seed=SEED)
+mod2.predict(idata2, kind="response", random_seed=SEED)
+```
+
+Posterior summary.
+
+```{python}
+az.summary(idata2, var_names="~mu", kind="stats")
+```
+
+Posterior conditional effects.
+
+```{python}
+#| label: fig-sleepstudy-conditional-effects-fit2
+plot_predictions(mod2, idata2, "Model 2")
+```
+
+Prior sensitivity analysis.
+
+```{python}
+mod2.compute_log_likelihood(idata2)
+mod2.compute_log_prior(idata2)
+```
+
+```{python}
+#| label: fig-sleepstudy-priorsense-fit2
+az.plot_psense_dist(idata2, var_names="~mu",
+                    visuals={"dist":False}
+)
+```
+
+## Simple linear model (informative priors with fat tails)
+
+Points to discuss:
+- tails of the priors (normal vs. Student-t)
+
+Prior 2b.
+
+```{python}
+prior2b = {
+    "Intercept": bmb.Prior("Normal", mu=250, sigma=100),
+    "Days": bmb.Prior("StudentT", nu=7, mu=0, sigma=1),
+    "sigma": bmb.Prior("Exponential", lam=0.02),
+}
+```
+
+Model 2b: sample from the posterior.
+
+```{python}
+#| label: fit2b
+#| results: hide
+#| cache: true
+mod2b = bmb.Model(
+    "Reaction ~ Days",
+    sleepstudy,
+    priors=prior2b,
+)
+idata2b = mod2b.fit(random_seed=SEED)
+mod2b.predict(idata2b, kind="response", random_seed=SEED)
+```
+
+Posterior summary.
+
+```{python}
+az.summary(idata2b, var_names="~mu")
+```
+
+Posterior conditional effects.
+
+```{python}
+#| label: fig-sleepstudy-conditional-effects-fit2b
+plot_predictions(mod2b, idata2b, "Model 2b")
+```
+
+Prior sensitivity analysis.
+
+```{python}
+mod2b.compute_log_likelihood(idata2b)
+mod2b.compute_log_prior(idata2b)
+```
+
+```{python}
+#| label: fig-sleepstudy-priorsense-fit2b
+az.plot_psense_dist(idata2b, var_names="~mu",
+                    visuals={"dist":False}
+)
+```
+
+Illustrate difference between normal and Student-t prior.
+
+```{python}
+#| label: fig-compare-normal-student-density
+pz.Normal(0, 1).plot_pdf()
+pz.StudentT(7, 0, 1).plot_pdf()
+```
+
+Compute CI-bound for an exponential prior.
+
+```{python}
+pz.Exponential(0.02).ppf([0.025, 0.975])
+```
+
+## Linear varying intercept model
+
+Points to discuss:
+
+- How to represent unidimensional multilevel structures via priors
+- priors on hyperparameters (SDs)
+- shall the prior on sigma change now that we add more terms?
+
+Prior 3.
+
+```{python}
+prior3 = {
+    "Intercept": bmb.Prior("Normal", mu=250, sigma=100),
+    "Days": bmb.Prior("Normal", mu=0, sigma=20),
+    "sigma": bmb.Prior("Exponential", lam=0.02),
+    "1|Subject": bmb.Prior("Normal", mu=0, sigma=bmb.Prior("Exponential", lam=0.02)),
+}
+```
+
+Model 3: sample from the posterior.
+
+```{python}
+#| label: fit3
+#| results: hide
+#| cache: true
+mod3 = bmb.Model(
+    "Reaction ~ Days + (1 | Subject)",
+    sleepstudy,
+    priors=prior3,
+    categorical="Subject",
+)
+idata3 = mod3.fit(random_seed=SEED)
+mod3.predict(idata3, kind="response", random_seed=SEED)
+```
+
+Posterior summary.
+
+```{python}
+az.summary(idata3, var_names=["~mu", "~1|Subject"])
+```
+
+Posterior conditional effects per subject.
+
+```{python}
+_plot = bmb.interpret.plot_predictions(mod3, idata3, ["Days", "Subject"], use_hdi=False,
+    subplot_kwargs={"main": "Days", "panel": "Subject"},
+    fig_kwargs={"theme": {"figure.figsize": (12, 7)}, 
+                "title": "subject {}".format,
+                "wrap": 6,
+                })
+plot = (
+    _plot
+    .add(
+        so.Dot(color="k", marker=".", artist_kws={"zorder": 0}), 
+        data=sleepstudy, 
+        x="Days", 
+        y="Reaction",
+        col="Subject"
+    )
+)
+plot.show()
+```
