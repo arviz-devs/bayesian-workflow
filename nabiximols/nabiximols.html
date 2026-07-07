@@ -88,7 +88,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../coronavirus/coronavirus.html" rel="next">
-<link href="../movies/movies.html" rel="prev">
+<link href="../sleep_study/sleep_study.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -441,6 +441,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../sleep_study/sleep_study.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ch 17: Prior specification for regression models: Reanalysis of a sleep study</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../nabiximols/nabiximols.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Ch 18: Predictive model checking and comparison: Clinical trial</span></a>
   </div>
@@ -554,7 +560,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2026-07-03</p>
+      <p class="date-modified">2026-07-07</p>
     </div>
   </div>
     
@@ -645,7 +651,7 @@ window.Quarto = {
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>fig.supxlabel(<span class="st">'cu'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-data" class="quarto-float quarto-figure quarto-figure-center anchored" width="911" height="611">
+<div id="fig-data" class="quarto-float quarto-figure quarto-figure-center anchored" height="611" width="911">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-data-output-1.png" id="fig-data" width="911" height="611" class="figure-img">
@@ -945,7 +951,7 @@ The effective sample size per chain is smaller than 100 for some parameters.  A 
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ax.plot(cu_df_predi[<span class="st">"cu"</span>], p3, color<span class="op">=</span><span class="st">"C0"</span>)</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ax.fill_between([<span class="fl">11.5</span>, <span class="fl">12.5</span>], <span class="dv">0</span>, p3[<span class="dv">12</span>], color<span class="op">=</span><span class="st">"lightgray"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-discretized-normal" class="quarto-float quarto-figure quarto-figure-center anchored" width="711" height="411">
+<div id="fig-discretized-normal" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="711">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-discretized-normal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-discretized-normal-output-1.png" id="fig-discretized-normal" width="711" height="411" class="figure-img">
@@ -1088,7 +1094,7 @@ Consider using plot_ppc variants specific for discrete data, such as plot_ppc_pa
   warn_if_discrete(observed_dist, predictive_dist, kind)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_hist-binomial" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_hist-binomial" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_hist-binomial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_hist-binomial-output-2.png" id="fig-ppc_hist-binomial" width="611" height="279" class="figure-img">
@@ -1104,7 +1110,7 @@ Figure&nbsp;3
 <div id="cell-fig-ppc_rootogram-binomial" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_rootogram(idata_binomial, yscale<span class="op">=</span><span class="st">"linear"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_rootogram-binomial" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_rootogram-binomial" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_rootogram-binomial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_rootogram-binomial-output-1.png" id="fig-ppc_rootogram-binomial" width="611" height="279" class="figure-img">
@@ -1121,7 +1127,7 @@ Figure&nbsp;4
 <div id="cell-fig-ppc_pit_ecdf-binomial" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_binomial)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_pit_ecdf-binomial" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_pit_ecdf-binomial" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_pit_ecdf-binomial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_pit_ecdf-binomial-output-1.png" id="fig-ppc_pit_ecdf-binomial" width="611" height="279" class="figure-img">
@@ -1138,7 +1144,7 @@ Figure&nbsp;5
 <div id="cell-fig-ppc_hist-normal" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_dist(idata_normal, kind<span class="op">=</span><span class="st">"hist"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_hist-normal" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_hist-normal" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_hist-normal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_hist-normal-output-1.png" id="fig-ppc_hist-normal" width="611" height="279" class="figure-img">
@@ -1154,7 +1160,7 @@ Figure&nbsp;6
 <div id="cell-fig-ppc_pit_ecdf-normal" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_normal)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_pit_ecdf-normal" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_pit_ecdf-normal" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_pit_ecdf-normal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_pit_ecdf-normal-output-1.png" id="fig-ppc_pit_ecdf-normal" width="611" height="279" class="figure-img">
@@ -1339,7 +1345,7 @@ Consider using plot_ppc variants specific for discrete data, such as plot_ppc_pa
   warn_if_discrete(observed_dist, predictive_dist, kind)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_hist-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_hist-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_hist-betabinomial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_hist-betabinomial-output-2.png" id="fig-ppc_hist-betabinomial" width="611" height="279" class="figure-img">
@@ -1355,7 +1361,7 @@ Figure&nbsp;8
 <div id="cell-fig-ppc_rootogram-betabinomial" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_rootogram(idata_betabinomial, yscale<span class="op">=</span><span class="st">"linear"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_rootogram-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_rootogram-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_rootogram-betabinomial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_rootogram-betabinomial-output-1.png" id="fig-ppc_rootogram-betabinomial" width="611" height="279" class="figure-img">
@@ -1372,7 +1378,7 @@ Figure&nbsp;9
 <div id="cell-fig-loo_pit_ecdf-betabinomial" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_betabinomial)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-loo_pit_ecdf-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-loo_pit_ecdf-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-loo_pit_ecdf-betabinomial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-loo_pit_ecdf-betabinomial-output-1.png" id="fig-loo_pit_ecdf-betabinomial" width="611" height="279" class="figure-img">
@@ -1388,7 +1394,7 @@ Figure&nbsp;10
 <div id="cell-fig-pit_ecdf-betabinomial" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_pit(idata_betabinomial)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-pit_ecdf-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-pit_ecdf-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-pit_ecdf-betabinomial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-pit_ecdf-betabinomial-output-1.png" id="fig-pit_ecdf-betabinomial" width="611" height="279" class="figure-img">
@@ -1442,7 +1448,7 @@ Figure&nbsp;11
   warnings.warn(</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-calibration-28-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-calibration-28-betabinomial" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-calibration-28-betabinomial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-calibration-28-betabinomial-output-2.png" id="fig-calibration-28-betabinomial" width="611" height="279" class="figure-img">
@@ -1929,7 +1935,7 @@ Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws 
 <div id="cell-fig-rootogram_bars-betabinomial2b" class="cell" data-execution_count="39">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_rootogram(idata_betabinomial2b, yscale<span class="op">=</span><span class="st">"linear"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-rootogram_bars-betabinomial2b" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-rootogram_bars-betabinomial2b" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-rootogram_bars-betabinomial2b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-rootogram_bars-betabinomial2b-output-1.png" id="fig-rootogram_bars-betabinomial2b" width="611" height="279" class="figure-img">
@@ -1945,7 +1951,7 @@ Figure&nbsp;13
 <div id="cell-fig-ppc_pit_ecdf-betabinomial2b" class="cell" data-execution_count="40">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_betabinomial2b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_pit_ecdf-betabinomial2b" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_pit_ecdf-betabinomial2b" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_pit_ecdf-betabinomial2b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_pit_ecdf-betabinomial2b-output-1.png" id="fig-ppc_pit_ecdf-betabinomial2b" width="611" height="279" class="figure-img">
@@ -1973,7 +1979,7 @@ Figure&nbsp;14
   warnings.warn(</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-calibration-0-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-calibration-0-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-calibration-0-betabinomial2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-calibration-0-betabinomial2-output-2.png" id="fig-calibration-0-betabinomial2" width="611" height="279" class="figure-img">
@@ -2000,7 +2006,7 @@ Figure&nbsp;15
   warnings.warn(</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-calibration-28-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-calibration-28-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-calibration-28-betabinomial2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-calibration-28-betabinomial2-output-2.png" id="fig-calibration-28-betabinomial2" width="611" height="279" class="figure-img">
@@ -2057,7 +2063,7 @@ Figure&nbsp;16
   warnings.warn(</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-posterior_prediction-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" width="911" height="611">
+<div id="fig-posterior_prediction-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" height="611" width="911">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-posterior_prediction-betabinomial2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-posterior_prediction-betabinomial2-output-2.png" id="fig-posterior_prediction-betabinomial2" width="911" height="611" class="figure-img">
@@ -2088,7 +2094,7 @@ Figure&nbsp;17
 <span id="cb74-15"><a href="#cb74-15" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, <span class="dv">0</span>)</span>
 <span id="cb74-16"><a href="#cb74-16" aria-hidden="true" tabindex="-1"></a>pc.add_title(<span class="st">"Difference in cu given placebo vs Nabiximols"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-posterior_prediction-diff-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" width="626" height="586">
+<div id="fig-posterior_prediction-diff-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" height="586" width="626">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-posterior_prediction-diff-betabinomial2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-posterior_prediction-diff-betabinomial2-output-1.png" id="fig-posterior_prediction-diff-betabinomial2" width="626" height="586" class="figure-img">
@@ -2124,7 +2130,7 @@ Figure&nbsp;18
 <span id="cb75-13"><a href="#cb75-13" aria-hidden="true" tabindex="-1"></a>    figure_kwargs<span class="op">=</span>{<span class="st">"figsize"</span>: (<span class="dv">9</span>, <span class="dv">4</span>)},</span>
 <span id="cb75-14"><a href="#cb75-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-kde-kde-hist-comparison-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" width="911" height="411">
+<div id="fig-kde-kde-hist-comparison-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="911">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-kde-kde-hist-comparison-betabinomial2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-kde-kde-hist-comparison-betabinomial2-output-1.png" id="fig-kde-kde-hist-comparison-betabinomial2" width="911" height="411" class="figure-img">
@@ -2173,7 +2179,7 @@ Figure&nbsp;19
 <span id="cb76-33"><a href="#cb76-33" aria-hidden="true" tabindex="-1"></a>    figure_kwargs<span class="op">=</span>{<span class="st">"sharex"</span>: <span class="va">True</span>, <span class="st">"figsize"</span>: (<span class="dv">9</span>, <span class="dv">6</span>)},</span>
 <span id="cb76-34"><a href="#cb76-34" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-epred-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" width="911" height="611">
+<div id="fig-epred-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" height="611" width="911">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-epred-betabinomial2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-epred-betabinomial2-output-1.png" id="fig-epred-betabinomial2" width="911" height="611" class="figure-img">
@@ -2204,7 +2210,7 @@ Figure&nbsp;20
 <span id="cb77-15"><a href="#cb77-15" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, <span class="dv">0</span>)</span>
 <span id="cb77-16"><a href="#cb77-16" aria-hidden="true" tabindex="-1"></a>pc.add_title(<span class="st">"Difference in expected cu given placebo vs Nabiximols"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-epred-diff-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" width="759" height="586">
+<div id="fig-epred-diff-betabinomial2" class="quarto-float quarto-figure quarto-figure-center anchored" height="586" width="759">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-epred-diff-betabinomial2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-epred-diff-betabinomial2-output-1.png" id="fig-epred-diff-betabinomial2" width="759" height="586" class="figure-img">
@@ -2339,7 +2345,7 @@ The rhat statistic is larger than 1.01 for some parameters. This indicates probl
 <div id="cell-fig-ppc_loo_pit_ecdf-normal2b" class="cell" data-execution_count="51">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb84"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_normal2b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_loo_pit_ecdf-normal2b" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_loo_pit_ecdf-normal2b" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_loo_pit_ecdf-normal2b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_loo_pit_ecdf-normal2b-output-1.png" id="fig-ppc_loo_pit_ecdf-normal2b" width="611" height="279" class="figure-img">
@@ -2358,7 +2364,7 @@ Figure&nbsp;22
 <span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>pit_dt <span class="op">=</span> xr.DataTree(xr.Dataset({<span class="st">"cu"</span>: pit_vals}), name<span class="op">=</span><span class="st">"fd"</span>)</span>
 <span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a>az.plot_ecdf_pit(pit_dt, group<span class="op">=</span><span class="st">"fd"</span>, sample_dims<span class="op">=</span>[<span class="st">"__obs__"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_pit_ecdf-normal2b" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-ppc_pit_ecdf-normal2b" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_pit_ecdf-normal2b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-ppc_pit_ecdf-normal2b-output-1.png" id="fig-ppc_pit_ecdf-normal2b" width="611" height="279" class="figure-img">
@@ -2527,7 +2533,7 @@ for Jupyter support
 <span id="cb94-47"><a href="#cb94-47" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, <span class="dv">0</span>)</span>
 <span id="cb94-48"><a href="#cb94-48" aria-hidden="true" tabindex="-1"></a>pc.add_title(<span class="st">"Difference in cu given placebo vs Nabiximols"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-epred-diff-4models" class="quarto-float quarto-figure quarto-figure-center anchored" width="626" height="745">
+<div id="fig-epred-diff-4models" class="quarto-float quarto-figure quarto-figure-center anchored" height="745" width="626">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-epred-diff-4models-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="nabiximols_files/figure-html/fig-epred-diff-4models-output-1.png" id="fig-epred-diff-4models" width="626" height="745" class="figure-img">
@@ -3160,8 +3166,8 @@ Lintzeris, Nicholas, Llewellyn Mills, Adrian Dunlop, Jan Copeland, Iain Mcgregor
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../movies/movies.html" class="pagination-link" aria-label="Ch 16: Coding a series of models: Simulated data of movie ratings">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Ch 16: Coding a series of models: Simulated data of movie ratings</span>
+      <a href="../sleep_study/sleep_study.html" class="pagination-link" aria-label="Ch 17: Prior specification for regression models: Reanalysis of a sleep study">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Ch 17: Prior specification for regression models: Reanalysis of a sleep study</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
