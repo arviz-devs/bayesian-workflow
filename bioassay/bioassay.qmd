@@ -52,7 +52,7 @@ az.style.use("arviz-variat")
 import seaborn.objects as so
 so.Plot.config.theme.update(plt.rcParams)
 az.rcParams["stats.ci_prob"] = 0.95
-plt.rcParams["figure.dpi"] = 75
+plt.rcParams["figure.dpi"] = 100
 SEED = 7412
 ```
 
@@ -218,8 +218,6 @@ dt_bioassay1 = az.from_cmdstanpy(fit1)
 
 ## Numpyro
 ```{.python}
-#| label: fit1
-#| results: hide
 kernel = NUTS(mod1)
 mcmc = MCMC(kernel,  num_warmup=1000, num_samples=1000)
 mcmc.run(random.PRNGKey(SEED), x=x, N=N, y=y)
@@ -228,7 +226,6 @@ dt_bioassay1 = az.from_numpyro(mcmc)
 
 ## PyMC
 ```{.python}
-#| results: hide
 with mod1:
     dt_bioassay1 = pm.sample(random_seed=SEED)
 ```
@@ -347,7 +344,7 @@ With `bambi` we can use the built-in plotting functions in the interpret submodu
 ```{python}
 plot = bmb.interpret.plot_predictions(model, idata_bambi, "dose",
                                       use_hdi=False,
-                                      fig_kwargs={"theme": {"figure.figsize": (7, 4)}})
+                                      fig_kwargs={"theme": {"figure.figsize": (8, 3)}})
 
 plotter = plot.plot()
 ax = plotter._figure.axes[0]
@@ -398,7 +395,6 @@ Kernel density plot of the LD50 (mg/ml) posterior.
 
 ```{python}
 #| label: fig-bioassay-LD50-KDE-bambi
-
 pc = az.plot_dist(
     idata_bambi,
     var_names="LD50_mg_ml",
