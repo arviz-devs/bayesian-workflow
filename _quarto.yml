@@ -106,7 +106,8 @@ format:
     encoding: UTF-8
     css: _style.css
     toc: true
-    toc-depth: 2
+    toc-depth: 4
+    toc-expand: 1
     toc-location: right
     smooth-scroll: true
     embed-resources: false
