@@ -47,6 +47,10 @@ from scipy.special import expit
 warnings.filterwarnings("ignore", category=FutureWarning)
 
 az.style.use("arviz-variat")
+# We need to explicitly tell seaborn to use the style defined by 
+# matplotlib rcParams, otherwise it will override them.
+import seaborn.objects as so
+so.Plot.config.theme.update(plt.rcParams)
 az.rcParams["stats.ci_prob"] = 0.95
 plt.rcParams["figure.dpi"] = 75
 SEED = 7412
