@@ -483,6 +483,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../world_cup/world_cup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ch 23: Debugging a model: World Cup football</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../roaches/roaches.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ch 24: Leave-one-out cross validation model checking and comparison: Roaches</span></a>
   </div>
@@ -554,7 +560,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2026-07-07</p>
+      <p class="date-modified">2026-07-10</p>
     </div>
   </div>
     
@@ -640,7 +646,7 @@ window.Quarto = {
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(J):</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    ax.annotate(<span class="ss">f"</span><span class="sc">{</span>y[i]<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>n[i]<span class="sc">}</span><span class="ss">"</span>, (x[i] <span class="op">+</span> <span class="fl">0.1</span>, y[i] <span class="op">/</span> n[i] <span class="op">+</span> se[i] <span class="op">+</span> <span class="fl">0.01</span>), fontsize<span class="op">=</span><span class="dv">9</span>, color<span class="op">=</span><span class="st">"0.1"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-data" class="quarto-float quarto-figure quarto-figure-center anchored" width="1011" height="511">
+<div id="fig-golf-data" class="quarto-float quarto-figure quarto-figure-center anchored" height="511" width="1011">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-golf-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-data-output-1.png" id="fig-golf-data" width="1011" height="511" class="figure-img">
@@ -771,7 +777,7 @@ y_j\sim\mathrm{binomial}(n_j, \mathrm{logit}^{-1}(a + bx_j)),
 </figure>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-fit1-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="1011" height="511">
+<div id="fig-golf-fit1-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="511" width="1011">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-golf-fit1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-fit1-output-2.png" id="fig-golf-fit1-2" data-ref-parent="fig-golf-fit1" width="1011" height="511" class="figure-img">
@@ -858,7 +864,7 @@ Figure&nbsp;2
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>ax.spines[[<span class="st">"left"</span>]].set_visible(<span class="va">False</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-sketch-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="711" height="311">
+<div id="fig-golf-sketch-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="311" width="711">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-golf-sketch-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-sketch-2-output-1.png" id="fig-golf-sketch-2" width="711" height="311" class="figure-img">
@@ -904,7 +910,7 @@ p_j &amp;= 2\Phi\left(\frac{\sin^{-1}((R-r)/x_j)}{\sigma}\right) - 1 , \text{ fo
 <span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>       title<span class="op">=</span><span class="vs">r"Modeled Pr</span><span class="kw">(</span><span class="vs">success</span><span class="kw">)</span><span class="vs"> for different values of </span><span class="dv">$\s</span><span class="vs">igma</span><span class="dv">$</span><span class="vs">"</span>,</span>
 <span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-angle-curves" class="quarto-float quarto-figure quarto-figure-center anchored" width="631" height="511">
+<div id="fig-golf-angle-curves" class="quarto-float quarto-figure quarto-figure-center anchored" height="511" width="631">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-golf-angle-curves-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-angle-curves-output-1.png" id="fig-golf-angle-curves" width="631" height="511" class="figure-img">
@@ -1020,7 +1026,7 @@ Figure&nbsp;4
 <span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-fit-1-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="1011" height="511">
+<div id="fig-golf-fit-1-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="511" width="1011">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-golf-fit-1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-fit-1-2-output-1.png" id="fig-golf-fit-1-2" width="1011" height="511" class="figure-img">
@@ -1051,7 +1057,7 @@ Figure&nbsp;5
 <span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>ax.set_xlim(<span class="dv">0</span>, <span class="fl">1.1</span> <span class="op">*</span> golf_new[<span class="st">"x"</span>].<span class="bu">max</span>())</span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>ax.legend()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-fit-2-new" class="quarto-float quarto-figure quarto-figure-center anchored" width="1011" height="511">
+<div id="fig-golf-fit-2-new" class="quarto-float quarto-figure quarto-figure-center anchored" height="511" width="1011">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-golf-fit-2-new-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-fit-2-new-output-1.png" id="fig-golf-fit-2-new" width="1011" height="511" class="figure-img">
@@ -1117,7 +1123,7 @@ Figure&nbsp;6
 </figure>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-sketch-3-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="136">
+<div id="fig-golf-sketch-3-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="136" width="611">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-golf-sketch-3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-sketch-3-output-2.png" id="fig-golf-sketch-3-2" data-ref-parent="fig-golf-sketch-3" width="611" height="136" class="figure-img">
@@ -1355,7 +1361,7 @@ distance}}\right)\right)\)</span>, where we have renamed the parameter <span cla
 <span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>        np.concatenate([[<span class="dv">1</span>, <span class="dv">1</span>], p_grid]), color<span class="op">=</span><span class="st">"C2"</span>)</span>
 <span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>ax.scatter(golf_new[<span class="st">"x"</span>], golf_new[<span class="st">"y"</span>] <span class="op">/</span> golf_new[<span class="st">"n"</span>], color<span class="op">=</span><span class="st">"C2"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-fit-3" class="quarto-float quarto-figure quarto-figure-center anchored" width="1011" height="511">
+<div id="fig-golf-fit-3" class="quarto-float quarto-figure quarto-figure-center anchored" height="511" width="1011">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-golf-fit-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-fit-3-output-1.png" id="fig-golf-fit-3" width="1011" height="511" class="figure-img">
@@ -1577,7 +1583,7 @@ Figure&nbsp;8
 <span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>        np.concatenate([[<span class="dv">1</span>, <span class="dv">1</span>], p_grid]), color<span class="op">=</span><span class="st">"C3"</span>)</span>
 <span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>ax.scatter(golf_new[<span class="st">"x"</span>], golf_new[<span class="st">"y"</span>] <span class="op">/</span> golf_new[<span class="st">"n"</span>], color<span class="op">=</span><span class="st">"C3"</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-fit-4" class="quarto-float quarto-figure quarto-figure-center anchored" width="1011" height="511">
+<div id="fig-golf-fit-4" class="quarto-float quarto-figure quarto-figure-center anchored" height="511" width="1011">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-golf-fit-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-fit-4-output-1.png" id="fig-golf-fit-4" width="1011" height="511" class="figure-img">
@@ -1607,7 +1613,7 @@ p_j\)</span>, then plot these vs.&nbsp;distance:</p>
 <span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"gray"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
 <span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>ax.plot(golf_new[<span class="st">"x"</span>], posterior_mean_residual)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-res-4" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="511">
+<div id="fig-golf-res-4" class="quarto-float quarto-figure quarto-figure-center anchored" height="511" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-golf-res-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-res-4-output-1.png" id="fig-golf-res-4" width="611" height="511" class="figure-img">
@@ -1855,7 +1861,7 @@ Figure&nbsp;10
 <span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a>        np.concatenate([[<span class="dv">1</span>, <span class="dv">1</span>], p_grid]), color<span class="op">=</span><span class="st">"C4"</span>)</span>
 <span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a>ax.scatter(golf_new[<span class="st">"x"</span>], golf_new[<span class="st">"y"</span>] <span class="op">/</span> golf_new[<span class="st">"n"</span>], color<span class="op">=</span><span class="st">"C4"</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-fit-5" class="quarto-float quarto-figure quarto-figure-center anchored" width="1011" height="511">
+<div id="fig-golf-fit-5" class="quarto-float quarto-figure quarto-figure-center anchored" height="511" width="1011">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-golf-fit-5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-fit-5-output-1.png" id="fig-golf-fit-5" width="1011" height="511" class="figure-img">
@@ -2012,7 +2018,7 @@ Figure&nbsp;11
 <span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>        np.concatenate([[<span class="dv">1</span>, <span class="dv">1</span>], p_grid]), color<span class="op">=</span><span class="st">"C5"</span>)</span>
 <span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>ax.scatter(golf_new[<span class="st">"x"</span>], golf_new[<span class="st">"y"</span>] <span class="op">/</span> golf_new[<span class="st">"n"</span>], color<span class="op">=</span><span class="st">"C5"</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-fit-6" class="quarto-float quarto-figure quarto-figure-center anchored" width="1011" height="511">
+<div id="fig-golf-fit-6" class="quarto-float quarto-figure quarto-figure-center anchored" height="511" width="1011">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-golf-fit-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-fit-6-output-1.png" id="fig-golf-fit-6" width="1011" height="511" class="figure-img">
@@ -2034,7 +2040,7 @@ Figure&nbsp;12
 <span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"gray"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
 <span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>ax.plot(golf_new[<span class="st">"x"</span>], posterior_mean_residual_6)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-res-6" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="511">
+<div id="fig-golf-res-6" class="quarto-float quarto-figure quarto-figure-center anchored" height="511" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-golf-res-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-res-6-output-1.png" id="fig-golf-res-6" width="611" height="511" class="figure-img">
@@ -2148,7 +2154,7 @@ Figure&nbsp;13
 <span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a>        np.concatenate([[<span class="dv">1</span>, <span class="dv">1</span>], p_grid]), color<span class="op">=</span><span class="st">"C6"</span>)</span>
 <span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a>ax.scatter(golf_new[<span class="st">"x"</span>], golf_new[<span class="st">"y"</span>] <span class="op">/</span> golf_new[<span class="st">"n"</span>], color<span class="op">=</span><span class="st">"C6"</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-fit-7" class="quarto-float quarto-figure quarto-figure-center anchored" width="1011" height="511">
+<div id="fig-golf-fit-7" class="quarto-float quarto-figure quarto-figure-center anchored" height="511" width="1011">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-golf-fit-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-fit-7-output-1.png" id="fig-golf-fit-7" width="1011" height="511" class="figure-img">
@@ -2170,7 +2176,7 @@ Figure&nbsp;14
 <span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"gray"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
 <span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>ax.plot(golf_new[<span class="st">"x"</span>], posterior_mean_residual_7)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-res-7" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="511">
+<div id="fig-golf-res-7" class="quarto-float quarto-figure quarto-figure-center anchored" height="511" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-golf-res-7-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-res-7-output-1.png" id="fig-golf-res-7" width="611" height="511" class="figure-img">
@@ -2334,7 +2340,7 @@ Figure&nbsp;15
 <span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>        np.concatenate([[<span class="dv">1</span>, <span class="dv">1</span>], p_grid]), color<span class="op">=</span><span class="st">"C7"</span>)</span>
 <span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a>ax.scatter(golf_new[<span class="st">"x"</span>], golf_new[<span class="st">"y"</span>] <span class="op">/</span> golf_new[<span class="st">"n"</span>], color<span class="op">=</span><span class="st">"C7"</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-fit-8" class="quarto-float quarto-figure quarto-figure-center anchored" width="1011" height="511">
+<div id="fig-golf-fit-8" class="quarto-float quarto-figure quarto-figure-center anchored" height="511" width="1011">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-golf-fit-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-fit-8-output-1.png" id="fig-golf-fit-8" width="1011" height="511" class="figure-img">
@@ -2357,7 +2363,7 @@ Figure&nbsp;16
 <span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"gray"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
 <span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>ax.plot(golf_new[<span class="st">"x"</span>], posterior_mean_residual_8)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-res-8" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="511">
+<div id="fig-golf-res-8" class="quarto-float quarto-figure quarto-figure-center anchored" height="511" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-golf-res-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-res-8-output-1.png" id="fig-golf-res-8" width="611" height="511" class="figure-img">
@@ -2429,7 +2435,7 @@ Figure&nbsp;17
 <span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span>[<span class="st">"distance_tolerance"</span>, <span class="st">"overshot"</span>],</span>
 <span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-mcmc-scatter-tolerance-overshot" class="quarto-float quarto-figure quarto-figure-center anchored" width="1211" height="430">
+<div id="fig-mcmc-scatter-tolerance-overshot" class="quarto-float quarto-figure quarto-figure-center anchored" height="430" width="1211">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-mcmc-scatter-tolerance-overshot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-mcmc-scatter-tolerance-overshot-output-1.png" id="fig-mcmc-scatter-tolerance-overshot" width="1211" height="430" class="figure-img">
@@ -2877,7 +2883,7 @@ Pareto k diagnostic values:
 <span id="cb81-14"><a href="#cb81-14" aria-hidden="true" tabindex="-1"></a>        np.concatenate([[<span class="dv">1</span>, <span class="dv">1</span>], p_grid]), color<span class="op">=</span><span class="st">"C8"</span>)</span>
 <span id="cb81-15"><a href="#cb81-15" aria-hidden="true" tabindex="-1"></a>ax.scatter(golf_new[<span class="st">"x"</span>], golf_new[<span class="st">"y"</span>] <span class="op">/</span> golf_new[<span class="st">"n"</span>], color<span class="op">=</span><span class="st">"C8"</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-fit-11" class="quarto-float quarto-figure quarto-figure-center anchored" width="1011" height="511">
+<div id="fig-golf-fit-11" class="quarto-float quarto-figure quarto-figure-center anchored" height="511" width="1011">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-golf-fit-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-fit-11-output-1.png" id="fig-golf-fit-11" width="1011" height="511" class="figure-img">
@@ -2899,7 +2905,7 @@ Figure&nbsp;19
 <span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"gray"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
 <span id="cb82-8"><a href="#cb82-8" aria-hidden="true" tabindex="-1"></a>ax.plot(golf_new[<span class="st">"x"</span>], posterior_mean_residual_11)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-golf-res-11" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="511">
+<div id="fig-golf-res-11" class="quarto-float quarto-figure quarto-figure-center anchored" height="511" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-golf-res-11-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="golf_files/figure-html/fig-golf-res-11-output-1.png" id="fig-golf-res-11" width="611" height="511" class="figure-img">

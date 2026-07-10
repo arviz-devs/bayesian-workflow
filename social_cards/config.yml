@@ -74,6 +74,11 @@ pages:
     page: cat_adoptions
     figure: fig-post1-sim2-output-1.png
 
+  world_cup:
+    dir: world_cup
+    page: world_cup
+    figure: fig-worldcup-ppc-intervals-fit_2-output-1.png
+
   roaches:
     dir: roaches
     page: roaches

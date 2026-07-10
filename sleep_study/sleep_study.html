@@ -482,6 +482,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../world_cup/world_cup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Ch 23: Debugging a model: World Cup football</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../roaches/roaches.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Ch 24: Leave-one-out cross validation model checking and comparison: Roaches</span></a>
   </div>
@@ -548,7 +554,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2026-07-07</p>
+      <p class="date-modified">2026-07-10</p>
     </div>
   </div>
     
@@ -681,7 +687,7 @@ window.Quarto = {
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>fig.text(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="st">"Reaction time (ms)"</span>, va<span class="op">=</span><span class="st">"center"</span>, rotation<span class="op">=</span><span class="st">"vertical"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-sleepstudy-data" class="quarto-float quarto-figure quarto-figure-center anchored" width="761" height="464">
+<div id="fig-sleepstudy-data" class="quarto-float quarto-figure quarto-figure-center anchored" height="464" width="761">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sleepstudy-data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="sleep_study_files/figure-html/fig-sleepstudy-data-output-1.png" id="fig-sleepstudy-data" width="761" height="464" class="figure-img">
@@ -795,7 +801,7 @@ NUTS: [sigma, Intercept, Days]</code></pre>
 <div id="cell-fig-sleepstudy-conditional-effects-lin-base" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plot_predictions(mod_lin_base, idata_lin_base, <span class="st">"Simple linear model"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-sleepstudy-conditional-effects-lin-base" class="quarto-float quarto-figure quarto-figure-center anchored" width="1168" height="968">
+<div id="fig-sleepstudy-conditional-effects-lin-base" class="quarto-float quarto-figure quarto-figure-center anchored" height="968" width="1168">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sleepstudy-conditional-effects-lin-base-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="sleep_study_files/figure-html/fig-sleepstudy-conditional-effects-lin-base-output-1.png" id="fig-sleepstudy-conditional-effects-lin-base" width="1168" height="968" class="figure-img">
@@ -844,7 +850,7 @@ Figure&nbsp;2
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-sleepstudy-pp-check-fit1-prior" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-sleepstudy-pp-check-fit1-prior" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sleepstudy-pp-check-fit1-prior-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="sleep_study_files/figure-html/fig-sleepstudy-pp-check-fit1-prior-output-1.png" id="fig-sleepstudy-pp-check-fit1-prior" width="458" height="209" class="figure-img">
@@ -951,7 +957,7 @@ NUTS: [sigma, Intercept, Days]</code></pre>
 <div id="cell-fig-sleepstudy-conditional-effects-fit1" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plot_predictions(mod1, idata1, <span class="st">"Simple linear model"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-sleepstudy-conditional-effects-fit1" class="quarto-float quarto-figure quarto-figure-center anchored" width="1168" height="968">
+<div id="fig-sleepstudy-conditional-effects-fit1" class="quarto-float quarto-figure quarto-figure-center anchored" height="968" width="1168">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sleepstudy-conditional-effects-fit1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="sleep_study_files/figure-html/fig-sleepstudy-conditional-effects-fit1-output-1.png" id="fig-sleepstudy-conditional-effects-fit1" width="1168" height="968" class="figure-img">
@@ -967,7 +973,7 @@ Figure&nbsp;4
 <div id="cell-fig-sleepstudy-pp-check-fit1" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_ppc_dist(idata1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-sleepstudy-pp-check-fit1" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-sleepstudy-pp-check-fit1" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sleepstudy-pp-check-fit1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="sleep_study_files/figure-html/fig-sleepstudy-pp-check-fit1-output-1.png" id="fig-sleepstudy-pp-check-fit1" width="458" height="209" class="figure-img">
@@ -989,7 +995,7 @@ Figure&nbsp;5
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                    visuals<span class="op">=</span>{<span class="st">"dist"</span>:<span class="va">False</span>}</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-sleepstudy-priorsense-fit1" class="quarto-float quarto-figure quarto-figure-center anchored" width="904" height="439">
+<div id="fig-sleepstudy-priorsense-fit1" class="quarto-float quarto-figure quarto-figure-center anchored" height="439" width="904">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sleepstudy-priorsense-fit1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="sleep_study_files/figure-html/fig-sleepstudy-priorsense-fit1-output-1.png" id="fig-sleepstudy-priorsense-fit1" width="904" height="439" class="figure-img">
@@ -1092,7 +1098,7 @@ NUTS: [sigma, Intercept, Days]</code></pre>
 <div id="cell-fig-sleepstudy-conditional-effects-fit2" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>plot_predictions(mod2, idata2, <span class="st">"Model 2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-sleepstudy-conditional-effects-fit2" class="quarto-float quarto-figure quarto-figure-center anchored" width="1168" height="968">
+<div id="fig-sleepstudy-conditional-effects-fit2" class="quarto-float quarto-figure quarto-figure-center anchored" height="968" width="1168">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sleepstudy-conditional-effects-fit2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="sleep_study_files/figure-html/fig-sleepstudy-conditional-effects-fit2-output-1.png" id="fig-sleepstudy-conditional-effects-fit2" width="1168" height="968" class="figure-img">
@@ -1114,7 +1120,7 @@ Figure&nbsp;7
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>                    visuals<span class="op">=</span>{<span class="st">"dist"</span>:<span class="va">False</span>}</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-sleepstudy-priorsense-fit2" class="quarto-float quarto-figure quarto-figure-center anchored" width="904" height="439">
+<div id="fig-sleepstudy-priorsense-fit2" class="quarto-float quarto-figure quarto-figure-center anchored" height="439" width="904">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sleepstudy-priorsense-fit2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="sleep_study_files/figure-html/fig-sleepstudy-priorsense-fit2-output-1.png" id="fig-sleepstudy-priorsense-fit2" width="904" height="439" class="figure-img">
@@ -1233,7 +1239,7 @@ NUTS: [sigma, Intercept, Days]</code></pre>
 <div id="cell-fig-sleepstudy-conditional-effects-fit2b" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>plot_predictions(mod2b, idata2b, <span class="st">"Model 2b"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-sleepstudy-conditional-effects-fit2b" class="quarto-float quarto-figure quarto-figure-center anchored" width="1168" height="968">
+<div id="fig-sleepstudy-conditional-effects-fit2b" class="quarto-float quarto-figure quarto-figure-center anchored" height="968" width="1168">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sleepstudy-conditional-effects-fit2b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="sleep_study_files/figure-html/fig-sleepstudy-conditional-effects-fit2b-output-1.png" id="fig-sleepstudy-conditional-effects-fit2b" width="1168" height="968" class="figure-img">
@@ -1255,7 +1261,7 @@ Figure&nbsp;9
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>                    visuals<span class="op">=</span>{<span class="st">"dist"</span>:<span class="va">False</span>}</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-sleepstudy-priorsense-fit2b" class="quarto-float quarto-figure quarto-figure-center anchored" width="904" height="439">
+<div id="fig-sleepstudy-priorsense-fit2b" class="quarto-float quarto-figure quarto-figure-center anchored" height="439" width="904">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sleepstudy-priorsense-fit2b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="sleep_study_files/figure-html/fig-sleepstudy-priorsense-fit2b-output-1.png" id="fig-sleepstudy-priorsense-fit2b" width="904" height="439" class="figure-img">
@@ -1272,7 +1278,7 @@ Figure&nbsp;10
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>pz.Normal(<span class="dv">0</span>, <span class="dv">1</span>).plot_pdf()</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>pz.StudentT(<span class="dv">7</span>, <span class="dv">0</span>, <span class="dv">1</span>).plot_pdf()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-compare-normal-student-density" class="quarto-float quarto-figure quarto-figure-center anchored" width="691" height="326">
+<div id="fig-compare-normal-student-density" class="quarto-float quarto-figure quarto-figure-center anchored" height="326" width="691">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-compare-normal-student-density-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="sleep_study_files/figure-html/fig-compare-normal-student-density-output-1.png" id="fig-compare-normal-student-density" width="691" height="326" class="figure-img">
