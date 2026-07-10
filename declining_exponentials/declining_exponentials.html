@@ -491,12 +491,17 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
     <h2 id="toc-title">On this page</h2>
    
-  <ul class="collapse">
+  <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#declining-exponential" id="toc-declining-exponential" class="nav-link" data-scroll-target="#declining-exponential"><span class="header-section-number">2</span> Declining exponential</a></li>
+  <li><a href="#declining-exponential" id="toc-declining-exponential" class="nav-link" data-scroll-target="#declining-exponential"><span class="header-section-number">2</span> Declining exponential</a>
+  <ul>
+  <li><a href="#simulated-data" id="toc-simulated-data" class="nav-link" data-scroll-target="#simulated-data"><span class="header-section-number">2.1</span> Simulated data</a></li>
+  <li><a href="#small-simulated-data" id="toc-small-simulated-data" class="nav-link" data-scroll-target="#small-simulated-data"><span class="header-section-number">2.2</span> Small simulated data</a></li>
+  <li><a href="#positive-simulated-data" id="toc-positive-simulated-data" class="nav-link" data-scroll-target="#positive-simulated-data"><span class="header-section-number">2.3</span> Positive simulated data</a></li>
+  </ul></li>
   <li><a href="#sum-of-declining-exponentials" id="toc-sum-of-declining-exponentials" class="nav-link" data-scroll-target="#sum-of-declining-exponentials"><span class="header-section-number">3</span> Sum of declining exponentials</a></li>
   <li><a href="#licenses" id="toc-licenses" class="nav-link" data-scroll-target="#licenses">Licenses</a></li>
   </ul>
@@ -644,7 +649,7 @@ y_i = ae^{-bx_i} + \epsilon_i, \text{ for } i=1,\dots,N,
 </figure>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-true-and-simulated-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="611">
+<div id="fig-true-and-simulated-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="411">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-true-and-simulated-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="declining_exponentials_files/figure-html/fig-true-and-simulated-output-2.png" id="fig-true-and-simulated-2" data-ref-parent="fig-true-and-simulated" width="611" height="411" class="figure-img">
@@ -865,7 +870,7 @@ Figure&nbsp;1
 </figure>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-10-data-points-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="611">
+<div id="fig-10-data-points-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="411">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-10-data-points-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="declining_exponentials_files/figure-html/fig-10-data-points-output-2.png" id="fig-10-data-points-2" data-ref-parent="fig-10-data-points" width="611" height="411" class="figure-img">
@@ -1091,7 +1096,7 @@ y_i = ae^{-bx_i} \cdot \epsilon_i, \text{ for } i=1,\dots,N\\
 </figure>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-positive-true-and-simulated-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="611">
+<div id="fig-positive-true-and-simulated-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="411">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-positive-true-and-simulated-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="declining_exponentials_files/figure-html/fig-positive-true-and-simulated-output-2.png" id="fig-positive-true-and-simulated-2" data-ref-parent="fig-positive-true-and-simulated" width="611" height="411" class="figure-img">
@@ -1247,7 +1252,7 @@ y_i = (a_1e^{-b_1x_i} + a_2e^{-b_2x_i}) \cdot \epsilon_i, \text{ for } i=1,\dots
 </figure>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-sumexp-true-and-simulated-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="611">
+<div id="fig-sumexp-true-and-simulated-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="411">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sumexp-true-and-simulated-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="declining_exponentials_files/figure-html/fig-sumexp-true-and-simulated-output-2.png" id="fig-sumexp-true-and-simulated-2" data-ref-parent="fig-sumexp-true-and-simulated" width="611" height="411" class="figure-img">
@@ -1491,7 +1496,7 @@ Figure&nbsp;4
 </figure>
 </div>
 <div class="cell-output cell-output-display">
-<div id="fig-sumexp-true-model-2" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="611">
+<div id="fig-sumexp-true-model-2" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="411">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-sumexp-true-model-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="declining_exponentials_files/figure-html/fig-sumexp-true-model-output-2.png" id="fig-sumexp-true-model-2" data-ref-parent="fig-sumexp-true-model" width="611" height="411" class="figure-img">
@@ -1526,7 +1531,7 @@ Figure&nbsp;5
 <span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">6.9</span>, <span class="fl">0.5</span>, <span class="st">"y = 1.0*exp(-0.1x) + 0.8*exp(-0.2x)"</span>, ha<span class="op">=</span><span class="st">"right"</span>, color<span class="op">=</span><span class="st">"C0"</span>, fontdict<span class="op">=</span>{<span class="st">"weight"</span>: <span class="st">"bold"</span>})<span class="op">;</span></span>
 <span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">6.1</span>, <span class="fl">1.4</span>, <span class="st">"y = 1.8*exp(-0.135x)"</span>, ha<span class="op">=</span><span class="st">"right"</span>, color<span class="op">=</span><span class="st">"C1"</span>, fontdict<span class="op">=</span>{<span class="st">"weight"</span>: <span class="st">"bold"</span>})<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-sumexp-true-and-one-component" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="611">
+<div id="fig-sumexp-true-and-one-component" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="411">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sumexp-true-and-one-component-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="declining_exponentials_files/figure-html/fig-sumexp-true-and-one-component-output-1.png" id="fig-sumexp-true-and-one-component" width="611" height="411" class="figure-img">

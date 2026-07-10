@@ -511,14 +511,22 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
     <h2 id="toc-title">On this page</h2>
    
-  <ul class="collapse">
+  <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">2</span> Data</a></li>
   <li><a href="#model-0-logistic-regression" id="toc-model-0-logistic-regression" class="nav-link" data-scroll-target="#model-0-logistic-regression"><span class="header-section-number">3</span> Model 0: Logistic regression</a></li>
-  <li><a href="#model-0h-hierarchical-logistic-regression" id="toc-model-0h-hierarchical-logistic-regression" class="nav-link" data-scroll-target="#model-0h-hierarchical-logistic-regression"><span class="header-section-number">4</span> Model 0h: Hierarchical logistic regression</a></li>
+  <li><a href="#model-0h-hierarchical-logistic-regression" id="toc-model-0h-hierarchical-logistic-regression" class="nav-link" data-scroll-target="#model-0h-hierarchical-logistic-regression"><span class="header-section-number">4</span> Model 0h: Hierarchical logistic regression</a>
+  <ul>
+  <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison"><span class="header-section-number">4.1</span> Model comparison</a></li>
+  <li><a href="#visualize-predictions" id="toc-visualize-predictions" class="nav-link" data-scroll-target="#visualize-predictions"><span class="header-section-number">4.2</span> Visualize predictions</a></li>
+  <li><a href="#predictive-calibration-check" id="toc-predictive-calibration-check" class="nav-link" data-scroll-target="#predictive-calibration-check"><span class="header-section-number">4.3</span> Predictive calibration check</a></li>
+  <li><a href="#residual-plots" id="toc-residual-plots" class="nav-link" data-scroll-target="#residual-plots"><span class="header-section-number">4.4</span> Residual plots</a></li>
+  <li><a href="#posterior-predictive-checking" id="toc-posterior-predictive-checking" class="nav-link" data-scroll-target="#posterior-predictive-checking"><span class="header-section-number">4.5</span> Posterior predictive checking</a></li>
+  <li><a href="#prior-likelihood-sensitivity-analysis" id="toc-prior-likelihood-sensitivity-analysis" class="nav-link" data-scroll-target="#prior-likelihood-sensitivity-analysis"><span class="header-section-number">4.6</span> Prior-likelihood sensitivity analysis</a></li>
+  </ul></li>
   <li><a href="#model-1-1-parameter-log-model" id="toc-model-1-1-parameter-log-model" class="nav-link" data-scroll-target="#model-1-1-parameter-log-model"><span class="header-section-number">5</span> Model 1: 1-parameter log model</a></li>
   </ul>
 </nav>
@@ -1003,7 +1011,7 @@ NUTS: [Intercept, time, 1|dog_sigma, 1|dog_offset, time|dog_sigma, time|dog_offs
 <div id="cell-fig-calib-0h" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pava(idata_0h)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-calib-0h" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-calib-0h" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-calib-0h-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="dogs_files/figure-html/fig-calib-0h-output-1.png" id="fig-calib-0h" width="611" height="279" class="figure-img">
@@ -1021,7 +1029,7 @@ Figure&nbsp;1
 <div id="cell-fig-residual-0h" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_pava_residuals(idata_0h, x_var<span class="op">=</span>dogs_df[<span class="st">"time"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-residual-0h" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-residual-0h" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-residual-0h-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="dogs_files/figure-html/fig-residual-0h-output-1.png" id="fig-residual-0h" width="611" height="279" class="figure-img">
@@ -1063,7 +1071,7 @@ Figure&nbsp;2
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>plot_ppc_shocks(ax1, shock_matrix, <span class="st">"Real dogs"</span>)</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>plot_ppc_shocks(ax2, y_rep_0h, <span class="st">"Model 0h: hier. logit"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_shocks-0h" class="quarto-float quarto-figure quarto-figure-center anchored" width="811" height="311">
+<div id="fig-ppc_shocks-0h" class="quarto-float quarto-figure quarto-figure-center anchored" height="311" width="811">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_shocks-0h-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="dogs_files/figure-html/fig-ppc_shocks-0h-output-1.png" id="fig-ppc_shocks-0h" width="811" height="311" class="figure-img">

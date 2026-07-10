@@ -511,30 +511,30 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
     <h2 id="toc-title">On this page</h2>
    
-  <ul class="collapse">
+  <ul>
   <li><a href="#world-cup-2014-team-performance-analysis" id="toc-world-cup-2014-team-performance-analysis" class="nav-link active" data-scroll-target="#world-cup-2014-team-performance-analysis"><span class="header-section-number">1</span> World Cup 2014 team performance analysis</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">2</span> Data</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#data-for-stan" id="toc-data-for-stan" class="nav-link" data-scroll-target="#data-for-stan"><span class="header-section-number">2.1</span> Data for Stan</a></li>
   </ul></li>
   <li><a href="#first-model" id="toc-first-model" class="nav-link" data-scroll-target="#first-model"><span class="header-section-number">3</span> First model</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#check-fit-of-the-first-model" id="toc-check-fit-of-the-first-model" class="nav-link" data-scroll-target="#check-fit-of-the-first-model"><span class="header-section-number">3.1</span> Check fit of the first model</a></li>
   </ul></li>
   <li><a href="#second-model-without-sqrt-transformation" id="toc-second-model-without-sqrt-transformation" class="nav-link" data-scroll-target="#second-model-without-sqrt-transformation"><span class="header-section-number">4</span> Second model without sqrt transformation</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#check-fit-of-the-second-model-to-data" id="toc-check-fit-of-the-second-model-to-data" class="nav-link" data-scroll-target="#check-fit-of-the-second-model-to-data"><span class="header-section-number">4.1</span> Check fit of the second model to data</a></li>
   </ul></li>
   <li><a href="#fix-the-first-model" id="toc-fix-the-first-model" class="nav-link" data-scroll-target="#fix-the-first-model"><span class="header-section-number">5</span> Fix the first model</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#check-the-fit-of-the-fixed-first-model" id="toc-check-the-fit-of-the-fixed-first-model" class="nav-link" data-scroll-target="#check-the-fit-of-the-fixed-first-model"><span class="header-section-number">5.1</span> Check the fit of the fixed first model</a></li>
   <li><a href="#fit-the-same-model-without-the-powerindex-prior" id="toc-fit-the-same-model-without-the-powerindex-prior" class="nav-link" data-scroll-target="#fit-the-same-model-without-the-powerindex-prior"><span class="header-section-number">5.2</span> Fit the same model without the powerindex prior</a></li>
   </ul></li>
   <li><a href="#discrete-models-and-loo-cv-comparison" id="toc-discrete-models-and-loo-cv-comparison" class="nav-link" data-scroll-target="#discrete-models-and-loo-cv-comparison"><span class="header-section-number">6</span> Discrete models and LOO-CV comparison</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#discrete-model-with-explicit-latent-z-sampled" id="toc-discrete-model-with-explicit-latent-z-sampled" class="nav-link" data-scroll-target="#discrete-model-with-explicit-latent-z-sampled"><span class="header-section-number">6.1</span> Discrete model with explicit latent z sampled</a></li>
   <li><a href="#discrete-model-with-latent-z-integrated-out" id="toc-discrete-model-with-latent-z-integrated-out" class="nav-link" data-scroll-target="#discrete-model-with-latent-z-integrated-out"><span class="header-section-number">6.2</span> Discrete model with latent z integrated out</a></li>
   <li><a href="#discrete-model-with-no-power-score" id="toc-discrete-model-with-no-power-score" class="nav-link" data-scroll-target="#discrete-model-with-no-power-score"><span class="header-section-number">6.3</span> Discrete model with no power score</a></li>
@@ -543,7 +543,7 @@ window.Quarto = {
   <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison"><span class="header-section-number">6.6</span> Model comparison</a></li>
   </ul></li>
   <li><a href="#discretizing-continuous-models" id="toc-discretizing-continuous-models" class="nav-link" data-scroll-target="#discretizing-continuous-models"><span class="header-section-number">7</span> Discretizing continuous models</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#continuous-model-with-log-predictive-probability-using-midpoint-rule" id="toc-continuous-model-with-log-predictive-probability-using-midpoint-rule" class="nav-link" data-scroll-target="#continuous-model-with-log-predictive-probability-using-midpoint-rule"><span class="header-section-number">7.1</span> Continuous model with log predictive probability using midpoint rule</a></li>
   <li><a href="#continuous-model-with-log-predictive-probability-using-exact-integration" id="toc-continuous-model-with-log-predictive-probability-using-exact-integration" class="nav-link" data-scroll-target="#continuous-model-with-log-predictive-probability-using-exact-integration"><span class="header-section-number">7.2</span> Continuous model with log predictive probability using exact integration</a></li>
   <li><a href="#model-comparison-1" id="toc-model-comparison-1" class="nav-link" data-scroll-target="#model-comparison-1"><span class="header-section-number">7.3</span> Model comparison</a></li>
@@ -552,7 +552,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#loo-cv-predictive-checking" id="toc-loo-cv-predictive-checking" class="nav-link" data-scroll-target="#loo-cv-predictive-checking"><span class="header-section-number">8</span> LOO-CV predictive checking</a></li>
   <li><a href="#bivariate-poisson-and-poisson-difference-models" id="toc-bivariate-poisson-and-poisson-difference-models" class="nav-link" data-scroll-target="#bivariate-poisson-and-poisson-difference-models"><span class="header-section-number">9</span> Bivariate Poisson and Poisson difference models</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#loo-cv-predictive-checking-1" id="toc-loo-cv-predictive-checking-1" class="nav-link" data-scroll-target="#loo-cv-predictive-checking-1"><span class="header-section-number">9.1</span> LOO-CV predictive checking</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
@@ -1188,7 +1188,7 @@ y_i \sim \mbox{t}_{\nu}(a_{j_1[i]}-a_{j_2[i]}, \sigma_y),
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>pc.coords <span class="op">=</span> {<span class="st">"column"</span>: <span class="st">"forest"</span>}</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, values<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-worldcup-mcmc-intervals-fit_1" class="quarto-float quarto-figure quarto-figure-center anchored" width="908" height="983">
+<div id="fig-worldcup-mcmc-intervals-fit_1" class="quarto-float quarto-figure quarto-figure-center anchored" height="983" width="908">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-worldcup-mcmc-intervals-fit_1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="world_cup_files/figure-html/fig-worldcup-mcmc-intervals-fit_1-output-1.png" id="fig-worldcup-mcmc-intervals-fit_1" width="908" height="983" class="figure-img">
@@ -1797,7 +1797,7 @@ Figure&nbsp;1
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>pc.coords <span class="op">=</span> {<span class="st">"column"</span>: <span class="st">"forest"</span>}</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, values<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-worldcup-mcmc-intervals-fit_2" class="quarto-float quarto-figure quarto-figure-center anchored" width="908" height="983">
+<div id="fig-worldcup-mcmc-intervals-fit_2" class="quarto-float quarto-figure quarto-figure-center anchored" height="983" width="908">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-worldcup-mcmc-intervals-fit_2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="world_cup_files/figure-html/fig-worldcup-mcmc-intervals-fit_2-output-1.png" id="fig-worldcup-mcmc-intervals-fit_2" width="908" height="983" class="figure-img">
@@ -1839,7 +1839,7 @@ Figure&nbsp;2
 <span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>pc.add_title(<span class="st">"Game score differentials</span><span class="ch">\n</span><span class="st">compared to 90% predictive interval"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-worldcup-ppc-intervals-fit_2" class="quarto-float quarto-figure quarto-figure-center anchored" width="908" height="1825">
+<div id="fig-worldcup-ppc-intervals-fit_2" class="quarto-float quarto-figure quarto-figure-center anchored" height="1825" width="908">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-worldcup-ppc-intervals-fit_2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="world_cup_files/figure-html/fig-worldcup-ppc-intervals-fit_2-output-1.png" id="fig-worldcup-ppc-intervals-fit_2" width="908" height="1825" class="figure-img">
@@ -2370,7 +2370,7 @@ Figure&nbsp;3
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>pc.coords <span class="op">=</span> {<span class="st">"column"</span>: <span class="st">"forest"</span>}</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, values<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-worldcup-mcmc-intervals-fit_3" class="quarto-float quarto-figure quarto-figure-center anchored" width="908" height="983">
+<div id="fig-worldcup-mcmc-intervals-fit_3" class="quarto-float quarto-figure quarto-figure-center anchored" height="983" width="908">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-worldcup-mcmc-intervals-fit_3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="world_cup_files/figure-html/fig-worldcup-mcmc-intervals-fit_3-output-1.png" id="fig-worldcup-mcmc-intervals-fit_3" width="908" height="983" class="figure-img">
@@ -2410,7 +2410,7 @@ Figure&nbsp;4
 <span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>pc.add_title(<span class="st">"Game score differentials</span><span class="ch">\n</span><span class="st">compared to 90% predictive interval</span><span class="ch">\n</span><span class="st">(corrected model with square root)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-worldcup-ppc-intervals-fit_3" class="quarto-float quarto-figure quarto-figure-center anchored" width="908" height="1825">
+<div id="fig-worldcup-ppc-intervals-fit_3" class="quarto-float quarto-figure quarto-figure-center anchored" height="1825" width="908">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-worldcup-ppc-intervals-fit_3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="world_cup_files/figure-html/fig-worldcup-ppc-intervals-fit_3-output-1.png" id="fig-worldcup-ppc-intervals-fit_3" width="908" height="1825" class="figure-img">
@@ -2490,7 +2490,7 @@ Figure&nbsp;5
 <span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>pc.coords <span class="op">=</span> {<span class="st">"column"</span>: <span class="st">"forest"</span>}</span>
 <span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, values<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-worldcup-mcmc-intervals-fit_3_no_prior" class="quarto-float quarto-figure quarto-figure-center anchored" width="908" height="983">
+<div id="fig-worldcup-mcmc-intervals-fit_3_no_prior" class="quarto-float quarto-figure quarto-figure-center anchored" height="983" width="908">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-worldcup-mcmc-intervals-fit_3_no_prior-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="world_cup_files/figure-html/fig-worldcup-mcmc-intervals-fit_3_no_prior-output-1.png" id="fig-worldcup-mcmc-intervals-fit_3_no_prior" width="908" height="983" class="figure-img">
@@ -6850,7 +6850,7 @@ Figure&nbsp;6
 <div id="cell-fig-ppc-dist-discr" class="cell" data-execution_count="59">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_discr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc-dist-discr" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc-dist-discr" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc-dist-discr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="world_cup_files/figure-html/fig-ppc-dist-discr-output-1.png" id="fig-ppc-dist-discr" width="458" height="209" class="figure-img">
@@ -6866,7 +6866,7 @@ Figure&nbsp;7
 <div id="cell-fig-ppc-dist-sqrt-cont" class="cell" data-execution_count="60">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_sqrt_c)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc-dist-sqrt-cont" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc-dist-sqrt-cont" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc-dist-sqrt-cont-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="world_cup_files/figure-html/fig-ppc-dist-sqrt-cont-output-1.png" id="fig-ppc-dist-sqrt-cont" width="458" height="209" class="figure-img">
@@ -7744,7 +7744,7 @@ Figure&nbsp;8
 <div id="cell-fig-ppc-dist-bipois" class="cell" data-execution_count="68">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb90"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_bipois)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc-dist-bipois" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc-dist-bipois" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc-dist-bipois-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="world_cup_files/figure-html/fig-ppc-dist-bipois-output-1.png" id="fig-ppc-dist-bipois" width="458" height="209" class="figure-img">
@@ -7760,7 +7760,7 @@ Figure&nbsp;9
 <div id="cell-fig-ppc-dist-poisdif" class="cell" data-execution_count="69">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pit(idata_poisdif)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc-dist-poisdif" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
+<div id="fig-ppc-dist-poisdif" class="quarto-float quarto-figure quarto-figure-center anchored" height="209" width="458">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc-dist-poisdif-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="world_cup_files/figure-html/fig-ppc-dist-poisdif-output-1.png" id="fig-ppc-dist-poisdif" width="458" height="209" class="figure-img">

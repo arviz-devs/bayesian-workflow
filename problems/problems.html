@@ -511,20 +511,81 @@ window.Quarto = {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
     <h2 id="toc-title">On this page</h2>
    
-  <ul class="collapse">
+  <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
-  <li><a href="#improper-posterior" id="toc-improper-posterior" class="nav-link" data-scroll-target="#improper-posterior"><span class="header-section-number">2</span> Improper posterior</a></li>
-  <li><a href="#a-model-with-unused-parameter" id="toc-a-model-with-unused-parameter" class="nav-link" data-scroll-target="#a-model-with-unused-parameter"><span class="header-section-number">3</span> A model with unused parameter</a></li>
-  <li><a href="#a-posterior-with-two-parameters-competing" id="toc-a-posterior-with-two-parameters-competing" class="nav-link" data-scroll-target="#a-posterior-with-two-parameters-competing"><span class="header-section-number">4</span> A posterior with two parameters competing</a></li>
-  <li><a href="#a-posterior-with-very-high-correlation" id="toc-a-posterior-with-very-high-correlation" class="nav-link" data-scroll-target="#a-posterior-with-very-high-correlation"><span class="header-section-number">5</span> A posterior with very high correlation</a></li>
-  <li><a href="#a-bimodal-posterior" id="toc-a-bimodal-posterior" class="nav-link" data-scroll-target="#a-bimodal-posterior"><span class="header-section-number">6</span> A bimodal posterior</a></li>
-  <li><a href="#easy-bimodal-posterior" id="toc-easy-bimodal-posterior" class="nav-link" data-scroll-target="#easy-bimodal-posterior"><span class="header-section-number">7</span> Easy bimodal posterior</a></li>
-  <li><a href="#initial-value-issues" id="toc-initial-value-issues" class="nav-link" data-scroll-target="#initial-value-issues"><span class="header-section-number">8</span> Initial value issues</a></li>
-  <li><a href="#thick-tailed-posterior" id="toc-thick-tailed-posterior" class="nav-link" data-scroll-target="#thick-tailed-posterior"><span class="header-section-number">9</span> Thick tailed posterior</a></li>
-  <li><a href="#variance-parameter-that-is-not-constrained-to-be-positive" id="toc-variance-parameter-that-is-not-constrained-to-be-positive" class="nav-link" data-scroll-target="#variance-parameter-that-is-not-constrained-to-be-positive"><span class="header-section-number">10</span> Variance parameter that is not constrained to be positive</a></li>
+  <li><a href="#improper-posterior" id="toc-improper-posterior" class="nav-link" data-scroll-target="#improper-posterior"><span class="header-section-number">2</span> Improper posterior</a>
+  <ul>
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">2.1</span> Data</a></li>
+  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model"><span class="header-section-number">2.2</span> Model</a></li>
+  <li><a href="#convergence-diagnostics" id="toc-convergence-diagnostics" class="nav-link" data-scroll-target="#convergence-diagnostics"><span class="header-section-number">2.3</span> Convergence diagnostics</a>
+  <ul class="collapse">
+  <li><a href="#stan-compiler-pedantic-check" id="toc-stan-compiler-pedantic-check" class="nav-link" data-scroll-target="#stan-compiler-pedantic-check"><span class="header-section-number">2.3.1</span> Stan compiler pedantic check</a></li>
+  </ul></li>
+  <li><a href="#a-fixed-model-with-proper-priors" id="toc-a-fixed-model-with-proper-priors" class="nav-link" data-scroll-target="#a-fixed-model-with-proper-priors"><span class="header-section-number">2.4</span> A fixed model with proper priors</a>
+  <ul class="collapse">
+  <li><a href="#convergence-diagnostics-1" id="toc-convergence-diagnostics-1" class="nav-link" data-scroll-target="#convergence-diagnostics-1"><span class="header-section-number">2.4.1</span> Convergence diagnostics</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#a-model-with-unused-parameter" id="toc-a-model-with-unused-parameter" class="nav-link" data-scroll-target="#a-model-with-unused-parameter"><span class="header-section-number">3</span> A model with unused parameter</a>
+  <ul>
+  <li><a href="#model-1" id="toc-model-1" class="nav-link" data-scroll-target="#model-1"><span class="header-section-number">3.1</span> Model</a>
+  <ul class="collapse">
+  <li><a href="#convergence-diagnostics-2" id="toc-convergence-diagnostics-2" class="nav-link" data-scroll-target="#convergence-diagnostics-2"><span class="header-section-number">3.1.1</span> Convergence diagnostics</a></li>
+  </ul></li>
+  <li><a href="#stan-compiler-pedantic-check-1" id="toc-stan-compiler-pedantic-check-1" class="nav-link" data-scroll-target="#stan-compiler-pedantic-check-1"><span class="header-section-number">3.2</span> Stan compiler pedantic check</a></li>
+  </ul></li>
+  <li><a href="#a-posterior-with-two-parameters-competing" id="toc-a-posterior-with-two-parameters-competing" class="nav-link" data-scroll-target="#a-posterior-with-two-parameters-competing"><span class="header-section-number">4</span> A posterior with two parameters competing</a>
+  <ul>
+  <li><a href="#data-1" id="toc-data-1" class="nav-link" data-scroll-target="#data-1"><span class="header-section-number">4.1</span> Data</a></li>
+  <li><a href="#model-2" id="toc-model-2" class="nav-link" data-scroll-target="#model-2"><span class="header-section-number">4.2</span> Model</a></li>
+  <li><a href="#convergence-diagnostics-3" id="toc-convergence-diagnostics-3" class="nav-link" data-scroll-target="#convergence-diagnostics-3"><span class="header-section-number">4.3</span> Convergence diagnostics</a></li>
+  <li><a href="#stan-compiler-pedantic-check-2" id="toc-stan-compiler-pedantic-check-2" class="nav-link" data-scroll-target="#stan-compiler-pedantic-check-2"><span class="header-section-number">4.4</span> Stan compiler pedantic check</a></li>
+  </ul></li>
+  <li><a href="#a-posterior-with-very-high-correlation" id="toc-a-posterior-with-very-high-correlation" class="nav-link" data-scroll-target="#a-posterior-with-very-high-correlation"><span class="header-section-number">5</span> A posterior with very high correlation</a>
+  <ul>
+  <li><a href="#data-2" id="toc-data-2" class="nav-link" data-scroll-target="#data-2"><span class="header-section-number">5.1</span> Data</a></li>
+  <li><a href="#model-3" id="toc-model-3" class="nav-link" data-scroll-target="#model-3"><span class="header-section-number">5.2</span> Model</a>
+  <ul class="collapse">
+  <li><a href="#convergence-diagnostics-4" id="toc-convergence-diagnostics-4" class="nav-link" data-scroll-target="#convergence-diagnostics-4"><span class="header-section-number">5.2.1</span> Convergence diagnostics</a></li>
+  </ul></li>
+  <li><a href="#centered-data" id="toc-centered-data" class="nav-link" data-scroll-target="#centered-data"><span class="header-section-number">5.3</span> Centered data</a></li>
+  <li><a href="#convergence-diagnostics-5" id="toc-convergence-diagnostics-5" class="nav-link" data-scroll-target="#convergence-diagnostics-5"><span class="header-section-number">5.4</span> Convergence diagnostics</a></li>
+  </ul></li>
+  <li><a href="#a-bimodal-posterior" id="toc-a-bimodal-posterior" class="nav-link" data-scroll-target="#a-bimodal-posterior"><span class="header-section-number">6</span> A bimodal posterior</a>
+  <ul>
+  <li><a href="#data-3" id="toc-data-3" class="nav-link" data-scroll-target="#data-3"><span class="header-section-number">6.1</span> Data</a></li>
+  <li><a href="#model-4" id="toc-model-4" class="nav-link" data-scroll-target="#model-4"><span class="header-section-number">6.2</span> Model</a>
+  <ul class="collapse">
+  <li><a href="#convergence-diagnostics-6" id="toc-convergence-diagnostics-6" class="nav-link" data-scroll-target="#convergence-diagnostics-6"><span class="header-section-number">6.2.1</span> Convergence diagnostics</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#easy-bimodal-posterior" id="toc-easy-bimodal-posterior" class="nav-link" data-scroll-target="#easy-bimodal-posterior"><span class="header-section-number">7</span> Easy bimodal posterior</a>
+  <ul>
+  <li><a href="#convergence-diagnostics-7" id="toc-convergence-diagnostics-7" class="nav-link" data-scroll-target="#convergence-diagnostics-7"><span class="header-section-number">7.1</span> Convergence diagnostics</a></li>
+  </ul></li>
+  <li><a href="#initial-value-issues" id="toc-initial-value-issues" class="nav-link" data-scroll-target="#initial-value-issues"><span class="header-section-number">8</span> Initial value issues</a>
+  <ul>
+  <li><a href="#data-4" id="toc-data-4" class="nav-link" data-scroll-target="#data-4"><span class="header-section-number">8.1</span> Data</a></li>
+  <li><a href="#model-5" id="toc-model-5" class="nav-link" data-scroll-target="#model-5"><span class="header-section-number">8.2</span> Model</a></li>
+  <li><a href="#convergence-diagnostics-8" id="toc-convergence-diagnostics-8" class="nav-link" data-scroll-target="#convergence-diagnostics-8"><span class="header-section-number">8.3</span> Convergence diagnostics</a></li>
+  <li><a href="#scaled-data" id="toc-scaled-data" class="nav-link" data-scroll-target="#scaled-data"><span class="header-section-number">8.4</span> Scaled data</a></li>
+  <li><a href="#convergence-diagnostics-9" id="toc-convergence-diagnostics-9" class="nav-link" data-scroll-target="#convergence-diagnostics-9"><span class="header-section-number">8.5</span> Convergence diagnostics</a></li>
+  </ul></li>
+  <li><a href="#thick-tailed-posterior" id="toc-thick-tailed-posterior" class="nav-link" data-scroll-target="#thick-tailed-posterior"><span class="header-section-number">9</span> Thick tailed posterior</a>
+  <ul>
+  <li><a href="#model-6" id="toc-model-6" class="nav-link" data-scroll-target="#model-6"><span class="header-section-number">9.1</span> Model</a></li>
+  <li><a href="#convergence-diagnostics-10" id="toc-convergence-diagnostics-10" class="nav-link" data-scroll-target="#convergence-diagnostics-10"><span class="header-section-number">9.2</span> Convergence diagnostics</a></li>
+  </ul></li>
+  <li><a href="#variance-parameter-that-is-not-constrained-to-be-positive" id="toc-variance-parameter-that-is-not-constrained-to-be-positive" class="nav-link" data-scroll-target="#variance-parameter-that-is-not-constrained-to-be-positive"><span class="header-section-number">10</span> Variance parameter that is not constrained to be positive</a>
+  <ul>
+  <li><a href="#data-5" id="toc-data-5" class="nav-link" data-scroll-target="#data-5"><span class="header-section-number">10.1</span> Data</a></li>
+  <li><a href="#model-7" id="toc-model-7" class="nav-link" data-scroll-target="#model-7"><span class="header-section-number">10.2</span> Model</a></li>
+  <li><a href="#convergence-diagnostics-11" id="toc-convergence-diagnostics-11" class="nav-link" data-scroll-target="#convergence-diagnostics-11"><span class="header-section-number">10.3</span> Convergence diagnostics</a></li>
+  <li><a href="#stan-compiler-pedantic-check-3" id="toc-stan-compiler-pedantic-check-3" class="nav-link" data-scroll-target="#stan-compiler-pedantic-check-3"><span class="header-section-number">10.4</span> Stan compiler pedantic check</a></li>
+  </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   <li><a href="#licenses" id="toc-licenses" class="nav-link" data-scroll-target="#licenses">Licenses</a></li>
   </ul>
@@ -642,7 +703,7 @@ window.Quarto = {
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>ax.scatter(df[<span class="st">"x"</span>], df[<span class="st">"y"</span>])</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(yticks<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>], xlabel<span class="op">=</span><span class="st">"x"</span>, ylabel<span class="op">=</span><span class="st">"y"</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-separable_data" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="311">
+<div id="fig-separable_data" class="quarto-float quarto-figure quarto-figure-center anchored" height="311" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-separable_data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-separable_data-output-1.png" id="fig-separable_data" width="611" height="311" class="figure-img">
@@ -779,7 +840,7 @@ You should consider regularizing your model with additional prior information or
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"divergence"</span>: <span class="va">True</span>},</span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-separable_pairs" class="quarto-float quarto-figure quarto-figure-center anchored" width="811" height="411">
+<div id="fig-separable_pairs" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="811">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-separable_pairs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-separable_pairs-output-1.png" id="fig-separable_pairs" width="811" height="411" class="figure-img">
@@ -913,7 +974,7 @@ Processing complete, no problems detected.</code></pre>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"divergence"</span>: <span class="va">True</span>},</span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-separable_prior_pairs" class="quarto-float quarto-figure quarto-figure-center anchored" width="811" height="411">
+<div id="fig-separable_prior_pairs" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="811">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-separable_prior_pairs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-separable_prior_pairs-output-1.png" id="fig-separable_prior_pairs" width="811" height="411" class="figure-img">
@@ -1063,7 +1124,7 @@ You should consider regularizing your model with additional prior information or
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"divergence"</span>: <span class="va">True</span>},</span>
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-unusedparam_pairs" class="quarto-float quarto-figure quarto-figure-center anchored" width="811" height="411">
+<div id="fig-unusedparam_pairs" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="811">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-unusedparam_pairs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-unusedparam_pairs-output-1.png" id="fig-unusedparam_pairs" width="811" height="411" class="figure-img">
@@ -1079,7 +1140,7 @@ Figure&nbsp;4
 <div id="cell-fig-unusedparam_trace" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>az.plot_trace(dt_logit3, var_names<span class="op">=</span>[<span class="st">"gamma"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-unusedparam_trace" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-unusedparam_trace" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-unusedparam_trace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-unusedparam_trace-output-1.png" id="fig-unusedparam_trace" width="611" height="279" class="figure-img">
@@ -1240,7 +1301,7 @@ Processing complete, no problems detected.</code></pre>
 <span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"divergence"</span>: <span class="va">True</span>},</span>
 <span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-competing_params_pairs" class="quarto-float quarto-figure quarto-figure-center anchored" width="811" height="411">
+<div id="fig-competing_params_pairs" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="811">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-competing_params_pairs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-competing_params_pairs-output-1.png" id="fig-competing_params_pairs" width="811" height="411" class="figure-img">
@@ -1289,7 +1350,7 @@ Figure&nbsp;6
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>ax.scatter(x, y)</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Year"</span>, ylabel<span class="op">=</span><span class="st">"Summer temp. @Kilpisjärvi"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-kilpisjarvi_data" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="411">
+<div id="fig-kilpisjarvi_data" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-kilpisjarvi_data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-kilpisjarvi_data-output-1.png" id="fig-kilpisjarvi_data" width="611" height="411" class="figure-img">
@@ -1431,7 +1492,7 @@ Processing complete, no problems detected.</code></pre>
 <span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"divergence"</span>: <span class="va">True</span>},</span>
 <span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-correlating_params_pairs" class="quarto-float quarto-figure quarto-figure-center anchored" width="811" height="411">
+<div id="fig-correlating_params_pairs" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="811">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-correlating_params_pairs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-correlating_params_pairs-output-1.png" id="fig-correlating_params_pairs" width="811" height="411" class="figure-img">
@@ -1555,7 +1616,7 @@ Processing complete, no problems detected.</code></pre>
 <span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"divergence"</span>: <span class="va">True</span>},</span>
 <span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-uncorrelating_params_pairs" class="quarto-float quarto-figure quarto-figure-center anchored" width="811" height="411">
+<div id="fig-uncorrelating_params_pairs" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="811">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-uncorrelating_params_pairs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-uncorrelating_params_pairs-output-1.png" id="fig-uncorrelating_params_pairs" width="811" height="411" class="figure-img">
@@ -1688,7 +1749,7 @@ You should consider regularizing your model with additional prior information or
 <span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>    },</span>
 <span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-bimodal1_hist" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-bimodal1_hist" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bimodal1_hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-bimodal1_hist-output-1.png" id="fig-bimodal1_hist" width="611" height="279" class="figure-img">
@@ -1784,7 +1845,7 @@ Processing complete, no problems detected.</code></pre>
 <div id="cell-fig-bimodal2_hist" class="cell" data-execution_count="49">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>az.plot_dist(dt_tt, kind<span class="op">=</span><span class="st">"hist"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-bimodal2_hist" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-bimodal2_hist" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bimodal2_hist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-bimodal2_hist-output-1.png" id="fig-bimodal2_hist" width="611" height="279" class="figure-img">
@@ -1800,7 +1861,7 @@ Figure&nbsp;11
 <div id="cell-fig-bimodal2_trace" class="cell" data-execution_count="50">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>az.plot_trace(dt_tt)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-bimodal2_trace" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-bimodal2_trace" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bimodal2_trace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-bimodal2_trace-output-1.png" id="fig-bimodal2_trace" width="611" height="279" class="figure-img">
@@ -1816,7 +1877,7 @@ Figure&nbsp;12
 <div id="cell-fig-bimodal2_rank" class="cell" data-execution_count="51">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>az.plot_rank(dt_tt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-bimodal2_rank" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-bimodal2_rank" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-bimodal2_rank-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-bimodal2_rank-output-1.png" id="fig-bimodal2_rank" width="611" height="279" class="figure-img">
@@ -1850,7 +1911,7 @@ Figure&nbsp;13
 <span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>ax.scatter(x, y)</span>
 <span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">'x'</span>, ylabel<span class="op">=</span><span class="st">'y'</span>)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-poisson_data" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="311">
+<div id="fig-poisson_data" class="quarto-float quarto-figure quarto-figure-center anchored" height="311" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-poisson_data-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-poisson_data-output-1.png" id="fig-poisson_data" width="611" height="311" class="figure-img">
@@ -1988,7 +2049,7 @@ You should consider regularizing your model with additional prior information or
 <span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"divergence"</span>: <span class="va">True</span>},</span>
 <span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-poisson_pairs" class="quarto-float quarto-figure quarto-figure-center anchored" width="811" height="411">
+<div id="fig-poisson_pairs" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="811">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-poisson_pairs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-poisson_pairs-output-1.png" id="fig-poisson_pairs" width="811" height="411" class="figure-img">
@@ -2013,7 +2074,7 @@ Figure&nbsp;15
 <span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>ax.scatter(data_pois[<span class="st">"x"</span>], data_pois[<span class="st">"y"</span>])</span>
 <span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"x"</span>, ylabel<span class="op">=</span><span class="st">"y"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-poisson_data2" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="311">
+<div id="fig-poisson_data2" class="quarto-float quarto-figure quarto-figure-center anchored" height="311" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-poisson_data2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-poisson_data2-output-1.png" id="fig-poisson_data2" width="611" height="311" class="figure-img">
@@ -2237,7 +2298,7 @@ You should consider regularizing your model with additional prior information or
 <span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"divergence"</span>: <span class="va">True</span>},</span>
 <span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-thick_tail_pairs" class="quarto-float quarto-figure quarto-figure-center anchored" width="811" height="411">
+<div id="fig-thick_tail_pairs" class="quarto-float quarto-figure quarto-figure-center anchored" height="411" width="811">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-thick_tail_pairs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-thick_tail_pairs-output-1.png" id="fig-thick_tail_pairs" width="811" height="411" class="figure-img">
@@ -2254,7 +2315,7 @@ Figure&nbsp;17
 <div id="cell-fig-thick_tail_rank" class="cell" data-execution_count="69">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb101"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a>az.plot_rank(dt_logit_glm4, var_names<span class="op">=</span>[<span class="st">"alpha"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-thick_tail_rank" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-thick_tail_rank" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-thick_tail_rank-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-thick_tail_rank-output-1.png" id="fig-thick_tail_rank" width="611" height="279" class="figure-img">
@@ -2331,7 +2392,7 @@ Figure&nbsp;18
 <div id="cell-fig-thick_tail_rank_more" class="cell" data-execution_count="72">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb104"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>az.plot_rank(dt_logit_glm4, var_names<span class="op">=</span>[<span class="st">"alpha"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-thick_tail_rank_more" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
+<div id="fig-thick_tail_rank_more" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-thick_tail_rank_more-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="problems_files/figure-html/fig-thick_tail_rank_more-output-1.png" id="fig-thick_tail_rank_more" width="611" height="279" class="figure-img">
