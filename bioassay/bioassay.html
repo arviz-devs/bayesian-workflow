@@ -595,10 +595,10 @@ window.Quarto = {
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>SEED <span class="op">=</span> <span class="dv">7412</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="tabset-margin-container"></div><div class="panel-tabset" data-group="ppl">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">CmdStanPy</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Numpyro</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">CmdStanPy</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Numpyro</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">PyMC</a></li></ul>
 <div class="tab-content" data-group="ppl">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div id="038bbc00" class="cell" data-execution_count="2">
+<div id="aa019260" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cmdstanpy <span class="im">import</span> CmdStanModel, disable_logging</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>disable_logging()</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> print_stan</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -615,15 +615,18 @@ window.Quarto = {
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span>  numpyro <span class="im">import</span> distributions <span class="im">as</span> dist</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpyro.infer <span class="im">import</span> NUTS, MCMC, Predictive</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymc <span class="im">as</span> pm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </div>
 </div>
 </section>
 <section id="bioassay-data" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="bioassay-data"><span class="header-section-number">2</span> Bioassay data</h2>
 <p>Read the data from csv</p>
-<div id="c10bd92e" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_bioassay <span class="op">=</span> pd.read_csv(<span class="st">"data/bioassay.csv"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df_bioassay</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="84ff8428" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_bioassay <span class="op">=</span> pd.read_csv(<span class="st">"data/bioassay.csv"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>df_bioassay</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <div>
 
@@ -670,10 +673,10 @@ window.Quarto = {
 </div>
 <p>Plot the data</p>
 <div id="cell-fig-bioassay-data-plot" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>ax.scatter(df_bioassay[<span class="st">"dose"</span>], df_bioassay[<span class="st">"deaths"</span>], s<span class="op">=</span><span class="dv">60</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Dose log(g/ml)"</span>, ylabel<span class="op">=</span><span class="st">"# of deaths"</span>)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>ax.spines[[<span class="st">"top"</span>, <span class="st">"right"</span>]].set_visible(<span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ax.scatter(df_bioassay[<span class="st">"dose"</span>], df_bioassay[<span class="st">"deaths"</span>], s<span class="op">=</span><span class="dv">60</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Dose log(g/ml)"</span>, ylabel<span class="op">=</span><span class="st">"# of deaths"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>ax.spines[[<span class="st">"top"</span>, <span class="st">"right"</span>]].set_visible(<span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="fig-bioassay-data-plot" class="quarto-float quarto-figure quarto-figure-center anchored" width="533" height="308">
 <figure class="quarto-float quarto-float-fig figure">
@@ -688,24 +691,29 @@ Figure&nbsp;1
 </div>
 </div>
 <div class="tabset-margin-container"></div><div class="panel-tabset" data-group="ppl">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">CmdStanPy</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Numpyro</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">CmdStanPy</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Numpyro</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false" href="">PyMC</a></li></ul>
 <div class="tab-content" data-group="ppl">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <p>Data as list for CmdStanPy</p>
-<div id="532b3bdc" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bioassay_data <span class="op">=</span> {</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"J"</span>: <span class="bu">len</span>(df_bioassay),</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x"</span>: df_bioassay[<span class="st">"dose"</span>].to_list(),</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"N"</span>: df_bioassay[<span class="st">"batch_size"</span>].to_list(),</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"y"</span>: df_bioassay[<span class="st">"deaths"</span>].to_list(),</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="dada57f2" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>bioassay_data <span class="op">=</span> {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"J"</span>: <span class="bu">len</span>(df_bioassay),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x"</span>: df_bioassay[<span class="st">"dose"</span>].to_list(),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"N"</span>: df_bioassay[<span class="st">"batch_size"</span>].to_list(),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"y"</span>: df_bioassay[<span class="st">"deaths"</span>].to_list(),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="bu">len</span>(df_bioassay)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> df_bioassay[<span class="st">"dose"</span>].values</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> df_bioassay[<span class="st">"batch_size"</span>].values</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_bioassay[<span class="st">"deaths"</span>].values</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="bu">len</span>(df_bioassay)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> df_bioassay[<span class="st">"dose"</span>].values</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> df_bioassay[<span class="st">"batch_size"</span>].values</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_bioassay[<span class="st">"deaths"</span>].values</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> df_bioassay[<span class="st">"dose"</span>]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> df_bioassay[<span class="st">"batch_size"</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_bioassay[<span class="st">"deaths"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -714,68 +722,74 @@ Figure&nbsp;1
 <h2 data-number="3" class="anchored" data-anchor-id="stan-models-and-inference"><span class="header-section-number">3</span> Stan models and inference</h2>
 <p>Model 0 (without priors).</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset" data-group="ppl">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">CmdStanPy</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Numpyro</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">CmdStanPy</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Numpyro</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false" href="">PyMC</a></li></ul>
 <div class="tab-content" data-group="ppl">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
-<div id="aed4507b" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mod0 <span class="op">=</span> CmdStanModel(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    stan_file<span class="op">=</span><span class="bu">str</span>(<span class="st">"bioassay0.stan"</span>),</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    stanc_options<span class="op">=</span>{<span class="st">"warn-pedantic"</span>: <span class="va">True</span>},</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>print_stan(mod0)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="0ddda894" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mod0 <span class="op">=</span> CmdStanModel(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    stan_file<span class="op">=</span><span class="bu">str</span>(<span class="st">"bioassay0.stan"</span>),</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    stanc_options<span class="op">=</span>{<span class="st">"warn-pedantic"</span>: <span class="va">True</span>},</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>print_stan(mod0)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; J;  </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[J] x;</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[J] <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N;</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[J] <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=N&gt; y;</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> a;</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> b;</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  y ~ binomial_logit(N, a + b * x);</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; J;  </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[J] x;</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[J] <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N;</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[J] <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=N&gt; y;</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> a;</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> b;</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  y ~ binomial_logit(N, a + b * x);</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mod0(x, N, y<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> numpyro.sample(<span class="st">"a"</span>, dist.Normal(<span class="dv">0</span>, <span class="fl">1e6</span>)) <span class="co"># flat prior</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> numpyro.sample(<span class="st">"b"</span>, dist.Normal(<span class="dv">0</span>, <span class="fl">1e6</span>)) <span class="co"># flat prior</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> numpyro.plate(<span class="st">"J"</span>, <span class="bu">len</span>(N)):</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> numpyro.sample(<span class="st">"y"</span>, dist.BinomialLogits(total_count<span class="op">=</span>N, logits<span class="op">=</span>a <span class="op">+</span> b<span class="op">*</span>x), obs<span class="op">=</span>y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mod0(x, N, y<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> numpyro.sample(<span class="st">"a"</span>, dist.Normal(<span class="dv">0</span>, <span class="fl">1e6</span>)) <span class="co"># flat prior</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> numpyro.sample(<span class="st">"b"</span>, dist.Normal(<span class="dv">0</span>, <span class="fl">1e6</span>)) <span class="co"># flat prior</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> numpyro.plate(<span class="st">"J"</span>, <span class="bu">len</span>(N)):</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> numpyro.sample(<span class="st">"y"</span>, dist.BinomialLogits(total_count<span class="op">=</span>N, logits<span class="op">=</span>a <span class="op">+</span> b<span class="op">*</span>x), obs<span class="op">=</span>y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> pm.Model() <span class="im">as</span> mod0:</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> pm.Flat(<span class="st">"a"</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> pm.Flat(<span class="st">"b"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    pm.Binomial(<span class="st">"y"</span>, n<span class="op">=</span>N, logit_p<span class="op">=</span>a <span class="op">+</span> b <span class="op">*</span> x, observed<span class="op">=</span>y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 <p>Model 1 (with priors).</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset" data-group="ppl">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">CmdStanPy</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Numpyro</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">CmdStanPy</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href="">Numpyro</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" role="tab" aria-controls="tabset-4-3" aria-selected="false" href="">PyMC</a></li></ul>
 <div class="tab-content" data-group="ppl">
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
-<div id="8da071a5" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="op">=</span> CmdStanModel(</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    stan_file<span class="op">=</span><span class="bu">str</span>(<span class="st">"bioassay1.stan"</span>),</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    stanc_options<span class="op">=</span>{<span class="st">"warn-pedantic"</span>: <span class="va">True</span>},</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>print_stan(mod1)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>mod1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="2e3f00d5" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="op">=</span> CmdStanModel(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    stan_file<span class="op">=</span><span class="bu">str</span>(<span class="st">"bioassay1.stan"</span>),</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    stanc_options<span class="op">=</span>{<span class="st">"warn-pedantic"</span>: <span class="va">True</span>},</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>print_stan(mod1)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>mod1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display cell-output-markdown">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; J;  </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[J] x;</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[J] <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N;</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[J] <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=N&gt; y;</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> a;</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; b;</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  {a, b} ~ normal(<span class="dv">0</span>, <span class="dv">5</span>);   </span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  y ~ binomial_logit(N, a + b * x);</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode stan code-with-copy"><code class="sourceCode stan"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; J;  </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">vector</span>[J] x;</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[J] <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; N;</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">array</span>[J] <span class="dt">int</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>, <span class="kw">upper</span>=N&gt; y;</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="kw">parameters</span> {</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span> a;</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">real</span>&lt;<span class="kw">lower</span>=<span class="dv">0</span>&gt; b;</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="kw">model</span> {</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  {a, b} ~ normal(<span class="dv">0</span>, <span class="dv">5</span>);   </span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  y ~ binomial_logit(N, a + b * x);</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <pre><code>CmdStanModel: name=bioassay1
@@ -786,31 +800,42 @@ Figure&nbsp;1
 </div>
 </div>
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mod1(x, N, y<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> numpyro.sample(<span class="st">"a"</span>, dist.Normal(<span class="dv">0</span>, <span class="dv">5</span>))</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> numpyro.sample(<span class="st">"b"</span>, dist.Normal(<span class="dv">0</span>, <span class="dv">5</span>))</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> numpyro.plate(<span class="st">"J"</span>, <span class="bu">len</span>(N)):</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> numpyro.sample(<span class="st">"y"</span>, dist.BinomialLogits(total_count<span class="op">=</span>N, logits<span class="op">=</span>a <span class="op">+</span> b<span class="op">*</span>x), obs<span class="op">=</span>y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mod1(x, N, y<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> numpyro.sample(<span class="st">"a"</span>, dist.Normal(<span class="dv">0</span>, <span class="dv">5</span>))</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> numpyro.sample(<span class="st">"b"</span>, dist.Normal(<span class="dv">0</span>, <span class="dv">5</span>))</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> numpyro.plate(<span class="st">"J"</span>, <span class="bu">len</span>(N)):</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> numpyro.sample(<span class="st">"y"</span>, dist.BinomialLogits(total_count<span class="op">=</span>N, logits<span class="op">=</span>a <span class="op">+</span> b<span class="op">*</span>x), obs<span class="op">=</span>y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-4-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-3-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> pm.Model() <span class="im">as</span> mod1:</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> pm.Normal(<span class="st">"a"</span>, mu<span class="op">=</span><span class="dv">0</span>, sigma<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> pm.Normal(<span class="st">"b"</span>, mu<span class="op">=</span><span class="dv">0</span>, sigma<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    pm.Binomial(<span class="st">"y"</span>, n<span class="op">=</span>N, logit_p<span class="op">=</span>a <span class="op">+</span> b <span class="op">*</span> x, observed<span class="op">=</span>y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
 <p>Sample with default settings</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset" data-group="ppl">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">CmdStanPy</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">Numpyro</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">CmdStanPy</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">Numpyro</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-3" role="tab" aria-controls="tabset-5-3" aria-selected="false" href="">PyMC</a></li></ul>
 <div class="tab-content" data-group="ppl">
 <div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
 <div id="fit1" class="cell" data-results="hide" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fit1 <span class="op">=</span> mod1.sample(data<span class="op">=</span>bioassay_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>dt_bioassay1 <span class="op">=</span> az.from_cmdstanpy(fit1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fit1 <span class="op">=</span> mod1.sample(data<span class="op">=</span>bioassay_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>dt_bioassay1 <span class="op">=</span> az.from_cmdstanpy(fit1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit1</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> NUTS(mod1)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>mcmc <span class="op">=</span> MCMC(kernel,  num_warmup<span class="op">=</span><span class="dv">1000</span>, num_samples<span class="op">=</span><span class="dv">1000</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>mcmc.run(random.PRNGKey(SEED), x<span class="op">=</span>x, N<span class="op">=</span>N, y<span class="op">=</span>y)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>dt_bioassay1 <span class="op">=</span> az.from_numpyro(mcmc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit1</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> NUTS(mod1)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>mcmc <span class="op">=</span> MCMC(kernel,  num_warmup<span class="op">=</span><span class="dv">1000</span>, num_samples<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>mcmc.run(random.PRNGKey(SEED), x<span class="op">=</span>x, N<span class="op">=</span>N, y<span class="op">=</span>y)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>dt_bioassay1 <span class="op">=</span> az.from_numpyro(mcmc)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="tabset-5-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-3-tab">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> mod1:</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    dt_bioassay1 <span class="op">=</span> pm.sample(random_seed<span class="op">=</span>SEED)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -818,8 +843,8 @@ Figure&nbsp;1
 <section id="posterior-summary" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="posterior-summary"><span class="header-section-number">4</span> Posterior summary</h2>
 <p>Posterior summary and MCMC diagnostics</p>
-<div id="9c942230" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>az.summary(dt_bioassay1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="0dd4a208" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>az.summary(dt_bioassay1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
@@ -872,33 +897,33 @@ Figure&nbsp;1
 </div>
 <p>Plot 20 logistic curves given 20 posterior <em>draws</em>, and one logistic given the posterior mean</p>
 <div id="cell-fig-bioassay-posterior-plot" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>posterior <span class="op">=</span> az.extract(dt_bioassay1, group<span class="op">=</span><span class="st">"posterior"</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>posterior_20 <span class="op">=</span> az.extract(dt_bioassay1, group<span class="op">=</span><span class="st">"posterior"</span>, num_samples<span class="op">=</span><span class="dv">20</span>, random_seed<span class="op">=</span>SEED)</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>ax.scatter(</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    df_bioassay[<span class="st">"dose"</span>],</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    df_bioassay[<span class="st">"deaths"</span>] <span class="op">/</span> df_bioassay[<span class="st">"batch_size"</span>],</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"black"</span>,</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Dose log(g/ml)"</span>, ylabel<span class="op">=</span><span class="st">"Pr (death)"</span>)</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">200</span>)</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    xs,</span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    expit(posterior_20[<span class="st">"a"</span>].values <span class="op">+</span> posterior_20[<span class="st">"b"</span>].values <span class="op">*</span> xs[:, <span class="va">None</span>]),</span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"C1"</span>,</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="fl">0.5</span>,</span>
-<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.6</span>,</span>
-<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
-<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    xs,</span>
-<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    expit(posterior[<span class="st">"a"</span>].mean().item() <span class="op">+</span> posterior[<span class="st">"b"</span>].mean().item() <span class="op">*</span> xs),</span>
-<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"C0"</span>,</span>
-<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>posterior <span class="op">=</span> az.extract(dt_bioassay1, group<span class="op">=</span><span class="st">"posterior"</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>posterior_20 <span class="op">=</span> az.extract(dt_bioassay1, group<span class="op">=</span><span class="st">"posterior"</span>, num_samples<span class="op">=</span><span class="dv">20</span>, random_seed<span class="op">=</span>SEED)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>ax.scatter(</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    df_bioassay[<span class="st">"dose"</span>],</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    df_bioassay[<span class="st">"deaths"</span>] <span class="op">/</span> df_bioassay[<span class="st">"batch_size"</span>],</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Dose log(g/ml)"</span>, ylabel<span class="op">=</span><span class="st">"Pr (death)"</span>)</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">200</span>)</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    xs,</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    expit(posterior_20[<span class="st">"a"</span>].values <span class="op">+</span> posterior_20[<span class="st">"b"</span>].values <span class="op">*</span> xs[:, <span class="va">None</span>]),</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"C1"</span>,</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.6</span>,</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>    xs,</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>    expit(posterior[<span class="st">"a"</span>].mean().item() <span class="op">+</span> posterior[<span class="st">"b"</span>].mean().item() <span class="op">*</span> xs),</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"C0"</span>,</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="fig-bioassay-posterior-plot" class="quarto-float quarto-figure quarto-figure-center anchored" width="608" height="233">
 <figure class="quarto-float quarto-float-fig figure">
@@ -916,15 +941,15 @@ Figure&nbsp;2
 <section id="derived-quantities" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="derived-quantities"><span class="header-section-number">5</span> Derived quantities</h2>
 <p>Compute posterior draws for LD50 in log(g/ml) and in mg/ml</p>
-<div id="ba8251d1" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>ld50_log <span class="op">=</span> <span class="op">-</span>dt_bioassay1.posterior[<span class="st">"a"</span>] <span class="op">/</span> dt_bioassay1.posterior[<span class="st">"b"</span>]</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>ld50_mg <span class="op">=</span> <span class="dv">1000</span> <span class="op">*</span> np.exp(ld50_log)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>dt_bioassay1.posterior[<span class="st">"LD50_log_g_ml"</span>] <span class="op">=</span> ld50_log</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>dt_bioassay1.posterior[<span class="st">"LD50_mg_ml"</span>] <span class="op">=</span> ld50_mg</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="00830b9d" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ld50_log <span class="op">=</span> <span class="op">-</span>dt_bioassay1.posterior[<span class="st">"a"</span>] <span class="op">/</span> dt_bioassay1.posterior[<span class="st">"b"</span>]</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>ld50_mg <span class="op">=</span> <span class="dv">1000</span> <span class="op">*</span> np.exp(ld50_log)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>dt_bioassay1.posterior[<span class="st">"LD50_log_g_ml"</span>] <span class="op">=</span> ld50_log</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>dt_bioassay1.posterior[<span class="st">"LD50_mg_ml"</span>] <span class="op">=</span> ld50_mg</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Summarise LD50 posterior</p>
-<div id="32ea22e1" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>az.summary(dt_bioassay1, var_names<span class="op">=</span><span class="st">"LD50_log_g_ml"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fa4313cd" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>az.summary(dt_bioassay1, var_names<span class="op">=</span><span class="st">"LD50_log_g_ml"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <div>
 
@@ -964,14 +989,14 @@ Figure&nbsp;2
 </div>
 </div>
 <p>Quantile dot plot of the LD50 (mg/ml) posterior</p>
-<div id="fafbd363" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    dt_bioassay1,</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"dot"</span>,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span><span class="st">"LD50_mg_ml"</span>,</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"point_estimate_text"</span>:<span class="va">False</span>},</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="642be5d4" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    dt_bioassay1,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"dot"</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span><span class="st">"LD50_mg_ml"</span>,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"point_estimate_text"</span>:<span class="va">False</span>},</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -982,12 +1007,12 @@ Figure&nbsp;2
 </div>
 <p>Kernel density plot of the LD50 (mg/ml) posterior</p>
 <div id="cell-fig-bioassay-LD50-KDE" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    dt_bioassay1,</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span><span class="st">"LD50_mg_ml"</span>,</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"point_estimate_text"</span>:<span class="va">False</span>},</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    dt_bioassay1,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span><span class="st">"LD50_mg_ml"</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"point_estimate_text"</span>:<span class="va">False</span>},</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="fig-bioassay-ld50-kde" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1005,17 +1030,17 @@ Figure&nbsp;3
 <section id="bambi-model-and-inference" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="bambi-model-and-inference"><span class="header-section-number">6</span> Bambi model and inference</h2>
 <p>The same model with <code>Bambi</code></p>
-<div id="373cde0f" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> bmb.Model(</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"prop(deaths, batch_size) ~ dose"</span>,</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_bioassay,</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    family<span class="op">=</span><span class="st">"binomial"</span>,</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    priors<span class="op">=</span>{</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Intercept"</span>: bmb.Prior(<span class="st">"Normal"</span>, mu<span class="op">=</span><span class="dv">0</span>, sigma<span class="op">=</span><span class="dv">5</span>),</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"dose"</span>: bmb.Prior(<span class="st">"HalfNormal"</span>, sigma<span class="op">=</span><span class="dv">5</span>),</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>idata_bambi <span class="op">=</span> model.fit(random_seed<span class="op">=</span><span class="dv">123</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="e6ae3f8a" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> bmb.Model(</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"prop(deaths, batch_size) ~ dose"</span>,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_bioassay,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    family<span class="op">=</span><span class="st">"binomial"</span>,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    priors<span class="op">=</span>{</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Intercept"</span>: bmb.Prior(<span class="st">"Normal"</span>, mu<span class="op">=</span><span class="dv">0</span>, sigma<span class="op">=</span><span class="dv">5</span>),</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"dose"</span>: bmb.Prior(<span class="st">"HalfNormal"</span>, sigma<span class="op">=</span><span class="dv">5</span>),</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>idata_bambi <span class="op">=</span> model.fit(random_seed<span class="op">=</span><span class="dv">123</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Initializing NUTS using jitter+adapt_diag...
 Multiprocess sampling (4 chains in 4 jobs)
@@ -1031,12 +1056,12 @@ for Jupyter support
 <pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 3 seconds.</code></pre>
+<pre><code>Sampling 4 chains for 1_000 tune and 1_000 draw iterations (4_000 + 4_000 draws total) took 16 seconds.</code></pre>
 </div>
 </div>
 <p>Summary of the inference</p>
-<div id="359fe734" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>az.summary(idata_bambi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="97352ff0" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>az.summary(idata_bambi)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <div>
 
@@ -1088,23 +1113,23 @@ for Jupyter support
 </div>
 </div>
 <p>With <code>bambi</code> we can use the built-in plotting functions in the interpret submodule.</p>
-<div id="a47eb634" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> bmb.interpret.plot_predictions(model, idata_bambi, <span class="st">"dose"</span>,</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                                      use_hdi<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                                      fig_kwargs<span class="op">=</span>{<span class="st">"theme"</span>: {<span class="st">"figure.figsize"</span>: (<span class="dv">7</span>, <span class="dv">4</span>)}})</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>plotter <span class="op">=</span> plot.plot()</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plotter._figure.axes[<span class="dv">0</span>]</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>ax.scatter(</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    df_bioassay[<span class="st">"dose"</span>],</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>    df_bioassay[<span class="st">"deaths"</span>] <span class="op">/</span> df_bioassay[<span class="st">"batch_size"</span>],</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">80</span>,</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"black"</span>,</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Tweak labels</span></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Dose log(g/ml)"</span>, ylabel<span class="op">=</span><span class="st">"Pr(death)"</span>)</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>plotter._figure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="84619840" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> bmb.interpret.plot_predictions(model, idata_bambi, <span class="st">"dose"</span>,</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>                                      use_hdi<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>                                      fig_kwargs<span class="op">=</span>{<span class="st">"theme"</span>: {<span class="st">"figure.figsize"</span>: (<span class="dv">7</span>, <span class="dv">4</span>)}})</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>plotter <span class="op">=</span> plot.plot()</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plotter._figure.axes[<span class="dv">0</span>]</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>ax.scatter(</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    df_bioassay[<span class="st">"dose"</span>],</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    df_bioassay[<span class="st">"deaths"</span>] <span class="op">/</span> df_bioassay[<span class="st">"batch_size"</span>],</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">80</span>,</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Tweak labels</span></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Dose log(g/ml)"</span>, ylabel<span class="op">=</span><span class="st">"Pr(death)"</span>)</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>plotter._figure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <div>
 <figure class="figure">
@@ -1117,15 +1142,15 @@ for Jupyter support
 <section id="ld50-posterior" class="level2" data-number="7">
 <h2 data-number="7" class="anchored" data-anchor-id="ld50-posterior"><span class="header-section-number">7</span> LD50 posterior</h2>
 <p>Compute posterior draws for lethal dose 50 (LD50) in log(g/ml) and in mg/ml</p>
-<div id="4a30e865" class="cell" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ld50_bambi_log <span class="op">=</span> <span class="op">-</span>idata_bambi.posterior[<span class="st">"Intercept"</span>] <span class="op">/</span> idata_bambi.posterior[<span class="st">"dose"</span>]</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>ld50_bambi_mg <span class="op">=</span> <span class="dv">1000</span> <span class="op">*</span> np.exp(ld50_bambi_log)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>idata_bambi.posterior[<span class="st">"LD50_log_g_ml"</span>] <span class="op">=</span> ld50_bambi_log</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>idata_bambi.posterior[<span class="st">"LD50_mg_ml"</span>] <span class="op">=</span> ld50_bambi_mg</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="4bc4c764" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>ld50_bambi_log <span class="op">=</span> <span class="op">-</span>idata_bambi.posterior[<span class="st">"Intercept"</span>] <span class="op">/</span> idata_bambi.posterior[<span class="st">"dose"</span>]</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>ld50_bambi_mg <span class="op">=</span> <span class="dv">1000</span> <span class="op">*</span> np.exp(ld50_bambi_log)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>idata_bambi.posterior[<span class="st">"LD50_log_g_ml"</span>] <span class="op">=</span> ld50_bambi_log</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>idata_bambi.posterior[<span class="st">"LD50_mg_ml"</span>] <span class="op">=</span> ld50_bambi_mg</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Posterior summary</p>
-<div id="a571d6b7" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>az.summary(idata_bambi, var_names<span class="op">=</span>[<span class="st">"LD50_log_g_ml"</span>, <span class="st">"LD50_mg_ml"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="9b2ed1c0" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>az.summary(idata_bambi, var_names<span class="op">=</span>[<span class="st">"LD50_log_g_ml"</span>, <span class="st">"LD50_mg_ml"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <div>
 
@@ -1178,13 +1203,13 @@ for Jupyter support
 </div>
 <p>Quantile dot plot of the LD50 (mg/ml) posterior.</p>
 <div id="cell-fig-bioassay-LD50-quantile-dots-bambi" class="cell" data-execution_count="20">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>    idata_bambi,</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"dot"</span>,</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span><span class="st">"LD50_mg_ml"</span>,</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"point_estimate_text"</span>:<span class="va">False</span>},</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    idata_bambi,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"dot"</span>,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span><span class="st">"LD50_mg_ml"</span>,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"point_estimate_text"</span>:<span class="va">False</span>},</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="fig-bioassay-ld50-quantile-dots-bambi" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1200,12 +1225,12 @@ Figure&nbsp;4
 </div>
 <p>Kernel density plot of the LD50 (mg/ml) posterior.</p>
 <div id="cell-fig-bioassay-LD50-KDE-bambi" class="cell" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    idata_bambi,</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span><span class="st">"LD50_mg_ml"</span>,</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"point_estimate_text"</span>:<span class="va">False</span>},</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>    idata_bambi,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span><span class="st">"LD50_mg_ml"</span>,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"point_estimate_text"</span>:<span class="va">False</span>},</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="fig-bioassay-ld50-kde-bambi" class="quarto-float quarto-figure quarto-figure-center anchored" width="458" height="209">
 <figure class="quarto-float quarto-float-fig figure">
@@ -1721,384 +1746,419 @@ Racine-Poon, A., A. P. Grieve, H. Fluhler, and A. F. M. Smith. 1986. <span>“Ba
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Bioassay case study"</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> ../social_cards/bioassay.png</span></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Andrew Gelman and Aki Vehtari"</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-10-15</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="an">date-format:</span><span class="co"> iso</span></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-download: true</span></span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> ../casestudies.bib</span></span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>This notebook includes the code for Bayesian Workflow book Section</span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>3.5 *A simple example of probabilistic programming*.</span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>We demonstrate the role of statistical programming environments and</span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>probabilistic programming by going through the steps of data</span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>analysis and computation in the context of a simple example.</span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>We work through an example by @Racine-Grieve-Fluhler-etal:1986,</span>
-<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>also included in Section 2.8 of Bayesian Data Analysis <span class="co">[</span><span class="ot">@BDA3</span><span class="co">]</span>, of</span>
-<span id="cb33-28"><a href="#cb33-28" aria-hidden="true" tabindex="-1"></a>a logistic regression fit to a bioassay experiment.</span>
-<span id="cb33-29"><a href="#cb33-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-32"><a href="#cb33-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-33"><a href="#cb33-33" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
-<span id="cb33-34"><a href="#cb33-34" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: true</span></span>
-<span id="cb33-35"><a href="#cb33-35" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: false</span></span>
-<span id="cb33-36"><a href="#cb33-36" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb33-37"><a href="#cb33-37" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb33-38"><a href="#cb33-38" aria-hidden="true" tabindex="-1"></a>sys.path.insert(<span class="dv">0</span>, <span class="st">'..'</span>)</span>
-<span id="cb33-39"><a href="#cb33-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-40"><a href="#cb33-40" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> arviz <span class="im">as</span> az</span>
-<span id="cb33-41"><a href="#cb33-41" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bambi <span class="im">as</span> bmb</span>
-<span id="cb33-42"><a href="#cb33-42" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb33-43"><a href="#cb33-43" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb33-44"><a href="#cb33-44" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb33-45"><a href="#cb33-45" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
-<span id="cb33-46"><a href="#cb33-46" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> expit</span>
-<span id="cb33-47"><a href="#cb33-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-48"><a href="#cb33-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-49"><a href="#cb33-49" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>, category<span class="op">=</span><span class="pp">FutureWarning</span>)</span>
-<span id="cb33-50"><a href="#cb33-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-51"><a href="#cb33-51" aria-hidden="true" tabindex="-1"></a>az.style.use(<span class="st">"arviz-variat"</span>)</span>
-<span id="cb33-52"><a href="#cb33-52" aria-hidden="true" tabindex="-1"></a>az.rcParams[<span class="st">"stats.ci_prob"</span>] <span class="op">=</span> <span class="fl">0.95</span></span>
-<span id="cb33-53"><a href="#cb33-53" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.dpi"</span>] <span class="op">=</span> <span class="dv">75</span></span>
-<span id="cb33-54"><a href="#cb33-54" aria-hidden="true" tabindex="-1"></a>SEED <span class="op">=</span> <span class="dv">7412</span></span>
-<span id="cb33-55"><a href="#cb33-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-56"><a href="#cb33-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-57"><a href="#cb33-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-58"><a href="#cb33-58" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset group="ppl"}</span>
-<span id="cb33-59"><a href="#cb33-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## CmdStanPy</span></span>
-<span id="cb33-60"><a href="#cb33-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-63"><a href="#cb33-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-64"><a href="#cb33-64" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cmdstanpy <span class="im">import</span> CmdStanModel, disable_logging</span>
-<span id="cb33-65"><a href="#cb33-65" aria-hidden="true" tabindex="-1"></a>disable_logging()</span>
-<span id="cb33-66"><a href="#cb33-66" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> print_stan</span>
-<span id="cb33-67"><a href="#cb33-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-68"><a href="#cb33-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-69"><a href="#cb33-69" aria-hidden="true" tabindex="-1"></a><span class="fu">## Numpyro</span></span>
-<span id="cb33-70"><a href="#cb33-70" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python}</span></span>
-<span id="cb33-71"><a href="#cb33-71" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax <span class="im">import</span> random</span>
-<span id="cb33-72"><a href="#cb33-72" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span>
-<span id="cb33-73"><a href="#cb33-73" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpyro</span>
-<span id="cb33-74"><a href="#cb33-74" aria-hidden="true" tabindex="-1"></a><span class="im">from</span>  numpyro <span class="im">import</span> distributions <span class="im">as</span> dist</span>
-<span id="cb33-75"><a href="#cb33-75" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpyro.infer <span class="im">import</span> NUTS, MCMC, Predictive</span>
-<span id="cb33-76"><a href="#cb33-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-77"><a href="#cb33-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-78"><a href="#cb33-78" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-79"><a href="#cb33-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-80"><a href="#cb33-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-81"><a href="#cb33-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-82"><a href="#cb33-82" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bioassay data</span></span>
-<span id="cb33-83"><a href="#cb33-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-84"><a href="#cb33-84" aria-hidden="true" tabindex="-1"></a>Read the data from csv</span>
-<span id="cb33-85"><a href="#cb33-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-88"><a href="#cb33-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-89"><a href="#cb33-89" aria-hidden="true" tabindex="-1"></a>df_bioassay <span class="op">=</span> pd.read_csv(<span class="st">"data/bioassay.csv"</span>)</span>
-<span id="cb33-90"><a href="#cb33-90" aria-hidden="true" tabindex="-1"></a>df_bioassay</span>
-<span id="cb33-91"><a href="#cb33-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-92"><a href="#cb33-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-93"><a href="#cb33-93" aria-hidden="true" tabindex="-1"></a>Plot the data</span>
-<span id="cb33-94"><a href="#cb33-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-97"><a href="#cb33-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-98"><a href="#cb33-98" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-bioassay-data-plot</span></span>
-<span id="cb33-99"><a href="#cb33-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-100"><a href="#cb33-100" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
-<span id="cb33-101"><a href="#cb33-101" aria-hidden="true" tabindex="-1"></a>ax.scatter(df_bioassay[<span class="st">"dose"</span>], df_bioassay[<span class="st">"deaths"</span>], s<span class="op">=</span><span class="dv">60</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
-<span id="cb33-102"><a href="#cb33-102" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Dose log(g/ml)"</span>, ylabel<span class="op">=</span><span class="st">"# of deaths"</span>)</span>
-<span id="cb33-103"><a href="#cb33-103" aria-hidden="true" tabindex="-1"></a>ax.spines[[<span class="st">"top"</span>, <span class="st">"right"</span>]].set_visible(<span class="va">False</span>)</span>
-<span id="cb33-104"><a href="#cb33-104" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-105"><a href="#cb33-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-106"><a href="#cb33-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-107"><a href="#cb33-107" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset group="ppl"}</span>
-<span id="cb33-108"><a href="#cb33-108" aria-hidden="true" tabindex="-1"></a><span class="fu">## CmdStanPy</span></span>
-<span id="cb33-109"><a href="#cb33-109" aria-hidden="true" tabindex="-1"></a>Data as list for CmdStanPy</span>
-<span id="cb33-110"><a href="#cb33-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-113"><a href="#cb33-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-114"><a href="#cb33-114" aria-hidden="true" tabindex="-1"></a>bioassay_data <span class="op">=</span> {</span>
-<span id="cb33-115"><a href="#cb33-115" aria-hidden="true" tabindex="-1"></a>    <span class="st">"J"</span>: <span class="bu">len</span>(df_bioassay),</span>
-<span id="cb33-116"><a href="#cb33-116" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x"</span>: df_bioassay[<span class="st">"dose"</span>].to_list(),</span>
-<span id="cb33-117"><a href="#cb33-117" aria-hidden="true" tabindex="-1"></a>    <span class="st">"N"</span>: df_bioassay[<span class="st">"batch_size"</span>].to_list(),</span>
-<span id="cb33-118"><a href="#cb33-118" aria-hidden="true" tabindex="-1"></a>    <span class="st">"y"</span>: df_bioassay[<span class="st">"deaths"</span>].to_list(),</span>
-<span id="cb33-119"><a href="#cb33-119" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb33-120"><a href="#cb33-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-121"><a href="#cb33-121" aria-hidden="true" tabindex="-1"></a><span class="fu">## Numpyro</span></span>
-<span id="cb33-122"><a href="#cb33-122" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python}</span></span>
-<span id="cb33-123"><a href="#cb33-123" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="bu">len</span>(df_bioassay)</span>
-<span id="cb33-124"><a href="#cb33-124" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> df_bioassay[<span class="st">"dose"</span>].values</span>
-<span id="cb33-125"><a href="#cb33-125" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> df_bioassay[<span class="st">"batch_size"</span>].values</span>
-<span id="cb33-126"><a href="#cb33-126" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_bioassay[<span class="st">"deaths"</span>].values</span>
-<span id="cb33-127"><a href="#cb33-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-128"><a href="#cb33-128" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-129"><a href="#cb33-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-130"><a href="#cb33-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-131"><a href="#cb33-131" aria-hidden="true" tabindex="-1"></a><span class="fu">## Stan models and inference</span></span>
-<span id="cb33-132"><a href="#cb33-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-133"><a href="#cb33-133" aria-hidden="true" tabindex="-1"></a>Model 0 (without priors).</span>
-<span id="cb33-134"><a href="#cb33-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-135"><a href="#cb33-135" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset group="ppl"}</span>
-<span id="cb33-136"><a href="#cb33-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-137"><a href="#cb33-137" aria-hidden="true" tabindex="-1"></a>Compile the Stan model code using pedantic mode</span>
-<span id="cb33-138"><a href="#cb33-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-139"><a href="#cb33-139" aria-hidden="true" tabindex="-1"></a><span class="fu">## CmdStanPy</span></span>
-<span id="cb33-142"><a href="#cb33-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-143"><a href="#cb33-143" aria-hidden="true" tabindex="-1"></a>mod0 <span class="op">=</span> CmdStanModel(</span>
-<span id="cb33-144"><a href="#cb33-144" aria-hidden="true" tabindex="-1"></a>    stan_file<span class="op">=</span><span class="bu">str</span>(<span class="st">"bioassay0.stan"</span>),</span>
-<span id="cb33-145"><a href="#cb33-145" aria-hidden="true" tabindex="-1"></a>    stanc_options<span class="op">=</span>{<span class="st">"warn-pedantic"</span>: <span class="va">True</span>},</span>
-<span id="cb33-146"><a href="#cb33-146" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-147"><a href="#cb33-147" aria-hidden="true" tabindex="-1"></a>print_stan(mod0)</span>
-<span id="cb33-148"><a href="#cb33-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-149"><a href="#cb33-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-150"><a href="#cb33-150" aria-hidden="true" tabindex="-1"></a><span class="fu">## Numpyro</span></span>
-<span id="cb33-151"><a href="#cb33-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python}</span></span>
-<span id="cb33-152"><a href="#cb33-152" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mod0(x, N, y<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb33-153"><a href="#cb33-153" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> numpyro.sample(<span class="st">"a"</span>, dist.Normal(<span class="dv">0</span>, <span class="fl">1e6</span>)) <span class="co"># flat prior</span></span>
-<span id="cb33-154"><a href="#cb33-154" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> numpyro.sample(<span class="st">"b"</span>, dist.Normal(<span class="dv">0</span>, <span class="fl">1e6</span>)) <span class="co"># flat prior</span></span>
-<span id="cb33-155"><a href="#cb33-155" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> numpyro.plate(<span class="st">"J"</span>, <span class="bu">len</span>(N)):</span>
-<span id="cb33-156"><a href="#cb33-156" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> numpyro.sample(<span class="st">"y"</span>, dist.BinomialLogits(total_count<span class="op">=</span>N, logits<span class="op">=</span>a <span class="op">+</span> b<span class="op">*</span>x), obs<span class="op">=</span>y)</span>
-<span id="cb33-157"><a href="#cb33-157" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-158"><a href="#cb33-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-159"><a href="#cb33-159" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-160"><a href="#cb33-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-161"><a href="#cb33-161" aria-hidden="true" tabindex="-1"></a>Model 1 (with priors). </span>
-<span id="cb33-162"><a href="#cb33-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-163"><a href="#cb33-163" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset group="ppl"}</span>
-<span id="cb33-164"><a href="#cb33-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-165"><a href="#cb33-165" aria-hidden="true" tabindex="-1"></a>Compile the updated Stan model code using pedantic mode</span>
-<span id="cb33-166"><a href="#cb33-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-167"><a href="#cb33-167" aria-hidden="true" tabindex="-1"></a><span class="fu">## CmdStanPy</span></span>
-<span id="cb33-170"><a href="#cb33-170" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-171"><a href="#cb33-171" aria-hidden="true" tabindex="-1"></a>mod1 <span class="op">=</span> CmdStanModel(</span>
-<span id="cb33-172"><a href="#cb33-172" aria-hidden="true" tabindex="-1"></a>    stan_file<span class="op">=</span><span class="bu">str</span>(<span class="st">"bioassay1.stan"</span>),</span>
-<span id="cb33-173"><a href="#cb33-173" aria-hidden="true" tabindex="-1"></a>    stanc_options<span class="op">=</span>{<span class="st">"warn-pedantic"</span>: <span class="va">True</span>},</span>
-<span id="cb33-174"><a href="#cb33-174" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-175"><a href="#cb33-175" aria-hidden="true" tabindex="-1"></a>print_stan(mod1)</span>
-<span id="cb33-176"><a href="#cb33-176" aria-hidden="true" tabindex="-1"></a>mod1</span>
-<span id="cb33-177"><a href="#cb33-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-178"><a href="#cb33-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-179"><a href="#cb33-179" aria-hidden="true" tabindex="-1"></a><span class="fu">## Numpyro</span></span>
-<span id="cb33-180"><a href="#cb33-180" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python}</span></span>
-<span id="cb33-181"><a href="#cb33-181" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mod1(x, N, y<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb33-182"><a href="#cb33-182" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> numpyro.sample(<span class="st">"a"</span>, dist.Normal(<span class="dv">0</span>, <span class="dv">5</span>))</span>
-<span id="cb33-183"><a href="#cb33-183" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> numpyro.sample(<span class="st">"b"</span>, dist.Normal(<span class="dv">0</span>, <span class="dv">5</span>))</span>
-<span id="cb33-184"><a href="#cb33-184" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> numpyro.plate(<span class="st">"J"</span>, <span class="bu">len</span>(N)):</span>
-<span id="cb33-185"><a href="#cb33-185" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> numpyro.sample(<span class="st">"y"</span>, dist.BinomialLogits(total_count<span class="op">=</span>N, logits<span class="op">=</span>a <span class="op">+</span> b<span class="op">*</span>x), obs<span class="op">=</span>y)</span>
-<span id="cb33-186"><a href="#cb33-186" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-187"><a href="#cb33-187" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-188"><a href="#cb33-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-189"><a href="#cb33-189" aria-hidden="true" tabindex="-1"></a>Sample with default settings</span>
-<span id="cb33-190"><a href="#cb33-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-191"><a href="#cb33-191" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset group="ppl"}</span>
-<span id="cb33-192"><a href="#cb33-192" aria-hidden="true" tabindex="-1"></a><span class="fu">## CmdStanPy</span></span>
-<span id="cb33-193"><a href="#cb33-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-196"><a href="#cb33-196" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-197"><a href="#cb33-197" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit1</span></span>
-<span id="cb33-198"><a href="#cb33-198" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb33-199"><a href="#cb33-199" aria-hidden="true" tabindex="-1"></a>fit1 <span class="op">=</span> mod1.sample(data<span class="op">=</span>bioassay_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb33-200"><a href="#cb33-200" aria-hidden="true" tabindex="-1"></a>dt_bioassay1 <span class="op">=</span> az.from_cmdstanpy(fit1)</span>
-<span id="cb33-201"><a href="#cb33-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-202"><a href="#cb33-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-203"><a href="#cb33-203" aria-hidden="true" tabindex="-1"></a><span class="fu">## Numpyro</span></span>
-<span id="cb33-204"><a href="#cb33-204" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python}</span></span>
-<span id="cb33-205"><a href="#cb33-205" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit1</span></span>
-<span id="cb33-206"><a href="#cb33-206" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb33-207"><a href="#cb33-207" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> NUTS(mod1)</span>
-<span id="cb33-208"><a href="#cb33-208" aria-hidden="true" tabindex="-1"></a>mcmc <span class="op">=</span> MCMC(kernel,  num_warmup<span class="op">=</span><span class="dv">1000</span>, num_samples<span class="op">=</span><span class="dv">1000</span>)</span>
-<span id="cb33-209"><a href="#cb33-209" aria-hidden="true" tabindex="-1"></a>mcmc.run(random.PRNGKey(SEED), x<span class="op">=</span>x, N<span class="op">=</span>N, y<span class="op">=</span>y)</span>
-<span id="cb33-210"><a href="#cb33-210" aria-hidden="true" tabindex="-1"></a>dt_bioassay1 <span class="op">=</span> az.from_numpyro(mcmc)</span>
-<span id="cb33-211"><a href="#cb33-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-212"><a href="#cb33-212" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb33-213"><a href="#cb33-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-214"><a href="#cb33-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-215"><a href="#cb33-215" aria-hidden="true" tabindex="-1"></a><span class="fu">## Posterior summary</span></span>
-<span id="cb33-216"><a href="#cb33-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-217"><a href="#cb33-217" aria-hidden="true" tabindex="-1"></a>Posterior summary and MCMC diagnostics</span>
-<span id="cb33-218"><a href="#cb33-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-221"><a href="#cb33-221" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-222"><a href="#cb33-222" aria-hidden="true" tabindex="-1"></a>az.summary(dt_bioassay1)</span>
-<span id="cb33-223"><a href="#cb33-223" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-224"><a href="#cb33-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-225"><a href="#cb33-225" aria-hidden="true" tabindex="-1"></a>Plot 20 logistic curves given 20 posterior _draws_, and one logistic given the posterior mean</span>
-<span id="cb33-226"><a href="#cb33-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-229"><a href="#cb33-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-230"><a href="#cb33-230" aria-hidden="true" tabindex="-1"></a><span class="co"># | label: fig-bioassay-posterior-plot</span></span>
-<span id="cb33-231"><a href="#cb33-231" aria-hidden="true" tabindex="-1"></a>posterior <span class="op">=</span> az.extract(dt_bioassay1, group<span class="op">=</span><span class="st">"posterior"</span>)</span>
-<span id="cb33-232"><a href="#cb33-232" aria-hidden="true" tabindex="-1"></a>posterior_20 <span class="op">=</span> az.extract(dt_bioassay1, group<span class="op">=</span><span class="st">"posterior"</span>, num_samples<span class="op">=</span><span class="dv">20</span>, random_seed<span class="op">=</span>SEED)</span>
-<span id="cb33-233"><a href="#cb33-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-234"><a href="#cb33-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-235"><a href="#cb33-235" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
-<span id="cb33-236"><a href="#cb33-236" aria-hidden="true" tabindex="-1"></a>ax.scatter(</span>
-<span id="cb33-237"><a href="#cb33-237" aria-hidden="true" tabindex="-1"></a>    df_bioassay[<span class="st">"dose"</span>],</span>
-<span id="cb33-238"><a href="#cb33-238" aria-hidden="true" tabindex="-1"></a>    df_bioassay[<span class="st">"deaths"</span>] <span class="op">/</span> df_bioassay[<span class="st">"batch_size"</span>],</span>
-<span id="cb33-239"><a href="#cb33-239" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"black"</span>,</span>
-<span id="cb33-240"><a href="#cb33-240" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-241"><a href="#cb33-241" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Dose log(g/ml)"</span>, ylabel<span class="op">=</span><span class="st">"Pr (death)"</span>)</span>
-<span id="cb33-242"><a href="#cb33-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-243"><a href="#cb33-243" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">200</span>)</span>
-<span id="cb33-244"><a href="#cb33-244" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
-<span id="cb33-245"><a href="#cb33-245" aria-hidden="true" tabindex="-1"></a>    xs,</span>
-<span id="cb33-246"><a href="#cb33-246" aria-hidden="true" tabindex="-1"></a>    expit(posterior_20[<span class="st">"a"</span>].values <span class="op">+</span> posterior_20[<span class="st">"b"</span>].values <span class="op">*</span> xs[:, <span class="va">None</span>]),</span>
-<span id="cb33-247"><a href="#cb33-247" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"C1"</span>,</span>
-<span id="cb33-248"><a href="#cb33-248" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="fl">0.5</span>,</span>
-<span id="cb33-249"><a href="#cb33-249" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.6</span>,</span>
-<span id="cb33-250"><a href="#cb33-250" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-251"><a href="#cb33-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-252"><a href="#cb33-252" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
-<span id="cb33-253"><a href="#cb33-253" aria-hidden="true" tabindex="-1"></a>    xs,</span>
-<span id="cb33-254"><a href="#cb33-254" aria-hidden="true" tabindex="-1"></a>    expit(posterior[<span class="st">"a"</span>].mean().item() <span class="op">+</span> posterior[<span class="st">"b"</span>].mean().item() <span class="op">*</span> xs),</span>
-<span id="cb33-255"><a href="#cb33-255" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"C0"</span>,</span>
-<span id="cb33-256"><a href="#cb33-256" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="dv">2</span>,</span>
-<span id="cb33-257"><a href="#cb33-257" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-258"><a href="#cb33-258" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-259"><a href="#cb33-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-260"><a href="#cb33-260" aria-hidden="true" tabindex="-1"></a><span class="fu">## Derived quantities</span></span>
-<span id="cb33-261"><a href="#cb33-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-262"><a href="#cb33-262" aria-hidden="true" tabindex="-1"></a>Compute posterior draws for LD50 in log(g/ml) and in mg/ml</span>
-<span id="cb33-263"><a href="#cb33-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-266"><a href="#cb33-266" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-267"><a href="#cb33-267" aria-hidden="true" tabindex="-1"></a>ld50_log <span class="op">=</span> <span class="op">-</span>dt_bioassay1.posterior[<span class="st">"a"</span>] <span class="op">/</span> dt_bioassay1.posterior[<span class="st">"b"</span>]</span>
-<span id="cb33-268"><a href="#cb33-268" aria-hidden="true" tabindex="-1"></a>ld50_mg <span class="op">=</span> <span class="dv">1000</span> <span class="op">*</span> np.exp(ld50_log)</span>
-<span id="cb33-269"><a href="#cb33-269" aria-hidden="true" tabindex="-1"></a>dt_bioassay1.posterior[<span class="st">"LD50_log_g_ml"</span>] <span class="op">=</span> ld50_log</span>
-<span id="cb33-270"><a href="#cb33-270" aria-hidden="true" tabindex="-1"></a>dt_bioassay1.posterior[<span class="st">"LD50_mg_ml"</span>] <span class="op">=</span> ld50_mg</span>
-<span id="cb33-271"><a href="#cb33-271" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-272"><a href="#cb33-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-273"><a href="#cb33-273" aria-hidden="true" tabindex="-1"></a>Summarise LD50 posterior</span>
-<span id="cb33-274"><a href="#cb33-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-277"><a href="#cb33-277" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-278"><a href="#cb33-278" aria-hidden="true" tabindex="-1"></a>az.summary(dt_bioassay1, var_names<span class="op">=</span><span class="st">"LD50_log_g_ml"</span>)</span>
-<span id="cb33-279"><a href="#cb33-279" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-280"><a href="#cb33-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-281"><a href="#cb33-281" aria-hidden="true" tabindex="-1"></a>Quantile dot plot of the LD50 (mg/ml) posterior</span>
-<span id="cb33-282"><a href="#cb33-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-285"><a href="#cb33-285" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-286"><a href="#cb33-286" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(</span>
-<span id="cb33-287"><a href="#cb33-287" aria-hidden="true" tabindex="-1"></a>    dt_bioassay1,</span>
-<span id="cb33-288"><a href="#cb33-288" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"dot"</span>,</span>
-<span id="cb33-289"><a href="#cb33-289" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span><span class="st">"LD50_mg_ml"</span>,</span>
-<span id="cb33-290"><a href="#cb33-290" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"point_estimate_text"</span>:<span class="va">False</span>},</span>
-<span id="cb33-291"><a href="#cb33-291" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-292"><a href="#cb33-292" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span>
-<span id="cb33-293"><a href="#cb33-293" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-294"><a href="#cb33-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-295"><a href="#cb33-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-296"><a href="#cb33-296" aria-hidden="true" tabindex="-1"></a>Kernel density plot of the LD50 (mg/ml) posterior</span>
-<span id="cb33-297"><a href="#cb33-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-300"><a href="#cb33-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-301"><a href="#cb33-301" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-bioassay-LD50-KDE</span></span>
-<span id="cb33-302"><a href="#cb33-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-303"><a href="#cb33-303" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(</span>
-<span id="cb33-304"><a href="#cb33-304" aria-hidden="true" tabindex="-1"></a>    dt_bioassay1,</span>
-<span id="cb33-305"><a href="#cb33-305" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span><span class="st">"LD50_mg_ml"</span>,</span>
-<span id="cb33-306"><a href="#cb33-306" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"point_estimate_text"</span>:<span class="va">False</span>},</span>
-<span id="cb33-307"><a href="#cb33-307" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-308"><a href="#cb33-308" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span>
-<span id="cb33-309"><a href="#cb33-309" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-310"><a href="#cb33-310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-311"><a href="#cb33-311" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bambi model and inference</span></span>
-<span id="cb33-312"><a href="#cb33-312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-313"><a href="#cb33-313" aria-hidden="true" tabindex="-1"></a>The same model with <span class="in">`Bambi`</span></span>
-<span id="cb33-314"><a href="#cb33-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-317"><a href="#cb33-317" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-318"><a href="#cb33-318" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> bmb.Model(</span>
-<span id="cb33-319"><a href="#cb33-319" aria-hidden="true" tabindex="-1"></a>    <span class="st">"prop(deaths, batch_size) ~ dose"</span>,</span>
-<span id="cb33-320"><a href="#cb33-320" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_bioassay,</span>
-<span id="cb33-321"><a href="#cb33-321" aria-hidden="true" tabindex="-1"></a>    family<span class="op">=</span><span class="st">"binomial"</span>,</span>
-<span id="cb33-322"><a href="#cb33-322" aria-hidden="true" tabindex="-1"></a>    priors<span class="op">=</span>{</span>
-<span id="cb33-323"><a href="#cb33-323" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Intercept"</span>: bmb.Prior(<span class="st">"Normal"</span>, mu<span class="op">=</span><span class="dv">0</span>, sigma<span class="op">=</span><span class="dv">5</span>),</span>
-<span id="cb33-324"><a href="#cb33-324" aria-hidden="true" tabindex="-1"></a>        <span class="st">"dose"</span>: bmb.Prior(<span class="st">"HalfNormal"</span>, sigma<span class="op">=</span><span class="dv">5</span>),</span>
-<span id="cb33-325"><a href="#cb33-325" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb33-326"><a href="#cb33-326" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-327"><a href="#cb33-327" aria-hidden="true" tabindex="-1"></a>idata_bambi <span class="op">=</span> model.fit(random_seed<span class="op">=</span><span class="dv">123</span>)</span>
-<span id="cb33-328"><a href="#cb33-328" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-329"><a href="#cb33-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-330"><a href="#cb33-330" aria-hidden="true" tabindex="-1"></a>Summary of the inference</span>
-<span id="cb33-331"><a href="#cb33-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-334"><a href="#cb33-334" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-335"><a href="#cb33-335" aria-hidden="true" tabindex="-1"></a>az.summary(idata_bambi)</span>
-<span id="cb33-336"><a href="#cb33-336" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-337"><a href="#cb33-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-338"><a href="#cb33-338" aria-hidden="true" tabindex="-1"></a>With <span class="in">`bambi`</span> we can use the built-in plotting functions in the interpret submodule.</span>
-<span id="cb33-339"><a href="#cb33-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-342"><a href="#cb33-342" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-343"><a href="#cb33-343" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> bmb.interpret.plot_predictions(model, idata_bambi, <span class="st">"dose"</span>,</span>
-<span id="cb33-344"><a href="#cb33-344" aria-hidden="true" tabindex="-1"></a>                                      use_hdi<span class="op">=</span><span class="va">False</span>,</span>
-<span id="cb33-345"><a href="#cb33-345" aria-hidden="true" tabindex="-1"></a>                                      fig_kwargs<span class="op">=</span>{<span class="st">"theme"</span>: {<span class="st">"figure.figsize"</span>: (<span class="dv">7</span>, <span class="dv">4</span>)}})</span>
-<span id="cb33-346"><a href="#cb33-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-347"><a href="#cb33-347" aria-hidden="true" tabindex="-1"></a>plotter <span class="op">=</span> plot.plot()</span>
-<span id="cb33-348"><a href="#cb33-348" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plotter._figure.axes[<span class="dv">0</span>]</span>
-<span id="cb33-349"><a href="#cb33-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-350"><a href="#cb33-350" aria-hidden="true" tabindex="-1"></a>ax.scatter(</span>
-<span id="cb33-351"><a href="#cb33-351" aria-hidden="true" tabindex="-1"></a>    df_bioassay[<span class="st">"dose"</span>],</span>
-<span id="cb33-352"><a href="#cb33-352" aria-hidden="true" tabindex="-1"></a>    df_bioassay[<span class="st">"deaths"</span>] <span class="op">/</span> df_bioassay[<span class="st">"batch_size"</span>],</span>
-<span id="cb33-353"><a href="#cb33-353" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">80</span>,</span>
-<span id="cb33-354"><a href="#cb33-354" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"black"</span>,</span>
-<span id="cb33-355"><a href="#cb33-355" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-356"><a href="#cb33-356" aria-hidden="true" tabindex="-1"></a><span class="co"># Tweak labels</span></span>
-<span id="cb33-357"><a href="#cb33-357" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Dose log(g/ml)"</span>, ylabel<span class="op">=</span><span class="st">"Pr(death)"</span>)</span>
-<span id="cb33-358"><a href="#cb33-358" aria-hidden="true" tabindex="-1"></a>plotter._figure</span>
-<span id="cb33-359"><a href="#cb33-359" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-360"><a href="#cb33-360" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-361"><a href="#cb33-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-362"><a href="#cb33-362" aria-hidden="true" tabindex="-1"></a><span class="fu">## LD50 posterior</span></span>
-<span id="cb33-363"><a href="#cb33-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-364"><a href="#cb33-364" aria-hidden="true" tabindex="-1"></a>Compute posterior draws for lethal dose 50 (LD50) in log(g/ml) and in mg/ml</span>
-<span id="cb33-365"><a href="#cb33-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-368"><a href="#cb33-368" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-369"><a href="#cb33-369" aria-hidden="true" tabindex="-1"></a>ld50_bambi_log <span class="op">=</span> <span class="op">-</span>idata_bambi.posterior[<span class="st">"Intercept"</span>] <span class="op">/</span> idata_bambi.posterior[<span class="st">"dose"</span>]</span>
-<span id="cb33-370"><a href="#cb33-370" aria-hidden="true" tabindex="-1"></a>ld50_bambi_mg <span class="op">=</span> <span class="dv">1000</span> <span class="op">*</span> np.exp(ld50_bambi_log)</span>
-<span id="cb33-371"><a href="#cb33-371" aria-hidden="true" tabindex="-1"></a>idata_bambi.posterior[<span class="st">"LD50_log_g_ml"</span>] <span class="op">=</span> ld50_bambi_log</span>
-<span id="cb33-372"><a href="#cb33-372" aria-hidden="true" tabindex="-1"></a>idata_bambi.posterior[<span class="st">"LD50_mg_ml"</span>] <span class="op">=</span> ld50_bambi_mg</span>
-<span id="cb33-373"><a href="#cb33-373" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-374"><a href="#cb33-374" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-375"><a href="#cb33-375" aria-hidden="true" tabindex="-1"></a>Posterior summary</span>
-<span id="cb33-376"><a href="#cb33-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-379"><a href="#cb33-379" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-380"><a href="#cb33-380" aria-hidden="true" tabindex="-1"></a>az.summary(idata_bambi, var_names<span class="op">=</span>[<span class="st">"LD50_log_g_ml"</span>, <span class="st">"LD50_mg_ml"</span>])</span>
-<span id="cb33-381"><a href="#cb33-381" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-382"><a href="#cb33-382" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-383"><a href="#cb33-383" aria-hidden="true" tabindex="-1"></a>Quantile dot plot of the LD50 (mg/ml) posterior.</span>
-<span id="cb33-384"><a href="#cb33-384" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-387"><a href="#cb33-387" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-388"><a href="#cb33-388" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-bioassay-LD50-quantile-dots-bambi</span></span>
-<span id="cb33-389"><a href="#cb33-389" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(</span>
-<span id="cb33-390"><a href="#cb33-390" aria-hidden="true" tabindex="-1"></a>    idata_bambi,</span>
-<span id="cb33-391"><a href="#cb33-391" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"dot"</span>,</span>
-<span id="cb33-392"><a href="#cb33-392" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span><span class="st">"LD50_mg_ml"</span>,</span>
-<span id="cb33-393"><a href="#cb33-393" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"point_estimate_text"</span>:<span class="va">False</span>},</span>
-<span id="cb33-394"><a href="#cb33-394" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-395"><a href="#cb33-395" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span>
-<span id="cb33-396"><a href="#cb33-396" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-397"><a href="#cb33-397" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-398"><a href="#cb33-398" aria-hidden="true" tabindex="-1"></a>Kernel density plot of the LD50 (mg/ml) posterior.</span>
-<span id="cb33-399"><a href="#cb33-399" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-402"><a href="#cb33-402" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb33-403"><a href="#cb33-403" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-bioassay-LD50-KDE-bambi</span></span>
-<span id="cb33-404"><a href="#cb33-404" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-405"><a href="#cb33-405" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(</span>
-<span id="cb33-406"><a href="#cb33-406" aria-hidden="true" tabindex="-1"></a>    idata_bambi,</span>
-<span id="cb33-407"><a href="#cb33-407" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span><span class="st">"LD50_mg_ml"</span>,</span>
-<span id="cb33-408"><a href="#cb33-408" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"point_estimate_text"</span>:<span class="va">False</span>},</span>
-<span id="cb33-409"><a href="#cb33-409" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-410"><a href="#cb33-410" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span>
-<span id="cb33-411"><a href="#cb33-411" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb33-412"><a href="#cb33-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-413"><a href="#cb33-413" aria-hidden="true" tabindex="-1"></a><span class="fu">## References {.unnumbered}</span></span>
-<span id="cb33-414"><a href="#cb33-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-415"><a href="#cb33-415" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">"refs"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
-<span id="cb33-416"><a href="#cb33-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-417"><a href="#cb33-417" aria-hidden="true" tabindex="-1"></a><span class="fu">## Licenses {.unnumbered}</span></span>
-<span id="cb33-418"><a href="#cb33-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-419"><a href="#cb33-419" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Code © 2025, Andrew Gelman and Aki Vehtari, licensed under BSD-3.</span>
-<span id="cb33-420"><a href="#cb33-420" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Text © 2025, Andrew Gelman and Aki Vehtari, licensed under CC-BY-NC 4.0.</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Bioassay case study"</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="an">image:</span><span class="co"> ../social_cards/bioassay.png</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Andrew Gelman and Aki Vehtari"</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2025-10-15</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="an">date-format:</span><span class="co"> iso</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="co">    number-sections: true</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-copy: true</span></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="co">    code-download: true</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> ../casestudies.bib</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a>This notebook includes the code for Bayesian Workflow book Section</span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>3.5 *A simple example of probabilistic programming*.</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>We demonstrate the role of statistical programming environments and</span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>probabilistic programming by going through the steps of data</span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>analysis and computation in the context of a simple example.</span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>We work through an example by @Racine-Grieve-Fluhler-etal:1986,</span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>also included in Section 2.8 of Bayesian Data Analysis <span class="co">[</span><span class="ot">@BDA3</span><span class="co">]</span>, of</span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>a logistic regression fit to a bioassay experiment.</span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: true</span></span>
+<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a><span class="co">#| cache: false</span></span>
+<span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a>sys.path.insert(<span class="dv">0</span>, <span class="st">'..'</span>)</span>
+<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-40"><a href="#cb38-40" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> arviz <span class="im">as</span> az</span>
+<span id="cb38-41"><a href="#cb38-41" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> bambi <span class="im">as</span> bmb</span>
+<span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb38-43"><a href="#cb38-43" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb38-44"><a href="#cb38-44" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb38-45"><a href="#cb38-45" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb38-46"><a href="#cb38-46" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.special <span class="im">import</span> expit</span>
+<span id="cb38-47"><a href="#cb38-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-48"><a href="#cb38-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-49"><a href="#cb38-49" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>, category<span class="op">=</span><span class="pp">FutureWarning</span>)</span>
+<span id="cb38-50"><a href="#cb38-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-51"><a href="#cb38-51" aria-hidden="true" tabindex="-1"></a>az.style.use(<span class="st">"arviz-variat"</span>)</span>
+<span id="cb38-52"><a href="#cb38-52" aria-hidden="true" tabindex="-1"></a>az.rcParams[<span class="st">"stats.ci_prob"</span>] <span class="op">=</span> <span class="fl">0.95</span></span>
+<span id="cb38-53"><a href="#cb38-53" aria-hidden="true" tabindex="-1"></a>plt.rcParams[<span class="st">"figure.dpi"</span>] <span class="op">=</span> <span class="dv">75</span></span>
+<span id="cb38-54"><a href="#cb38-54" aria-hidden="true" tabindex="-1"></a>SEED <span class="op">=</span> <span class="dv">7412</span></span>
+<span id="cb38-55"><a href="#cb38-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-56"><a href="#cb38-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-57"><a href="#cb38-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-58"><a href="#cb38-58" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset group="ppl"}</span>
+<span id="cb38-59"><a href="#cb38-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## CmdStanPy</span></span>
+<span id="cb38-60"><a href="#cb38-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-63"><a href="#cb38-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-64"><a href="#cb38-64" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cmdstanpy <span class="im">import</span> CmdStanModel, disable_logging</span>
+<span id="cb38-65"><a href="#cb38-65" aria-hidden="true" tabindex="-1"></a>disable_logging()</span>
+<span id="cb38-66"><a href="#cb38-66" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> utils <span class="im">import</span> print_stan</span>
+<span id="cb38-67"><a href="#cb38-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-68"><a href="#cb38-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-69"><a href="#cb38-69" aria-hidden="true" tabindex="-1"></a><span class="fu">## Numpyro</span></span>
+<span id="cb38-70"><a href="#cb38-70" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python}</span></span>
+<span id="cb38-71"><a href="#cb38-71" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> jax <span class="im">import</span> random</span>
+<span id="cb38-72"><a href="#cb38-72" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> jax.numpy <span class="im">as</span> jnp</span>
+<span id="cb38-73"><a href="#cb38-73" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpyro</span>
+<span id="cb38-74"><a href="#cb38-74" aria-hidden="true" tabindex="-1"></a><span class="im">from</span>  numpyro <span class="im">import</span> distributions <span class="im">as</span> dist</span>
+<span id="cb38-75"><a href="#cb38-75" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> numpyro.infer <span class="im">import</span> NUTS, MCMC, Predictive</span>
+<span id="cb38-76"><a href="#cb38-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-77"><a href="#cb38-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-78"><a href="#cb38-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-79"><a href="#cb38-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## PyMC</span></span>
+<span id="cb38-80"><a href="#cb38-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python}</span></span>
+<span id="cb38-81"><a href="#cb38-81" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymc <span class="im">as</span> pm</span>
+<span id="cb38-82"><a href="#cb38-82" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-83"><a href="#cb38-83" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb38-84"><a href="#cb38-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-85"><a href="#cb38-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-86"><a href="#cb38-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-87"><a href="#cb38-87" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bioassay data</span></span>
+<span id="cb38-88"><a href="#cb38-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-89"><a href="#cb38-89" aria-hidden="true" tabindex="-1"></a>Read the data from csv</span>
+<span id="cb38-90"><a href="#cb38-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-93"><a href="#cb38-93" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-94"><a href="#cb38-94" aria-hidden="true" tabindex="-1"></a>df_bioassay <span class="op">=</span> pd.read_csv(<span class="st">"data/bioassay.csv"</span>)</span>
+<span id="cb38-95"><a href="#cb38-95" aria-hidden="true" tabindex="-1"></a>df_bioassay</span>
+<span id="cb38-96"><a href="#cb38-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-97"><a href="#cb38-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-98"><a href="#cb38-98" aria-hidden="true" tabindex="-1"></a>Plot the data</span>
+<span id="cb38-99"><a href="#cb38-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-102"><a href="#cb38-102" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-103"><a href="#cb38-103" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-bioassay-data-plot</span></span>
+<span id="cb38-104"><a href="#cb38-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-105"><a href="#cb38-105" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
+<span id="cb38-106"><a href="#cb38-106" aria-hidden="true" tabindex="-1"></a>ax.scatter(df_bioassay[<span class="st">"dose"</span>], df_bioassay[<span class="st">"deaths"</span>], s<span class="op">=</span><span class="dv">60</span>, color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb38-107"><a href="#cb38-107" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Dose log(g/ml)"</span>, ylabel<span class="op">=</span><span class="st">"# of deaths"</span>)</span>
+<span id="cb38-108"><a href="#cb38-108" aria-hidden="true" tabindex="-1"></a>ax.spines[[<span class="st">"top"</span>, <span class="st">"right"</span>]].set_visible(<span class="va">False</span>)</span>
+<span id="cb38-109"><a href="#cb38-109" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-110"><a href="#cb38-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-111"><a href="#cb38-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-112"><a href="#cb38-112" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset group="ppl"}</span>
+<span id="cb38-113"><a href="#cb38-113" aria-hidden="true" tabindex="-1"></a><span class="fu">## CmdStanPy</span></span>
+<span id="cb38-114"><a href="#cb38-114" aria-hidden="true" tabindex="-1"></a>Data as list for CmdStanPy</span>
+<span id="cb38-115"><a href="#cb38-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-118"><a href="#cb38-118" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-119"><a href="#cb38-119" aria-hidden="true" tabindex="-1"></a>bioassay_data <span class="op">=</span> {</span>
+<span id="cb38-120"><a href="#cb38-120" aria-hidden="true" tabindex="-1"></a>    <span class="st">"J"</span>: <span class="bu">len</span>(df_bioassay),</span>
+<span id="cb38-121"><a href="#cb38-121" aria-hidden="true" tabindex="-1"></a>    <span class="st">"x"</span>: df_bioassay[<span class="st">"dose"</span>].to_list(),</span>
+<span id="cb38-122"><a href="#cb38-122" aria-hidden="true" tabindex="-1"></a>    <span class="st">"N"</span>: df_bioassay[<span class="st">"batch_size"</span>].to_list(),</span>
+<span id="cb38-123"><a href="#cb38-123" aria-hidden="true" tabindex="-1"></a>    <span class="st">"y"</span>: df_bioassay[<span class="st">"deaths"</span>].to_list(),</span>
+<span id="cb38-124"><a href="#cb38-124" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb38-125"><a href="#cb38-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-126"><a href="#cb38-126" aria-hidden="true" tabindex="-1"></a><span class="fu">## Numpyro</span></span>
+<span id="cb38-127"><a href="#cb38-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python}</span></span>
+<span id="cb38-128"><a href="#cb38-128" aria-hidden="true" tabindex="-1"></a>J <span class="op">=</span> <span class="bu">len</span>(df_bioassay)</span>
+<span id="cb38-129"><a href="#cb38-129" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> df_bioassay[<span class="st">"dose"</span>].values</span>
+<span id="cb38-130"><a href="#cb38-130" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> df_bioassay[<span class="st">"batch_size"</span>].values</span>
+<span id="cb38-131"><a href="#cb38-131" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_bioassay[<span class="st">"deaths"</span>].values</span>
+<span id="cb38-132"><a href="#cb38-132" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-133"><a href="#cb38-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-134"><a href="#cb38-134" aria-hidden="true" tabindex="-1"></a><span class="fu">## PyMC</span></span>
+<span id="cb38-135"><a href="#cb38-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python}</span></span>
+<span id="cb38-136"><a href="#cb38-136" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> df_bioassay[<span class="st">"dose"</span>]</span>
+<span id="cb38-137"><a href="#cb38-137" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> df_bioassay[<span class="st">"batch_size"</span>]</span>
+<span id="cb38-138"><a href="#cb38-138" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df_bioassay[<span class="st">"deaths"</span>]</span>
+<span id="cb38-139"><a href="#cb38-139" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-140"><a href="#cb38-140" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb38-141"><a href="#cb38-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-142"><a href="#cb38-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-143"><a href="#cb38-143" aria-hidden="true" tabindex="-1"></a><span class="fu">## Stan models and inference</span></span>
+<span id="cb38-144"><a href="#cb38-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-145"><a href="#cb38-145" aria-hidden="true" tabindex="-1"></a>Model 0 (without priors).</span>
+<span id="cb38-146"><a href="#cb38-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-147"><a href="#cb38-147" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset group="ppl"}</span>
+<span id="cb38-148"><a href="#cb38-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-149"><a href="#cb38-149" aria-hidden="true" tabindex="-1"></a>Compile the Stan model code using pedantic mode</span>
+<span id="cb38-150"><a href="#cb38-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-151"><a href="#cb38-151" aria-hidden="true" tabindex="-1"></a><span class="fu">## CmdStanPy</span></span>
+<span id="cb38-154"><a href="#cb38-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-155"><a href="#cb38-155" aria-hidden="true" tabindex="-1"></a>mod0 <span class="op">=</span> CmdStanModel(</span>
+<span id="cb38-156"><a href="#cb38-156" aria-hidden="true" tabindex="-1"></a>    stan_file<span class="op">=</span><span class="bu">str</span>(<span class="st">"bioassay0.stan"</span>),</span>
+<span id="cb38-157"><a href="#cb38-157" aria-hidden="true" tabindex="-1"></a>    stanc_options<span class="op">=</span>{<span class="st">"warn-pedantic"</span>: <span class="va">True</span>},</span>
+<span id="cb38-158"><a href="#cb38-158" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-159"><a href="#cb38-159" aria-hidden="true" tabindex="-1"></a>print_stan(mod0)</span>
+<span id="cb38-160"><a href="#cb38-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-161"><a href="#cb38-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-162"><a href="#cb38-162" aria-hidden="true" tabindex="-1"></a><span class="fu">## Numpyro</span></span>
+<span id="cb38-163"><a href="#cb38-163" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python}</span></span>
+<span id="cb38-164"><a href="#cb38-164" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mod0(x, N, y<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb38-165"><a href="#cb38-165" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> numpyro.sample(<span class="st">"a"</span>, dist.Normal(<span class="dv">0</span>, <span class="fl">1e6</span>)) <span class="co"># flat prior</span></span>
+<span id="cb38-166"><a href="#cb38-166" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> numpyro.sample(<span class="st">"b"</span>, dist.Normal(<span class="dv">0</span>, <span class="fl">1e6</span>)) <span class="co"># flat prior</span></span>
+<span id="cb38-167"><a href="#cb38-167" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> numpyro.plate(<span class="st">"J"</span>, <span class="bu">len</span>(N)):</span>
+<span id="cb38-168"><a href="#cb38-168" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> numpyro.sample(<span class="st">"y"</span>, dist.BinomialLogits(total_count<span class="op">=</span>N, logits<span class="op">=</span>a <span class="op">+</span> b<span class="op">*</span>x), obs<span class="op">=</span>y)</span>
+<span id="cb38-169"><a href="#cb38-169" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-170"><a href="#cb38-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-171"><a href="#cb38-171" aria-hidden="true" tabindex="-1"></a><span class="fu">## PyMC</span></span>
+<span id="cb38-172"><a href="#cb38-172" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python}</span></span>
+<span id="cb38-173"><a href="#cb38-173" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> pm.Model() <span class="im">as</span> mod0:</span>
+<span id="cb38-174"><a href="#cb38-174" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> pm.Flat(<span class="st">"a"</span>)</span>
+<span id="cb38-175"><a href="#cb38-175" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> pm.Flat(<span class="st">"b"</span>)</span>
+<span id="cb38-176"><a href="#cb38-176" aria-hidden="true" tabindex="-1"></a>    pm.Binomial(<span class="st">"y"</span>, n<span class="op">=</span>N, logit_p<span class="op">=</span>a <span class="op">+</span> b <span class="op">*</span> x, observed<span class="op">=</span>y)</span>
+<span id="cb38-177"><a href="#cb38-177" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-178"><a href="#cb38-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-179"><a href="#cb38-179" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb38-180"><a href="#cb38-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-181"><a href="#cb38-181" aria-hidden="true" tabindex="-1"></a>Model 1 (with priors). </span>
+<span id="cb38-182"><a href="#cb38-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-183"><a href="#cb38-183" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset group="ppl"}</span>
+<span id="cb38-184"><a href="#cb38-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-185"><a href="#cb38-185" aria-hidden="true" tabindex="-1"></a>Compile the updated Stan model code using pedantic mode</span>
+<span id="cb38-186"><a href="#cb38-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-187"><a href="#cb38-187" aria-hidden="true" tabindex="-1"></a><span class="fu">## CmdStanPy</span></span>
+<span id="cb38-190"><a href="#cb38-190" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-191"><a href="#cb38-191" aria-hidden="true" tabindex="-1"></a>mod1 <span class="op">=</span> CmdStanModel(</span>
+<span id="cb38-192"><a href="#cb38-192" aria-hidden="true" tabindex="-1"></a>    stan_file<span class="op">=</span><span class="bu">str</span>(<span class="st">"bioassay1.stan"</span>),</span>
+<span id="cb38-193"><a href="#cb38-193" aria-hidden="true" tabindex="-1"></a>    stanc_options<span class="op">=</span>{<span class="st">"warn-pedantic"</span>: <span class="va">True</span>},</span>
+<span id="cb38-194"><a href="#cb38-194" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-195"><a href="#cb38-195" aria-hidden="true" tabindex="-1"></a>print_stan(mod1)</span>
+<span id="cb38-196"><a href="#cb38-196" aria-hidden="true" tabindex="-1"></a>mod1</span>
+<span id="cb38-197"><a href="#cb38-197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-198"><a href="#cb38-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-199"><a href="#cb38-199" aria-hidden="true" tabindex="-1"></a><span class="fu">## Numpyro</span></span>
+<span id="cb38-200"><a href="#cb38-200" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python}</span></span>
+<span id="cb38-201"><a href="#cb38-201" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mod1(x, N, y<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb38-202"><a href="#cb38-202" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> numpyro.sample(<span class="st">"a"</span>, dist.Normal(<span class="dv">0</span>, <span class="dv">5</span>))</span>
+<span id="cb38-203"><a href="#cb38-203" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> numpyro.sample(<span class="st">"b"</span>, dist.Normal(<span class="dv">0</span>, <span class="dv">5</span>))</span>
+<span id="cb38-204"><a href="#cb38-204" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> numpyro.plate(<span class="st">"J"</span>, <span class="bu">len</span>(N)):</span>
+<span id="cb38-205"><a href="#cb38-205" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> numpyro.sample(<span class="st">"y"</span>, dist.BinomialLogits(total_count<span class="op">=</span>N, logits<span class="op">=</span>a <span class="op">+</span> b<span class="op">*</span>x), obs<span class="op">=</span>y)</span>
+<span id="cb38-206"><a href="#cb38-206" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-207"><a href="#cb38-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-208"><a href="#cb38-208" aria-hidden="true" tabindex="-1"></a><span class="fu">## PyMC</span></span>
+<span id="cb38-209"><a href="#cb38-209" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python}</span></span>
+<span id="cb38-210"><a href="#cb38-210" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> pm.Model() <span class="im">as</span> mod1:</span>
+<span id="cb38-211"><a href="#cb38-211" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> pm.Normal(<span class="st">"a"</span>, mu<span class="op">=</span><span class="dv">0</span>, sigma<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb38-212"><a href="#cb38-212" aria-hidden="true" tabindex="-1"></a>    b <span class="op">=</span> pm.Normal(<span class="st">"b"</span>, mu<span class="op">=</span><span class="dv">0</span>, sigma<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb38-213"><a href="#cb38-213" aria-hidden="true" tabindex="-1"></a>    pm.Binomial(<span class="st">"y"</span>, n<span class="op">=</span>N, logit_p<span class="op">=</span>a <span class="op">+</span> b <span class="op">*</span> x, observed<span class="op">=</span>y)</span>
+<span id="cb38-214"><a href="#cb38-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-215"><a href="#cb38-215" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb38-216"><a href="#cb38-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-217"><a href="#cb38-217" aria-hidden="true" tabindex="-1"></a>Sample with default settings</span>
+<span id="cb38-218"><a href="#cb38-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-219"><a href="#cb38-219" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset group="ppl"}</span>
+<span id="cb38-220"><a href="#cb38-220" aria-hidden="true" tabindex="-1"></a><span class="fu">## CmdStanPy</span></span>
+<span id="cb38-221"><a href="#cb38-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-224"><a href="#cb38-224" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-225"><a href="#cb38-225" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit1</span></span>
+<span id="cb38-226"><a href="#cb38-226" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb38-227"><a href="#cb38-227" aria-hidden="true" tabindex="-1"></a>fit1 <span class="op">=</span> mod1.sample(data<span class="op">=</span>bioassay_data, seed<span class="op">=</span>SEED, show_progress<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb38-228"><a href="#cb38-228" aria-hidden="true" tabindex="-1"></a>dt_bioassay1 <span class="op">=</span> az.from_cmdstanpy(fit1)</span>
+<span id="cb38-229"><a href="#cb38-229" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-230"><a href="#cb38-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-231"><a href="#cb38-231" aria-hidden="true" tabindex="-1"></a><span class="fu">## Numpyro</span></span>
+<span id="cb38-232"><a href="#cb38-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python}</span></span>
+<span id="cb38-233"><a href="#cb38-233" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fit1</span></span>
+<span id="cb38-234"><a href="#cb38-234" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb38-235"><a href="#cb38-235" aria-hidden="true" tabindex="-1"></a>kernel <span class="op">=</span> NUTS(mod1)</span>
+<span id="cb38-236"><a href="#cb38-236" aria-hidden="true" tabindex="-1"></a>mcmc <span class="op">=</span> MCMC(kernel,  num_warmup<span class="op">=</span><span class="dv">1000</span>, num_samples<span class="op">=</span><span class="dv">1000</span>)</span>
+<span id="cb38-237"><a href="#cb38-237" aria-hidden="true" tabindex="-1"></a>mcmc.run(random.PRNGKey(SEED), x<span class="op">=</span>x, N<span class="op">=</span>N, y<span class="op">=</span>y)</span>
+<span id="cb38-238"><a href="#cb38-238" aria-hidden="true" tabindex="-1"></a>dt_bioassay1 <span class="op">=</span> az.from_numpyro(mcmc)</span>
+<span id="cb38-239"><a href="#cb38-239" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-240"><a href="#cb38-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-241"><a href="#cb38-241" aria-hidden="true" tabindex="-1"></a><span class="fu">## PyMC</span></span>
+<span id="cb38-242"><a href="#cb38-242" aria-hidden="true" tabindex="-1"></a><span class="in">```{.python}</span></span>
+<span id="cb38-243"><a href="#cb38-243" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb38-244"><a href="#cb38-244" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> mod1:</span>
+<span id="cb38-245"><a href="#cb38-245" aria-hidden="true" tabindex="-1"></a>    dt_bioassay1 <span class="op">=</span> pm.sample(random_seed<span class="op">=</span>SEED)</span>
+<span id="cb38-246"><a href="#cb38-246" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-247"><a href="#cb38-247" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb38-248"><a href="#cb38-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-249"><a href="#cb38-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-250"><a href="#cb38-250" aria-hidden="true" tabindex="-1"></a><span class="fu">## Posterior summary</span></span>
+<span id="cb38-251"><a href="#cb38-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-252"><a href="#cb38-252" aria-hidden="true" tabindex="-1"></a>Posterior summary and MCMC diagnostics</span>
+<span id="cb38-253"><a href="#cb38-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-256"><a href="#cb38-256" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-257"><a href="#cb38-257" aria-hidden="true" tabindex="-1"></a>az.summary(dt_bioassay1)</span>
+<span id="cb38-258"><a href="#cb38-258" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-259"><a href="#cb38-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-260"><a href="#cb38-260" aria-hidden="true" tabindex="-1"></a>Plot 20 logistic curves given 20 posterior _draws_, and one logistic given the posterior mean</span>
+<span id="cb38-261"><a href="#cb38-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-264"><a href="#cb38-264" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-265"><a href="#cb38-265" aria-hidden="true" tabindex="-1"></a><span class="co"># | label: fig-bioassay-posterior-plot</span></span>
+<span id="cb38-266"><a href="#cb38-266" aria-hidden="true" tabindex="-1"></a>posterior <span class="op">=</span> az.extract(dt_bioassay1, group<span class="op">=</span><span class="st">"posterior"</span>)</span>
+<span id="cb38-267"><a href="#cb38-267" aria-hidden="true" tabindex="-1"></a>posterior_20 <span class="op">=</span> az.extract(dt_bioassay1, group<span class="op">=</span><span class="st">"posterior"</span>, num_samples<span class="op">=</span><span class="dv">20</span>, random_seed<span class="op">=</span>SEED)</span>
+<span id="cb38-268"><a href="#cb38-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-269"><a href="#cb38-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-270"><a href="#cb38-270" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
+<span id="cb38-271"><a href="#cb38-271" aria-hidden="true" tabindex="-1"></a>ax.scatter(</span>
+<span id="cb38-272"><a href="#cb38-272" aria-hidden="true" tabindex="-1"></a>    df_bioassay[<span class="st">"dose"</span>],</span>
+<span id="cb38-273"><a href="#cb38-273" aria-hidden="true" tabindex="-1"></a>    df_bioassay[<span class="st">"deaths"</span>] <span class="op">/</span> df_bioassay[<span class="st">"batch_size"</span>],</span>
+<span id="cb38-274"><a href="#cb38-274" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb38-275"><a href="#cb38-275" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-276"><a href="#cb38-276" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Dose log(g/ml)"</span>, ylabel<span class="op">=</span><span class="st">"Pr (death)"</span>)</span>
+<span id="cb38-277"><a href="#cb38-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-278"><a href="#cb38-278" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">200</span>)</span>
+<span id="cb38-279"><a href="#cb38-279" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
+<span id="cb38-280"><a href="#cb38-280" aria-hidden="true" tabindex="-1"></a>    xs,</span>
+<span id="cb38-281"><a href="#cb38-281" aria-hidden="true" tabindex="-1"></a>    expit(posterior_20[<span class="st">"a"</span>].values <span class="op">+</span> posterior_20[<span class="st">"b"</span>].values <span class="op">*</span> xs[:, <span class="va">None</span>]),</span>
+<span id="cb38-282"><a href="#cb38-282" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"C1"</span>,</span>
+<span id="cb38-283"><a href="#cb38-283" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb38-284"><a href="#cb38-284" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.6</span>,</span>
+<span id="cb38-285"><a href="#cb38-285" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-286"><a href="#cb38-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-287"><a href="#cb38-287" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
+<span id="cb38-288"><a href="#cb38-288" aria-hidden="true" tabindex="-1"></a>    xs,</span>
+<span id="cb38-289"><a href="#cb38-289" aria-hidden="true" tabindex="-1"></a>    expit(posterior[<span class="st">"a"</span>].mean().item() <span class="op">+</span> posterior[<span class="st">"b"</span>].mean().item() <span class="op">*</span> xs),</span>
+<span id="cb38-290"><a href="#cb38-290" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"C0"</span>,</span>
+<span id="cb38-291"><a href="#cb38-291" aria-hidden="true" tabindex="-1"></a>    lw<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb38-292"><a href="#cb38-292" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-293"><a href="#cb38-293" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-294"><a href="#cb38-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-295"><a href="#cb38-295" aria-hidden="true" tabindex="-1"></a><span class="fu">## Derived quantities</span></span>
+<span id="cb38-296"><a href="#cb38-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-297"><a href="#cb38-297" aria-hidden="true" tabindex="-1"></a>Compute posterior draws for LD50 in log(g/ml) and in mg/ml</span>
+<span id="cb38-298"><a href="#cb38-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-301"><a href="#cb38-301" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-302"><a href="#cb38-302" aria-hidden="true" tabindex="-1"></a>ld50_log <span class="op">=</span> <span class="op">-</span>dt_bioassay1.posterior[<span class="st">"a"</span>] <span class="op">/</span> dt_bioassay1.posterior[<span class="st">"b"</span>]</span>
+<span id="cb38-303"><a href="#cb38-303" aria-hidden="true" tabindex="-1"></a>ld50_mg <span class="op">=</span> <span class="dv">1000</span> <span class="op">*</span> np.exp(ld50_log)</span>
+<span id="cb38-304"><a href="#cb38-304" aria-hidden="true" tabindex="-1"></a>dt_bioassay1.posterior[<span class="st">"LD50_log_g_ml"</span>] <span class="op">=</span> ld50_log</span>
+<span id="cb38-305"><a href="#cb38-305" aria-hidden="true" tabindex="-1"></a>dt_bioassay1.posterior[<span class="st">"LD50_mg_ml"</span>] <span class="op">=</span> ld50_mg</span>
+<span id="cb38-306"><a href="#cb38-306" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-307"><a href="#cb38-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-308"><a href="#cb38-308" aria-hidden="true" tabindex="-1"></a>Summarise LD50 posterior</span>
+<span id="cb38-309"><a href="#cb38-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-312"><a href="#cb38-312" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-313"><a href="#cb38-313" aria-hidden="true" tabindex="-1"></a>az.summary(dt_bioassay1, var_names<span class="op">=</span><span class="st">"LD50_log_g_ml"</span>)</span>
+<span id="cb38-314"><a href="#cb38-314" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-315"><a href="#cb38-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-316"><a href="#cb38-316" aria-hidden="true" tabindex="-1"></a>Quantile dot plot of the LD50 (mg/ml) posterior</span>
+<span id="cb38-317"><a href="#cb38-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-320"><a href="#cb38-320" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-321"><a href="#cb38-321" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(</span>
+<span id="cb38-322"><a href="#cb38-322" aria-hidden="true" tabindex="-1"></a>    dt_bioassay1,</span>
+<span id="cb38-323"><a href="#cb38-323" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"dot"</span>,</span>
+<span id="cb38-324"><a href="#cb38-324" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span><span class="st">"LD50_mg_ml"</span>,</span>
+<span id="cb38-325"><a href="#cb38-325" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"point_estimate_text"</span>:<span class="va">False</span>},</span>
+<span id="cb38-326"><a href="#cb38-326" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-327"><a href="#cb38-327" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span>
+<span id="cb38-328"><a href="#cb38-328" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-329"><a href="#cb38-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-330"><a href="#cb38-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-331"><a href="#cb38-331" aria-hidden="true" tabindex="-1"></a>Kernel density plot of the LD50 (mg/ml) posterior</span>
+<span id="cb38-332"><a href="#cb38-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-335"><a href="#cb38-335" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-336"><a href="#cb38-336" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-bioassay-LD50-KDE</span></span>
+<span id="cb38-337"><a href="#cb38-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-338"><a href="#cb38-338" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(</span>
+<span id="cb38-339"><a href="#cb38-339" aria-hidden="true" tabindex="-1"></a>    dt_bioassay1,</span>
+<span id="cb38-340"><a href="#cb38-340" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span><span class="st">"LD50_mg_ml"</span>,</span>
+<span id="cb38-341"><a href="#cb38-341" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"point_estimate_text"</span>:<span class="va">False</span>},</span>
+<span id="cb38-342"><a href="#cb38-342" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-343"><a href="#cb38-343" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span>
+<span id="cb38-344"><a href="#cb38-344" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-345"><a href="#cb38-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-346"><a href="#cb38-346" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bambi model and inference</span></span>
+<span id="cb38-347"><a href="#cb38-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-348"><a href="#cb38-348" aria-hidden="true" tabindex="-1"></a>The same model with <span class="in">`Bambi`</span></span>
+<span id="cb38-349"><a href="#cb38-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-352"><a href="#cb38-352" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-353"><a href="#cb38-353" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> bmb.Model(</span>
+<span id="cb38-354"><a href="#cb38-354" aria-hidden="true" tabindex="-1"></a>    <span class="st">"prop(deaths, batch_size) ~ dose"</span>,</span>
+<span id="cb38-355"><a href="#cb38-355" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_bioassay,</span>
+<span id="cb38-356"><a href="#cb38-356" aria-hidden="true" tabindex="-1"></a>    family<span class="op">=</span><span class="st">"binomial"</span>,</span>
+<span id="cb38-357"><a href="#cb38-357" aria-hidden="true" tabindex="-1"></a>    priors<span class="op">=</span>{</span>
+<span id="cb38-358"><a href="#cb38-358" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Intercept"</span>: bmb.Prior(<span class="st">"Normal"</span>, mu<span class="op">=</span><span class="dv">0</span>, sigma<span class="op">=</span><span class="dv">5</span>),</span>
+<span id="cb38-359"><a href="#cb38-359" aria-hidden="true" tabindex="-1"></a>        <span class="st">"dose"</span>: bmb.Prior(<span class="st">"HalfNormal"</span>, sigma<span class="op">=</span><span class="dv">5</span>),</span>
+<span id="cb38-360"><a href="#cb38-360" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb38-361"><a href="#cb38-361" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-362"><a href="#cb38-362" aria-hidden="true" tabindex="-1"></a>idata_bambi <span class="op">=</span> model.fit(random_seed<span class="op">=</span><span class="dv">123</span>)</span>
+<span id="cb38-363"><a href="#cb38-363" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-364"><a href="#cb38-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-365"><a href="#cb38-365" aria-hidden="true" tabindex="-1"></a>Summary of the inference</span>
+<span id="cb38-366"><a href="#cb38-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-369"><a href="#cb38-369" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-370"><a href="#cb38-370" aria-hidden="true" tabindex="-1"></a>az.summary(idata_bambi)</span>
+<span id="cb38-371"><a href="#cb38-371" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-372"><a href="#cb38-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-373"><a href="#cb38-373" aria-hidden="true" tabindex="-1"></a>With <span class="in">`bambi`</span> we can use the built-in plotting functions in the interpret submodule.</span>
+<span id="cb38-374"><a href="#cb38-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-377"><a href="#cb38-377" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-378"><a href="#cb38-378" aria-hidden="true" tabindex="-1"></a>plot <span class="op">=</span> bmb.interpret.plot_predictions(model, idata_bambi, <span class="st">"dose"</span>,</span>
+<span id="cb38-379"><a href="#cb38-379" aria-hidden="true" tabindex="-1"></a>                                      use_hdi<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb38-380"><a href="#cb38-380" aria-hidden="true" tabindex="-1"></a>                                      fig_kwargs<span class="op">=</span>{<span class="st">"theme"</span>: {<span class="st">"figure.figsize"</span>: (<span class="dv">7</span>, <span class="dv">4</span>)}})</span>
+<span id="cb38-381"><a href="#cb38-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-382"><a href="#cb38-382" aria-hidden="true" tabindex="-1"></a>plotter <span class="op">=</span> plot.plot()</span>
+<span id="cb38-383"><a href="#cb38-383" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plotter._figure.axes[<span class="dv">0</span>]</span>
+<span id="cb38-384"><a href="#cb38-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-385"><a href="#cb38-385" aria-hidden="true" tabindex="-1"></a>ax.scatter(</span>
+<span id="cb38-386"><a href="#cb38-386" aria-hidden="true" tabindex="-1"></a>    df_bioassay[<span class="st">"dose"</span>],</span>
+<span id="cb38-387"><a href="#cb38-387" aria-hidden="true" tabindex="-1"></a>    df_bioassay[<span class="st">"deaths"</span>] <span class="op">/</span> df_bioassay[<span class="st">"batch_size"</span>],</span>
+<span id="cb38-388"><a href="#cb38-388" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">80</span>,</span>
+<span id="cb38-389"><a href="#cb38-389" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb38-390"><a href="#cb38-390" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-391"><a href="#cb38-391" aria-hidden="true" tabindex="-1"></a><span class="co"># Tweak labels</span></span>
+<span id="cb38-392"><a href="#cb38-392" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">"Dose log(g/ml)"</span>, ylabel<span class="op">=</span><span class="st">"Pr(death)"</span>)</span>
+<span id="cb38-393"><a href="#cb38-393" aria-hidden="true" tabindex="-1"></a>plotter._figure</span>
+<span id="cb38-394"><a href="#cb38-394" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-395"><a href="#cb38-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-396"><a href="#cb38-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-397"><a href="#cb38-397" aria-hidden="true" tabindex="-1"></a><span class="fu">## LD50 posterior</span></span>
+<span id="cb38-398"><a href="#cb38-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-399"><a href="#cb38-399" aria-hidden="true" tabindex="-1"></a>Compute posterior draws for lethal dose 50 (LD50) in log(g/ml) and in mg/ml</span>
+<span id="cb38-400"><a href="#cb38-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-403"><a href="#cb38-403" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-404"><a href="#cb38-404" aria-hidden="true" tabindex="-1"></a>ld50_bambi_log <span class="op">=</span> <span class="op">-</span>idata_bambi.posterior[<span class="st">"Intercept"</span>] <span class="op">/</span> idata_bambi.posterior[<span class="st">"dose"</span>]</span>
+<span id="cb38-405"><a href="#cb38-405" aria-hidden="true" tabindex="-1"></a>ld50_bambi_mg <span class="op">=</span> <span class="dv">1000</span> <span class="op">*</span> np.exp(ld50_bambi_log)</span>
+<span id="cb38-406"><a href="#cb38-406" aria-hidden="true" tabindex="-1"></a>idata_bambi.posterior[<span class="st">"LD50_log_g_ml"</span>] <span class="op">=</span> ld50_bambi_log</span>
+<span id="cb38-407"><a href="#cb38-407" aria-hidden="true" tabindex="-1"></a>idata_bambi.posterior[<span class="st">"LD50_mg_ml"</span>] <span class="op">=</span> ld50_bambi_mg</span>
+<span id="cb38-408"><a href="#cb38-408" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-409"><a href="#cb38-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-410"><a href="#cb38-410" aria-hidden="true" tabindex="-1"></a>Posterior summary</span>
+<span id="cb38-411"><a href="#cb38-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-414"><a href="#cb38-414" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-415"><a href="#cb38-415" aria-hidden="true" tabindex="-1"></a>az.summary(idata_bambi, var_names<span class="op">=</span>[<span class="st">"LD50_log_g_ml"</span>, <span class="st">"LD50_mg_ml"</span>])</span>
+<span id="cb38-416"><a href="#cb38-416" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-417"><a href="#cb38-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-418"><a href="#cb38-418" aria-hidden="true" tabindex="-1"></a>Quantile dot plot of the LD50 (mg/ml) posterior.</span>
+<span id="cb38-419"><a href="#cb38-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-422"><a href="#cb38-422" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-423"><a href="#cb38-423" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-bioassay-LD50-quantile-dots-bambi</span></span>
+<span id="cb38-424"><a href="#cb38-424" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(</span>
+<span id="cb38-425"><a href="#cb38-425" aria-hidden="true" tabindex="-1"></a>    idata_bambi,</span>
+<span id="cb38-426"><a href="#cb38-426" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"dot"</span>,</span>
+<span id="cb38-427"><a href="#cb38-427" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span><span class="st">"LD50_mg_ml"</span>,</span>
+<span id="cb38-428"><a href="#cb38-428" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"point_estimate_text"</span>:<span class="va">False</span>},</span>
+<span id="cb38-429"><a href="#cb38-429" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-430"><a href="#cb38-430" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span>
+<span id="cb38-431"><a href="#cb38-431" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-432"><a href="#cb38-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-433"><a href="#cb38-433" aria-hidden="true" tabindex="-1"></a>Kernel density plot of the LD50 (mg/ml) posterior.</span>
+<span id="cb38-434"><a href="#cb38-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-437"><a href="#cb38-437" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb38-438"><a href="#cb38-438" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-bioassay-LD50-KDE-bambi</span></span>
+<span id="cb38-439"><a href="#cb38-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-440"><a href="#cb38-440" aria-hidden="true" tabindex="-1"></a>pc <span class="op">=</span> az.plot_dist(</span>
+<span id="cb38-441"><a href="#cb38-441" aria-hidden="true" tabindex="-1"></a>    idata_bambi,</span>
+<span id="cb38-442"><a href="#cb38-442" aria-hidden="true" tabindex="-1"></a>    var_names<span class="op">=</span><span class="st">"LD50_mg_ml"</span>,</span>
+<span id="cb38-443"><a href="#cb38-443" aria-hidden="true" tabindex="-1"></a>    visuals<span class="op">=</span>{<span class="st">"point_estimate_text"</span>:<span class="va">False</span>},</span>
+<span id="cb38-444"><a href="#cb38-444" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-445"><a href="#cb38-445" aria-hidden="true" tabindex="-1"></a>az.add_lines(pc, [<span class="dv">500</span>, <span class="dv">2000</span>])<span class="op">;</span></span>
+<span id="cb38-446"><a href="#cb38-446" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-447"><a href="#cb38-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-448"><a href="#cb38-448" aria-hidden="true" tabindex="-1"></a><span class="fu">## References {.unnumbered}</span></span>
+<span id="cb38-449"><a href="#cb38-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-450"><a href="#cb38-450" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">"refs"</span><span class="dt">&gt;&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb38-451"><a href="#cb38-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-452"><a href="#cb38-452" aria-hidden="true" tabindex="-1"></a><span class="fu">## Licenses {.unnumbered}</span></span>
+<span id="cb38-453"><a href="#cb38-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-454"><a href="#cb38-454" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Code © 2025, Andrew Gelman and Aki Vehtari, licensed under BSD-3.</span>
+<span id="cb38-455"><a href="#cb38-455" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Text © 2025, Andrew Gelman and Aki Vehtari, licensed under CC-BY-NC 4.0.</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

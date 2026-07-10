@@ -1011,7 +1011,7 @@ NUTS: [Intercept, time, 1|dog_sigma, 1|dog_offset, time|dog_sigma, time|dog_offs
 <div id="cell-fig-calib-0h" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>az.plot_loo_pava(idata_0h)<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-calib-0h" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
+<div id="fig-calib-0h" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-calib-0h-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="dogs_files/figure-html/fig-calib-0h-output-1.png" id="fig-calib-0h" width="611" height="279" class="figure-img">
@@ -1029,7 +1029,7 @@ Figure&nbsp;1
 <div id="cell-fig-residual-0h" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>az.plot_ppc_pava_residuals(idata_0h, x_var<span class="op">=</span>dogs_df[<span class="st">"time"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-residual-0h" class="quarto-float quarto-figure quarto-figure-center anchored" height="279" width="611">
+<div id="fig-residual-0h" class="quarto-float quarto-figure quarto-figure-center anchored" width="611" height="279">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-residual-0h-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="dogs_files/figure-html/fig-residual-0h-output-1.png" id="fig-residual-0h" width="611" height="279" class="figure-img">
@@ -1071,7 +1071,7 @@ Figure&nbsp;2
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>plot_ppc_shocks(ax1, shock_matrix, <span class="st">"Real dogs"</span>)</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>plot_ppc_shocks(ax2, y_rep_0h, <span class="st">"Model 0h: hier. logit"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="fig-ppc_shocks-0h" class="quarto-float quarto-figure quarto-figure-center anchored" height="311" width="811">
+<div id="fig-ppc_shocks-0h" class="quarto-float quarto-figure quarto-figure-center anchored" width="811" height="311">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ppc_shocks-0h-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="dogs_files/figure-html/fig-ppc_shocks-0h-output-1.png" id="fig-ppc_shocks-0h" width="811" height="311" class="figure-img">
