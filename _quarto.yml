@@ -20,7 +20,7 @@ project:
     - dogs/dogs.qmd
     - dogs/dogs_stan.qmd
     - cat_adoptions/cat_adoptions.qmd
-    # - world_cup/world_cup.qmd
+    - world_cup/world_cup.qmd
     - roaches/roaches.qmd
     - golf/golf.qmd
     # - sharks/sharks.qmd
@@ -78,8 +78,8 @@ website:
         href: dogs/dogs_stan.qmd
       - text: "Ch 22: Incremental development and testing: Black cat adoptions"
         href: cat_adoptions/cat_adoptions.html
-      # # - text: "Ch 23: Debugging a model: World Cup football"
-      # #   href: world_cup/world_cup.html
+      - text: "Ch 23: Debugging a model: World Cup football"
+        href: world_cup/world_cup.html
       - text: "Ch 24: Leave-one-out cross validation model checking and comparison: Roaches"
         href: roaches/roaches.qmd
       - text: "Ch 25: Model building and expansion: Golf putting"

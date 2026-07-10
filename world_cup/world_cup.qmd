@@ -1,0 +1,865 @@
+---
+title: "Debugging a model: World Cup football"
+image: ../social_cards/world_cup.png
+author: "Andrew Gelman and Aki Vehtari"
+date: 2021-01-12
+date-modified: today
+date-format: iso
+format:
+  html:
+    number-sections: true
+    code-copy: true
+    code-download: true
+    code-tools: true
+bibliography: ../casestudies.bib
+---
+
+This notebook includes the code for the Bayesian Workflow book
+Chapter 23 *Debugging a model: World Cup football*.
+
+# World Cup 2014 team performance analysis
+
+We use an item-response model such as described in the previous
+chapter to fit a model to estimate the abilities of the teams in
+the 2014 football World Cup. We use score differentials as data
+(ignoring the shoot-outs).
+
+Game scores could be modelled with a discrete bivariate Poisson
+model, and score differences with Poisson difference models
+@Karlis-Ntzoufras:2003, which are commonly used in analysis of
+sports data. But we'll start with continuous models and discretized
+continuous models to illustrate how those can be compared, and
+eventually build also models using naturally discrete data models.
+
+**Load packages**
+
+```{python}
+#| label: setup
+#| include: true
+#| cache: false
+import warnings
+import sys
+sys.path.insert(0, '..')
+
+import arviz as az
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import pymc as pm
+import xarray as xr
+from scipy import stats
+
+az.style.use("arviz-variat")
+az.rcParams["stats.ci_prob"] = 0.90
+plt.rcParams["figure.dpi"] = 75
+SEED = 7412
+```
+
+```{python}
+from cmdstanpy import CmdStanModel, disable_logging
+disable_logging()
+from utils import print_stan
+```
+
+
+# Data
+
+Data include 64 game results from World Cup 2014 and Soccer Power
+Index that was available on the internet a month before the
+tournament @Silver:2014. We took the rankings, with Brazil at
+the top (getting a score of 32) and Australia at the bottom (with a
+score of 1), and then for simplicity in interpretation of the
+parameters we rescaled these to have mean 0 and standard deviation
+1/2, to get "prior scores" that ranged from $-0.83$ to $+0.83$.
+
+```{python}
+powerindex = pd.read_csv("data/soccerpowerindex.csv")
+rev_index = powerindex["index"].values[::-1]
+powerindex["prior_score"] = (rev_index - rev_index.mean()) / rev_index.std(ddof=1) / 2
+teamnames = powerindex["team"].values
+
+worldcup = pd.read_csv("data/worldcup2014.csv")
+team_to_idx = {team: i + 1 for i, team in enumerate(teamnames)}
+worldcup["team_1"] = worldcup["team1"].map(team_to_idx)
+worldcup["team_2"] = worldcup["team2"].map(team_to_idx)
+
+N_games = len(worldcup)
+gamenames = [
+    f"{teamnames[t1 - 1]} vs. {teamnames[t2 - 1]}"
+    for t1, t2 in zip(worldcup["team_1"], worldcup["team_2"])
+][::-1]
+
+dif = worldcup["score1"].values - worldcup["score2"].values
+sqrt_dif = np.sign(dif) * np.sqrt(np.abs(dif))
+sqrt_dif_fixed = 2 * np.sign(dif) * np.sqrt(np.abs(dif))
+```
+
+## Data for Stan
+
+```{python}
+stan_data = {
+    "N_teams": len(powerindex),
+    "N_games": N_games,
+    "team_1": worldcup["team_1"].values.tolist(),
+    "team_2": worldcup["team_2"].values.tolist(),
+    "score_1": worldcup["score1"].values.tolist(),
+    "score_2": worldcup["score2"].values.tolist(),
+    "prior_score": powerindex["prior_score"].values.tolist(),
+    "df": 7,
+}
+```
+
+# First model
+
+The first model uses Student's $t$ for square root of score
+difference. It's not particularly well justified model, but that is
+what Andrew first thought and it turned out to be useful for
+illustration.
+
+The model structure is as follows: if game $i$ has teams $j_1$ and
+team $j_2$ playing, and they score $z_1$ and $z_2$ goals,
+respectively, then the data point for this game is $y_i =
+\mbox{sign}(z_1-z_2)*\sqrt{|z_1-z_2|}$, and the data model is: $y_i
+\sim \mbox{normal}(a_{j_1[i]}-a_{j_2[i]}, \sigma_y)$, where
+$a_{j_1}$ and $a_{j_2}$ are the ability parameters (to use
+psychometrics jargon) for the two teams and $\sigma_y$ is a scale
+parameter estimated from the data.
+
+$$
+y_i \sim \mbox{t}_{\nu}(a_{j_1[i]}-a_{j_2[i]}, \sigma_y),
+$$
+setting the degrees of freedom to $\nu=7$.
+
+Stan model
+
+```{python}
+#| label: model_1_code
+model_1 = CmdStanModel(stan_file="worldcup_first_try.stan")
+print_stan(model_1)
+```
+
+Fit the model and show the results
+
+```{python}
+#| label: fit_1
+#| results: hide
+#| cache: true
+fit_1 = model_1.sample(data=stan_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+#| label: fit_1_summary
+idata_1 = az.from_cmdstanpy(fit_1, coords={"a_dim_0": teamnames})
+idata_1.posterior.ds = idata_1.posterior.ds.rename({
+    "a_dim_0": "teams",
+})
+az.summary(idata_1, var_names=["a", "b", "sigma_a", "sigma_y"])
+```
+
+```{python}
+#| label: fig-worldcup-mcmc-intervals-fit_1
+pc = az.plot_forest(idata_1, var_names=["a"], combined=True, labels=["teams"])
+pc.add_title("Team quality estimate with 90% intervals")
+pc.coords = {"column": "forest"}
+az.add_lines(pc, values=0)
+```
+
+## Check fit of the first model
+
+```{python}
+#| label: model_1_rep_code
+model_1_rep = CmdStanModel(stan_file="worldcup_with_replication.stan")
+print_stan(model_1_rep)
+```
+
+```{python}
+#| label: fit_1_rep
+#| results: hide
+#| cache: true
+fit_1_rep = model_1_rep.sample(data=stan_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+idata_1_rep = az.from_cmdstanpy(
+    fit_1_rep,
+    posterior_predictive="y_rep_original_scale",
+    observed_data={"dif": dif},
+    coords={"y_rep_original_scale_dim_0": gamenames,
+            "dif_dim_0": gamenames}
+)
+idata_1_rep.posterior_predictive.ds = idata_1_rep.posterior_predictive.ds.rename({
+    "y_rep_original_scale": "dif",
+    "y_rep_original_scale_dim_0": "Games"
+})
+
+
+pc = az.plot_forest(
+    idata_1_rep,
+    group="posterior_predictive",
+    combined=True,
+    visuals={"trunk": False},
+    labels=["Games"],
+)
+pc.map(
+    az.visuals.scatter_x,
+    "observations",
+    data=idata_1_rep.observed_data.ds,
+    coords={"column": "forest"},
+    color="C1",
+)
+pc.add_title("Game score differentials\ncompared to 90% predictive interval")
+```
+
+# Second model without sqrt transformation
+
+```{python}
+#| label: model_2_code
+model_2 = CmdStanModel(stan_file="worldcup_no_sqrt.stan")
+print_stan(model_2)
+```
+
+```{python}
+#| label: fit_2
+#| results: hide
+#| cache: true
+fit_2 = model_2.sample(data=stan_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+#| label: fit_2_summary
+idata_2 = az.from_cmdstanpy(fit_2, coords={"a_dim_0": teamnames})
+idata_2.posterior.ds = idata_2.posterior.ds.rename({
+    "a_dim_0": "teams",
+})
+az.summary(idata_2, var_names=["a", "b", "sigma_a", "sigma_y"])
+```
+
+```{python}
+#| label: fig-worldcup-mcmc-intervals-fit_2
+pc = az.plot_forest(idata_2, var_names=["a"], combined=True, labels=["teams"])
+pc.add_title("Team quality estimate with 90% intervals\n(model with no square root)")
+pc.coords = {"column": "forest"}
+az.add_lines(pc, values=0)
+```
+
+
+## Check fit of the second model to data
+
+```{python}
+#| label: fig-worldcup-ppc-intervals-fit_2
+idata_2_rep = az.from_cmdstanpy(
+    fit_2,
+    posterior_predictive="y_rep",
+    observed_data={"dif": dif},
+    coords={"y_rep_dim_0": gamenames, "dif_dim_0": gamenames}
+)
+idata_2_rep.posterior_predictive.ds = idata_2_rep.posterior_predictive.ds.rename({
+    "y_rep": "dif",
+    "y_rep_dim_0": "Games"
+})
+
+pc = az.plot_forest(
+    idata_2_rep,
+    group="posterior_predictive",
+    combined=True,
+    visuals={"trunk": False},
+    labels=["Games"],
+)
+pc.map(
+    az.visuals.scatter_x,
+    "observations",
+    data=idata_2_rep.observed_data.ds,
+    coords={"column": "forest"},
+    color="C1",
+)
+pc.add_title("Game score differentials\ncompared to 90% predictive interval")
+```
+
+# Fix the first model
+
+```{python}
+#| label: model_3_code
+model_3 = CmdStanModel(stan_file="worldcup_fixed.stan")
+print_stan(model_3)
+```
+
+```{python}
+#| label: fit_3
+#| results: hide
+#| cache: true
+fit_3 = model_3.sample(data=stan_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+#| label: fit_3_summary
+idata_3 = az.from_cmdstanpy(
+    fit_3,
+    observed_data={"sqrt_dif": sqrt_dif_fixed.ravel()},
+    log_likelihood={"sqrt_dif": "log_lik"},
+    coords={"a_dim_0": teamnames}
+)
+idata_3.posterior.ds = idata_3.posterior.ds.rename({
+    "a_dim_0": "teams",
+})
+az.summary(idata_3, var_names=["a", "b", "sigma_a", "sigma_y"])
+```
+
+```{python}
+#| label: fig-worldcup-mcmc-intervals-fit_3
+pc = az.plot_forest(idata_3, var_names=["a"], combined=True, labels=["teams"])
+pc.add_title("Team quality estimate with 90% intervals\n(corrected model)")
+pc.coords = {"column": "forest"}
+az.add_lines(pc, values=0)
+```
+
+## Check the fit of the fixed first model
+
+```{python}
+#| label: fig-worldcup-ppc-intervals-fit_3
+y_rep_orig_3 = idata_3.posterior["y_rep"].values * np.abs(idata_3.posterior["y_rep"].values)
+idata_3_ppc = az.from_dict({
+    "posterior_predictive": {"dif": y_rep_orig_3},
+    "observed_data": {"dif": dif}},
+    coords={"games": gamenames},
+    dims={"dif": ["games"]},
+)
+
+pc = az.plot_forest(
+    idata_3_ppc,
+    group="posterior_predictive",
+    combined=True,
+    visuals={"trunk": False},
+    labels=["games"]
+)
+
+pc.map(
+    az.visuals.scatter_x,
+    "observations",
+    data=idata_3_ppc.observed_data.ds,
+    coords={"column": "forest"},
+    color="C1",
+)
+pc.add_title("Game score differentials\ncompared to 90% predictive interval\n(corrected model with square root)")
+
+```
+
+## Fit the same model without the powerindex prior
+
+Set b=0 in the data.
+
+```{python}
+#| label: model_3_no_prior_code
+model_3_no_prior = CmdStanModel(stan_file="worldcup_no_prior.stan")
+print_stan(model_3_no_prior)
+```
+
+```{python}
+#| label: fit_3_no_prior
+#| results: hide
+#| cache: true
+stan_data_no_prior = {**stan_data, "b": 0}
+fit_3_no_prior = model_3_no_prior.sample(data=stan_data_no_prior, seed=SEED, show_progress=False)
+```
+
+```{python}
+#| label: fig-worldcup-mcmc-intervals-fit_3_no_prior
+idata_3_np = az.from_cmdstanpy(
+    fit_3_no_prior,
+    observed_data={"sqrt_dif": sqrt_dif_fixed.ravel()},
+    log_likelihood={"sqrt_dif": "log_lik"},
+    coords={"a_dim_0": teamnames},
+)
+idata_3_np.posterior.ds = idata_3_np.posterior.ds.rename({
+    "a_dim_0": "teams",
+})
+
+pc = az.plot_forest(idata_3_np, var_names=["a"], combined=True, labels=["teams"])
+pc.add_title("Team quality estimate with 90% intervals\nModel without prior rankings")
+pc.coords = {"column": "forest"}
+az.add_lines(pc, values=0)
+```
+
+# Discrete models and LOO-CV comparison
+
+## Discrete model with explicit latent z sampled
+
+```{python}
+#| label: model_discr_z_code
+model_discr_z = CmdStanModel(stan_file="worldcup_discrete_z.stan")
+print_stan(model_discr_z)
+```
+
+```{python}
+#| label: fit_discr_z
+#| results: hide
+#| cache: true
+fit_discr_z = model_discr_z.sample(data=stan_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+#| label: fit_discr_z_summary
+idata_discr_z = az.from_cmdstanpy(
+    fit_discr_z,
+    posterior_predictive="y_rep",
+    observed_data={"dif": dif},
+    log_likelihood={"dif": "log_lik"},
+    coords={"a_dim_0": teamnames},
+)
+idata_discr_z.posterior_predictive.ds = idata_discr_z.posterior_predictive.ds.rename({"y_rep": "dif", "y_rep_dim_0":"dif_dim_0"})
+
+az.summary(idata_discr_z, var_names=["b", "sigma_a", "sigma_z"])
+```
+
+
+## Discrete model with latent z integrated out
+
+```{python}
+#| label: model_discr_code
+model_discr = CmdStanModel(stan_file="worldcup_discrete.stan")
+print_stan(model_discr)
+```
+
+```{python}
+#| label: fit_discr
+#| results: hide
+#| cache: true
+fit_discr = model_discr.sample(data=stan_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+#| label: fit_discr_summary
+idata_discr = az.from_cmdstanpy(
+    fit_discr,
+    posterior_predictive="y_rep",
+    observed_data={"dif": dif},
+    log_likelihood={"dif": "log_lik"},
+    coords={"a_dim_0": teamnames},
+)
+idata_discr.posterior_predictive.ds = idata_discr.posterior_predictive.ds.rename({"y_rep": "dif", "y_rep_dim_0":"dif_dim_0"})
+az.summary(idata_discr, var_names=["a", "b", "sigma_a", "sigma_z"])
+```
+
+
+## Discrete model with no power score
+
+```{python}
+#| label: model_discr_nopower_code
+model_discr_nopower = CmdStanModel(stan_file="worldcup_discrete_nopower.stan")
+print_stan(model_discr_nopower)
+```
+
+```{python}
+#| label: fit_discr_nopower
+#| results: hide
+#| cache: true
+fit_discr_nopower = model_discr_nopower.sample(data=stan_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+#| label: fit_discr_nopower_summary
+idata_discr_np = az.from_cmdstanpy(
+    fit_discr_nopower,
+    posterior_predictive="y_rep",
+    observed_data={"dif": dif},
+    log_likelihood={"dif": "log_lik"},
+    coords={"a_dim_0": teamnames},
+)
+idata_discr_np.posterior_predictive.ds = idata_discr_np.posterior_predictive.ds.rename({"y_rep": "dif", "y_rep_dim_0":"dif_dim_0"})
+az.summary(idata_discr_np, var_names=["a", "sigma_a", "sigma_z"])
+```
+
+## Discrete model with power score only
+
+```{python}
+#| label: model_discr_poweronly_code
+model_discr_poweronly = CmdStanModel(stan_file="worldcup_discrete_poweronly.stan")
+print_stan(model_discr_poweronly)
+```
+
+```{python}
+#| label: fit_discr_poweronly
+#| results: hide
+#| cache: true
+fit_discr_poweronly = model_discr_poweronly.sample(data=stan_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+#| label: fit_discr_poweronly_summary
+idata_discr_po = az.from_cmdstanpy(
+    fit_discr_poweronly,
+    posterior_predictive="y_rep",
+    observed_data={"dif": dif},
+    log_likelihood={"dif": "log_lik"},
+    coords={"a_dim_0": teamnames},
+)
+idata_discr_po.posterior_predictive.ds = idata_discr_po.posterior_predictive.ds.rename({"y_rep": "dif", "y_rep_dim_0":"dif_dim_0"})
+az.summary(idata_discr_po, var_names=["b0", "b", "sigma_z"])
+```
+
+
+## Discrete model with no power score and pooled effect
+
+```{python}
+#| label: model_discr_pool_code
+model_discr_pool = CmdStanModel(stan_file="worldcup_discrete_pooled.stan")
+print_stan(model_discr_pool)
+```
+
+```{python}
+#| label: fit_discr_pooled
+#| results: hide
+#| cache: true
+fit_discr_pool = model_discr_pool.sample(data=stan_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+#| label: fit_discr_pool_summary
+idata_discr_pl = az.from_cmdstanpy(
+    fit_discr_pool,
+    posterior_predictive="y_rep",
+    observed_data={"dif": dif},
+    log_likelihood={"dif": "log_lik"},
+    coords={"a_dim_0": teamnames},
+)
+idata_discr_pl.posterior_predictive.ds = idata_discr_pl.posterior_predictive.ds.rename({"y_rep": "dif", "y_rep_dim_0":"dif_dim_0"})
+az.summary(idata_discr_pl, var_names=["mu_z", "sigma_z"])
+```
+
+## Model comparison
+
+Now that we have implemented discrete model, we compare various
+models with or without different components. Hierarchical model
+with power score is the best, but not much better than power score
+only model or hierarchical model without power score. Clearly the
+power score and the score differences are providing similar
+information. Looking at the posterior we do see that using them
+both, does decrease posterior uncertainty, but as the match
+outcomes still have significant randomness the difference in
+predictive performance is small.
+
+```{python}
+#| label: loo-compare-discrete
+az.compare({
+    "Hier. w power score": idata_discr,
+    "Power score only": idata_discr_po,
+    "Hier. w/o power score": idata_discr_np,
+    "Pooled w/o power score": idata_discr_pl,
+})
+```
+
+# Discretizing continuous models
+
+## Continuous model with log predictive probability using midpoint rule
+
+```{python}
+#| label: model_cont_midp_code
+model_cont_midp = CmdStanModel(stan_file="worldcup_continuous_midpoint_ll.stan")
+print_stan(model_cont_midp)
+```
+
+```{python}
+#| label: fit_cont_midp
+#| results: hide
+#| cache: true
+fit_cont_midp = model_cont_midp.sample(data=stan_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+#| label: fit_cont_midp_summary
+idata_cont_mp = az.from_cmdstanpy(
+    fit_cont_midp,
+    posterior_predictive="y_rep",
+    observed_data={"dif": dif},
+    log_likelihood={"dif": "log_lik"},
+    coords={"a_dim_0": teamnames},
+)
+idata_cont_mp.posterior_predictive.ds = idata_cont_mp.posterior_predictive.ds.rename({"y_rep": "dif", "y_rep_dim_0":"dif_dim_0"})
+az.summary(idata_cont_mp, var_names=["a", "b", "sigma_a", "sigma_y"])
+```
+
+
+## Continuous model with log predictive probability using exact integration
+
+```{python}
+#| label: model_cont_code
+model_cont = CmdStanModel(stan_file="worldcup_continuous.stan")
+print_stan(model_cont)
+```
+
+```{python}
+#| label: fit_cont
+#| results: hide
+#| cache: true
+fit_cont = model_cont.sample(data=stan_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+#| label: fit_cont_summary
+idata_cont = az.from_cmdstanpy(
+    fit_cont,
+    posterior_predictive="y_rep",
+    observed_data={"dif": dif},
+    log_likelihood={"dif": "log_lik"},
+    coords={"a_dim_0": teamnames},
+)
+idata_cont.posterior_predictive.ds = idata_cont.posterior_predictive.ds.rename({"y_rep": "dif", "y_rep_dim_0":"dif_dim_0"})
+az.summary(idata_cont, var_names=["a", "b", "sigma_a", "sigma_y"])
+```
+
+## Model comparison
+
+The elpd_diff's between models are small enough to be caused
+by Monte Carlo variation.
+
+```{python}
+#| label: loo-compare-cont
+az.compare({
+    "Discrete model": idata_discr,
+    "Continuous + midpoint log_lik": idata_cont_mp,
+    "Continuous model": idata_cont,
+})
+```
+
+## More discretized continuous models
+
+Continuous sqrt model with log predictive probability using midpoint rule and no Jacobian.
+
+```{python}
+#| label: model_sqrt_cont_noj_code
+model_sqrt_cont_noj = CmdStanModel(stan_file="worldcup_sqrt_continuous_nojacobian.stan")
+print_stan(model_sqrt_cont_noj)
+```
+
+```{python}
+#| label: fit_sqrt_cont_noj
+#| results: hide
+#| cache: true
+fit_sqrt_cont_noj = model_sqrt_cont_noj.sample(data=stan_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+#| label: fit_sqrt_cont_noj_summary
+idata_sqrt_cnj = az.from_cmdstanpy(
+    fit_sqrt_cont_noj,
+    posterior_predictive="y_rep",
+    observed_data={"sqrt_dif": sqrt_dif_fixed.ravel()},
+    log_likelihood={"sqrt_dif": "log_lik"},
+    coords={"a_dim_0": teamnames},
+)
+idata_sqrt_cnj.posterior_predictive.ds = idata_sqrt_cnj.posterior_predictive.ds.rename({"y_rep": "sqrt_dif", "y_rep_dim_0":"sqrt_dif_dim_0"})
+az.summary(idata_sqrt_cnj, var_names=["a", "b", "sigma_a", "sigma_y"])
+```
+
+Continuous sqrt model with log predictive probability using
+midpoint rule and Jacobian is not possible as Jacobian is infinite
+for midpoint 0.
+
+Continuous sqrt model with log predictive probability using
+Jacobian and quadrature integration.
+
+```{python}
+#| label: model_sqrt_cont_code
+model_sqrt_cont = CmdStanModel(stan_file="worldcup_sqrt_continuous.stan")
+print_stan(model_sqrt_cont)
+```
+
+```{python}
+#| label: fit_sqrt_cont
+#| results: hide
+#| cache: true
+fit_sqrt_cont = model_sqrt_cont.sample(data=stan_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+#| label: fit_sqrt_cont_summary
+idata_sqrt_c = az.from_cmdstanpy(
+    fit_sqrt_cont,
+    posterior_predictive="y_rep",
+    observed_data={"sqrt_dif": sqrt_dif_fixed.ravel()},
+    log_likelihood={"sqrt_dif": "log_lik"},
+    coords={"a_dim_0": teamnames},
+)
+idata_sqrt_c.posterior_predictive.ds = idata_sqrt_c.posterior_predictive.ds.rename({"y_rep": "sqrt_dif", "y_rep_dim_0":"sqrt_dif_dim_0"})
+az.summary(idata_sqrt_c, var_names=["a", "b", "sigma_a", "sigma_y"])
+```
+
+Discrete sqrt model with log predictive probability using Jacobian
+and quadrature integration. The sampling is slow as the quadrature
+integration is done at each HMC/NUTS leapfrog step.
+
+```{python}
+#| label: model_sqrt_discr_code
+model_sqrt_discr = CmdStanModel(stan_file="worldcup_sqrt_discrete.stan")
+print_stan(model_sqrt_discr)
+```
+
+```{python}
+#| label: fit_sqrt_discr
+#| results: hide
+#| cache: true
+fit_sqrt_discr = model_sqrt_discr.sample(data=stan_data, seed=SEED, show_progress=False)
+```
+
+```{python}
+#| label: fit_sqrt_discr_summary
+idata_sqrt_d = az.from_cmdstanpy(
+    fit_sqrt_discr,
+    posterior_predictive="y_rep",
+    observed_data={"sqrt_dif": sqrt_dif_fixed.ravel()},
+    log_likelihood={"sqrt_dif": "log_lik"},
+    coords={"a_dim_0": teamnames},
+)
+idata_sqrt_d.posterior_predictive.ds = idata_sqrt_d.posterior_predictive.ds.rename({"y_rep": "sqrt_dif", "y_rep_dim_0":"sqrt_dif_dim_0"})
+az.summary(idata_sqrt_d, var_names=["a", "b", "sigma_a", "sigma_y"])
+```
+
+
+## Model comparison
+
+Without taking Jacobian into account, the continuous model for
+square root of score difference looks like the best.
+
+```{python}
+#| label: loo-compare-sqrt-noj
+az.compare({
+    "Discrete": idata_discr,
+    "Discrete sqrt": idata_sqrt_d,
+    "Cont-sqrt + midp, -Jacobian": idata_sqrt_cnj,
+})
+```
+
+Taking Jacobian into account, the square root models are worse, and
+the difference between continuous and discrete square root model is
+small enough to be explained by Monte Carlo variation.
+
+```{python}
+#| label: loo-compare-sqrt-j
+az.compare({
+    "Discrete": idata_discr,
+    "Discrete sqrt": idata_sqrt_d,
+    "Continuous sqrt +Jacobian": idata_sqrt_c,
+})
+```
+
+# LOO-CV predictive checking
+
+LOO-CV predictive checking with LOO-PIT for the discrete model looks fine
+```{python}
+#| label: fig-ppc-dist-discr
+az.plot_loo_pit(idata_discr)
+```
+
+LOO-CV predictive checking for the continuous model indicates slight miscalibration with too many low PIT values (left tail of the predictive distribution is shorter than expected)
+
+```{python}
+#| label: fig-ppc-dist-sqrt-cont
+az.plot_loo_pit(idata_sqrt_c)
+
+```
+
+# Bivariate Poisson and Poisson difference models
+
+Bivariate Poisson model is commonly used for football scores
+@Karlis-Ntzoufras:2003. If we care only about the score
+difference we can also use Poisson difference model
+@Karlis-Ntzoufras:2003.
+
+```{python}
+#| label: model_bipois_code
+model_bipois = CmdStanModel(stan_file="worldcup_bivariate_poisson.stan")
+print_stan(model_bipois)
+```
+
+```{python}
+#| label: fit_bipois
+#| results: hide
+#| cache: true
+fit_bipois = model_bipois.sample(
+    data=stan_data, seed=SEED, show_progress=False, adapt_delta=0.95
+)
+```
+
+```{python}
+#| label: fit_bipois_summary
+idata_bipois = az.from_cmdstanpy(
+    fit_bipois,
+    posterior_predictive="y_rep",
+    observed_data={"dif": dif},
+    log_likelihood={"dif": "log_lik"},
+    coords={"a_dim_0": teamnames},
+)
+idata_bipois.posterior_predictive.ds = idata_bipois.posterior_predictive.ds.rename({"y_rep": "dif", "y_rep_dim_0":"dif_dim_0"})
+az.summary(idata_bipois, var_names=["a", "o", "d", "b_o", "b_d", "sigma_o", "sigma_d"])
+```
+
+```{python}
+#| label: model_poisdif_code
+model_poisdif = CmdStanModel(stan_file="worldcup_poisson_difference.stan")
+print_stan(model_poisdif)
+```
+
+```{python}
+#| label: fit_poisdif
+#| results: hide
+fit_poisdif = model_poisdif.sample(data=stan_data, seed=SEED,
+inits=0.1, show_progress=False)
+```
+
+```{python}
+#| label: fit_poisdif_summary
+idata_poisdif = az.from_cmdstanpy(
+    fit_poisdif,
+    posterior_predictive="y_rep",
+    observed_data={"dif": dif},
+    log_likelihood={"dif": "log_lik"},
+    coords={"a_dim_0": teamnames},
+)
+idata_poisdif.posterior_predictive.ds = idata_poisdif.posterior_predictive.ds.rename({"y_rep": "dif", "y_rep_dim_0":"dif_dim_0"})
+az.summary(idata_poisdif, var_names=["a", "b", "sigma_a"])
+```
+
+The set in this case study is small, and we don't see practical
+difference in the predictive performance.
+
+```{python}
+#| label: loo-compare-final
+az.compare({
+    "Discrete": idata_discr,
+    "Bivariate Poisson": idata_bipois,
+    "Poisson difference": idata_poisdif,
+})
+```
+
+## LOO-CV predictive checking
+
+LOO-CV predictive checking with LOO-PIT for the binary Poisson model looks fine.
+
+```{python}
+#| label: fig-ppc-dist-bipois
+az.plot_loo_pit(idata_bipois)
+```
+
+LOO-CV predictive checking with LOO-PIT for the Poisson difference model looks fine.
+
+```{python}
+#| label: fig-ppc-dist-poisdif
+az.plot_loo_pit(idata_poisdif)
+```
+
+In this case study, we used many other models for illustration, but
+for real football score modeling, it is a good idea to start with
+the bivariate Poisson model. For real football analysis footBayes R
+package [@Egidi-MacriDemartino-Palaskas:2024] has several different
+models including dynamic models allowing the latent performance to
+evolve in time.
+ 
+<br />
+
+# References {.unnumbered}
+
+<div id="refs"></div>
+
+# Licenses {.unnumbered}
+
+* Code &copy; 2021--2025, Andrew Gelman, Aki Vehtari, licensed under BSD-3.
+* Text &copy; 2021--2025, Andrew Gelman, Aki Vehtari, licensed under CC-BY-NC 4.0.

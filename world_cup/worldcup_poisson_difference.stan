@@ -28,7 +28,7 @@ model {
     real l1 = exp(a[team_1[n]] - a[team_2[n]]);
     real l2 = exp(a[team_2[n]] - a[team_1[n]]);
     target += -(l1 + l2) + (log(l1) - log(l2))*(dif[n]/2.0) +
-      log(modified_bessel_first_kind(to_int(dif[n]), 2.0*sqrt(l1*l2)));
+      log(modified_bessel_first_kind(to_int(abs(dif[n])), 2.0*sqrt(l1*l2)));
   }
 }
 generated quantities {
@@ -43,6 +43,6 @@ generated quantities {
     real l1 = exp(a[team_1[n]] - a[team_2[n]]);
     real l2 = exp(a[team_2[n]] - a[team_1[n]]);
     log_lik[n] = -(l1 + l2) + (log(l1) - log(l2))*(dif[n]/2.0) +
-      log(modified_bessel_first_kind(to_int(dif[n]), 2.0*sqrt(l1*l2)));
+      log(modified_bessel_first_kind(to_int(abs(dif[n])), 2.0*sqrt(l1*l2)));
   }
 }
