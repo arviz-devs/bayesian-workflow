@@ -71,6 +71,11 @@ from  numpyro import distributions as dist
 from numpyro.infer import NUTS, MCMC, Predictive
 
 ```
+
+## PyMC
+```{.python}
+import pymc as pm
+```
 :::
 
 
@@ -89,7 +94,7 @@ Plot the data
 ```{python}
 #| label: fig-bioassay-data-plot
 
-fig, ax = plt.subplots(figsize=(7, 4))
+_, ax = plt.subplots(figsize=(7, 4))
 ax.scatter(df_bioassay["dose"], df_bioassay["deaths"], s=60, color="black")
 ax.set(xlabel="Dose log(g/ml)", ylabel="# of deaths")
 ax.spines[["top", "right"]].set_visible(False)
@@ -114,6 +119,13 @@ J = len(df_bioassay)
 x = df_bioassay["dose"].values
 N = df_bioassay["batch_size"].values
 y = df_bioassay["deaths"].values
+```
+
+## PyMC
+```{.python}
+x = df_bioassay["dose"]
+N = df_bioassay["batch_size"]
+y = df_bioassay["deaths"]
 ```
 :::
 
@@ -144,6 +156,14 @@ def mod0(x, N, y=None):
         return numpyro.sample("y", dist.BinomialLogits(total_count=N, logits=a + b*x), obs=y)
 ```
 
+## PyMC
+```{.python}
+with pm.Model() as mod0:
+    a = pm.Flat("a")
+    b = pm.Flat("b")
+    pm.Binomial("y", n=N, logit_p=a + b * x, observed=y)
+```
+
 :::
 
 Model 1 (with priors). 
@@ -170,6 +190,14 @@ def mod1(x, N, y=None):
     with numpyro.plate("J", len(N)):
         return numpyro.sample("y", dist.BinomialLogits(total_count=N, logits=a + b*x), obs=y)
 ```
+
+## PyMC
+```{.python}
+with pm.Model() as mod1:
+    a = pm.Normal("a", mu=0, sigma=5)
+    b = pm.Normal("b", mu=0, sigma=5)
+    pm.Binomial("y", n=N, logit_p=a + b * x, observed=y)
+```
 :::
 
 Sample with default settings
@@ -192,6 +220,13 @@ kernel = NUTS(mod1)
 mcmc = MCMC(kernel,  num_warmup=1000, num_samples=1000)
 mcmc.run(random.PRNGKey(SEED), x=x, N=N, y=y)
 dt_bioassay1 = az.from_numpyro(mcmc)
+```
+
+## PyMC
+```{.python}
+#| results: hide
+with mod1:
+    dt_bioassay1 = pm.sample(random_seed=SEED)
 ```
 :::
 

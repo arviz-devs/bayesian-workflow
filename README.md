@@ -14,6 +14,7 @@ These case studies have been ported to Python and use the following main librari
 - PPLs
   - [CmdStanPy](https://mc-stan.org/cmdstanpy/)
   - [numpyro](https://num.pyro.ai/en/stable/)
+  - [PyMC](https://www.pymc.io/)
 - [ArviZ](https://python.arviz.org/en/stable/) for MCMC diagnostics, model checking, model comparison, and visualization
 - [Bambi](https://bambinos.github.io/bambi/) for fitting some models in selected case studies
 - [Kulprit](https://kulprit.readthedocs.io/en/latest/) for variable selection.
